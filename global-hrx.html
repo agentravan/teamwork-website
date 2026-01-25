@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Global HRX | Team Work</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;font-family:Inter,Arial,sans-serif}
+    body{color:#0f172a;background:#fff}
+    a{text-decoration:none;color:inherit}
+
+    header{
+      display:flex;justify-content:space-between;align-items:center;
+      padding:22px 70px;border-bottom:1px solid #e5e7eb;
+    }
+    .logo{font-size:22px;font-weight:700}
+    nav a{margin-left:26px;font-weight:500}
+    .btn{background:#2563eb;color:#fff;padding:10px 18px;border-radius:8px}
+    .btn-outline{border:1px solid #2563eb;color:#2563eb;padding:10px 18px;border-radius:8px}
+
+    .hero{
+      padding:90px 70px;max-width:1200px;margin:auto;
+    }
+    .hero h1{font-size:46px;line-height:1.15}
+    .hero p{margin-top:18px;font-size:18px;color:#475569;max-width:720px}
+    .actions{margin-top:28px}
+    .actions a{margin-right:16px}
+
+    .section{
+      padding:80px 70px;max-width:1200px;margin:auto;
+    }
+    .section h2{font-size:34px;margin-bottom:36px;text-align:center}
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:26px;
+    }
+    .card{
+      border:1px solid #e5e7eb;
+      padding:32px;border-radius:16px;background:#fff;
+    }
+    .card h3{font-size:18px;margin-bottom:10px}
+    .card p{color:#475569;font-size:15px;line-height:1.6}
+
+    .dark{background:#f8fafc}
+
+    .cta{
+      text-align:center;padding:70px 20px;background:#0f172a;color:#fff
+    }
+    .cta h2{font-size:34px}
+    .cta p{margin-top:14px;color:#cbd5f5}
+    .cta a{display:inline-block;margin-top:24px}
+
+    footer{
+      padding:32px;text-align:center;border-top:1px solid #e5e7eb;color:#64748b
+    }
+
+    @media(max-width:768px){
+      header{padding:20px}
+      .hero,.section{padding:60px 20px}
+      .hero h1{font-size:36px}
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">Team Work</div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="global-hrx.html">Global HRX</a>
+    <a href="#" class="btn-outline">Request Access</a>
+    <a href="#" class="btn">Login</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <h1>Global HRX — Enterprise HRMS</h1>
+  <p>
+    A configurable, enterprise-grade HRMS built for Indian companies.
+    Global HRX combines payroll, compliance, HR operations and analytics
+    in one powerful platform.
+  </p>
+  <div class="actions">
+    <a href="#" class="btn">Request Access</a>
+    <a href="#modules" class="btn-outline">View Modules</a>
+  </div>
+</section>
+
+<section class="section dark" id="modules">
+  <h2>Core Modules</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Employee Lifecycle</h3>
+      <p>Centralized employee records with event-based history and audit trails.</p>
+    </div>
+    <div class="card">
+      <h3>Custom Onboarding</h3>
+      <p>Company-specific onboarding flows, documents and approvals.</p>
+    </div>
+    <div class="card">
+      <h3>Attendance & Leave</h3>
+      <p>Shift-based attendance, leave policies, comp-off and approvals.</p>
+    </div>
+    <div class="card">
+      <h3>Payroll Engine</h3>
+      <p>Flexible salary structures with formula-driven payroll processing.</p>
+    </div>
+    <div class="card">
+      <h3>Statutory Compliance</h3>
+      <p>PF, ESIC, PT, LWF, TDS calculations and reports.</p>
+    </div>
+    <div class="card">
+      <h3>Reports & Analytics</h3>
+      <p>Headcount, payroll cost, compliance and operational insights.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>Why Global HRX</h2>
+  <div class="grid">
+    <div class="card"><h3>Configurable</h3><p>No forced workflows. Adapt to your policies.</p></div>
+    <div class="card"><h3>Scalable</h3><p>From startups to large enterprises.</p></div>
+    <div class="card"><h3>Compliance-Ready</h3><p>Built for Indian statutory requirements.</p></div>
+  </div>
+</section>
+
+<section class="cta">
+  <h2>Ready to get started?</h2>
+  <p>Request access to Global HRX and see it in action.</p>
+  <a href="#" class="btn">Request Access</a>
+</section>
+
+<footer>
+  © 2026 Team Work. All rights reserved.
+</footer>
+
+</body>
+</html>
