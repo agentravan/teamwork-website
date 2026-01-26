@@ -1,179 +1,81 @@
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,Arial,sans-serif
-}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Team Work | Global HRX</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
 
-body{
-  background:#ffffff;
-  color:#0f172a;
-  line-height:1.6;
-}
+<header>
+  <div class="nav">
+    <div class="logo">Team Work</div>
+    <div class="menu">
+      <a href="global-hrx.html">Product</a>
+      <a href="solutions.html">Solutions</a>
+      <a href="industries.html">Industries</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="request-access.html" class="btn-outline">Request Access</a>
+      <a href="login.html" class="btn">Login</a>
+    </div>
+  </div>
+</header>
 
-/* ---------- HEADER ---------- */
-header{
-  position:sticky;
-  top:0;
-  z-index:10;
-  background:#fff;
-  border-bottom:1px solid #e5e7eb;
-  padding:14px 18px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
+<section class="hero">
+  <div class="hero-inner fade">
+    <h1>Future-Ready HR, Payroll & Compliance Platform</h1>
+    <p>
+      Team Work presents <b>Global HRX</b> — an enterprise-grade HRMS
+      built for Indian companies with flexibility at its core.
+    </p>
+    <div class="hero-actions">
+      <a href="request-access.html" class="btn">Request Access</a>
+      <a href="global-hrx.html" class="btn-outline">Explore Product</a>
+    </div>
+  </div>
+</section>
 
-.logo{
-  font-size:18px;
-  font-weight:700;
-}
+<section class="section">
+  <div class="section-inner">
+    <h2 class="fade">Why Team Work</h2>
+    <div class="grid">
+      <div class="card fade">End-to-End HRMS</div>
+      <div class="card fade">Custom Payroll Engine</div>
+      <div class="card fade">PF, ESIC, PT, TDS Compliance</div>
+      <div class="card fade">Employee Self Service</div>
+      <div class="card fade">Enterprise Security</div>
+      <div class="card fade">Scalable Architecture</div>
+    </div>
+  </div>
+</section>
 
-nav{
-  display:flex;
-  gap:12px;
-}
+<section class="cta">
+  <h2>Ready to experience Global HRX?</h2>
+  <p>Request access and see the future of HRMS.</p>
+  <a href="request-access.html" class="btn" style="margin-top:24px;display:inline-block">Get Started</a>
+</section>
 
-nav a{
-  font-size:14px;
-  font-weight:500;
-}
+<footer>
+  <div class="footer-inner">
+    <div>
+      <h4>Team Work</h4>
+      <a href="#">About</a>
+      <a href="#">Careers</a>
+    </div>
+    <div>
+      <h4>Product</h4>
+      <a href="global-hrx.html">Global HRX</a>
+      <a href="pricing.html">Pricing</a>
+    </div>
+    <div>
+      <h4>Resources</h4>
+      <a href="#">Docs</a>
+      <a href="#">Support</a>
+    </div>
+  </div>
+  <div class="copy">© 2026 Team Work. All rights reserved.</div>
+</footer>
 
-.btn{
-  background:#2563eb;
-  color:#fff;
-  padding:8px 14px;
-  border-radius:10px;
-  font-size:14px;
-}
-
-.btn-outline{
-  border:1px solid #2563eb;
-  color:#2563eb;
-  padding:8px 14px;
-  border-radius:10px;
-  font-size:14px;
-}
-
-/* ---------- HERO ---------- */
-.hero{
-  padding:48px 18px;
-}
-
-.hero h1{
-  font-size:28px;
-  font-weight:700;
-  line-height:1.25;
-}
-
-.hero p{
-  margin-top:14px;
-  font-size:15px;
-  color:#475569;
-}
-
-.hero-actions{
-  margin-top:22px;
-  display:flex;
-  flex-direction:column;
-  gap:12px;
-}
-
-.hero-actions a{
-  text-align:center;
-}
-
-/* ---------- SECTIONS ---------- */
-.section{
-  padding:48px 18px;
-}
-
-.section h2{
-  font-size:22px;
-  text-align:center;
-  margin-bottom:26px;
-}
-
-.dark{
-  background:#f8fafc;
-}
-
-/* ---------- GRID / CARDS ---------- */
-.grid{
-  display:grid;
-  grid-template-columns:1fr;
-  gap:16px;
-}
-
-.card{
-  border:1px solid #e5e7eb;
-  padding:22px;
-  border-radius:16px;
-  background:#fff;
-  font-size:14px;
-  font-weight:500;
-}
-
-/* ---------- FOOTER ---------- */
-footer{
-  padding:24px 16px;
-  text-align:center;
-  font-size:13px;
-  color:#64748b;
-  border-top:1px solid #e5e7eb;
-}
-
-/* ---------- DESKTOP ENHANCEMENTS ---------- */
-@media(min-width:768px){
-
-  header{
-    padding:22px 70px;
-  }
-
-  .logo{
-    font-size:22px;
-  }
-
-  nav a{
-    font-size:15px;
-  }
-
-  .hero{
-    padding:110px 70px;
-    max-width:1200px;
-    margin:auto;
-  }
-
-  .hero h1{
-    font-size:52px;
-  }
-
-  .hero p{
-    font-size:18px;
-    max-width:650px;
-  }
-
-  .hero-actions{
-    flex-direction:row;
-  }
-
-  .section{
-    padding:90px 70px;
-    max-width:1200px;
-    margin:auto;
-  }
-
-  .section h2{
-    font-size:38px;
-  }
-
-  .grid{
-    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-    gap:26px;
-  }
-
-  .card{
-    padding:34px;
-    font-size:16px;
-  }
-}
+<script src="js/main.js"></script>
+</body>
+</html>
