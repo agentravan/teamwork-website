@@ -15,109 +15,62 @@
 
 <body>
 
-    <!-- Master Blueprint Header (Fixed) -->
-    <nav class="navbar">
-        <div class="container nav-content">
-            <a href="index.html" class="logo">
-                <div style="display: flex; flex-direction: column; line-height: 1.1;">
-                    <div style="display: flex; align-items: center; gap: 6px;">
-                        <i class="ph-fill ph-hexagon" style="color: var(--primary);"></i>
-                        <span>TeamWork</span>
-                    </div>
-                    <span
-                        style="font-size: 0.7rem; letter-spacing: 1px; color: var(--text-secondary); margin-left: 24px;">SOLUTIONS</span>
-                </div>
-            </a>
-            <ul class="nav-links desktop-menu">
-                <li><a href="index.html" class="nav-link">Home</a></li>
-                <li><a href="global-hrx.html" class="nav-link">Global HRX</a></li>
-                <li class="nav-item-dropdown">
-                    <a href="services.html" class="nav-link">Services <i class="ph-bold ph-caret-down"></i></a>
-                    <div class="mega-menu">
-                        <div class="mega-column">
-                            <h4>Core HR & Operations</h4>
-                            <a href="services.html" class="mega-link"><i
-                                    class="ph-duotone ph-currency-dollar mega-icon"></i>
-                                <div class="mega-text">
-                                    <h5>Payroll Management</h5>
-                                    <p>End-to-end processing & accuracy.</p>
-                                </div>
-                            </a>
-                            <a href="services.html" class="mega-link"><i
-                                    class="ph-duotone ph-shield-check mega-icon"></i>
-                                <div class="mega-text">
-                                    <h5>Statutory Compliance</h5>
-                                    <p>PF, ESIC, Tax filing & audits.</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="mega-column">
-                            <h4>Technology & Tools</h4>
-                            <a href="global-hrx.html" class="mega-link"><i class="ph-duotone ph-desktop mega-icon"
-                                    style="color: var(--accent);"></i>
-                                <div class="mega-text">
-                                    <h5>Global HRX</h5>
-                                    <p>Enterprise System of Record.</p>
-                                </div>
-                            </a>
-                            <a href="calculators.html" class="mega-link"><i class="ph-duotone ph-calculator mega-icon"
-                                    style="color: var(--accent);"></i>
-                                <div class="mega-text">
-                                    <h5>HR Calculators</h5>
-                                    <p>TDS, PF, ESIC & Gratuity.</p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </li>
-                <li class="nav-item-dropdown">
-                    <a href="calculators.html" class="nav-link">Calculators <i class="ph-bold ph-caret-down"></i></a>
-                    <div class="mega-menu" style="width: 400px; grid-template-columns: 1fr;">
-                        <div class="mega-column">
-                            <h4>Financial Tools</h4>
-                            <a href="calculator-pf.html" class="mega-link"><i class="ph-duotone ph-piggy-bank mega-icon"
-                                    style="color: #ec4899;"></i>
-                                <div class="mega-text">
-                                    <h5>PF Calculator</h5>
-                                    <p>12% vs 13% | Wage Ceiling Logic.</p>
-                                </div>
-                            </a>
-                            <a href="calculator-esic.html" class="mega-link"><i
-                                    class="ph-duotone ph-first-aid-kit mega-icon" style="color: #ec4899;"></i>
-                                <div class="mega-text">
-                                    <h5>ESIC Calculator</h5>
-                                    <p>0.75% / 3.25% Contribution.</p>
-                                </div>
-                            </a>
-                            <a href="calculator-gratuity.html" class="mega-link"><i
-                                    class="ph-duotone ph-coins mega-icon" style="color: #ec4899;"></i>
-                                <div class="mega-text">
-                                    <h5>Gratuity Calculator</h5>
-                                    <p>Eligibility & Payout Estimation.</p>
-                                </div>
-                            </a>
-                            <a href="calculator-tds.html" class="mega-link"><i class="ph-duotone ph-receipt mega-icon"
-                                    style="color: #ec4899;"></i>
-                                <div class="mega-text">
-                                    <h5>TDS Smart Estimator</h5>
-                                    <p>Old vs New Regime Recommender.</p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </li>
-                <li><a href="careers.html" class="nav-link">Careers</a></li>
-                <li><a href="hrms-pricing.html" class="nav-link">Pricing</a></li>
-                <li><a href="about.html" class="nav-link">About</a></li>
-                <li><a href="contact.html" class="nav-link">Contact</a></li>
-            </ul>
+    <!-- UNIFIED HEADER -->
+    <header class="site-header">
+        <div class="nav-container">
+            <!-- LOGO -->
+            <div class="logo">
+                TeamWork <span>SOLUTIONS</span>
+            </div>
+
+            <!-- NAV -->
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="global-hrx.html">Global HRX</a></li>
+
+                    <!-- SERVICES DROPDOWN -->
+                    <li class="dropdown">
+                        <a href="#">Services ▾</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="services.html#payroll">Payroll Management</a></li>
+                            <li><a href="services.html#compliance">Compliance Outsourcing</a></li>
+                            <li><a href="services.html#hrpolicy">HR Policy & Audit</a></li>
+                            <li><a href="services.html#startup">Startup Registration</a></li>
+                        </ul>
+                    </li>
+
+                    <!-- CALCULATORS DROPDOWN -->
+                    <li class="dropdown">
+                        <a href="#">Calculators ▾</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="calculator-pf.html">PF Calculator</a></li>
+                            <li><a href="calculator-esic.html">ESIC Calculator</a></li>
+                            <li><a href="calculator-tds.html">TDS Calculator</a></li>
+                            <li><a href="calculator-gratuity.html">Gratuity Calculator</a></li>
+                        </ul>
+                    </li>
+
+                    <li><a href="careers.html">Careers</a></li>
+                    <li><a href="pricing.html">Pricing</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+
+            <!-- ACTIONS -->
             <div class="nav-actions">
-                <a href="login.html" class="btn btn-outline" style="padding: 8px 20px; font-size: 0.9rem;">Login</a>
-                <a href="request-access.html" class="btn btn-primary"
-                    style="padding: 8px 20px; font-size: 0.9rem;">Request Access</a>
+                <!-- Point back to Gateway -->
+                <a class="btn-ghost" href="login.html">Back to Choice</a>
+                <a class="btn-primary" href="request-access.html">Request Access</a>
+            </div>
+
+            <!-- MOBILE TOGGLE -->
+            <div class="hamburger">
+                ☰
             </div>
         </div>
-    </nav>
+    </header>
 
     <main style="min-height: 100vh; display: flex; align-items: center; justify-content: center; padding-top: 80px;">
         <div class="glass-panel" style="width: 100%; max-width: 400px; padding: 40px;">
@@ -144,12 +97,12 @@
             <form id="loginForm" onsubmit="handleLogin(event)">
                 <div class="form-group" style="margin-bottom: 20px;">
                     <label style="display: block; margin-bottom: 8px; font-size: 0.9rem;">Username</label>
-                    <input type="text" id="username" placeholder="admin" required
+                    <input type="text" id="username" required
                         style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
                 </div>
                 <div class="form-group" style="margin-bottom: 25px;">
                     <label style="display: block; margin-bottom: 8px; font-size: 0.9rem;">Password</label>
-                    <input type="password" id="password" placeholder="admin123" required
+                    <input type="password" id="password" required
                         style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
                 </div>
                 <button type="submit" class="btn btn-primary" style="width: 100%;">Login to Console</button>
@@ -175,16 +128,23 @@
             const u = document.getElementById('username').value;
             const p = document.getElementById('password').value;
 
-            if (u === 'admin' && p === 'admin123') {
+            // Fetch users from storage (or use default admin)
+            const users = JSON.parse(localStorage.getItem('adminUsers')) ||
+                [{ username: 'admin', password: 'admin123' }];
+
+            const validUser = users.find(user => user.username === u && user.password === p);
+
+            if (validUser) {
                 // Set Session (5 Mins = 5*60*1000 ms)
                 const expiry = Date.now() + (5 * 60 * 1000);
                 localStorage.setItem('adminSession', JSON.stringify({
                     token: 'valid-token-' + Date.now(),
+                    username: validUser.username,
                     expiry: expiry
                 }));
                 window.location.href = 'admin-dashboard.html';
             } else {
-                alert('Invalid Credentials. Try admin / admin123');
+                alert('Invalid Credentials.');
             }
         }
 

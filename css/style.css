@@ -338,8 +338,17 @@ h3 {
     }
 
     .nav-actions {
-        display: none;
-        /* Hide desktop actions, maybe add to mobile menu if needed or rely on hamburger menu having them? User code didn't strictly specify actions in mobile menu, but generally needed. I'll adhere to user's css. */
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        width: 100%;
+        padding: 0 20px;
+        padding-bottom: 20px;
+    }
+
+    .nav-actions .btn {
+        width: 100%;
+        justify-content: center;
     }
 }
 

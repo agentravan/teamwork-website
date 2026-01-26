@@ -4,54 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Selection | TeamWork Solutions</title>
+    <title>Global HRX Login | TeamWork Solutions</title>
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/mega-menu.css">
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
-    <style>
-        .login-card {
-            background: rgba(30, 41, 59, 0.4);
-            border: 1px solid var(--border-subtle);
-            border-radius: 12px;
-            padding: 30px;
-            text-align: center;
-            transition: transform 0.3s ease, border-color 0.3s ease;
-            cursor: pointer;
-            text-decoration: none;
-            display: block;
-        }
-
-        .login-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary);
-            background: rgba(30, 41, 59, 0.6);
-        }
-
-        .card-icon {
-            font-size: 48px;
-            margin-bottom: 20px;
-            color: var(--text-secondary);
-        }
-
-        .login-card:hover .card-icon {
-            color: var(--primary);
-        }
-
-        .card-title {
-            font-size: 1.25rem;
-            color: white;
-            margin-bottom: 10px;
-            font-weight: 600;
-        }
-
-        .card-desc {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-    </style>
 </head>
 
 <body>
@@ -59,13 +18,18 @@
     <!-- UNIFIED HEADER -->
     <header class="site-header">
         <div class="nav-container">
+            <!-- LOGO -->
             <div class="logo">
                 TeamWork <span>SOLUTIONS</span>
             </div>
+
+            <!-- NAV -->
             <nav class="main-nav">
                 <ul>
                     <li><a href="index.html">Home</a></li>
                     <li><a href="global-hrx.html">Global HRX</a></li>
+
+                    <!-- SERVICES DROPDOWN -->
                     <li class="dropdown">
                         <a href="#">Services ▾</a>
                         <ul class="dropdown-menu">
@@ -75,6 +39,8 @@
                             <li><a href="services.html#startup">Startup Registration</a></li>
                         </ul>
                     </li>
+
+                    <!-- CALCULATORS DROPDOWN -->
                     <li class="dropdown">
                         <a href="#">Calculators ▾</a>
                         <ul class="dropdown-menu">
@@ -84,48 +50,58 @@
                             <li><a href="calculator-gratuity.html">Gratuity Calculator</a></li>
                         </ul>
                     </li>
+
                     <li><a href="careers.html">Careers</a></li>
                     <li><a href="pricing.html">Pricing</a></li>
                     <li><a href="about.html">About</a></li>
                     <li><a href="contact.html">Contact</a></li>
                 </ul>
             </nav>
+
+            <!-- ACTIONS -->
             <div class="nav-actions">
-                <a class="btn-ghost" href="login.html">Login</a>
+                <!-- Point back to Gateway -->
+                <a class="btn-ghost" href="login.html">Back to Choice</a>
                 <a class="btn-primary" href="request-access.html">Request Access</a>
             </div>
-            <div class="hamburger">☰</div>
+
+            <!-- MOBILE TOGGLE -->
+            <div class="hamburger">
+                ☰
+            </div>
         </div>
     </header>
 
     <main style="min-height: 100vh; display: flex; align-items: center; justify-content: center; padding-top: 80px;">
-        <div class="container">
-            <div style="text-align: center; margin-bottom: 50px;">
-                <h1 style="margin-bottom: 15px;">Welcome Back</h1>
-                <p style="color: var(--text-secondary);">Choose your portal to login.</p>
+        <div class="glass-panel" style="width: 100%; max-width: 400px; padding: 40px;">
+            <div style="text-align: center; margin-bottom: 30px;">
+                <i class="ph-duotone ph-globe-hemisphere-west"
+                    style="font-size: 48px; color: var(--primary); margin-bottom: 15px;"></i>
+                <h2 style="color: white; font-size: 1.5rem;">HRX Login</h2>
+                <p style="color: var(--text-secondary); font-size: 0.9rem;">Access your Global HRX Workspace.</p>
             </div>
 
-            <div
-                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; max-width: 800px; margin: 0 auto;">
-
-                <!-- HRMS Login -->
-                <a href="login-hrx.html" class="login-card">
-                    <i class="ph-duotone ph-globe-hemisphere-west card-icon"></i>
-                    <div class="card-title">Global HRX Login</div>
-                    <div class="card-desc">For Employees & Clients accessing the HRMS Dashboard.</div>
-                </a>
-
-                <!-- Career Admin Login -->
-                <a href="admin-login.html" class="login-card">
-                    <i class="ph-duotone ph-briefcase card-icon"></i>
-                    <div class="card-title">Career Admin</div>
-                    <div class="card-desc">For Hiring Managers to post jobs and manage applications.</div>
-                </a>
-
+            <!-- Login Form -->
+            <form onsubmit="handleHRXLogin(event)">
+                <div class="form-group" style="margin-bottom: 20px;">
+                    <label style="display: block; margin-bottom: 8px; font-size: 0.9rem;">Work Email</label>
+                    <input type="email" placeholder="you@company.com" required
+                        style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
+                </div>
+                <div class="form-group" style="margin-bottom: 25px;">
+                    <label style="display: block; margin-bottom: 8px; font-size: 0.9rem;">Password</label>
+                    <input type="password" placeholder="••••••••" required
+                        style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Sign In</button>
+            </form>
+            <div style="text-align: center; margin-top: 20px; font-size: 0.85rem;">
+                <a href="#" style="color: var(--text-tertiary); text-decoration: none;">Forgot Password?</a>
             </div>
         </div>
     </main>
 
+    <!-- FOOTER -->
     <footer>
         <div class="container">
             <div
@@ -136,6 +112,14 @@
     </footer>
 
     <script src="js/main.js"></script>
+    <script>
+        function handleHRXLogin(e) {
+            e.preventDefault();
+            // Mock Login
+            alert("This is a demo environment. Redirecting to dashboard...");
+            window.location.href = 'hrms-dashboard.html'; // Ensure this page exists or use index
+        }
+    </script>
 </body>
 
 </html>

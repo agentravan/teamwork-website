@@ -239,43 +239,61 @@
 
 <body>
 
-    <!-- 1. PUBLIC HEADER (Strict Adherence) -->
-    <nav class="navbar">
-        <div class="container nav-content">
-            <a href="index.html" class="logo">
-                <div style="display: flex; flex-direction: column; line-height: 1.1;">
-                    <div style="display: flex; align-items: center; gap: 6px;">
-                        <i class="ph-fill ph-hexagon" style="color: var(--primary);"></i>
-                        <span>TeamWork</span>
-                    </div>
-                    <span
-                        style="font-size: 0.7rem; letter-spacing: 1px; color: var(--text-secondary); margin-left: 24px;">SOLUTIONS</span>
-                </div>
-            </a>
-            <ul class="nav-links desktop-menu">
-                <li><a href="index.html" class="nav-link">Home</a></li>
-                <li><a href="global-hrx.html" class="nav-link">Global HRX</a></li>
-                <li class="nav-item-dropdown">
-                    <a href="services.html" class="nav-link">Services <i class="ph-bold ph-caret-down"></i></a>
-                    <div class="mega-menu">
-                        <div class="mega-column">
-                            <h4>Core HR & Operations</h4>
-                            <a href="services.html" class="mega-link"><i
-                                    class="ph-duotone ph-currency-dollar mega-icon"></i>
-                                <div class="mega-text">
-                                    <h5>Payroll Management</h5>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-            <div class="nav-actions">
-                <button onclick="handleLogout()" class="btn btn-outline"
-                    style="padding: 8px 20px; font-size: 0.9rem;">Logout</button>
+    <!-- UNIFIED HEADER -->
+    <header class="site-header">
+        <div class="nav-container">
+            <!-- LOGO -->
+            <div class="logo">
+                TeamWork <span>SOLUTIONS</span>
+            </div>
+
+            <!-- NAV -->
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="global-hrx.html">Global HRX</a></li>
+
+                    <!-- SERVICES DROPDOWN -->
+                    <li class="dropdown">
+                        <a href="#">Services ▾</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="services.html#payroll">Payroll Management</a></li>
+                            <li><a href="services.html#compliance">Compliance Outsourcing</a></li>
+                            <li><a href="services.html#hrpolicy">HR Policy & Audit</a></li>
+                            <li><a href="services.html#startup">Startup Registration</a></li>
+                        </ul>
+                    </li>
+
+                    <!-- CALCULATORS DROPDOWN -->
+                    <li class="dropdown">
+                        <a href="#">Calculators ▾</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="calculator-pf.html">PF Calculator</a></li>
+                            <li><a href="calculator-esic.html">ESIC Calculator</a></li>
+                            <li><a href="calculator-tds.html">TDS Calculator</a></li>
+                            <li><a href="calculator-gratuity.html">Gratuity Calculator</a></li>
+                        </ul>
+                    </li>
+
+                    <li><a href="careers.html">Careers</a></li>
+                    <li><a href="pricing.html">Pricing</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+
+            <!-- ACTIONS (Will be overridden by JS for Dashboard context) -->
+            <div class="nav-actions" id="headerActions">
+                <a class="btn-ghost" href="login.html">Login</a>
+                <a class="btn-primary" href="request-access.html">Request Access</a>
+            </div>
+
+            <!-- MOBILE TOGGLE -->
+            <div class="hamburger">
+                ☰
             </div>
         </div>
-    </nav>
+    </header>
 
     <!-- 2. ADMIN LAYOUT -->
     <div class="admin-layout">
@@ -293,12 +311,13 @@
             <a onclick="switchView('manage')" id="nav-manage" class="sidebar-item">
                 <i class="ph-bold ph-briefcase"></i> Manage Jobs
             </a>
-            <a onclick="alert('User Management is restricted to Super Admin.')" class="sidebar-item">
+            <a onclick="switchView('users')" id="nav-users" class="sidebar-item">
                 <i class="ph-bold ph-users"></i> Users
             </a>
             <div style="margin-top: auto; padding-top: 20px; border-top: 1px solid var(--border-subtle);">
                 <div style="padding-left: 12px; font-size: 0.85rem; color: white;">Admin User</div>
-                <div style="padding-left: 12px; font-size: 0.75rem; color: var(--text-tertiary);">admin@teamwork.com
+                <div style="padding-left: 12px; font-size: 0.75rem; color: var(--text-tertiary);" id="currentUserEmail">
+                    admin@teamwork.com
                 </div>
             </div>
         </aside>
@@ -349,10 +368,28 @@
                 </div>
             </div>
 
-            <!-- VIEW: MANAGE (Similar to Dashboard but just table) -->
+            <!-- VIEW: MANAGE -->
             <div id="view-manage" style="display: none;">
                 <h2 style="margin-bottom: 30px;">Manage Jobs</h2>
                 <div id="manageTableContainer">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+
+            <!-- VIEW: USERS -->
+            <div id="view-users" style="display: none;">
+                <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px;">
+                    <div>
+                        <h2 style="margin-bottom: 10px;">User Management</h2>
+                        <p style="color: var(--text-secondary);">Manage admin access and permissions.</p>
+                    </div>
+                    <div>
+                        <button onclick="openCreateUserModal()" class="btn btn-primary">
+                            <i class="ph-bold ph-plus"></i> Create User
+                        </button>
+                    </div>
+                </div>
+                <div id="usersTableContainer">
                     <!-- Populated by JS -->
                 </div>
             </div>
@@ -476,16 +513,72 @@
         </div>
     </div>
 
+    <!-- 4. CREATE USER MODAL -->
+    <div id="createUserModal" class="modal-overlay-custom">
+        <div class="modal-content-custom" style="width: 450px;">
+            <div class="modal-header">
+                <h3 style="margin: 0; font-size: 1.25rem;">Create Admin User</h3>
+                <button onclick="closeCreateUserModal()"
+                    style="background: none; border: none; color: white; cursor: pointer;"><i class="ph-bold ph-x"
+                        style="font-size: 20px;"></i></button>
+            </div>
+            <form onsubmit="handleCreateUser(event)">
+                <div class="modal-body">
+                    <div class="form-group" style="margin-bottom: 20px;">
+                        <label style="display: block; margin-bottom: 8px; font-size: 0.9rem;">Username</label>
+                        <input type="text" name="newUsername" required placeholder="e.g. jdoe"
+                            style="width: 100%; padding: 12px; background: rgba(0,0,0,0.2); border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
+                    </div>
+                    <div class="form-group" style="margin-bottom: 20px;">
+                        <label style="display: block; margin-bottom: 8px; font-size: 0.9rem;">Password</label>
+                        <input type="password" name="newPassword" required placeholder="••••••••"
+                            style="width: 100%; padding: 12px; background: rgba(0,0,0,0.2); border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
+                    </div>
+                    <div class="form-group" style="margin-bottom: 20px;">
+                        <label style="display: block; margin-bottom: 8px; font-size: 0.9rem;">Role</label>
+                        <select name="newRole"
+                            style="width: 100%; padding: 12px; background: #0f172a; border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
+                            <option value="Admin">Admin</option>
+                            <option value="Manager">Manager</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" onclick="closeCreateUserModal()" class="btn btn-outline"
+                        style="border: none;">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Create User</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <!-- Scripts -->
     <script src="js/main.js"></script>
     <script>
-        // --- 1. SESSION GUARD ---
+        // --- 1. SESSION GUARD & HEADER SETUP ---
         const session = JSON.parse(localStorage.getItem('adminSession'));
         if (!session || session.expiry < Date.now()) {
             window.location.href = 'admin-login.html';
         }
 
-        // --- 2. DATA SERVICE LAYERS (SIMULATING DB) ---
+        // SWAP LOGIN BUTTON FOR LOGOUT IN HEADER
+        const headerActions = document.getElementById('headerActions');
+        if (headerActions) {
+            headerActions.innerHTML = `
+                <button onclick="handleLogout()" class="btn btn-outline" style="padding: 8px 20px; font-size: 0.9rem; border-color: rgba(255,255,255,0.2);">
+                    <i class="ph-bold ph-sign-out" style="margin-right: 6px;"></i> Logout
+                </button>
+            `;
+        }
+
+        // Show current user in sidebar
+        /* We don't store username in session yet, but we will fix that in login logic. 
+           For now default to admin@teamwork.com or session username if available */
+        if (session.username) {
+            document.getElementById('currentUserEmail').innerText = session.username;
+        }
+
+        // --- 2. DATA SERVICE LAYERS ---
         const JobService = {
             getAll: () => JSON.parse(localStorage.getItem('jobs')) || [],
             save: (jobs) => localStorage.setItem('jobs', JSON.stringify(jobs)),
@@ -518,6 +611,37 @@
             getByJobId: (jobId) => AppService.getAll().filter(a => a.jobId === jobId)
         };
 
+        const UserService = {
+            getAll: () => {
+                const users = JSON.parse(localStorage.getItem('adminUsers'));
+                // Ensure default admin always exists if empty
+                if (!users || users.length === 0) {
+                    const defaultAdmin = { username: 'admin', password: 'admin123', role: 'Super Admin', created: Date.now() };
+                    localStorage.setItem('adminUsers', JSON.stringify([defaultAdmin]));
+                    return [defaultAdmin];
+                }
+                return users;
+            },
+            add: (user) => {
+                const users = UserService.getAll();
+                if (users.find(u => u.username === user.username)) {
+                    alert('Username already exists!');
+                    return false;
+                }
+                users.push(user);
+                localStorage.setItem('adminUsers', JSON.stringify(users));
+                return true;
+            },
+            delete: (username) => {
+                if (username === 'admin') {
+                    alert('Cannot delete the root admin.');
+                    return;
+                }
+                const users = UserService.getAll().filter(u => u.username !== username);
+                localStorage.setItem('adminUsers', JSON.stringify(users));
+            }
+        };
+
         // --- 3. CORE LOGIC ---
         function initDashboard() {
             const jobs = JobService.getAll();
@@ -527,8 +651,6 @@
             const total = jobs.length;
             const active = jobs.filter(j => j.status === 'Active').length;
             const hold = jobs.filter(j => j.status === 'Hold').length;
-
-            // Validate Logic: If no jobs, apps must be 0 (Clean up orphan apps if any exist conceptually, but we rely on cascade delete)
             const appCount = total === 0 ? 0 : apps.length;
 
             // Update UI
@@ -539,14 +661,7 @@
 
             // Update Tables
             renderTables(jobs, apps);
-
-            // Update Sidebar Logic
-            const manageLink = document.getElementById('nav-manage');
-            if (total === 0) {
-                manageLink.classList.add('disabled');
-            } else {
-                manageLink.classList.remove('disabled');
-            }
+            renderUsers();
 
             // Export Button Visibility
             const btnExport = document.getElementById('btnExport');
@@ -620,7 +735,45 @@
 
             html += `</tbody></table>`;
             container.innerHTML = html;
-            manageContainer.innerHTML = html; // Reusing same table for manage view for now
+            manageContainer.innerHTML = html;
+        }
+
+        function renderUsers() {
+            const users = UserService.getAll();
+            const container = document.getElementById('usersTableContainer');
+
+            let html = `
+                <table class="modern-table">
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Role</th>
+                            <th>Created</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+
+            users.forEach(u => {
+                html += `
+                    <tr>
+                        <td>
+                            <div style="font-weight: 500;">${u.username}</div>
+                        </td>
+                        <td><span class="status-badge bg-success">${u.role || 'Admin'}</span></td>
+                        <td>${u.created ? new Date(u.created).toLocaleDateString() : 'N/A'}</td>
+                        <td>
+                             <button onclick="deleteUser('${u.username}')" class="btn-outline" style="padding: 6px; border: none; color: #ef4444;" ${u.username === 'admin' ? 'disabled style="opacity:0.3; cursor:not-allowed;"' : ''}>
+                                <i class="ph-bold ph-trash"></i>
+                             </button>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            html += `</tbody></table>`;
+            container.innerHTML = html;
         }
 
         // --- 4. ACTION HANDLERS ---
@@ -630,6 +783,14 @@
 
         function closePostJobModal() {
             document.getElementById('postJobModal').style.display = 'none';
+        }
+
+        function openCreateUserModal() {
+            document.getElementById('createUserModal').style.display = 'flex';
+        }
+
+        function closeCreateUserModal() {
+            document.getElementById('createUserModal').style.display = 'none';
         }
 
         function handlePostJob(e) {
@@ -651,6 +812,30 @@
             initDashboard(); // Refresh
         }
 
+        function handleCreateUser(e) {
+            e.preventDefault();
+            const form = e.target;
+            const newUser = {
+                username: form.newUsername.value,
+                password: form.newPassword.value,
+                role: form.newRole.value,
+                created: Date.now()
+            };
+
+            if (UserService.add(newUser)) {
+                closeCreateUserModal();
+                form.reset();
+                renderUsers();
+            }
+        }
+
+        function deleteUser(username) {
+            if (confirm('Delete user ' + username + '?')) {
+                UserService.delete(username);
+                renderUsers();
+            }
+        }
+
         function toggleJobStatus(id, currentStatus) {
             const newStatus = currentStatus === 'Active' ? 'Hold' : 'Active';
             JobService.updateStatus(id, newStatus);
@@ -670,12 +855,16 @@
         }
 
         function switchView(viewName) {
-            // Simple view switcher
-            document.getElementById('view-dashboard').style.display = 'none';
-            document.getElementById('view-manage').style.display = 'none';
-            document.getElementById('nav-dashboard').classList.remove('active');
-            document.getElementById('nav-manage').classList.remove('active');
+            // Hide all
+            ['dashboard', 'manage', 'users'].forEach(v => {
+                const el = document.getElementById('view-' + v);
+                if (el) el.style.display = 'none';
 
+                const nav = document.getElementById('nav-' + v);
+                if (nav) nav.classList.remove('active');
+            });
+
+            // Show target
             document.getElementById('view-' + viewName).style.display = 'block';
             document.getElementById('nav-' + viewName).classList.add('active');
         }
@@ -688,9 +877,9 @@
             }
 
             // Generate CSV
-            let csv = 'Job Title,Candidate Name,Email,Phone,Applied Date,Resume Link\n';
+            let csv = 'Job Title,Candidate Name,Email,Phone,Applied Date,Resume Link\\n';
             apps.forEach(app => {
-                csv += `"${app.jobTitle}","${app.name}","${app.email}","${app.phone}","${new Date(app.appliedDate).toLocaleDateString()}","${app.resumeLink}"\n`;
+                csv += `"${app.jobTitle}","${app.name}","${app.email}","${app.phone}","${new Date(app.appliedDate).toLocaleDateString()}","${app.resumeLink}"\\n`;
             });
 
             const blob = new Blob([csv], { type: 'text/csv' });
@@ -705,6 +894,7 @@
         window.addEventListener('DOMContentLoaded', initDashboard);
 
     </script>
+
 </body>
 
 </html>
