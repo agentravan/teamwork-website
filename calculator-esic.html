@@ -15,10 +15,9 @@
 
 <body>
 
-    <!-- Master Blueprint Header -->
+    <!-- PUBLIC HEADER -->
     <nav class="navbar">
         <div class="container nav-content">
-            <!-- Left: Logo -->
             <a href="index.html" class="logo">
                 <div style="display: flex; flex-direction: column; line-height: 1.1;">
                     <div style="display: flex; align-items: center; gap: 6px;">
@@ -29,189 +28,200 @@
                         style="font-size: 0.7rem; letter-spacing: 1px; color: var(--text-secondary); margin-left: 24px;">SOLUTIONS</span>
                 </div>
             </a>
-
-            <!-- Center: Links & Mega Menu -->
             <ul class="nav-links desktop-menu">
                 <li><a href="index.html" class="nav-link">Home</a></li>
                 <li><a href="global-hrx.html" class="nav-link">Global HRX</a></li>
-
-                <!-- Services Mega Menu -->
                 <li class="nav-item-dropdown">
                     <a href="services.html" class="nav-link">Services <i class="ph-bold ph-caret-down"></i></a>
                     <div class="mega-menu">
-                        <!-- Col 1: Core HR -->
                         <div class="mega-column">
                             <h4>Core HR & Operations</h4>
-                            <a href="services.html" class="mega-link">
-                                <i class="ph-duotone ph-currency-dollar mega-icon"></i>
+                            <a href="services.html" class="mega-link"><i
+                                    class="ph-duotone ph-currency-dollar mega-icon"></i>
                                 <div class="mega-text">
                                     <h5>Payroll Management</h5>
-                                    <p>End-to-end processing & accuracy.</p>
                                 </div>
                             </a>
-                            <a href="services.html" class="mega-link">
-                                <i class="ph-duotone ph-shield-check mega-icon"></i>
+                            <a href="services.html" class="mega-link"><i
+                                    class="ph-duotone ph-shield-check mega-icon"></i>
                                 <div class="mega-text">
                                     <h5>Statutory Compliance</h5>
-                                    <p>PF, ESIC, Tax filing & audits.</p>
-                                </div>
-                            </a>
-                        </div>
-
-                        <!-- Col 2: Tech & Tools -->
-                        <div class="mega-column">
-                            <h4>Technology & Tools</h4>
-                            <a href="global-hrx.html" class="mega-link">
-                                <i class="ph-duotone ph-desktop mega-icon" style="color: var(--accent);"></i>
-                                <div class="mega-text">
-                                    <h5>Global HRX</h5>
-                                    <p>Enterprise System of Record.</p>
-                                </div>
-                            </a>
-                            <a href="calculators.html" class="mega-link">
-                                <i class="ph-duotone ph-calculator mega-icon" style="color: var(--accent);"></i>
-                                <div class="mega-text">
-                                    <h5>HR Calculators</h5>
-                                    <p>TDS, PF, ESIC & Gratuity.</p>
                                 </div>
                             </a>
                         </div>
                     </div>
                 </li>
-
-                <!-- Calculators Dropdown -->
                 <li class="nav-item-dropdown">
-                    <a href="calculators.html" class="nav-link active">Calculators <i
-                            class="ph-bold ph-caret-down"></i></a>
+                    <a href="calculators.html" class="nav-link active">Tools <i class="ph-bold ph-caret-down"></i></a>
                     <div class="mega-menu" style="width: 400px; grid-template-columns: 1fr;">
-                        <!-- Single Col for Calculators -->
                         <div class="mega-column">
                             <h4>Financial Tools</h4>
-                            <a href="calculator-pf.html" class="mega-link">
-                                <i class="ph-duotone ph-piggy-bank mega-icon" style="color: #ec4899;"></i>
+                            <a href="calculator-pf.html" class="mega-link"><i
+                                    class="ph-duotone ph-piggy-bank mega-icon"></i>
                                 <div class="mega-text">
                                     <h5>PF Calculator</h5>
-                                    <p>12% vs 13% | Wage Ceiling Logic.</p>
                                 </div>
                             </a>
-                            <a href="calculator-esic.html" class="mega-link">
-                                <i class="ph-duotone ph-first-aid-kit mega-icon" style="color: #ec4899;"></i>
+                            <a href="calculator-esic.html" class="mega-link"><i
+                                    class="ph-duotone ph-first-aid-kit mega-icon"></i>
                                 <div class="mega-text">
                                     <h5>ESIC Calculator</h5>
-                                    <p>0.75% / 3.25% Contribution.</p>
                                 </div>
                             </a>
-                            <a href="calculator-gratuity.html" class="mega-link">
-                                <i class="ph-duotone ph-coins mega-icon" style="color: #ec4899;"></i>
+                            <a href="calculator-tds.html" class="mega-link"><i
+                                    class="ph-duotone ph-receipt mega-icon"></i>
                                 <div class="mega-text">
-                                    <h5>Gratuity Calculator</h5>
-                                    <p>Eligibility & Payout Estimation.</p>
-                                </div>
-                            </a>
-                            <a href="calculator-tds.html" class="mega-link">
-                                <i class="ph-duotone ph-receipt mega-icon" style="color: #ec4899;"></i>
-                                <div class="mega-text">
-                                    <h5>TDS Smart Estimator</h5>
-                                    <p>Old vs New Regime Recommender.</p>
+                                    <h5>TDS Calculator</h5>
                                 </div>
                             </a>
                         </div>
                     </div>
                 </li>
-
-                <li><a href="careers.html" class="nav-link">Careers</a></li>
-                <li><a href="hrms-pricing.html" class="nav-link">Pricing</a></li>
-                <li><a href="about.html" class="nav-link">About</a></li>
-                <li><a href="contact.html" class="nav-link">Contact</a></li>
             </ul>
-
-            <!-- Right: Actions -->
             <div class="nav-actions">
-                <a href="login.html" class="nav-link" style="margin-right: 15px; font-size: 0.9rem;">Login</a>
-                <a href="request-access.html" class="btn btn-primary" style="padding: 8px 20px; font-size: 0.9rem;">
-                    Request Access
-                </a>
+                <a href="login.html" class="btn btn-outline" style="padding: 8px 20px; font-size: 0.9rem;">Login</a>
+                <a href="request-access.html" class="btn btn-primary"
+                    style="padding: 8px 20px; font-size: 0.9rem;">Request Access</a>
             </div>
         </div>
     </nav>
 
-    <header class="section-padding" style="padding-top: 160px; text-align: center;">
+    <header class="section-padding" style="padding-top: 140px; text-align: center;">
         <div class="container">
             <h1 class="fade-up" style="margin-bottom: 24px;">ESIC <span class="text-gradient">Calculator</span></h1>
-            <p class="fade-up" style="color: var(--text-secondary); max-width: 700px; margin: 0 auto;">
-                Determine Employee State Insurance Corp contributions accurately.
-            </p>
+            <p class="fade-up" style="color: var(--text-secondary);">Employee State Insurance Act, 1948. Latest
+                Contribution Rates.</p>
         </div>
     </header>
 
     <main>
         <section class="section-padding">
             <div class="container">
+                <div class="glass-panel" style="padding: 40px; max-width: 900px; margin: 0 auto;">
 
-                <!-- Info Section -->
-                <div class="glass-panel"
-                    style="padding: 30px; margin-bottom: 40px; border-left: 4px solid var(--primary);">
-                    <h3 style="margin-bottom: 10px; color: var(--primary);">ESI Act, 1948 Guidelines</h3>
-                    <p style="color: var(--text-secondary);">
-                        Applicable for employees with <strong>Gross Monthly Salary ≤ ₹21,000</strong>.
-                        <br>Rates (w.e.f 1 July 2019): <strong>Employee 0.75%</strong> | <strong>Employer
-                            3.25%</strong>.
-                    </p>
-                    <div style="margin-top: 20px; display: flex; gap: 20px; font-size: 0.9rem;">
-                        <a href="https://www.esic.gov.in/" target="_blank"
-                            style="color: white; text-decoration: underline;">ESIC Portal <i
-                                class="ph-bold ph-arrow-up-right"></i></a>
+                    <!-- Legal Info -->
+                    <div
+                        style="background: rgba(59, 130, 246, 0.1); padding: 20px; border-left: 4px solid var(--primary); margin-bottom: 30px; border-radius: 8px;">
+                        <h4 style="color: var(--primary); margin-bottom: 10px;">Eligibility & Rates (2025-26)</h4>
+                        <ul style="font-size: 0.9rem; color: var(--text-secondary); list-style-position: inside;">
+                            <li>Applicable if Gross Salary ≤ ₹21,000 (Monthly).</li>
+                            <li>Employee Contribution: 0.75% of Gross.</li>
+                            <li>Employer Contribution: 3.25% of Gross.</li>
+                        </ul>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px;">
+                        <!-- Input -->
+                        <div>
+                            <h3 style="margin-bottom: 20px;">Input</h3>
+
+                            <div class="form-group" style="margin-bottom: 20px;">
+                                <label style="display: block; margin-bottom: 8px;">Gross Monthly Salary</label>
+                                <input type="number" id="esicGross" value="18000"
+                                    style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
+                            </div>
+
+                            <!-- Daily Wage Toggle for optional exemption case mentioned in Blueprint (Daily < 176) 
+                                 Blueprint said "If daily wage < 176 -> employee exempted". 
+                                 Let's keep it simple as "Standard" vs "Exempted" if user wants? 
+                                 User Blueprint said "INPUT: Gross Monthly Salary". That's all. 
+                                 I will handle the logic internally based on standard 21k rule.
+                            -->
+
+                            <button onclick="calculateESIC()" class="btn btn-primary"
+                                style="width: 100%;">Calculate</button>
+                        </div>
+
+                        <!-- Output -->
+                        <div id="esicResult"
+                            style="background: rgba(255,255,255,0.02); padding: 30px; border-radius: 12px; border: 1px solid var(--border-subtle);">
+                            <h3 style="margin-bottom: 20px; color: var(--text-primary);">Calculations</h3>
+
+                            <!-- Eligibility Flag -->
+                            <div id="esicAlert"
+                                style="display: none; background: rgba(239, 68, 68, 0.1); color: #ef4444; padding: 10px; border-radius: 8px; font-size: 0.9rem; margin-bottom: 20px;">
+                                Not Eligible (Gross > ₹21,000)
+                            </div>
+
+                            <div id="esicBreakdown">
+                                <div style="margin-bottom: 25px;">
+                                    <h4 style="color: var(--service); font-size: 0.9rem; margin-bottom: 10px;">Employee
+                                        Share (0.75%)</h4>
+                                    <div
+                                        style="display: flex; justify-content: space-between; font-weight: 600; color: white;">
+                                        <span>Deduction</span>
+                                        <span id="outEsicEmp">₹ 0</span>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <h4 style="color: var(--accent); font-size: 0.9rem; margin-bottom: 10px;">Employer
+                                        Share (3.25%)</h4>
+                                    <div
+                                        style="display: flex; justify-content: space-between; font-weight: 600; color: white;">
+                                        <span>Contribution</span>
+                                        <span id="outEsicEmplr">₹ 0</span>
+                                    </div>
+                                    <div
+                                        style="display: flex; justify-content: space-between; padding-top: 15px; margin-top: 15px; border-top: 1px dashed var(--border-subtle);">
+                                        <span style="color: var(--text-secondary);">Total Statutory Cost</span>
+                                        <span style="color: var(--accent); font-weight: 700;" id="outEsicTotal">₹
+                                            0</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="glass-panel" style="padding: 40px; max-width: 600px; margin: 0 auto;">
-                    <h3 style="margin-bottom: 30px;">Calculate ESI</h3>
-
-                    <div class="form-group" style="margin-bottom: 25px;">
-                        <label style="display: block; margin-bottom: 8px; font-size: 0.9rem;">Gross Monthly
-                            Salary</label>
-                        <input type="number" id="esicGross" placeholder="e.g. 18000"
-                            style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
-                    </div>
-
-                    <button onclick="calculateESIC()" class="btn btn-primary"
-                        style="width: 100%; margin-bottom: 30px;">Check Eligibility & Value</button>
-
-                    <!-- Alert for Ineligibility -->
-                    <div id="esiAlert"
-                        style="display: none; padding: 15px; background: rgba(239, 68, 68, 0.1); border: 1px solid #ef4444; color: #ef4444; border-radius: 8px; text-align: center; margin-bottom: 20px;">
-                        Salary exceeds ₹21,000. Not eligible for ESIC.
-                    </div>
-
-                    <!-- Results -->
-                    <div id="esiResult"
-                        style="display: none; border-top: 1px solid var(--border-subtle); padding-top: 30px;">
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
-                            <span style="color: var(--text-secondary);">Employee (0.75%):</span>
-                            <span id="resEsiEmp" style="color: white; font-weight: 600; font-size: 1.2rem;">₹ 0</span>
-                        </div>
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
-                            <span style="color: var(--text-secondary);">Employer (3.25%):</span>
-                            <span id="resEsiEmplr" style="color: white; font-weight: 600; font-size: 1.2rem;">₹ 0</span>
-                        </div>
-                        <div
-                            style="display: flex; justify-content: space-between; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px;">
-                            <span style="color: white;">Total Contribution:</span>
-                            <span id="resEsiTotal" style="color: var(--primary); font-weight: 700; font-size: 1.4rem;">₹
-                                0</span>
-                        </div>
-                    </div>
-
+                <!-- Links -->
+                <div style="text-align: center; margin-top: 40px; font-size: 0.9rem;">
+                    <a href="https://www.esic.in" target="_blank"
+                        style="color: var(--text-secondary); margin: 0 15px;">ESIC Official Portal</a>
                 </div>
 
             </div>
         </section>
     </main>
 
+    <!-- Standard Footer -->
     <footer>
-        <div class="container"
-            style="text-align: center; padding: 40px 0; border-top: 1px solid var(--border-subtle); color: var(--text-tertiary);">
-            &copy; 2026 TeamWork Solutions.
+        <div class="container">
+            <div
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-bottom: 40px;">
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Compliance Tools</h4>
+                    <ul>
+                        <li><a href="calculator-pf.html">PF Calculator</a></li>
+                        <li><a href="calculator-esic.html">ESIC Calculator</a></li>
+                        <li><a href="calculator-tds.html">TDS Calculator</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Legal & Privacy</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms</a></li>
+                        <li><a href="https://unifiedportal-mem.epfindia.gov.in" target="_blank">EPFO</a></li>
+                        <li><a href="https://www.esic.in" target="_blank">ESIC</a></li>
+                    </ul>
+                    <p style="margin-top:20px; font-size: 0.8rem; color: var(--text-tertiary);">Disclaimer: Calculations
+                        are indicative. Actual statutory deductions may vary.</p>
+                </div>
+            </div>
+            <div
+                style="text-align: center; padding-top: 40px; border-top: 1px solid var(--border-subtle); color: var(--text-tertiary);">
+                &copy; 2026 TeamWork Solutions | Payroll & Compliance Experts
+            </div>
         </div>
     </footer>
 
@@ -219,25 +229,37 @@
     <script>
         function calculateESIC() {
             const gross = parseFloat(document.getElementById('esicGross').value) || 0;
-            const alertBox = document.getElementById('esiAlert');
-            const resBox = document.getElementById('esiResult');
+            const breakdown = document.getElementById('esicBreakdown');
+            const alertBox = document.getElementById('esicAlert');
 
             if (gross > 21000) {
                 alertBox.style.display = 'block';
-                resBox.style.display = 'none';
-            } else {
-                alertBox.style.display = 'none';
-                resBox.style.display = 'block';
-
-                // Rules: Rounded to next higher rupee
-                const empShare = Math.ceil(gross * 0.0075);
-                const emplrShare = Math.ceil(gross * 0.0325);
-
-                document.getElementById('resEsiEmp').innerText = "₹ " + empShare;
-                document.getElementById('resEsiEmplr').innerText = "₹ " + emplrShare;
-                document.getElementById('resEsiTotal').innerText = "₹ " + (empShare + emplrShare);
+                breakdown.style.opacity = '0.3'; // Dim it
+                // Set zero?
+                // Usually statutory calc shows 0 if ineligible.
+                document.getElementById('outEsicEmp').innerText = "₹ 0";
+                document.getElementById('outEsicEmplr').innerText = "₹ 0";
+                document.getElementById('outEsicTotal').innerText = "₹ 0";
+                return;
             }
+
+            alertBox.style.display = 'none';
+            breakdown.style.opacity = '1';
+
+            // Calc
+            // ESIC is rounded to next rupee sometimes, but standard math.round or ceil?
+            // Regulation 31C: Contribution rounded to next higher rupee.
+            const empShare = Math.ceil(gross * 0.0075);
+            const emplrShare = Math.ceil(gross * 0.0325);
+            const total = empShare + emplrShare;
+
+            document.getElementById('outEsicEmp').innerText = "₹ " + empShare.toLocaleString();
+            document.getElementById('outEsicEmplr').innerText = "₹ " + emplrShare.toLocaleString();
+            document.getElementById('outEsicTotal').innerText = "₹ " + total.toLocaleString();
         }
+
+        // Init
+        calculateESIC();
     </script>
 </body>
 

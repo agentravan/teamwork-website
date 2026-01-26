@@ -4,108 +4,177 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login | Global HRX</title>
+    <title>Login | TeamWork Solutions</title>
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/mega-menu.css">
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <style>
+        /* Special Logic for Login Page: Hide Login Button in Header */
+        .btn-outline[href="login.html"] {
+            display: none !important;
+        }
+    </style>
 </head>
 
 <body>
 
+    <!-- PUBLIC HEADER -->
     <nav class="navbar">
         <div class="container nav-content">
             <a href="index.html" class="logo">
-                <i class="ph-fill ph-hexagon" style="color: var(--primary);"></i>
-                TeamWork<span>Solutions</span>
+                <div style="display: flex; flex-direction: column; line-height: 1.1;">
+                    <div style="display: flex; align-items: center; gap: 6px;">
+                        <i class="ph-fill ph-hexagon" style="color: var(--primary);"></i>
+                        <span>TeamWork</span>
+                    </div>
+                    <span
+                        style="font-size: 0.7rem; letter-spacing: 1px; color: var(--text-secondary); margin-left: 24px;">SOLUTIONS</span>
+                </div>
             </a>
-            <ul class="nav-links">
+            <ul class="nav-links desktop-menu">
                 <li><a href="index.html" class="nav-link">Home</a></li>
-                <li><a href="contact.html" class="nav-link">Contact</a></li>
+                <li><a href="global-hrx.html" class="nav-link">Global HRX</a></li>
+                <li class="nav-item-dropdown">
+                    <a href="services.html" class="nav-link">Services <i class="ph-bold ph-caret-down"></i></a>
+                    <!-- Mega Menu omitted for brevity, logic handled in pure links or copy full structure if needed. For Login page, simpler nav is often preferred but user said "Two Headers". I'll keep full structure. -->
+                    <div class="mega-menu">
+                        <div class="mega-column">
+                            <h4>Core HR & Operations</h4>
+                            <a href="services.html" class="mega-link"><i
+                                    class="ph-duotone ph-currency-dollar mega-icon"></i>
+                                <div class="mega-text">
+                                    <h5>Payroll Management</h5>
+                                </div>
+                            </a>
+                            <a href="services.html" class="mega-link"><i
+                                    class="ph-duotone ph-shield-check mega-icon"></i>
+                                <div class="mega-text">
+                                    <h5>Statutory Compliance</h5>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item-dropdown">
+                    <a href="calculators.html" class="nav-link">Tools <i class="ph-bold ph-caret-down"></i></a>
+                    <div class="mega-menu" style="width: 400px; grid-template-columns: 1fr;">
+                        <div class="mega-column">
+                            <h4>Financial Tools</h4>
+                            <a href="calculator-pf.html" class="mega-link"><i
+                                    class="ph-duotone ph-piggy-bank mega-icon"></i>
+                                <div class="mega-text">
+                                    <h5>PF Calculator</h5>
+                                </div>
+                            </a>
+                            <a href="calculator-esic.html" class="mega-link"><i
+                                    class="ph-duotone ph-first-aid-kit mega-icon"></i>
+                                <div class="mega-text">
+                                    <h5>ESIC Calculator</h5>
+                                </div>
+                            </a>
+                            <a href="calculator-tds.html" class="mega-link"><i
+                                    class="ph-duotone ph-receipt mega-icon"></i>
+                                <div class="mega-text">
+                                    <h5>TDS Calculator</h5>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </li>
             </ul>
+            <div class="nav-actions">
+                <a href="login.html" class="btn btn-outline" style="padding: 8px 20px; font-size: 0.9rem;">Login</a>
+                <a href="request-access.html" class="btn btn-primary"
+                    style="padding: 8px 20px; font-size: 0.9rem;">Request Access</a>
+            </div>
         </div>
     </nav>
 
-    <div
-        style="min-height: 100vh; display: flex; align-items: center; justify-content: center; padding-top: 80px; position: relative; overflow: hidden; background: radial-gradient(circle at 10% 20%, rgba(59, 130, 246, 0.1) 0%, transparent 60%);">
-
-        <div class="container"
-            style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; max-width: 1000px;">
-
-            <!-- Left Panel: Animated Showcase -->
-            <div class="fade-up">
-                <h1 style="margin-bottom: 24px;">Secure Gateway to <br> <span class="text-gradient">Global HRX</span>
-                </h1>
-                <div style="display: grid; gap: 20px;">
-                    <div class="glass-panel" style="padding: 20px; border-left: 4px solid var(--service);">
-                        <h4 style="margin-bottom: 8px; color: var(--service);"><i class="ph-fill ph-check-circle"></i>
-                            Automating...</h4>
-                        <p style="font-size: 0.9rem; color: var(--text-secondary);">Payroll, Attendance, and Leave
-                            workflows.</p>
-                    </div>
-                    <div class="glass-panel" style="padding: 20px; border-left: 4px solid var(--primary);">
-                        <h4 style="margin-bottom: 8px; color: var(--primary);"><i class="ph-fill ph-shield-check"></i>
-                            Protecting...</h4>
-                        <p style="font-size: 0.9rem; color: var(--text-secondary);">Sensitive employee data and
-                            statutory liability.</p>
-                    </div>
-                    <div class="glass-panel" style="padding: 20px; border-left: 4px solid #ef4444;">
-                        <h4 style="margin-bottom: 8px; color: #ef4444;"><i class="ph-fill ph-prohibit"></i>
-                            Preventing...</h4>
-                        <p style="font-size: 0.9rem; color: var(--text-secondary);">Compliance breaches and unauthorized
-                            access.</p>
-                    </div>
-                </div>
+    <main style="min-height: 100vh; display: flex; align-items: center; justify-content: center; padding-top: 80px;">
+        <div class="glass-panel" style="width: 100%; max-width: 400px; padding: 40px;">
+            <div style="text-align: center; margin-bottom: 30px;">
+                <i class="ph-duotone ph-lock-key"
+                    style="font-size: 48px; color: var(--primary); margin-bottom: 15px;"></i>
+                <h2 style="color: white; font-size: 1.5rem;">Admin Login</h2>
+                <p style="color: var(--text-secondary); font-size: 0.9rem;">Secure access for TeamWork Admins.</p>
             </div>
 
-            <!-- Right Panel: Login Card -->
-            <div class="glass-panel fade-up"
-                style="padding: 40px; text-align: center; border: 1px solid rgba(255,255,255,0.1);">
-                <i class="ph-fill ph-lock-key" style="font-size: 48px; color: var(--primary); margin-bottom: 20px;"></i>
-                <h2 style="margin-bottom: 8px;">Welcome User</h2>
-                <p style="color: var(--text-secondary); margin-bottom: 30px;">Access your Dashboard</p>
-
-                <form onsubmit="event.preventDefault(); window.location.href='hrms-dashboard.html';">
-                    <div class="form-group" style="margin-bottom: 20px; text-align: left;">
-                        <label style="display: block; margin-bottom: 8px; font-size: 0.9rem;">Email Address</label>
-                        <div style="position: relative;">
-                            <input type="email" required
-                                style="width: 100%; padding: 12px 12px 12px 40px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
-                            <i class="ph-fill ph-envelope"
-                                style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-tertiary);"></i>
-                        </div>
-                    </div>
-
-                    <div class="form-group" style="margin-bottom: 30px; text-align: left;">
-                        <label style="display: block; margin-bottom: 8px; font-size: 0.9rem;">Password</label>
-                        <div style="position: relative;">
-                            <input type="password" required
-                                style="width: 100%; padding: 12px 12px 12px 40px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
-                            <i class="ph-fill ph-lock-key"
-                                style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-tertiary);"></i>
-                        </div>
-                    </div>
-
-                    <button type="submit" class="btn btn-primary" style="width: 100%;">Secure Login</button>
-                </form>
-
-                <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--border-subtle);">
-                    <p style="margin-bottom: 10px; font-size: 0.9rem; color: var(--text-secondary);">Recruitment Team?
-                    </p>
-                    <a href="admin-login.html" class="btn btn-outline"
-                        style="font-size: 0.8rem; padding: 6px 12px; width: 100%;">Career Admin Login</a>
+            <!-- Login Form -->
+            <form id="loginForm" onsubmit="handleLogin(event)">
+                <div class="form-group" style="margin-bottom: 20px;">
+                    <label style="display: block; margin-bottom: 8px; font-size: 0.9rem;">Username</label>
+                    <input type="text" id="username" placeholder="admin" required
+                        style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
                 </div>
+                <div class="form-group" style="margin-bottom: 25px;">
+                    <label style="display: block; margin-bottom: 8px; font-size: 0.9rem;">Password</label>
+                    <input type="password" id="password" placeholder="admin123" required
+                        style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
+            </form>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-bottom: 40px;">
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Compliance Tools</h4>
+                    <ul>
+                        <li><a href="calculator-pf.html">PF Calculator</a></li>
+                        <li><a href="calculator-esic.html">ESIC Calculator</a></li>
+                        <li><a href="calculator-tds.html">TDS Calculator</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Legal & Privacy</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div
+                style="text-align: center; padding-top: 40px; border-top: 1px solid var(--border-subtle); color: var(--text-tertiary);">
+                &copy; 2026 TeamWork Solutions
             </div>
         </div>
-    </div>
+    </footer>
 
-    <!-- No footer for login page usually, but user asked for "Footer on every page". Adding mini footer. -->
-    <div
-        style="position: absolute; bottom: 20px; width: 100%; text-align: center; color: var(--text-tertiary); font-size: 0.8rem;">
-        &copy; 2026 TeamWork Solutions.
-    </div>
+    <script src="js/main.js"></script>
+    <script>
+        function handleLogin(e) {
+            e.preventDefault();
+            const u = document.getElementById('username').value;
+            const p = document.getElementById('password').value;
 
+            if (u === 'admin' && p === 'admin123') {
+                const expiry = Date.now() + (5 * 60 * 1000);
+                localStorage.setItem('adminSession', JSON.stringify({
+                    token: 'valid-token-' + Date.now(),
+                    expiry: expiry
+                }));
+                window.location.href = 'admin-dashboard.html';
+            } else {
+                alert('Invalid Credentials. Try admin / admin123');
+            }
+        }
+    </script>
 </body>
 
 </html>

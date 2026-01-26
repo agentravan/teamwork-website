@@ -96,18 +96,17 @@ function initMobileMenu() {
 
             <div class="mobile-dropdown-group">
                 <div class="mobile-nav-link" onclick="this.nextElementSibling.classList.toggle('active')">
-                    Calculators <i class="ph-bold ph-caret-down"></i>
+                    Tools <i class="ph-bold ph-caret-down"></i>
                 </div>
                 <div class="mobile-nav-sub">
-                    <a href="calculator-tds.html"><i class="ph-duotone ph-receipt"></i> TDS Estimator</a>
                     <a href="calculator-pf.html"><i class="ph-duotone ph-piggy-bank"></i> PF Calculator</a>
                     <a href="calculator-esic.html"><i class="ph-duotone ph-first-aid-kit"></i> ESIC Calculator</a>
+                    <a href="calculator-tds.html"><i class="ph-duotone ph-receipt"></i> TDS Calculator</a>
                     <a href="calculator-gratuity.html"><i class="ph-duotone ph-coins"></i> Gratuity</a>
                 </div>
             </div>
 
             <a href="careers.html" class="mobile-nav-link">Careers</a>
-            <a href="contact.html" class="mobile-nav-link">Contact</a>
             
             <div style="margin-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;">
                 <a href="login.html" class="btn btn-outline" style="width: 100%; text-align: center; margin-bottom: 10px;">Login</a>

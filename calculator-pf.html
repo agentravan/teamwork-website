@@ -15,10 +15,9 @@
 
 <body>
 
-    <!-- Master Blueprint Header -->
+    <!-- PUBLIC HEADER (Standardized) -->
     <nav class="navbar">
         <div class="container nav-content">
-            <!-- Left: Logo -->
             <a href="index.html" class="logo">
                 <div style="display: flex; flex-direction: column; line-height: 1.1;">
                     <div style="display: flex; align-items: center; gap: 6px;">
@@ -29,268 +28,269 @@
                         style="font-size: 0.7rem; letter-spacing: 1px; color: var(--text-secondary); margin-left: 24px;">SOLUTIONS</span>
                 </div>
             </a>
-
-            <!-- Center: Links & Mega Menu -->
             <ul class="nav-links desktop-menu">
                 <li><a href="index.html" class="nav-link">Home</a></li>
                 <li><a href="global-hrx.html" class="nav-link">Global HRX</a></li>
-
-                <!-- Services Mega Menu -->
                 <li class="nav-item-dropdown">
                     <a href="services.html" class="nav-link">Services <i class="ph-bold ph-caret-down"></i></a>
                     <div class="mega-menu">
-                        <!-- Col 1: Core HR -->
                         <div class="mega-column">
                             <h4>Core HR & Operations</h4>
-                            <a href="services.html" class="mega-link">
-                                <i class="ph-duotone ph-currency-dollar mega-icon"></i>
+                            <a href="services.html" class="mega-link"><i
+                                    class="ph-duotone ph-currency-dollar mega-icon"></i>
                                 <div class="mega-text">
                                     <h5>Payroll Management</h5>
-                                    <p>End-to-end processing & accuracy.</p>
                                 </div>
                             </a>
-                            <a href="services.html" class="mega-link">
-                                <i class="ph-duotone ph-shield-check mega-icon"></i>
+                            <a href="services.html" class="mega-link"><i
+                                    class="ph-duotone ph-shield-check mega-icon"></i>
                                 <div class="mega-text">
                                     <h5>Statutory Compliance</h5>
-                                    <p>PF, ESIC, Tax filing & audits.</p>
-                                </div>
-                            </a>
-                        </div>
-
-                        <!-- Col 2: Tech & Tools -->
-                        <div class="mega-column">
-                            <h4>Technology & Tools</h4>
-                            <a href="global-hrx.html" class="mega-link">
-                                <i class="ph-duotone ph-desktop mega-icon" style="color: var(--accent);"></i>
-                                <div class="mega-text">
-                                    <h5>Global HRX</h5>
-                                    <p>Enterprise System of Record.</p>
-                                </div>
-                            </a>
-                            <a href="calculators.html" class="mega-link">
-                                <i class="ph-duotone ph-calculator mega-icon" style="color: var(--accent);"></i>
-                                <div class="mega-text">
-                                    <h5>HR Calculators</h5>
-                                    <p>TDS, PF, ESIC & Gratuity.</p>
                                 </div>
                             </a>
                         </div>
                     </div>
                 </li>
-
-                <!-- Calculators Dropdown -->
                 <li class="nav-item-dropdown">
-                    <a href="calculators.html" class="nav-link active">Calculators <i
-                            class="ph-bold ph-caret-down"></i></a>
+                    <a href="calculators.html" class="nav-link active">Tools <i class="ph-bold ph-caret-down"></i></a>
                     <div class="mega-menu" style="width: 400px; grid-template-columns: 1fr;">
-                        <!-- Single Col for Calculators -->
                         <div class="mega-column">
                             <h4>Financial Tools</h4>
-                            <a href="calculator-pf.html" class="mega-link">
-                                <i class="ph-duotone ph-piggy-bank mega-icon" style="color: #ec4899;"></i>
+                            <a href="calculator-pf.html" class="mega-link"><i
+                                    class="ph-duotone ph-piggy-bank mega-icon"></i>
                                 <div class="mega-text">
                                     <h5>PF Calculator</h5>
-                                    <p>12% vs 13% | Wage Ceiling Logic.</p>
                                 </div>
                             </a>
-                            <a href="calculator-esic.html" class="mega-link">
-                                <i class="ph-duotone ph-first-aid-kit mega-icon" style="color: #ec4899;"></i>
+                            <a href="calculator-esic.html" class="mega-link"><i
+                                    class="ph-duotone ph-first-aid-kit mega-icon"></i>
                                 <div class="mega-text">
                                     <h5>ESIC Calculator</h5>
-                                    <p>0.75% / 3.25% Contribution.</p>
                                 </div>
                             </a>
-                            <a href="calculator-gratuity.html" class="mega-link">
-                                <i class="ph-duotone ph-coins mega-icon" style="color: #ec4899;"></i>
+                            <a href="calculator-tds.html" class="mega-link"><i
+                                    class="ph-duotone ph-receipt mega-icon"></i>
                                 <div class="mega-text">
-                                    <h5>Gratuity Calculator</h5>
-                                    <p>Eligibility & Payout Estimation.</p>
-                                </div>
-                            </a>
-                            <a href="calculator-tds.html" class="mega-link">
-                                <i class="ph-duotone ph-receipt mega-icon" style="color: #ec4899;"></i>
-                                <div class="mega-text">
-                                    <h5>TDS Smart Estimator</h5>
-                                    <p>Old vs New Regime Recommender.</p>
+                                    <h5>TDS Calculator</h5>
                                 </div>
                             </a>
                         </div>
                     </div>
                 </li>
-
-                <li><a href="careers.html" class="nav-link">Careers</a></li>
-                <li><a href="hrms-pricing.html" class="nav-link">Pricing</a></li>
-                <li><a href="about.html" class="nav-link">About</a></li>
-                <li><a href="contact.html" class="nav-link">Contact</a></li>
             </ul>
-
-            <!-- Right: Actions -->
             <div class="nav-actions">
-                <a href="login.html" class="nav-link" style="margin-right: 15px; font-size: 0.9rem;">Login</a>
-                <a href="request-access.html" class="btn btn-primary" style="padding: 8px 20px; font-size: 0.9rem;">
-                    Request Access
-                </a>
+                <a href="login.html" class="btn btn-outline" style="padding: 8px 20px; font-size: 0.9rem;">Login</a>
+                <a href="request-access.html" class="btn btn-primary"
+                    style="padding: 8px 20px; font-size: 0.9rem;">Request Access</a>
             </div>
         </div>
     </nav>
 
-    <header class="section-padding" style="padding-top: 160px; text-align: center;">
+    <header class="section-padding" style="padding-top: 140px; text-align: center;">
         <div class="container">
-            <h1 class="fade-up" style="margin-bottom: 24px;">EPF <span class="text-gradient">Calculator</span></h1>
-            <p class="fade-up" style="color: var(--text-secondary); max-width: 700px; margin: 0 auto;">
-                Accurate Provident Fund Estimations. Compliant with EPF & MP Act, 1952.
-            </p>
+            <h1 class="fade-up" style="margin-bottom: 24px;">PF <span class="text-gradient">Calculator</span></h1>
+            <p class="fade-up" style="color: var(--text-secondary);">Compliant with EPF & MP Act, 1952. FY 2025-26
+                Ready.</p>
         </div>
     </header>
 
     <main>
         <section class="section-padding">
             <div class="container">
+                <div class="glass-panel" style="padding: 40px; max-width: 900px; margin: 0 auto;">
 
-                <!-- Info Section -->
-                <div class="glass-panel" style="padding: 30px; margin-bottom: 40px; border-left: 4px solid #ec4899;">
-                    <h3 style="margin-bottom: 10px; color: #ec4899;">EPF Guidelines</h3>
-                    <p style="color: var(--text-secondary);">
-                        <strong>Mandatory:</strong> Employee (12%) and Employer (12% of which 8.33% goes to EPS).
-                        <strong>Wage Ceiling:</strong> ₹15,000. Contributions can be restricted to this ceiling.
-                    </p>
-                    <div style="margin-top: 20px; display: flex; gap: 20px; font-size: 0.9rem;">
-                        <a href="https://unifiedportal-mem.epfindia.gov.in/memberinterface/" target="_blank"
-                            style="color: white; text-decoration: underline;">UAN Member Portal <i
-                                class="ph-bold ph-arrow-up-right"></i></a>
-                        <a href="https://unifiedportal-emp.epfindia.gov.in/epfo/" target="_blank"
-                            style="color: white; text-decoration: underline;">Employer Portal <i
-                                class="ph-bold ph-arrow-up-right"></i></a>
+                    <!-- Legal Info -->
+                    <div
+                        style="background: rgba(59, 130, 246, 0.1); padding: 20px; border-left: 4px solid var(--primary); margin-bottom: 30px; border-radius: 8px;">
+                        <h4 style="color: var(--primary); margin-bottom: 10px;">Applicability & Rules</h4>
+                        <ul style="font-size: 0.9rem; color: var(--text-secondary); list-style-position: inside;">
+                            <li>Mandatory if Establishment ≥ 20 employees.</li>
+                            <li>Mandatory if Basic + DA ≤ ₹15,000.</li>
+                            <li>Interest Rate: ~8.25% (FY 23-24).</li>
+                        </ul>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px;">
+                        <!-- Input -->
+                        <div>
+                            <h3 style="margin-bottom: 20px;">Configuration</h3>
+
+                            <div class="form-group" style="margin-bottom: 20px;">
+                                <label style="display: block; margin-bottom: 8px;">Basic + DA (Monthly)</label>
+                                <input type="number" id="pfBasic" value="15000"
+                                    style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
+                            </div>
+
+                            <div class="form-group" style="margin-bottom: 20px;">
+                                <label style="display: block; margin-bottom: 8px;">PF Ceiling Applicable?</label>
+                                <select id="pfCeiling"
+                                    style="width: 100%; padding: 12px; background: #0f172a; border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
+                                    <option value="yes">Yes (Cap at ₹15,000)</option>
+                                    <option value="no">No (Full Basic)</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group" style="margin-bottom: 30px;">
+                                <label style="display: block; margin-bottom: 8px;">Employer Contribution Mode</label>
+                                <select id="pfMode"
+                                    style="width: 100%; padding: 12px; background: #0f172a; border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
+                                    <option value="12">12% (Standard)</option>
+                                    <option value="13">13% (Includes Admin Charges)</option>
+                                </select>
+                            </div>
+
+                            <button onclick="calculatePF()" class="btn btn-primary"
+                                style="width: 100%;">Calculate</button>
+                        </div>
+
+                        <!-- Output -->
+                        <div id="pfResult"
+                            style="background: rgba(255,255,255,0.02); padding: 30px; border-radius: 12px; border: 1px solid var(--border-subtle);">
+                            <h3 style="margin-bottom: 20px; color: var(--text-primary);">Breakdown</h3>
+
+                            <div style="margin-bottom: 25px;">
+                                <h4 style="color: var(--service); font-size: 0.9rem; margin-bottom: 10px;">Employee
+                                    Share</h4>
+                                <div
+                                    style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.9rem;">
+                                    <span style="color: var(--text-secondary);">EPF (12%)</span>
+                                    <span style="color: white; font-weight: 600;" id="outEmpPf">₹ 0</span>
+                                </div>
+                                <div
+                                    style="display: flex; justify-content: space-between; padding-top: 10px; border-top: 1px dashed var(--border-subtle);">
+                                    <span>Total Deduction</span>
+                                    <span style="color: var(--service); font-weight: 700;" id="outEmpTotal">₹ 0</span>
+                                </div>
+                            </div>
+
+                            <div>
+                                <h4 style="color: var(--accent); font-size: 0.9rem; margin-bottom: 10px;">Employer Share
+                                </h4>
+                                <div
+                                    style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.9rem;">
+                                    <span style="color: var(--text-secondary);">EPF (3.67%)</span>
+                                    <span style="color: white;" id="outEmplrEpf">₹ 0</span>
+                                </div>
+                                <div
+                                    style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.9rem;">
+                                    <span style="color: var(--text-secondary);">EPS (8.33%)</span>
+                                    <span style="color: white;" id="outEmplrEps">₹ 0</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.9rem; display: none;"
+                                    id="rowEdli">
+                                    <span style="color: var(--text-secondary);">Admin/EDLI (~1%)</span>
+                                    <span style="color: white;" id="outEmplrEdli">₹ 0</span>
+                                </div>
+                                <div
+                                    style="display: flex; justify-content: space-between; padding-top: 10px; border-top: 1px dashed var(--border-subtle);">
+                                    <span>Total Cost</span>
+                                    <span style="color: var(--accent); font-weight: 700;" id="outEmplrTotal">₹ 0</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="glass-panel" style="padding: 40px; max-width: 800px; margin: 0 auto;">
-                    <h3 style="margin-bottom: 30px;">Input Details</h3>
-
-                    <div class="form-group" style="margin-bottom: 25px;">
-                        <label style="display: block; margin-bottom: 8px; font-size: 0.9rem;">Basic Salary + DA
-                            (Monthly)</label>
-                        <input type="number" id="pfBasic" placeholder="e.g. 25000"
-                            style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
-                    </div>
-
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 30px;">
-                        <div class="form-group">
-                            <label style="display: block; margin-bottom: 8px; font-size: 0.9rem;">Restrict to Ceiling
-                                (₹15k)?</label>
-                            <select id="pfCap"
-                                style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
-                                <option value="no" style="background: #0f172a;">No (Full Basic)</option>
-                                <option value="yes" style="background: #0f172a;">Yes (Limit to 15k)</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label style="display: block; margin-bottom: 8px; font-size: 0.9rem;">Voluntary PF (Extra
-                                %)</label>
-                            <input type="number" id="vpfPct" placeholder="e.g. 10"
-                                style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
-                        </div>
-                    </div>
-
-                    <button onclick="calculatePF()" class="btn btn-primary"
-                        style="width: 100%; margin-bottom: 30px;">Calculate Contributions</button>
-
-                    <!-- Results -->
-                    <div id="pfResult"
-                        style="display: none; border-top: 1px solid var(--border-subtle); padding-top: 30px;">
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
-                            <div>
-                                <h4 style="color: var(--service); margin-bottom: 15px;">Employee Share</h4>
-                                <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                                    <span style="color: var(--text-secondary);">EPF (12%):</span>
-                                    <span id="resEmpPF" style="color: white; font-weight: 600;">₹ 0</span>
-                                </div>
-                                <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                                    <span style="color: var(--text-secondary);">VPF (Voluntary):</span>
-                                    <span id="resVPF" style="color: white; font-weight: 600;">₹ 0</span>
-                                </div>
-                                <div
-                                    style="display: flex; justify-content: space-between; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px;">
-                                    <span style="color: white;">Total Deduction:</span>
-                                    <span id="resEmpTotal" style="color: var(--service); font-weight: 700;">₹ 0</span>
-                                </div>
-                            </div>
-
-                            <div>
-                                <h4 style="color: var(--accent); margin-bottom: 15px;">Employer Share</h4>
-                                <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                                    <span style="color: var(--text-secondary);">EPF (3.67%):</span>
-                                    <span id="resEmplrPF" style="color: white; font-weight: 600;">₹ 0</span>
-                                </div>
-                                <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                                    <span style="color: var(--text-secondary);">EPS (8.33%):</span>
-                                    <span id="resEPS" style="color: white; font-weight: 600;">₹ 0</span>
-                                </div>
-                                <div
-                                    style="display: flex; justify-content: space-between; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px;">
-                                    <span style="color: white;">Total Contribution:</span>
-                                    <span id="resEmplrTotal" style="color: var(--accent); font-weight: 700;">₹ 0</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+                <!-- Links -->
+                <div style="text-align: center; margin-top: 40px; font-size: 0.9rem;">
+                    <a href="https://unifiedportal-mem.epfindia.gov.in" target="_blank"
+                        style="color: var(--text-secondary); margin: 0 15px;">UAN Member Portal</a>
+                    <a href="https://www.epfindia.gov.in" target="_blank"
+                        style="color: var(--text-secondary); margin: 0 15px;">EPFO Official</a>
                 </div>
 
             </div>
         </section>
     </main>
 
+    <!-- Standard Footer -->
     <footer>
-        <div class="container"
-            style="text-align: center; padding: 40px 0; border-top: 1px solid var(--border-subtle); color: var(--text-tertiary);">
-            &copy; 2026 TeamWork Solutions.
+        <div class="container">
+            <div
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-bottom: 40px;">
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Compliance Tools</h4>
+                    <ul>
+                        <li><a href="calculator-pf.html">PF Calculator</a></li>
+                        <li><a href="calculator-esic.html">ESIC Calculator</a></li>
+                        <li><a href="calculator-tds.html">TDS Calculator</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Legal & Privacy</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms</a></li>
+                        <li><a href="https://unifiedportal-mem.epfindia.gov.in" target="_blank">EPFO</a></li>
+                        <li><a href="https://www.esic.in" target="_blank">ESIC</a></li>
+                    </ul>
+                    <p style="margin-top:20px; font-size: 0.8rem; color: var(--text-tertiary);">Disclaimer: Calculations
+                        are indicative. Actual statutory deductions may vary.</p>
+                </div>
+            </div>
+            <div
+                style="text-align: center; padding-top: 40px; border-top: 1px solid var(--border-subtle); color: var(--text-tertiary);">
+                &copy; 2026 TeamWork Solutions | Payroll & Compliance Experts
+            </div>
         </div>
     </footer>
 
     <script src="js/main.js"></script>
     <script>
         function calculatePF() {
-            let basic = parseFloat(document.getElementById('pfBasic').value) || 0;
-            const capped = document.getElementById('pfCap').value === 'yes';
-            const vpfRate = parseFloat(document.getElementById('vpfPct').value) || 0;
+            const basic = parseFloat(document.getElementById('pfBasic').value) || 0;
+            const ceiling = document.getElementById('pfCeiling').value === 'yes';
+            const mode = document.getElementById('pfMode').value; // 12 or 13
 
-            let calcBasic = basic;
+            // Wage Logic
+            // If ceiling is Yes: Wage is limited to 15000
+            // If ceiling is No: Wage is actual basic
+            let wage = basic;
+            if (ceiling && basic > 15000) wage = 15000;
 
-            // Capping Logic: If YES, limit calculation basis to 15000
-            if (capped && basic > 15000) {
-                calcBasic = 15000;
+            // Employee Share: 12% of Wage
+            const empPf = Math.round(wage * 0.12);
+
+            // Employer Share
+            // EPS strictly on Capped Wage (15000)
+            let epsWage = (basic > 15000) ? 15000 : basic;
+
+            const eps = Math.round(epsWage * 0.0833);
+            const emplrEpf = Math.round(wage * 0.12) - eps;
+
+            // Admin Charges (if 13%)
+            let admin = 0;
+            if (mode === '13') {
+                // Admin charges usually on capped wage
+                admin = Math.round(epsWage * 0.01);
+                document.getElementById('rowEdli').style.display = 'flex';
+                document.getElementById('outEmplrEdli').innerText = "₹ " + admin;
+            } else {
+                document.getElementById('rowEdli').style.display = 'none';
             }
 
-            // Employee
-            const empPF = Math.round(calcBasic * 0.12);
-            // VPF is on ACTUAL Basic potentially, but usually follows PF rules. 
-            // Standard practice: VPF is % of Actual Basic.
-            const vpf = Math.round(basic * (vpfRate / 100));
+            const emplrTotal = emplrEpf + eps + admin;
 
-            // Employer
-            // EPS is strictly capped at 15000 basis usually
-            let epsBasis = (basic > 15000) ? 15000 : basic;
-            // If capped option selected, everything is on 15000.
-            // If NOT capped, Employer share usually still limits EPS to 15k and puts rest in PF, OR limits entire contrib.
-            // Simplified Blueprint logic: "Employer capped at ₹1,950" (which is 13% of 15k? No 12% is 1800. 13% includes admin charges maybe? Blueprint says 'Employer: 13%').
-            // Let's stick to standard split: 8.33% EPS (capped at 15k usually) + 3.67% PF.
+            // UI
+            document.getElementById('outEmpPf').innerText = "₹ " + empPf.toLocaleString();
+            document.getElementById('outEmpTotal').innerText = "₹ " + empPf.toLocaleString();
 
-            const eps = Math.round(epsBasis * 0.0833);
-            const emplrPF = Math.round(calcBasic * 0.12) - eps;
-
-            // Update UI
-            document.getElementById('resEmpPF').innerText = "₹ " + empPF.toLocaleString();
-            document.getElementById('resVPF').innerText = "₹ " + vpf.toLocaleString();
-            document.getElementById('resEmpTotal').innerText = "₹ " + (empPF + vpf).toLocaleString();
-
-            document.getElementById('resEmplrPF').innerText = "₹ " + emplrPF.toLocaleString();
-            document.getElementById('resEPS').innerText = "₹ " + eps.toLocaleString();
-            document.getElementById('resEmplrTotal').innerText = "₹ " + (emplrPF + eps).toLocaleString();
-
-            document.getElementById('pfResult').style.display = 'block';
+            document.getElementById('outEmplrEpf').innerText = "₹ " + emplrEpf.toLocaleString();
+            document.getElementById('outEmplrEps').innerText = "₹ " + eps.toLocaleString();
+            document.getElementById('outEmplrTotal').innerText = "₹ " + emplrTotal.toLocaleString();
         }
+
+        // Init with default calc
+        calculatePF();
     </script>
 </body>
 
