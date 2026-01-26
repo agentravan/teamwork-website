@@ -136,12 +136,18 @@ h3 {
 }
 
 .btn-primary {
-    background: var(--primary);
+    background: #2563eb;
+    /* Matching the bright blue from image */
     color: white;
+    border: 1px solid #2563eb;
+    padding: 10px 24px;
+    /* Pill shape */
+    font-weight: 600;
 }
 
 .btn-primary:hover {
-    background: #2563eb;
+    background: #1d4ed8;
+    border-color: #1d4ed8;
     transform: translateY(-2px);
 }
 
@@ -167,14 +173,19 @@ h3 {
 }
 
 .btn-ghost {
-    background: transparent;
+    background: #0f172a;
+    /* Dark background as seen in image */
     color: var(--text-white);
-    padding: 8px 16px;
-    font-weight: 500;
+    padding: 10px 24px;
+    /* Matching size */
+    font-weight: 600;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .btn-ghost:hover {
-    color: var(--primary);
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+    color: white;
 }
 
 
@@ -389,6 +400,8 @@ h3 {
 @media (min-width: 993px) {
     .nav-actions {
         display: flex !important;
+        gap: 16px;
+        /* Space between buttons */
     }
 }
 
