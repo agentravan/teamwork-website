@@ -9,89 +9,100 @@
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
 </head>
 
 <body>
+
     <nav class="navbar">
-        <div class="container nav-container">
-            <a href="index.html" class="logo">Team<span>Work</span></a>
+        <div class="container nav-content">
+            <a href="index.html" class="logo"><i class="ph-fill ph-hexagon" style="color: var(--primary);"></i>
+                Team<span>Work</span></a>
             <ul class="nav-links">
                 <li><a href="index.html" class="nav-link">Home</a></li>
-                <li><a href="global-hrx.html" class="nav-link">Product</a></li>
+                <li><a href="global-hrx.html" class="nav-link">Global HRX</a></li>
                 <li><a href="solutions.html" class="nav-link">Solutions</a></li>
-                <li><a href="services.html" class="nav-link">Services</a></li>
-                <li><a href="pricing.html" class="nav-link">Pricing</a></li>
+                <li><a href="services.html" class="nav-link">Consultancy</a></li>
             </ul>
-            <div class="nav-actions">
-                <a href="login.html" class="nav-link">Login</a>
-                <a href="request-access.html" class="btn btn-primary">Book Demo</a>
-            </div>
-            <div class="mobile-toggle">
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
-            </div>
         </div>
     </nav>
 
-    <main style="padding-top: 80px;">
-        <section style="padding: 100px 0; text-align: center;">
-            <div class="container">
-                <h1 class="fade-up" style="font-size: 3rem; margin-bottom: 24px;">We Are <span
-                        class="text-gradient">Team Work</span></h1>
-                <p class="fade-up" style="color: var(--text-muted); max-width: 600px; margin: 0 auto;">Building the
-                    future of work with technology and empathy.</p>
-            </div>
-        </section>
+    <header class="section-padding" style="padding-top: 160px; text-align: center;">
+        <div class="container">
+            <h1 class="fade-up" style="font-size: 3.5rem; margin-bottom: 24px;">We are <span class="text-gradient">Team
+                    Work</span></h1>
+            <p class="fade-up"
+                style="color: var(--text-secondary); font-size: 1.25rem; max-width: 700px; margin: 0 auto; line-height: 1.7;">
+                Founded on the belief that Great People Deserve Great Technology. We are a collective of HR veterans and
+                engineering leaders building the future of work.
+            </p>
+        </div>
+    </header>
 
-        <section style="padding: 60px 0;">
+    <main>
+        <section class="section-padding">
             <div class="container">
-                <div style="background: var(--bg-card); border-radius: 20px; overflow: hidden; display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--border-light);"
-                    class="fade-up">
+                <div class="glass-panel"
+                    style="padding: 0; overflow: hidden; display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--border-subtle);">
                     <div style="padding: 60px;">
                         <h2 style="margin-bottom: 24px;">Our Mission</h2>
-                        <p style="color: var(--text-muted); margin-bottom: 24px; line-height: 1.8;">To empower
-                            organizations globally with intelligent, human-centric HR tools that simplify complex
-                            processes and foster a culture of growth.</p>
-                        <p style="color: var(--text-muted); line-height: 1.8;">Founded by industry veterans, Team Work
-                            combines decades of HR consultancy experience with cutting-edge technology.</p>
+                        <p style="color: var(--text-secondary); margin-bottom: 24px; line-height: 1.7;">
+                            For decades, HR professionals have been stuck with clunky, on-premise software or disjointed
+                            spreadsheets.
+                        </p>
+                        <p style="color: var(--text-secondary); line-height: 1.7;">
+                            Team Work bridges the gap between <strong>operational compliance</strong> and
+                            <strong>strategic talent management</strong>. We combine the power of an enterprise-grade
+                            SaaS platform with the human touch of expert consultancy.
+                        </p>
                     </div>
                     <div
-                        style="background: rgba(59, 130, 246, 0.1); display: flex; align-items: center; justify-content: center; min-height: 300px;">
-                        <!-- Placeholder for team image/graphic -->
-                        <span style="font-size: 5rem;">🌍</span>
+                        style="background: rgba(59, 130, 246, 0.1); display: flex; align-items: center; justify-content: center; position: relative;">
+                        <!-- Abstract team visual -->
+                        <div
+                            style="position: absolute; width: 200px; height: 200px; border: 2px solid var(--primary); border-radius: 50%;">
+                        </div>
+                        <div
+                            style="position: absolute; width: 300px; height: 300px; border: 1px solid var(--purple); border-radius: 50%; opacity: 0.5;">
+                        </div>
+                        <i class="ph-duotone ph-globe-hemisphere-west" style="font-size: 100px; color: white;"></i>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section style="padding: 80px 0;">
+        <section class="section-padding">
             <div class="container">
-                <h2 style="text-align: center; margin-bottom: 40px;" class="fade-up">Our Values</h2>
-                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px;">
-                    <div class="glass-card fade-up">
-                        <h3 class="text-accent">Innovation</h3>
-                        <p style="color: var(--text-muted); margin-top: 10px;">Constantly pushing boundaries.</p>
+                <h2 style="text-align: center; margin-bottom: 60px;">Our Values</h2>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px;">
+                    <div class="glass-panel fade-up" style="padding: 30px; text-align: center;">
+                        <i class="ph-duotone ph-lightbulb"
+                            style="font-size: 40px; color: var(--accent); margin-bottom: 16px;"></i>
+                        <h4>Innovation First</h4>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 12px;">We don't follow
+                            trends; we set them with AI-first problem solving.</p>
                     </div>
-                    <div class="glass-card fade-up" style="transition-delay: 0.1s;">
-                        <h3 class="text-accent">Trust</h3>
-                        <p style="color: var(--text-muted); margin-top: 10px;">Data security is our top priority.</p>
+                    <div class="glass-panel fade-up" style="padding: 30px; text-align: center;">
+                        <i class="ph-duotone ph-lock-key"
+                            style="font-size: 40px; color: var(--primary); margin-bottom: 16px;"></i>
+                        <h4>Radical Trust</h4>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 12px;">Your data is
+                            sacred. Security and transparency guide every decision.</p>
                     </div>
-                    <div class="glass-card fade-up" style="transition-delay: 0.2s;">
-                        <h3 class="text-accent">Empathy</h3>
-                        <p style="color: var(--text-muted); margin-top: 10px;">Technology designed for people.</p>
+                    <div class="glass-panel fade-up" style="padding: 30px; text-align: center;">
+                        <i class="ph-duotone ph-heart"
+                            style="font-size: 40px; color: var(--purple); margin-bottom: 16px;"></i>
+                        <h4>Empathy</h4>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 12px;">We build for
+                            humans, not just for efficiency.</p>
                     </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer>
-        <div class="container">
-            <div class="footer-bottom">
-                <div>&copy; 2026 Team Work.</div>
-            </div>
-        </div>
+    <footer style="background: rgba(2, 6, 23, 0.8); padding: 40px 0; text-align: center; color: var(--text-tertiary);">
+        <div class="container">&copy; 2026 Team Work.</div>
     </footer>
     <script src="js/main.js"></script>
 </body>

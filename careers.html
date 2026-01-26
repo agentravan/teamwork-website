@@ -9,85 +9,71 @@
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
 </head>
 
 <body>
+
     <nav class="navbar">
-        <div class="container nav-container">
-            <a href="index.html" class="logo">Team<span>Work</span></a>
+        <div class="container nav-content">
+            <a href="index.html" class="logo"><i class="ph-fill ph-hexagon" style="color: var(--primary);"></i>
+                Team<span>Work</span></a>
             <ul class="nav-links">
                 <li><a href="index.html" class="nav-link">Home</a></li>
-                <li><a href="global-hrx.html" class="nav-link">Product</a></li>
+                <li><a href="global-hrx.html" class="nav-link">Global HRX</a></li>
                 <li><a href="solutions.html" class="nav-link">Solutions</a></li>
-                <li><a href="services.html" class="nav-link">Services</a></li>
-                <li><a href="pricing.html" class="nav-link">Pricing</a></li>
             </ul>
-            <div class="nav-actions">
-                <a href="login.html" class="nav-link">Login</a>
-                <a href="request-access.html" class="btn btn-primary">Book Demo</a>
-            </div>
-            <div class="mobile-toggle">
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
-            </div>
         </div>
     </nav>
 
-    <main style="padding-top: 80px;">
-        <section style="padding: 100px 0; text-align: center;">
-            <div class="container">
-                <h1 class="fade-up" style="font-size: 3rem; margin-bottom: 24px;">Join the <span
-                        class="text-gradient">Mission</span></h1>
-                <p class="fade-up" style="color: var(--text-muted); max-width: 600px; margin: 0 auto;">Build the future
-                    of HR technology with us.</p>
-            </div>
-        </section>
+    <header class="section-padding" style="padding-top: 160px; text-align: center;">
+        <div class="container">
+            <h1 class="fade-up" style="margin-bottom: 24px;">Build the <span class="text-gradient">Future of Work</span>
+            </h1>
+            <p class="fade-up" style="color: var(--text-secondary); max-width: 600px; margin: 0 auto;">
+                Join a team of visionaries, engineers, and problem solvers.
+            </p>
+        </div>
+    </header>
 
-        <section style="padding-bottom: 100px;">
+    <main>
+        <section class="section-padding">
             <div class="container">
-                <div class="glass-card fade-up">
-                    <h2 style="margin-bottom: 30px;">Open Positions</h2>
+                <div class="glass-panel" style="padding: 40px;">
+                    <h3 style="margin-bottom: 30px;">Open Positions</h3>
 
                     <div
-                        style="border-bottom: 1px solid var(--border-light); padding: 24px 0; display: flex; justify-content: space-between; align-items: center;">
+                        style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-subtle); padding: 20px 0;">
                         <div>
-                            <h3 style="margin-bottom: 8px;">Senior Frontend Engineer</h3>
-                            <p style="color: var(--text-muted); font-size: 0.9rem;">Engineering • Remote</p>
+                            <h4 style="margin-bottom: 8px;">Senior Frontend Engineer</h4>
+                            <span
+                                style="background: rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 4px; font-size: 0.8rem;">Engineering</span>
+                            <span style="color: var(--text-tertiary); font-size: 0.8rem; margin-left: 10px;">Remote /
+                                Hybrid</span>
                         </div>
-                        <a href="contact.html" class="btn btn-glass"
-                            style="padding: 8px 20px; font-size: 0.9rem;">Apply</a>
+                        <a href="contact.html" class="btn btn-outline"
+                            style="padding: 8px 24px; font-size: 0.9rem;">Apply</a>
                     </div>
 
                     <div
-                        style="border-bottom: 1px solid var(--border-light); padding: 24px 0; display: flex; justify-content: space-between; align-items: center;">
+                        style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-subtle); padding: 20px 0;">
                         <div>
-                            <h3 style="margin-bottom: 8px;">Product Designer</h3>
-                            <p style="color: var(--text-muted); font-size: 0.9rem;">Product • Hybrid</p>
+                            <h4 style="margin-bottom: 8px;">Product Designer (UX/UI)</h4>
+                            <span
+                                style="background: rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 4px; font-size: 0.8rem;">Product</span>
+                            <span style="color: var(--text-tertiary); font-size: 0.8rem; margin-left: 10px;">New
+                                York</span>
                         </div>
-                        <a href="contact.html" class="btn btn-glass"
-                            style="padding: 8px 20px; font-size: 0.9rem;">Apply</a>
-                    </div>
-
-                    <div style="padding: 24px 0; display: flex; justify-content: space-between; align-items: center;">
-                        <div>
-                            <h3 style="margin-bottom: 8px;">HR Consultant</h3>
-                            <p style="color: var(--text-muted); font-size: 0.9rem;">Services • On-site</p>
-                        </div>
-                        <a href="contact.html" class="btn btn-glass"
-                            style="padding: 8px 20px; font-size: 0.9rem;">Apply</a>
+                        <a href="contact.html" class="btn btn-outline"
+                            style="padding: 8px 24px; font-size: 0.9rem;">Apply</a>
                     </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer>
-        <div class="container">
-            <div class="footer-bottom">
-                <div>&copy; 2026 Team Work.</div>
-            </div>
-        </div>
+    <footer style="background: rgba(2, 6, 23, 0.8); padding: 40px 0; text-align: center; color: var(--text-tertiary);">
+        <div class="container">&copy; 2026 Team Work.</div>
     </footer>
     <script src="js/main.js"></script>
 </body>

@@ -9,67 +9,82 @@
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
 </head>
 
 <body>
+
     <nav class="navbar">
-        <div class="container nav-container">
-            <a href="index.html" class="logo">Team<span>Work</span></a>
+        <div class="container nav-content">
+            <a href="index.html" class="logo"><i class="ph-fill ph-hexagon" style="color: var(--primary);"></i>
+                Team<span>Work</span></a>
             <ul class="nav-links">
                 <li><a href="index.html" class="nav-link">Home</a></li>
-                <li><a href="global-hrx.html" class="nav-link">Product</a></li>
+                <li><a href="global-hrx.html" class="nav-link">Global HRX</a></li>
                 <li><a href="solutions.html" class="nav-link active">Solutions</a></li>
-                <li><a href="services.html" class="nav-link">Services</a></li>
+                <li><a href="services.html" class="nav-link">Consultancy</a></li>
                 <li><a href="pricing.html" class="nav-link">Pricing</a></li>
             </ul>
             <div class="nav-actions">
-                <a href="login.html" class="nav-link">Login</a>
                 <a href="request-access.html" class="btn btn-primary">Book Demo</a>
-            </div>
-            <div class="mobile-toggle">
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
             </div>
         </div>
     </nav>
 
-    <main style="padding-top: 80px;">
-        <section style="padding: 100px 0; text-align: center;">
-            <div class="container">
-                <h1 class="fade-up" style="font-size: 3rem; margin-bottom: 24px;">Tailored <span
-                        class="text-gradient">Solutions</span></h1>
-                <p class="fade-up" style="color: var(--text-muted); max-width: 600px; margin: 0 auto;">Solving complex
-                    workforce challenges with precision.</p>
-            </div>
-        </section>
+    <header class="section-padding" style="padding-top: 160px; text-align: center;">
+        <div class="container">
+            <h1 class="fade-up" style="margin-bottom: 24px;">Scalable Solutions for <br> <span
+                    class="text-gradient">Every Growth Stage</span></h1>
+            <p class="fade-up"
+                style="color: var(--text-secondary); font-size: 1.25rem; max-width: 600px; margin: 0 auto;">
+                Whether you're a team of 10 or 10,000, we have a tailored HR roadmap for you.
+            </p>
+        </div>
+    </header>
 
-        <section style="padding-bottom: 100px;">
+    <main>
+        <section class="section-padding">
             <div class="container">
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px;">
 
-                    <div class="glass-card fade-up">
-                        <h3 class="text-accent" style="margin-bottom: 16px;">For Startups</h3>
-                        <p style="color: var(--text-muted); margin-bottom: 24px;">Scalable systems that grow with you.
-                            Zero bureaucracy, maximum agility.</p>
-                        <ul style="color: var(--text-dim); margin-bottom: 24px;">
-                            <li>• Quick Onboarding</li>
-                            <li>• Automated Compliance</li>
-                            <li>• Flexible Payroll</li>
+                    <!-- Startup Card -->
+                    <div class="glass-panel fade-up" style="padding: 40px;">
+                        <i class="ph-duotone ph-rocket-launch"
+                            style="font-size: 48px; color: var(--accent); margin-bottom: 24px;"></i>
+                        <h2 style="margin-bottom: 16px;">For High-Growth Startups</h2>
+                        <p style="color: var(--text-secondary); margin-bottom: 32px; min-height: 60px;">
+                            Move fast without breaking things. Get a lightweight HR stack that sets up compliance
+                            foundations from Day 1.
+                        </p>
+                        <ul style="margin-bottom: 32px; display: grid; gap: 12px; color: var(--text-primary);">
+                            <li style="display: flex; gap: 12px;"><i class="ph-fill ph-check"
+                                    style="color: var(--accent);"></i> Self-service onboarding for new hires</li>
+                            <li style="display: flex; gap: 12px;"><i class="ph-fill ph-check"
+                                    style="color: var(--accent);"></i> Automated offer letter generation</li>
+                            <li style="display: flex; gap: 12px;"><i class="ph-fill ph-check"
+                                    style="color: var(--accent);"></i> Plug-and-play payroll</li>
                         </ul>
-                        <a href="request-access.html" class="btn btn-glass">Startup Plan</a>
+                        <a href="pricing.html" class="btn btn-outline" style="width: 100%;">View Startup Plans</a>
                     </div>
 
-                    <div class="glass-card fade-up">
-                        <h3 style="color: var(--purple); margin-bottom: 16px;">For Enterprises</h3>
-                        <p style="color: var(--text-muted); margin-bottom: 24px;">Robust, secure, and customizable.
-                            Handle thousands of employees effortlessly.</p>
-                        <ul style="color: var(--text-dim); margin-bottom: 24px;">
-                            <li>• multi-entity support</li>
-                            <li>• Custom Workflows</li>
-                            <li>• Dedicated Account Manager</li>
+                    <!-- Enterprise Card -->
+                    <div class="glass-panel fade-up" style="padding: 40px; border-color: var(--primary-glow);">
+                        <i class="ph-duotone ph-buildings"
+                            style="font-size: 48px; color: var(--purple); margin-bottom: 24px;"></i>
+                        <h2 style="margin-bottom: 16px;">For Global Enterprises</h2>
+                        <p style="color: var(--text-secondary); margin-bottom: 32px; min-height: 60px;">
+                            Unify disparate systems across regions. Robust governance, audit trails, and custom ERP
+                            integrations.
+                        </p>
+                        <ul style="margin-bottom: 32px; display: grid; gap: 12px; color: var(--text-primary);">
+                            <li style="display: flex; gap: 12px;"><i class="ph-fill ph-check"
+                                    style="color: var(--purple);"></i> Multi-country localization</li>
+                            <li style="display: flex; gap: 12px;"><i class="ph-fill ph-check"
+                                    style="color: var(--purple);"></i> Dedicated Success Manager</li>
+                            <li style="display: flex; gap: 12px;"><i class="ph-fill ph-check"
+                                    style="color: var(--purple);"></i> Custom API Access</li>
                         </ul>
-                        <a href="request-access.html" class="btn btn-glass">Enterprise Suite</a>
+                        <a href="contact.html" class="btn btn-primary" style="width: 100%;">Talk to Sales</a>
                     </div>
 
                 </div>
@@ -77,12 +92,8 @@
         </section>
     </main>
 
-    <footer>
-        <div class="container">
-            <div class="footer-bottom">
-                <div>&copy; 2026 Team Work.</div>
-            </div>
-        </div>
+    <footer style="background: rgba(2, 6, 23, 0.8); padding: 40px 0; text-align: center; color: var(--text-tertiary);">
+        <div class="container">&copy; 2026 Team Work. Enterprise HRMS.</div>
     </footer>
     <script src="js/main.js"></script>
 </body>

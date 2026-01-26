@@ -9,108 +9,198 @@
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
 </head>
 
 <body>
+
+    <!-- Background -->
+    <div class="orb"
+        style="top: 10%; right: -10%; width: 700px; height: 700px; background: var(--accent); opacity: 0.15;"></div>
+
     <nav class="navbar">
-        <div class="container nav-container">
-            <a href="index.html" class="logo">Team<span>Work</span></a>
+        <div class="container nav-content">
+            <a href="index.html" class="logo"><i class="ph-fill ph-hexagon" style="color: var(--primary);"></i>
+                Team<span>Work</span></a>
             <ul class="nav-links">
                 <li><a href="index.html" class="nav-link">Home</a></li>
-                <li><a href="global-hrx.html" class="nav-link active">Product</a></li>
+                <li><a href="global-hrx.html" class="nav-link active">Global HRX</a></li>
                 <li><a href="solutions.html" class="nav-link">Solutions</a></li>
-                <li><a href="services.html" class="nav-link">Services</a></li>
+                <li><a href="services.html" class="nav-link">Consultancy</a></li>
                 <li><a href="pricing.html" class="nav-link">Pricing</a></li>
             </ul>
             <div class="nav-actions">
-                <a href="login.html" class="nav-link">Login</a>
                 <a href="request-access.html" class="btn btn-primary">Book Demo</a>
-            </div>
-            <div class="mobile-toggle">
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
             </div>
         </div>
     </nav>
 
-    <main style="padding-top: 80px;">
-        <section style="padding: 100px 0; text-align: center;">
-            <div class="container">
-                <h1 class="fade-up" style="font-size: 3.5rem; margin-bottom: 24px;">Global <span
-                        class="text-gradient">HRX</span></h1>
-                <p class="fade-up"
-                    style="color: var(--text-muted); max-width: 700px; margin: 0 auto; font-size: 1.2rem;">
-                    The complete Human Resource Management System designed for the modern enterprise.
+    <header class="section-padding" style="padding-top: 160px; text-align: center;">
+        <div class="container">
+            <div class="fade-up">
+                <span
+                    style="color: var(--accent); font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 16px; display: block;">The
+                    Enterprise HRMS</span>
+                <h1 style="margin-bottom: 24px;">Built for the <br> <span class="text-gradient">Modern Workforce</span>
+                </h1>
+                <p
+                    style="color: var(--text-secondary); font-size: 1.25rem; max-width: 700px; margin: 0 auto; line-height: 1.7;">
+                    Global HRX is the unified platform that manages the entire employee lifecycle—from hire to retire.
+                    Scalable, secure, and powered by intelligent automation.
                 </p>
             </div>
-        </section>
+        </div>
+    </header>
 
-        <section style="padding-bottom: 100px;">
+    <main>
+        <!-- Feature 1: Payroll -->
+        <section class="section-padding">
             <div class="container">
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px;">
-                    <!-- Module 1 -->
-                    <div class="glass-card fade-up">
-                        <h3 class="text-accent" style="margin-bottom: 16px;">Payroll Engine</h3>
-                        <p style="color: var(--text-muted); margin-bottom: 24px;">Configurable multi-country payroll
-                            processing with one-click disbursement and tax handling.</p>
-                        <ul style="color: var(--text-dim); font-size: 0.9rem;">
-                            <li style="margin-bottom: 8px;">• Automated Tax Calculations</li>
-                            <li style="margin-bottom: 8px;">• Compliance Checks</li>
-                            <li>• Bank Integrations</li>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;">
+                    <div class="fade-up">
+                        <div
+                            style="width: 60px; height: 60px; background: rgba(59, 130, 246, 0.2); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 24px;">
+                            <i class="ph-duotone ph-currency-dollar"
+                                style="font-size: 32px; color: var(--primary);"></i>
+                        </div>
+                        <h2 style="margin-bottom: 20px;">Precision Payroll Engine</h2>
+                        <p style="color: var(--text-secondary); margin-bottom: 30px;">
+                            Running payroll shouldn't be a monthly crisis. Our engine handles multi-entity structures,
+                            variable heavy pay-scales, and complex tax regimes effortlessly.
+                        </p>
+                        <ul style="display: grid; gap: 16px;">
+                            <li style="display: flex; gap: 12px; align-items: center; color: var(--text-primary);">
+                                <i class="ph-fill ph-check-circle" style="color: var(--accent);"></i> One-click
+                                disbursement processing
+                            </li>
+                            <li style="display: flex; gap: 12px; align-items: center; color: var(--text-primary);">
+                                <i class="ph-fill ph-check-circle" style="color: var(--accent);"></i> Automated tax slip
+                                generation
+                            </li>
+                            <li style="display: flex; gap: 12px; align-items: center; color: var(--text-primary);">
+                                <i class="ph-fill ph-check-circle" style="color: var(--accent);"></i> Integration with
+                                ERPs (SAP, Oracle)
+                            </li>
                         </ul>
                     </div>
-                    <!-- Module 2 -->
-                    <div class="glass-card fade-up" style="transition-delay: 0.1s;">
-                        <h3 class="text-accent" style="margin-bottom: 16px;">Attendance & Leave</h3>
-                        <p style="color: var(--text-muted); margin-bottom: 24px;">Geo-fenced attendance marking, shift
-                            management, and biometric integration.</p>
-                        <ul style="color: var(--text-dim); font-size: 0.9rem;">
-                            <li style="margin-bottom: 8px;">• Mobile Check-in</li>
-                            <li style="margin-bottom: 8px;">• Shift Rostering</li>
-                            <li>• Leave Ledger</li>
-                        </ul>
-                    </div>
-                    <!-- Module 3 -->
-                    <div class="glass-card fade-up" style="transition-delay: 0.2s;">
-                        <h3 class="text-accent" style="margin-bottom: 16px;">Performance</h3>
-                        <p style="color: var(--text-muted); margin-bottom: 24px;">360-degree feedback loops, OKRs, and
-                            continuous performance tracking.</p>
-                        <ul style="color: var(--text-dim); font-size: 0.9rem;">
-                            <li style="margin-bottom: 8px;">• Goal Setting</li>
-                            <li style="margin-bottom: 8px;">• Appraisal Workflows</li>
-                            <li>• Skill Matrix</li>
-                        </ul>
-                    </div>
-                    <!-- Module 4 -->
-                    <div class="glass-card fade-up">
-                        <h3 class="text-accent" style="margin-bottom: 16px;">Recruitment</h3>
-                        <p style="color: var(--text-muted); margin-bottom: 24px;">End-to-end applicant tracking system
-                            (ATS) with AI candidate matching.</p>
-                    </div>
-                    <!-- Module 5 -->
-                    <div class="glass-card fade-up" style="transition-delay: 0.1s;">
-                        <h3 class="text-accent" style="margin-bottom: 16px;">Analytics</h3>
-                        <p style="color: var(--text-muted); margin-bottom: 24px;">Real-time dashboards for attrition,
-                            headcount, and payroll costs.</p>
-                    </div>
-                    <!-- Module 6 -->
-                    <div class="glass-card fade-up" style="transition-delay: 0.2s;">
-                        <h3 class="text-accent" style="margin-bottom: 16px;">ESS Portal</h3>
-                        <p style="color: var(--text-muted); margin-bottom: 24px;">Empower employees with self-service
-                            document access and requests.</p>
+                    <div class="glass-panel fade-up"
+                        style="height: 400px; display: flex; align-items: center; justify-content: center;">
+                        <!-- Abstract Visual -->
+                        <div style="text-align: center;">
+                            <div
+                                style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 12px; width: 300px; margin: 0 auto 20px;">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                                    <span style="color: var(--text-secondary);">Gross Pay</span>
+                                    <span>$ 125,000.00</span>
+                                </div>
+                                <div
+                                    style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-subtle); padding-bottom: 10px; margin-bottom: 10px;">
+                                    <span style="color: var(--text-secondary);">Deductions</span>
+                                    <span style="color: #ef4444;">- $ 22,000.00</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; font-weight: bold;">
+                                    <span>Net Pay</span>
+                                    <span style="color: var(--accent);">$ 103,000.00</span>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary" style="padding: 10px 24px; font-size: 0.9rem;">Process
+                                Payroll</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
+
+        <!-- Feature 2: Compliance -->
+        <section class="section-padding" style="background: rgba(0,0,0,0.3);">
+            <div class="container">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;">
+                    <div class="glass-panel fade-up"
+                        style="height: 400px; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center;">
+                        <i class="ph-duotone ph-shield-check"
+                            style="font-size: 200px; color: var(--purple); opacity: 0.2;"></i>
+                        <div
+                            style="position: absolute; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px;">
+                            <div
+                                style="background: rgba(3, 7, 18, 0.8); padding: 16px 24px; border-radius: 50px; border: 1px solid var(--border-highlight); color: var(--accent);">
+                                <i class="ph-fill ph-globe"></i> USA: 401(k) Compliant
+                            </div>
+                            <div
+                                style="background: rgba(3, 7, 18, 0.8); padding: 16px 24px; border-radius: 50px; border: 1px solid var(--border-highlight); color: var(--purple);">
+                                <i class="ph-fill ph-globe"></i> India: PF & ESIC Ready
+                            </div>
+                            <div
+                                style="background: rgba(3, 7, 18, 0.8); padding: 16px 24px; border-radius: 50px; border: 1px solid var(--border-highlight); color: var(--primary);">
+                                <i class="ph-fill ph-globe"></i> EU: GDPR Compliant
+                            </div>
+                        </div>
+                    </div>
+                    <div class="fade-up">
+                        <div
+                            style="width: 60px; height: 60px; background: rgba(139, 92, 246, 0.2); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 24px;">
+                            <i class="ph-duotone ph-gavel" style="font-size: 32px; color: var(--purple);"></i>
+                        </div>
+                        <h2 style="margin-bottom: 20px;">Auto-Pilot Compliance</h2>
+                        <p style="color: var(--text-secondary); margin-bottom: 30px;">
+                            Never worry about changing labor laws again. Global HRX flags non-compliance risks in
+                            real-time, ensuring your organization stays audit-ready 24/7.
+                        </p>
+                        <p
+                            style="color: var(--text-primary); border-left: 2px solid var(--purple); padding-left: 16px;">
+                            "The system automatically updated our PF calculations when the new budget was announced. It
+                            saved us weeks of manual work."
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Feature Grid: More Modules -->
+        <section class="section-padding">
+            <div class="container">
+                <h2 style="text-align: center; margin-bottom: 60px;">Complete Lifecycle Management</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+
+                    <div class="glass-panel fade-up" style="padding: 30px;">
+                        <i class="ph-duotone ph-users-three"
+                            style="font-size: 40px; color: var(--accent); margin-bottom: 20px;"></i>
+                        <h4>Recruitment (ATS)</h4>
+                        <p style="color: var(--text-secondary); margin-top: 10px;">Post jobs, track applicants, and
+                            schedule interviews. AI ranking helps you find the top 1% talent faster.</p>
+                    </div>
+
+                    <div class="glass-panel fade-up" style="padding: 30px;">
+                        <i class="ph-duotone ph-chart-line-up"
+                            style="font-size: 40px; color: var(--primary); margin-bottom: 20px;"></i>
+                        <h4>Performance Mgmt</h4>
+                        <p style="color: var(--text-secondary); margin-top: 10px;">Move beyond annual reviews. Enable
+                            continuous feedback loops, OKRs, and 360-degree appraisals.</p>
+                    </div>
+
+                    <div class="glass-panel fade-up" style="padding: 30px;">
+                        <i class="ph-duotone ph-device-mobile"
+                            style="font-size: 40px; color: var(--purple); margin-bottom: 20px;"></i>
+                        <h4>ESS Mobile App</h4>
+                        <p style="color: var(--text-secondary); margin-top: 10px;">Empower employees to mark attendance,
+                            download payslips, and apply for leave from their pocket.</p>
+                    </div>
+
+                    <div class="glass-panel fade-up" style="padding: 30px;">
+                        <i class="ph-duotone ph-airplane-tilt"
+                            style="font-size: 40px; color: #f59e0b; margin-bottom: 20px;"></i>
+                        <h4>Travel & Expense</h4>
+                        <p style="color: var(--text-secondary); margin-top: 10px;">Streamlined reimbursement workflows
+                            with OCR receipt scanning and multi-level approval chains.</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
     </main>
 
-    <footer>
-        <div class="container">
-            <div class="footer-bottom">
-                <div>&copy; 2026 Team Work. All rights reserved.</div>
-            </div>
-        </div>
+    <footer style="background: rgba(2, 6, 23, 0.8); padding: 40px 0; text-align: center; color: var(--text-tertiary);">
+        <div class="container">&copy; 2026 Team Work. Enterprise HRMS.</div>
     </footer>
     <script src="js/main.js"></script>
 </body>
