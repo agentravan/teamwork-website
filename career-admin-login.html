@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Admin Login | TeamWork Solutions</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/mega-menu.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+
+<body>
+
+    <!-- UNIFIED HEADER -->
+    <header class="site-header">
+        <div class="nav-container">
+            <!-- LOGO -->
+            <div class="logo">
+                TeamWork <span>SOLUTIONS</span>
+            </div>
+
+            <!-- NAV -->
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="global-hrx.html">Global HRX</a></li>
+
+                    <!-- SERVICES DROPDOWN -->
+                    <li class="dropdown">
+                        <a href="#">Services ▾</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="services.html#payroll">Payroll Management</a></li>
+                            <li><a href="services.html#compliance">Compliance Outsourcing</a></li>
+                            <li><a href="services.html#hrpolicy">HR Policy & Audit</a></li>
+                            <li><a href="services.html#startup">Startup Registration</a></li>
+                        </ul>
+                    </li>
+
+                    <!-- CALCULATORS DROPDOWN -->
+                    <li class="dropdown">
+                        <a href="#">Calculators ▾</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="calculator-pf.html">PF Calculator</a></li>
+                            <li><a href="calculator-esic.html">ESIC Calculator</a></li>
+                            <li><a href="calculator-tds.html">TDS Calculator</a></li>
+                            <li><a href="calculator-gratuity.html">Gratuity Calculator</a></li>
+                        </ul>
+                    </li>
+
+                    <li><a href="careers.html">Careers</a></li>
+                    <li><a href="pricing.html">Pricing</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+
+            <!-- ACTIONS -->
+            <div class="nav-actions">
+                <!-- Point back to Gateway -->
+                <a class="btn-ghost" href="login.html">Back to Choice</a>
+                <a class="btn-primary" href="request-access.html">Request Access</a>
+            </div>
+
+            <!-- MOBILE TOGGLE -->
+            <div class="hamburger">
+                ☰
+            </div>
+        </div>
+    </header>
+
+    <main style="min-height: 100vh; display: flex; align-items: center; justify-content: center; padding-top: 80px;">
+        <div class="glass-panel" style="width: 100%; max-width: 400px; padding: 40px;">
+            <div style="text-align: center; margin-bottom: 30px;">
+                <i class="ph-duotone ph-lock-key"
+                    style="font-size: 48px; color: var(--primary); margin-bottom: 15px;"></i>
+                <h2 style="color: white; font-size: 1.5rem;">Career Admin</h2>
+                <p style="color: var(--text-secondary); font-size: 0.9rem;">Secure access for hiring managers.</p>
+            </div>
+
+            <!-- Pre-Check: If session exists -->
+            <div id="sessionFound" style="display: none; text-align: center; margin-bottom: 20px;">
+                <div
+                    style="background: rgba(16, 185, 129, 0.1); color: #10b981; padding: 10px; border-radius: 8px; font-size: 0.9rem; margin-bottom: 15px;">
+                    Active session found!
+                </div>
+                <a href="admin-dashboard.html" class="btn btn-primary" style="width: 100%;">Go to Dashboard</a>
+                <button onclick="logout()"
+                    style="background: none; border: none; color: var(--text-tertiary); margin-top: 15px; cursor: pointer; text-decoration: underline;">Switch
+                    Account</button>
+            </div>
+
+            <!-- Login Form -->
+            <form id="loginForm" onsubmit="handleLogin(event)">
+                <div class="form-group" style="margin-bottom: 20px;">
+                    <label style="display: block; margin-bottom: 8px; font-size: 0.9rem;">Username</label>
+                    <input type="text" id="username" required
+                        style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
+                </div>
+                <div class="form-group" style="margin-bottom: 25px;">
+                    <label style="display: block; margin-bottom: 8px; font-size: 0.9rem;">Password</label>
+                    <input type="password" id="password" required
+                        style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Login to Console</button>
+            </form>
+        </div>
+    </main>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Check Session on Load
+        window.addEventListener('DOMContentLoaded', () => {
+            const session = JSON.parse(localStorage.getItem('adminSession'));
+            if (session && session.expiry > Date.now()) {
+                document.getElementById('loginForm').style.display = 'none';
+                document.getElementById('sessionFound').style.display = 'block';
+            } else {
+                localStorage.removeItem('adminSession'); // Clear expired
+            }
+        });
+
+        function handleLogin(e) {
+            e.preventDefault();
+            const u = document.getElementById('username').value;
+            const p = document.getElementById('password').value;
+
+            // Fetch users from storage (or use default admin)
+            const users = JSON.parse(localStorage.getItem('adminUsers')) ||
+                [{ username: 'admin', password: 'admin123' }];
+
+            const validUser = users.find(user => user.username === u && user.password === p);
+
+            if (validUser) {
+                // Set Session (5 Mins = 5*60*1000 ms)
+                const expiry = Date.now() + (5 * 60 * 1000);
+                localStorage.setItem('adminSession', JSON.stringify({
+                    token: 'valid-token-' + Date.now(),
+                    username: validUser.username,
+                    expiry: expiry
+                }));
+                window.location.href = 'admin-dashboard.html';
+            } else {
+                alert('Invalid Credentials.');
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('adminSession');
+            location.reload();
+        }
+    </script>
+</body>
+
+</html>
