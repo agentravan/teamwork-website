@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Industries | Team Work</title>
+    <title>Industries We Serve | TeamWork Solutions</title>
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
         rel="stylesheet">
@@ -14,78 +14,95 @@
 
 <body>
 
+    <!-- Standard Header -->
     <nav class="navbar">
         <div class="container nav-content">
-            <a href="index.html" class="logo"><i class="ph-fill ph-hexagon" style="color: var(--primary);"></i>
-                Team<span>Work</span></a>
-            <ul class="nav-links">
+            <a href="index.html" class="logo">
+                <i class="ph-fill ph-hexagon" style="color: var(--primary);"></i>
+                TeamWork<span>Solutions</span>
+            </a>
+            <ul class="nav-links desktop-menu">
                 <li><a href="index.html" class="nav-link">Home</a></li>
-                <li><a href="global-hrx.html" class="nav-link">Global HRX</a></li>
-                <li><a href="solutions.html" class="nav-link">Solutions</a></li>
-                <li><a href="services.html" class="nav-link">Consultancy</a></li>
-                <li><a href="pricing.html" class="nav-link">Pricing</a></li>
+                <li><a href="global-hrx.html" class="nav-link text-gradient">Global HRX</a></li>
+                <li><a href="services.html" class="nav-link text-gradient-service">Services</a></li>
+                <li><a href="industries.html" class="nav-link active">Industries</a></li>
+                <li><a href="hrms-pricing.html" class="nav-link">Pricing</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
             </ul>
+            <div class="nav-actions">
+                <a href="https://wa.me/919518842774" class="btn btn-primary"
+                    style="padding: 8px 20px; font-size: 0.9rem;">
+                    <i class="ph-fill ph-whatsapp-logo"></i> +91 9518842774
+                </a>
+            </div>
         </div>
     </nav>
 
     <header class="section-padding" style="padding-top: 160px; text-align: center;">
         <div class="container">
-            <h1 class="fade-up" style="margin-bottom: 24px;">Specialized for <br> <span class="text-gradient">Your
-                    Industry</span></h1>
+            <h1 class="fade-up" style="margin-bottom: 24px;">Built for <span class="text-gradient">Every Scale</span>
+            </h1>
+            <p class="fade-up" style="color: var(--text-secondary); max-width: 600px; margin: 0 auto;">
+                Specialized HR solutions for Manufacturing, IT, Healthcare, and Retail sectors.
+            </p>
         </div>
     </header>
 
     <main>
         <section class="section-padding">
             <div class="container">
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px;">
 
-                    <div class="glass-panel fade-up" style="padding: 30px;">
-                        <i class="ph-duotone ph-code"
-                            style="font-size: 40px; color: var(--accent); margin-bottom: 20px;"></i>
-                        <h3>Technology</h3>
-                        <p style="color: var(--text-secondary); margin-top: 10px;">Retain top developer talent with
-                            modern benefits administration and agile performance reviews.</p>
-                    </div>
-
-                    <div class="glass-panel fade-up" style="padding: 30px; transition-delay: 0.1s;">
+                    <!-- Manufacturing -->
+                    <div class="glass-panel fade-up" style="padding: 40px;">
                         <i class="ph-duotone ph-factory"
-                            style="font-size: 40px; color: #f59e0b; margin-bottom: 20px;"></i>
-                        <h3>Manufacturing</h3>
-                        <p style="color: var(--text-secondary); margin-top: 10px;">Handle complex shift patterns,
-                            overtime calculations, and union compliance effortlessly.</p>
+                            style="font-size: 48px; color: var(--accent); margin-bottom: 20px;"></i>
+                        <h3 style="margin-bottom: 16px;">Manufacturing</h3>
+                        <p style="color: var(--text-secondary); mb-20">
+                            Manage complex shift rosters, overtime calculations, and Factory Act compliance with zero
+                            errors.
+                        </p>
+                        <ul style="color: var(--text-tertiary); font-size: 0.9rem; margin-top: 20px;">
+                            <li>• Shift Scheduling</li>
+                            <li>• Gate Pass Integration</li>
+                            <li>• Contract Labour Mgmt</li>
+                        </ul>
                     </div>
 
-                    <div class="glass-panel fade-up" style="padding: 30px; transition-delay: 0.2s;">
+                    <!-- IT & SaaS -->
+                    <div class="glass-panel fade-up" style="padding: 40px;">
+                        <i class="ph-duotone ph-laptop"
+                            style="font-size: 48px; color: var(--primary); margin-bottom: 20px;"></i>
+                        <h3 style="margin-bottom: 16px;">IT & Startups</h3>
+                        <p style="color: var(--text-secondary); mb-20">
+                            Streamline onboarding, asset management, and remote attendance for the digital workforce.
+                        </p>
+                        <ul style="color: var(--text-tertiary); font-size: 0.9rem; margin-top: 20px;">
+                            <li>• Remote Geo-fencing</li>
+                            <li>• Asset Tracking</li>
+                            <li>• Project Timesheets</li>
+                        </ul>
+                    </div>
+
+                    <!-- Healthcare -->
+                    <div class="glass-panel fade-up" style="padding: 40px;">
                         <i class="ph-duotone ph-first-aid"
-                            style="font-size: 40px; color: #ef4444; margin-bottom: 20px;"></i>
-                        <h3>Healthcare</h3>
-                        <p style="color: var(--text-secondary); margin-top: 10px;">Manage nurse rostering, credential
-                            expiry alerts, and strict HIPAA/GDPR data privacy.</p>
+                            style="font-size: 48px; color: #ec4899; margin-bottom: 20px;"></i>
+                        <h3 style="margin-bottom: 16px;">Healthcare</h3>
+                        <p style="color: var(--text-secondary); mb-20">
+                            Handle 24/7 staff rotation, nurse specialized payroll, and compliance for hospitals.
+                        </p>
                     </div>
 
-                    <div class="glass-panel fade-up" style="padding: 30px;">
-                        <i class="ph-duotone ph-storefront"
-                            style="font-size: 40px; color: var(--purple); margin-bottom: 20px;"></i>
-                        <h3>Retail</h3>
-                        <p style="color: var(--text-secondary); margin-top: 10px;">Mobile-first tools for your frontline
-                            workforce. Geofenced attendance for distributed stores.</p>
-                    </div>
-
-                    <div class="glass-panel fade-up" style="padding: 30px; transition-delay: 0.1s;">
-                        <i class="ph-duotone ph-bank"
-                            style="font-size: 40px; color: var(--primary); margin-bottom: 20px;"></i>
-                        <h3>BFSI</h3>
-                        <p style="color: var(--text-secondary); margin-top: 10px;">Audit-ready processes for highly
-                            regulated financial environments.</p>
-                    </div>
-
-                    <div class="glass-panel fade-up" style="padding: 30px; transition-delay: 0.2s;">
+                    <!-- Logistics -->
+                    <div class="glass-panel fade-up" style="padding: 40px;">
                         <i class="ph-duotone ph-truck"
-                            style="font-size: 40px; color: var(--text-secondary); margin-bottom: 20px;"></i>
-                        <h3>Logistics</h3>
-                        <p style="color: var(--text-secondary); margin-top: 10px;">Driver management, trip-based
-                            payouts, and document verification on the go.</p>
+                            style="font-size: 48px; color: var(--service); margin-bottom: 20px;"></i>
+                        <h3 style="margin-bottom: 16px;">Logistics & Retail</h3>
+                        <p style="color: var(--text-secondary); mb-20">
+                            Manage distributed field force with mobile-first attendance and expense claims.
+                        </p>
                     </div>
 
                 </div>
@@ -93,10 +110,53 @@
         </section>
     </main>
 
-    <footer style="background: rgba(2, 6, 23, 0.8); padding: 40px 0; text-align: center; color: var(--text-tertiary);">
-        <div class="container">&copy; 2026 Team Work. Enterprise HRMS.</div>
+    <!-- Standard Footer -->
+    <footer>
+        <div class="container">
+            <div style="display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 60px; margin-bottom: 40px;">
+                <div>
+                    <a href="#" class="logo" style="margin-bottom: 20px;">
+                        <i class="ph-fill ph-hexagon" style="color: var(--primary);"></i> TeamWork<span>Solutions</span>
+                    </a>
+                    <p style="margin-bottom: 20px; color: var(--text-secondary);">
+                        TeamWork Solutions & Global HRX.<br>
+                        Your trusted partner for HR Technology, Outsourcing, and Compliance.
+                    </p>
+                    <p style="margin-bottom: 8px;"><i class="ph-fill ph-envelope"></i> teamwork.hrsolution@zohomail.in
+                    </p>
+                    <p><i class="ph-fill ph-phone"></i> +91 9518842774</p>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="team.html">Our Team</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Key Services</h4>
+                    <ul>
+                        <li><a href="global-hrx.html">Global HRX Software</a></li>
+                        <li><a href="services.html">Payroll Outsourcing</a></li>
+                        <li><a href="services.html">Compliance Audit</a></li>
+                        <li><a href="services.html">Manpower Solutions</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div style="text-align: center; border-top: 1px solid var(--border-subtle); padding-top: 20px;">
+                &copy; 2026 TeamWork Solutions. Made with ❤️ in India.
+            </div>
+        </div>
     </footer>
+
+    <a href="https://wa.me/919518842774" class="whatsapp-float" target="_blank"><i
+            class="ph-fill ph-whatsapp-logo"></i></a>
     <script src="js/main.js"></script>
+
 </body>
 
 </html>

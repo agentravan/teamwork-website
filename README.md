@@ -1,38 +1,19 @@
-# Team Work - Global HRX (Enterprise Edition)
+# TeamWork Solutions Website
 
-**The Future of Workforce Intelligence.**
-A premium, enterprise-grade static website for Team Work & Global HRX.
+Enterprise HRMS & Consultancy Website.
 
-## 🚀 Deployment Instructions
+## 🚀 Deployment
 
-### Option 1: Vercel (Recommended)
+1.  Upload this folder to GitHub.
+2.  Deploy on Vercel.
+3.  **Important**: Set "Root Directory" to `teamwork-website` in Vercel.
 
-1.  **Push to GitHub**:
-    *   Initialize git and push this folder.
-    *   **CRITICAL**: Ensure the `teamwork-website` folder is the repository root, OR configure Vercel's "Root Directory" to `teamwork-website` if you uploaded the parent folder.
+## 📂 Features
 
-2.  **Vercel Configuration**:
-    *   **Framework Preset**: Select **"Other"**.
-    *   **Root Directory**: `./` (or `teamwork-website` if nested).
-    *   **Build Command**: *Leave Empty*.
-    *   **Output Directory**: *Leave Empty*.
+-   **Type**: Static HTML5/CSS3.
+-   **Design**: Glassmorphism, Deep Space Theme.
+-   **Forms**: Integrated with Zoho Forms (Request Access & Contact).
+-   **Pages**: 12 Unique Views.
 
-### Option 2: Local Development
-
-Just open `index.html` in your browser. No server required.
-
-## 🎨 Design System 2.0
-
-*   **Theme**: Deep Enterprise Dark (`#030712`)
-*   **Accents**: Royal Blue, Innovation Violet, Future Cyan
-*   **Effects**: Glassmorphism (`backdrop-filter`), CSS Orbs, Phosphor Icons
-
-## 📂 Structure
-
-*   `index.html`: Main landing page
-*   `global-hrx.html`: Product deep dive
-*   `services.html`: Consultancy flows
-*   `css/style.css`: The styling engine
-
----
-© 2026 Team Work.
+## 📞 Support
+Contact: +91 9518842774

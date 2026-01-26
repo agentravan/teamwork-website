@@ -51,26 +51,78 @@
     <main>
         <section class="section-padding">
             <div class="container">
-                <div class="glass-panel" style="padding: 60px; text-align: center; max-width: 600px; margin: 0 auto;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px;">
 
-                    <div style="margin-bottom: 40px;">
-                        <i class="ph-fill ph-phone"
-                            style="font-size: 40px; color: var(--service); margin-bottom: 16px;"></i>
-                        <h3>Phone & WhatsApp</h3>
-                        <p style="font-size: 1.5rem; font-weight: 700; color: white; margin-top: 10px;">+91 9518842774
-                        </p>
+                    <!-- Contact Info -->
+                    <div class="glass-panel" style="padding: 60px; text-align: left;">
+                        <h3 style="margin-bottom: 30px;">Contact Details</h3>
+                        <div style="margin-bottom: 40px; display: flex; gap: 20px; align-items: start;">
+                            <i class="ph-fill ph-phone" style="font-size: 32px; color: var(--service);"></i>
+                            <div>
+                                <h4 style="color: var(--text-primary); margin-bottom: 5px;">Phone & WhatsApp</h4>
+                                <p style="font-size: 1.1rem; color: white;">+91 9518842774</p>
+                            </div>
+                        </div>
+
+                        <div style="margin-bottom: 40px; display: flex; gap: 20px; align-items: start;">
+                            <i class="ph-fill ph-envelope" style="font-size: 32px; color: var(--primary);"></i>
+                            <div>
+                                <h4 style="color: var(--text-primary); margin-bottom: 5px;">Email</h4>
+                                <p style="font-size: 1.1rem; color: white;">teamwork.hrsolution@zohomail.in</p>
+                            </div>
+                        </div>
+
+                        <a href="https://wa.me/919518842774" class="btn btn-primary"
+                            style="width: 100%; text-align: center;">Chat on WhatsApp</a>
                     </div>
 
-                    <div style="margin-bottom: 40px;">
-                        <i class="ph-fill ph-envelope"
-                            style="font-size: 40px; color: var(--primary); margin-bottom: 16px;"></i>
-                        <h3>Email</h3>
-                        <p style="font-size: 1.25rem; font-weight: 700; color: white; margin-top: 10px;">
-                            teamwork.hrsolution@zohomail.in</p>
+                    <!-- Contact Form (Zoho) -->
+                    <div class="glass-panel" style="padding: 40px;">
+                        <h3 style="margin-bottom: 24px;">Send us a message</h3>
+
+                        <form id="zohoContactForm"
+                            action="https://forms.zoho.in/teamworkhrsolutionzoho1/form/TeamWorkContactUs" method="POST"
+                            target="hiddenContactFrame" onsubmit="handleContactSubmit(event)">
+                            <div class="form-group" style="margin-bottom: 16px;">
+                                <label style="display: block; margin-bottom: 8px; font-size: 0.9rem;">Full Name
+                                    *</label>
+                                <input type="text" name="Name_First" required
+                                    style="width: 100%; padding: 10px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
+                            </div>
+                            <div class="form-group" style="margin-bottom: 16px;">
+                                <label style="display: block; margin-bottom: 8px; font-size: 0.9rem;">Company *</label>
+                                <input type="text" name="SingleLine" required
+                                    style="width: 100%; padding: 10px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
+                            </div>
+                            <div class="form-group" style="margin-bottom: 16px;">
+                                <label style="display: block; margin-bottom: 8px; font-size: 0.9rem;">Email *</label>
+                                <input type="email" name="Email" required
+                                    style="width: 100%; padding: 10px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
+                            </div>
+                            <div class="form-group" style="margin-bottom: 16px;">
+                                <label style="display: block; margin-bottom: 8px; font-size: 0.9rem;">Phone *</label>
+                                <input type="text" name="PhoneNumber" required
+                                    style="width: 100%; padding: 10px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
+                            </div>
+                            <div class="form-group" style="margin-bottom: 24px;">
+                                <label style="display: block; margin-bottom: 8px; font-size: 0.9rem;">Message</label>
+                                <textarea name="MultiLine" rows="3"
+                                    style="width: 100%; padding: 10px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: white; border-radius: 8px;"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-service" style="width: 100%;">Send Message</button>
+                        </form>
+
+                        <iframe name="hiddenContactFrame" style="display:none;"
+                            onload="handleContactFrameLoad()"></iframe>
+
+                        <div id="contactSuccessMessage"
+                            style="display: none; text-align: center; margin-top: 20px; color: var(--service);">
+                            <i class="ph-fill ph-check-circle" style="font-size: 40px; margin-bottom: 10px;"></i>
+                            <h3>Message Sent!</h3>
+                            <p>We will get back to you shortly.</p>
+                        </div>
+
                     </div>
-
-                    <a href="https://wa.me/919518842774" class="btn btn-primary">Chat on WhatsApp</a>
-
                 </div>
             </div>
         </section>
@@ -122,6 +174,22 @@
     <a href="https://wa.me/919518842774" class="whatsapp-float" target="_blank"><i
             class="ph-fill ph-whatsapp-logo"></i></a>
     <script src="js/main.js"></script>
+    <script>
+        let contactSubmitted = false;
+        function handleContactSubmit(event) {
+            const btn = event.target.querySelector('button');
+            btn.innerHTML = '<i class="ph-bold ph-spinner ph-spin"></i> Sending...';
+            btn.disabled = true;
+            contactSubmitted = true;
+        }
+
+        function handleContactFrameLoad() {
+            if (contactSubmitted) {
+                document.getElementById('zohoContactForm').style.display = 'none';
+                document.getElementById('contactSuccessMessage').style.display = 'block';
+            }
+        }
+    </script>
 
 </body>
 

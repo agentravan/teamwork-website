@@ -14,7 +14,7 @@
 
 <body>
 
-    <!-- Unified Header -->
+    <!-- SPECIAL HEADER FOR GLOBAL HRX (Rule #2) -->
     <nav class="navbar">
         <div class="container nav-content">
             <a href="index.html" class="logo">
@@ -27,13 +27,16 @@
                 <li><a href="services.html" class="nav-link text-gradient-service">Services</a></li>
                 <li><a href="hrms-pricing.html" class="nav-link">Pricing</a></li>
                 <li><a href="about.html" class="nav-link">About</a></li>
-                <li><a href="careers.html" class="nav-link">Careers</a></li>
                 <li><a href="contact.html" class="nav-link">Contact</a></li>
             </ul>
-            <div class="nav-actions">
-                <a href="https://wa.me/919518842774" class="btn btn-primary"
-                    style="padding: 8px 20px; font-size: 0.9rem;">
-                    <i class="ph-fill ph-whatsapp-logo"></i> +91 9518842774
+
+            <!-- BUTTON REPLACEMENT -->
+            <div class="nav-actions" style="display: flex; gap: 10px;">
+                <a href="login.html" class="btn btn-outline" style="padding: 8px 20px; font-size: 0.9rem;">
+                    Login
+                </a>
+                <a href="request-access.html" class="btn btn-primary" style="padding: 8px 20px; font-size: 0.9rem;">
+                    Request Access
                 </a>
             </div>
         </div>
@@ -52,6 +55,11 @@
                     Global HRX is the unified platform that manages the entire employee lifecycle—from hire to retire.
                     Scalable, secure, and powered by intelligent automation.
                 </p>
+                <!-- Hero Buttons also updated -->
+                <div style="margin-top: 40px; display: flex; justify-content: center; gap: 20px;">
+                    <a href="request-access.html" class="btn btn-primary">Book Demo</a>
+                    <a href="hrms-pricing.html" class="btn btn-outline">View Plans</a>
+                </div>
             </div>
         </div>
     </header>
@@ -180,7 +188,7 @@
         </section>
     </main>
 
-    <!-- Unified Footer -->
+    <!-- Standard Footer -->
     <footer>
         <div class="container">
             <div style="display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 60px; margin-bottom: 40px;">
@@ -223,8 +231,9 @@
         </div>
     </footer>
 
-    <a href="https://wa.me/919518842774" class="whatsapp-float" target="_blank"><i
-            class="ph-fill ph-whatsapp-logo"></i></a>
+    <!-- Whatsapp removed as per rule "Global HRX PAges Only - Remove whatsapp button" -->
+    <!-- But Footer must contain header? No, header rules. footer must exist. -->
+
     <script src="js/main.js"></script>
 </body>
 
