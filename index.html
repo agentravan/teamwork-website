@@ -16,27 +16,135 @@
 
 <body>
 
-    <!-- Unified Header -->
+    <!-- Master Blueprint Header -->
     <nav class="navbar">
         <div class="container nav-content">
+            <!-- Left: Logo -->
             <a href="index.html" class="logo">
-                <i class="ph-fill ph-hexagon" style="color: var(--primary);"></i>
-                TeamWork<span>Solutions</span>
+                <div style="display: flex; flex-direction: column; line-height: 1.1;">
+                    <div style="display: flex; align-items: center; gap: 6px;">
+                        <i class="ph-fill ph-hexagon" style="color: var(--primary);"></i>
+                        <span>TeamWork</span>
+                    </div>
+                    <span
+                        style="font-size: 0.7rem; letter-spacing: 1px; color: var(--text-secondary); margin-left: 24px;">SOLUTIONS</span>
+                </div>
             </a>
+
+            <!-- Center: Links & Mega Menu -->
             <ul class="nav-links desktop-menu">
                 <li><a href="index.html" class="nav-link active">Home</a></li>
-                <li><a href="global-hrx.html" class="nav-link text-gradient">Global HRX</a></li>
-                <li><a href="services.html" class="nav-link text-gradient-service">Services</a></li>
-                <li><a href="calculators.html" class="nav-link">Calculators</a></li>
+                <li><a href="global-hrx.html" class="nav-link">Global HRX</a></li>
+
+                <!-- Services Mega Menu -->
+                <li class="nav-item-dropdown">
+                    <a href="services.html" class="nav-link">Services <i class="ph-bold ph-caret-down"></i></a>
+                    <div class="mega-menu">
+                        <!-- Col 1: Core HR -->
+                        <div class="mega-column">
+                            <h4>Core HR & Operations</h4>
+                            <a href="services.html" class="mega-link">
+                                <i class="ph-duotone ph-currency-dollar mega-icon"></i>
+                                <div class="mega-text">
+                                    <h5>Payroll Management</h5>
+                                    <p>End-to-end processing & accuracy.</p>
+                                </div>
+                            </a>
+                            <a href="services.html" class="mega-link">
+                                <i class="ph-duotone ph-shield-check mega-icon"></i>
+                                <div class="mega-text">
+                                    <h5>Statutory Compliance</h5>
+                                    <p>PF, ESIC, Tax filing & audits.</p>
+                                </div>
+                            </a>
+                            <a href="services.html" class="mega-link">
+                                <i class="ph-duotone ph-briefcase mega-icon"></i>
+                                <div class="mega-text">
+                                    <h5>Recruitment</h5>
+                                    <p>Permanent & Contract hiring.</p>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- Col 2: Tech & Tools -->
+                        <div class="mega-column">
+                            <h4>Technology & Tools</h4>
+                            <a href="global-hrx.html" class="mega-link">
+                                <i class="ph-duotone ph-desktop mega-icon" style="color: var(--accent);"></i>
+                                <div class="mega-text">
+                                    <h5>Global HRX</h5>
+                                    <p>Enterprise System of Record.</p>
+                                </div>
+                            </a>
+                            <a href="services.html" class="mega-link">
+                                <i class="ph-duotone ph-scroll mega-icon" style="color: var(--accent);"></i>
+                                <div class="mega-text">
+                                    <h5>Labour Licenses</h5>
+                                    <p>Factory Act & CLRA registrations.</p>
+                                </div>
+                            </a>
+                            <a href="calculators.html" class="mega-link">
+                                <i class="ph-duotone ph-calculator mega-icon" style="color: var(--accent);"></i>
+                                <div class="mega-text">
+                                    <h5>HR Calculators</h5>
+                                    <p>TDS, PF, ESIC & Gratuity.</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+
+                <!-- Calculators (Direct or Mega? Blueprint said "Services Dropdown" for Calculators inside Col 2. But Blueprint also listed "Calculator Menu (Header Dropdown)" separately in point 8. 
+                     Point 2 says "Tax & Payroll Calculators" in Col 2 of Services Dropdown.
+                     Point 8 says "Calculator Menu (Header Dropdown)" with 4 items.
+                     I will follow Point 8 for a dedicated "Calculators" dropdown as it's cleaner for user access.) -->
+                <li class="nav-item-dropdown">
+                    <a href="calculators.html" class="nav-link">Calculators <i class="ph-bold ph-caret-down"></i></a>
+                    <div class="mega-menu" style="width: 400px; grid-template-columns: 1fr;">
+                        <!-- Single Col for Calculators -->
+                        <div class="mega-column">
+                            <h4>Financial Tools</h4>
+                            <a href="calculator-pf.html" class="mega-link">
+                                <i class="ph-duotone ph-piggy-bank mega-icon" style="color: #ec4899;"></i>
+                                <div class="mega-text">
+                                    <h5>PF Calculator</h5>
+                                    <p>12% vs 13% | Wage Ceiling Logic.</p>
+                                </div>
+                            </a>
+                            <a href="calculator-esic.html" class="mega-link">
+                                <i class="ph-duotone ph-first-aid-kit mega-icon" style="color: #ec4899;"></i>
+                                <div class="mega-text">
+                                    <h5>ESIC Calculator</h5>
+                                    <p>0.75% / 3.25% Contribution.</p>
+                                </div>
+                            </a>
+                            <a href="calculator-gratuity.html" class="mega-link">
+                                <i class="ph-duotone ph-coins mega-icon" style="color: #ec4899;"></i>
+                                <div class="mega-text">
+                                    <h5>Gratuity Calculator</h5>
+                                    <p>Eligibility & Payout Estimation.</p>
+                                </div>
+                            </a>
+                            <a href="calculator-tds.html" class="mega-link">
+                                <i class="ph-duotone ph-receipt mega-icon" style="color: #ec4899;"></i>
+                                <div class="mega-text">
+                                    <h5>TDS Smart Estimator</h5>
+                                    <p>Old vs New Regime Recommender.</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+
                 <li><a href="careers.html" class="nav-link">Careers</a></li>
                 <li><a href="hrms-pricing.html" class="nav-link">Pricing</a></li>
                 <li><a href="about.html" class="nav-link">About</a></li>
                 <li><a href="contact.html" class="nav-link">Contact</a></li>
             </ul>
+
+            <!-- Right: Actions -->
             <div class="nav-actions">
-                <a href="login.html" class="btn btn-outline" style="padding: 8px 20px; font-size: 0.9rem;">
-                    Login
-                </a>
+                <a href="login.html" class="nav-link" style="margin-right: 15px; font-size: 0.9rem;">Login</a>
                 <a href="request-access.html" class="btn btn-primary" style="padding: 8px 20px; font-size: 0.9rem;">
                     Request Access
                 </a>

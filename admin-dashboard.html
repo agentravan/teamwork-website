@@ -4,162 +4,447 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Post a Job | TeamWork Solutions</title>
+    <title>Admin Dashboard | TeamWork Solutions</title>
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/mega-menu.css">
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <style>
+        .admin-layout {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            min-height: calc(100vh - 80px);
+            /* Adjust for header */
+            margin-top: 80px;
+        }
+
+        .sidebar {
+            background: rgba(15, 23, 42, 0.95);
+            border-right: 1px solid var(--border-subtle);
+            padding: 20px;
+            position: fixed;
+            width: 250px;
+            height: 100%;
+            overflow-y: auto;
+        }
+
+        .main-content {
+            margin-left: 250px;
+            padding: 40px;
+        }
+
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-radius: 8px;
+            margin-bottom: 5px;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .sidebar-item:hover,
+        .sidebar-item.active {
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+        }
+
+        .sidebar-item.active {
+            border-left: 3px solid var(--primary);
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid var(--border-subtle);
+        }
+
+        .job-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .job-table th,
+        .job-table td {
+            text-align: left;
+            padding: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .job-table th {
+            color: var(--text-tertiary);
+            font-weight: 500;
+        }
+
+        .badge {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+        }
+
+        .badge-live {
+            background: rgba(16, 185, 129, 0.1);
+            color: #10b981;
+        }
+
+        .badge-hold {
+            background: rgba(234, 179, 8, 0.1);
+            color: #eab308;
+        }
+
+        .badge-hired {
+            background: rgba(59, 130, 246, 0.1);
+            color: #3b82f6;
+        }
+
+        .btn-sm {
+            padding: 6px 12px;
+            font-size: 0.8rem;
+            border-radius: 6px;
+            border: 1px solid var(--border-subtle);
+            background: transparent;
+            color: white;
+            cursor: pointer;
+        }
+
+        .btn-sm:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+    </style>
 </head>
 
 <body>
 
-    <!-- Unified Header (GLOBAL RULE) -->
+    <!-- Master Blueprint Header -->
     <nav class="navbar">
         <div class="container nav-content">
             <a href="index.html" class="logo">
-                <i class="ph-fill ph-hexagon" style="color: var(--primary);"></i>
-                TeamWork<span>Solutions</span>
+                <div style="display: flex; flex-direction: column; line-height: 1.1;">
+                    <div style="display: flex; align-items: center; gap: 6px;">
+                        <i class="ph-fill ph-hexagon" style="color: var(--primary);"></i>
+                        <span>TeamWork</span>
+                    </div>
+                    <span
+                        style="font-size: 0.7rem; letter-spacing: 1px; color: var(--text-secondary); margin-left: 24px;">SOLUTIONS</span>
+                </div>
             </a>
             <ul class="nav-links desktop-menu">
                 <li><a href="index.html" class="nav-link">Home</a></li>
-                <li><a href="global-hrx.html" class="nav-link text-gradient">Global HRX</a></li>
-                <li><a href="services.html" class="nav-link text-gradient-service">Services</a></li>
-                <li><a href="calculators.html" class="nav-link">Calculators</a></li>
-                <li><a href="careers.html" class="nav-link">Careers</a></li>
-                <li><a href="hrms-pricing.html" class="nav-link">Pricing</a></li>
-                <li><a href="about.html" class="nav-link">About</a></li>
-                <li><a href="contact.html" class="nav-link">Contact</a></li>
+                <li><a href="global-hrx.html" class="nav-link">Global HRX</a></li>
+                <li class="nav-item-dropdown">
+                    <a href="services.html" class="nav-link">Services <i class="ph-bold ph-caret-down"></i></a>
+                    <div class="mega-menu">
+                        <!-- Simplified Mega Menu for Admin -->
+                        <div class="mega-column">
+                            <h4>Core HR & Operations</h4>
+                            <a href="services.html" class="mega-link"><i
+                                    class="ph-duotone ph-currency-dollar mega-icon"></i>
+                                <div class="mega-text">
+                                    <h5>Payroll Management</h5>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </li>
             </ul>
             <div class="nav-actions">
-                <a href="login.html" class="btn btn-outline" style="padding: 8px 20px; font-size: 0.9rem;">Login</a>
-                <a href="request-access.html" class="btn btn-primary"
-                    style="padding: 8px 20px; font-size: 0.9rem;">Request Access</a>
+                <span style="color: var(--text-secondary); font-size: 0.9rem; margin-right: 15px;">Admin Mode</span>
+                <button onclick="logout()" class="btn btn-outline"
+                    style="padding: 8px 20px; font-size: 0.9rem;">Logout</button>
             </div>
         </div>
     </nav>
 
-    <header class="section-padding" style="padding-top: 160px; text-align: center;">
-        <div class="container">
-            <h1 class="fade-up" style="margin-bottom: 24px;">Post New <span class="text-gradient">Opportunity</span>
-            </h1>
-            <p class="fade-up" style="color: var(--text-secondary); max-width: 600px; margin: 0 auto;">
-                Create a job listing. It will be live on the Careers page instantly.
-            </p>
-        </div>
-    </header>
+    <div class="admin-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div
+                style="margin-bottom: 20px; padding-left: 12px; color: var(--text-tertiary); font-size: 0.8rem; letter-spacing: 1px;">
+                MENU</div>
+            <a onclick="showSection('dashboard')" class="sidebar-item active" id="nav-dashboard">
+                <i class="ph-duotone ph-squares-four"></i> Dashboard
+            </a>
+            <a onclick="showSection('postJob')" class="sidebar-item" id="nav-postJob">
+                <i class="ph-duotone ph-plus-circle"></i> Post a Job
+            </a>
+            <a onclick="showSection('manageJobs')" class="sidebar-item" id="nav-manageJobs">
+                <i class="ph-duotone ph-briefcase"></i> Manage Jobs
+            </a>
+            <div
+                style="margin-top: 20px; margin-bottom: 20px; padding-left: 12px; color: var(--text-tertiary); font-size: 0.8rem; letter-spacing: 1px;">
+                SYSTEM</div>
+            <a onclick="alert('User Management module is restricted to Super Admin.')" class="sidebar-item">
+                <i class="ph-duotone ph-users"></i> Users
+            </a>
+            <a onclick="logout()" class="sidebar-item" style="color: #ef4444;">
+                <i class="ph-duotone ph-sign-out"></i> Logout
+            </a>
+        </aside>
 
-    <main>
-        <section class="section-padding">
-            <div class="container" style="max-width: 800px;">
-                <div class="glass-panel fade-up" style="padding: 40px;">
-                    <form onsubmit="handlePostJob(event)">
+        <!-- Main Content -->
+        <main class="main-content">
 
-                        <!-- Job Title -->
+            <!-- Dashboard View -->
+            <div id="section-dashboard">
+                <h2 style="margin-bottom: 20px;">Overview</h2>
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 40px;">
+                    <div class="stat-card">
+                        <div style="color: var(--text-tertiary); margin-bottom: 5px;">Total Jobs</div>
+                        <div style="font-size: 1.8rem; font-weight: 700;" id="statTotal">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div style="color: var(--text-tertiary); margin-bottom: 5px;">Active</div>
+                        <div style="font-size: 1.8rem; font-weight: 700; color: #10b981;" id="statActive">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div style="color: var(--text-tertiary); margin-bottom: 5px;">On Hold</div>
+                        <div style="font-size: 1.8rem; font-weight: 700; color: #eab308;" id="statHold">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div style="color: var(--text-tertiary); margin-bottom: 5px;">Applications</div>
+                        <div style="font-size: 1.8rem; font-weight: 700;" id="statApps">124</div> <!-- Mock data -->
+                    </div>
+                </div>
+
+                <div class="glass-panel" style="padding: 30px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+                        <h3>Recent Job Posts</h3>
+                        <button onclick="downloadApplications()" class="btn btn-outline" style="font-size: 0.9rem;"><i
+                                class="ph-bold ph-download-simple"></i> Export Applicants</button>
+                    </div>
+                    <table class="job-table">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                                <th>Applicants</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dashboardTableBody">
+                            <!-- Populated via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Post Job View -->
+            <div id="section-postJob" style="display: none;">
+                <h2 style="margin-bottom: 20px;">Post a New Job</h2>
+                <div class="glass-panel" style="padding: 40px; max-width: 800px;">
+                    <form onsubmit="saveJob(event)">
                         <div class="form-group" style="margin-bottom: 20px;">
-                            <label style="display: block; margin-bottom: 8px; font-size: 0.9rem;">Job Title</label>
-                            <input type="text" id="jobTitle" required placeholder="e.g. HR Executive"
+                            <label style="display: block; margin-bottom: 8px;">Job Title</label>
+                            <input type="text" id="jobTitle" required
                                 style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
                         </div>
-
-                        <!-- Grid -->
                         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
                             <div class="form-group">
-                                <label style="display: block; margin-bottom: 8px; font-size: 0.9rem;">Department</label>
-                                <input type="text" id="jobDept" required placeholder="e.g. Compliance"
+                                <label style="display: block; margin-bottom: 8px;">Department</label>
+                                <select id="jobDept"
                                     style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
-                            </div>
-                            <div class="form-group">
-                                <label style="display: block; margin-bottom: 8px; font-size: 0.9rem;">Location</label>
-                                <input type="text" id="jobLoc" required placeholder="e.g. Gurugram / Remote"
-                                    style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
-                            </div>
-                        </div>
-
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
-                            <div class="form-group">
-                                <label style="display: block; margin-bottom: 8px; font-size: 0.9rem;">Employment
-                                    Type</label>
-                                <select id="jobType"
-                                    style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
-                                    <option style="background: #0f172a;" value="Full Time">Full Time</option>
-                                    <option style="background: #0f172a;" value="Contract">Contract</option>
-                                    <option style="background: #0f172a;" value="Part Time">Part Time</option>
-                                    <option style="background: #0f172a;" value="Internship">Internship</option>
+                                    <option value="Engineering" style="background:#0f172a">Engineering</option>
+                                    <option value="HR & Ops" style="background:#0f172a">HR & Ops</option>
+                                    <option value="Sales" style="background:#0f172a">Sales</option>
+                                    <option value="Marketing" style="background:#0f172a">Marketing</option>
                                 </select>
                             </div>
-                            <!-- Image URL Simulation -->
                             <div class="form-group">
-                                <label style="display: block; margin-bottom: 8px; font-size: 0.9rem;">Image URL
-                                    (Optional)</label>
-                                <input type="text" id="jobImg" placeholder="https://..."
+                                <label style="display: block; margin-bottom: 8px;">Location</label>
+                                <input type="text" id="jobLoc" placeholder="e.g. Remote / Gurgaon" required
                                     style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
                             </div>
                         </div>
-
-                        <!-- Description -->
-                        <div class="form-group" style="margin-bottom: 30px;">
-                            <label style="display: block; margin-bottom: 8px; font-size: 0.9rem;">Job
-                                Description</label>
-                            <textarea id="jobDesc" rows="5" required
-                                placeholder="Key responsibilities and requirements..."
-                                style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: white; border-radius: 8px; font-family: 'Inter', sans-serif;"></textarea>
+                        <div class="form-group" style="margin-bottom: 20px;">
+                            <label style="display: block; margin-bottom: 8px;">Description</label>
+                            <textarea id="jobDesc" rows="4" required
+                                style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: white; border-radius: 8px;"></textarea>
                         </div>
-
-                        <button type="submit" class="btn btn-service" style="width: 100%;">Publish Job</button>
-
-                        <div id="postSuccess"
-                            style="display: none; margin-top: 20px; text-align: center; color: var(--service);">
-                            <i class="ph-fill ph-check-circle" style="font-size: 24px; vertical-align: middle;"></i>
-                            Job Posted Successfully! <a href="careers.html"
-                                style="color: white; text-decoration: underline;">View on Career Page</a>
-                        </div>
-
+                        <button type="submit" class="btn btn-primary">Publish Job</button>
                     </form>
                 </div>
             </div>
-        </section>
-    </main>
 
-    <footer>
-        <div class="container"
-            style="text-align: center; padding-top: 40px; border-top: 1px solid var(--border-subtle); color: var(--text-tertiary);">
-            &copy; 2026 TeamWork Solutions.
-        </div>
-    </footer>
+            <!-- Manage Jobs View -->
+            <div id="section-manageJobs" style="display: none;">
+                <h2 style="margin-bottom: 20px;">Manage Jobs</h2>
+                <div class="glass-panel" style="padding: 30px;">
+                    <table class="job-table">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="manageTableBody">
+                            <!-- Populated via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </main>
+    </div>
 
     <script src="js/main.js"></script>
     <script>
-        function handlePostJob(e) {
-            e.preventDefault();
-            const btn = e.target.querySelector('button');
-            btn.innerHTML = 'Publishing...';
+        // --- Session Check ---
+        const session = JSON.parse(localStorage.getItem('adminSession'));
+        if (!session || session.expiry < Date.now()) {
+            window.location.href = 'admin-login.html';
+        }
 
+        // --- Core Data Logic ---
+        function getJobs() {
+            return JSON.parse(localStorage.getItem('jobs')) || [];
+        }
+
+        function setJobs(jobs) {
+            localStorage.setItem('jobs', JSON.stringify(jobs));
+            renderDashboard();
+        }
+
+        // --- Rendering ---
+        function renderDashboard() {
+            const jobs = getJobs();
+            const tbody = document.getElementById('dashboardTableBody');
+            const manageBody = document.getElementById('manageTableBody');
+
+            tbody.innerHTML = '';
+            manageBody.innerHTML = '';
+
+            let activeCount = 0;
+            let holdCount = 0;
+
+            jobs.forEach((job, index) => {
+                if (job.status === 'Live') activeCount++;
+                if (job.status === 'Hold') holdCount++;
+
+                // Dashboard Row
+                const row = `
+                    <tr>
+                        <td><strong>${job.title}</strong><br><span style="font-size:0.8em; color:var(--text-tertiary)">${job.dept}</span></td>
+                        <td>${new Date(job.id).toLocaleDateString()}</td>
+                        <td><span class="badge badge-${job.status.toLowerCase()}">${job.status}</span></td>
+                        <td>${Math.floor(Math.random() * 50) + 1}</td> <!-- Mock Applicants -->
+                        <td>
+                            <button onclick="toggleHold(${index})" class="btn-sm" style="color: #eab308" title="Hold/Resume"><i class="ph-bold ph-pause"></i></button>
+                            <button onclick="markHired(${index})" class="btn-sm" style="color: #3b82f6" title="Mark Hired"><i class="ph-bold ph-check"></i></button>
+                            <button onclick="deleteJob(${index})" class="btn-sm" style="color: #ef4444" title="Delete"><i class="ph-bold ph-trash"></i></button>
+                        </td>
+                    </tr>
+                `;
+                tbody.innerHTML += row;
+
+                // Manage Row
+                manageBody.innerHTML += `
+                     <tr>
+                        <td>${job.title}</td>
+                        <td><span class="badge badge-${job.status.toLowerCase()}">${job.status}</span></td>
+                        <td>
+                             <button onclick="deleteJob(${index})" class="btn-sm" style="color: #ef4444">Delete</button>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            // Update Stats
+            document.getElementById('statTotal').innerText = jobs.length;
+            document.getElementById('statActive').innerText = activeCount;
+            document.getElementById('statHold').innerText = holdCount;
+        }
+
+        // --- Actions ---
+        function saveJob(e) {
+            e.preventDefault();
+            const jobs = getJobs();
             const newJob = {
                 id: Date.now(),
                 title: document.getElementById('jobTitle').value,
-                department: document.getElementById('jobDept').value,
-                location: document.getElementById('jobLoc').value,
-                type: document.getElementById('jobType').value,
-                image: document.getElementById('jobImg').value || '',
-                description: document.getElementById('jobDesc').value,
-                postedDate: new Date().toLocaleDateString()
+                dept: document.getElementById('jobDept').value,
+                loc: document.getElementById('jobLoc').value,
+                desc: document.getElementById('jobDesc').value,
+                status: 'Live' // Default
             };
-
-            // Get existing jobs
-            const existingJobs = JSON.parse(localStorage.getItem('jobs') || '[]');
-            existingJobs.unshift(newJob); // Add to top
-
-            // Save back
-            localStorage.setItem('jobs', JSON.stringify(existingJobs));
-
-            // UI Feedback
-            setTimeout(() => {
-                btn.innerHTML = 'Publish Job';
-                document.getElementById('postSuccess').style.display = 'block';
-                e.target.reset();
-            }, 800);
+            jobs.unshift(newJob);
+            setJobs(jobs);
+            alert('Job Posted Successfully!');
+            e.target.reset(); // Clear form
+            showSection('dashboard');
         }
+
+        function toggleHold(index) {
+            const jobs = getJobs();
+            if (jobs[index].status === 'Live') {
+                jobs[index].status = 'Hold';
+            } else if (jobs[index].status === 'Hold') {
+                jobs[index].status = 'Live';
+            }
+            setJobs(jobs);
+        }
+
+        function markHired(index) {
+            const jobs = getJobs();
+            jobs[index].status = 'Hired'; // Hired Jobs hidden from public, kept in DB
+            setJobs(jobs);
+        }
+
+        function deleteJob(index) {
+            if (confirm('Are you sure you want to delete this job?')) {
+                const jobs = getJobs();
+                jobs.splice(index, 1);
+                setJobs(jobs);
+            }
+        }
+
+        function downloadApplications() {
+            // CSV Generation Simulation
+            let p = 'Candidate Name,Email,Phone,Applied Job,Experience\n';
+            p += 'Rohan Sharma,rohan@example.com,9999999990,Software Engineer,4 Years\n';
+            p += 'Priya Singh,priya@example.com,9898989890,HR Manager,6 Years\n';
+
+            const blob = new Blob([p], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'applications_export_' + Date.now() + '.csv';
+            a.click();
+        }
+
+        // --- Navigation ---
+        function showSection(id) {
+            // Hide all
+            document.getElementById('section-dashboard').style.display = 'none';
+            document.getElementById('section-postJob').style.display = 'none';
+            document.getElementById('section-manageJobs').style.display = 'none';
+
+            // Deactivate Sidebar
+            document.getElementById('nav-dashboard').classList.remove('active');
+            document.getElementById('nav-postJob').classList.remove('active');
+            document.getElementById('nav-manageJobs').classList.remove('active');
+
+            // Show One
+            document.getElementById('section-' + id).style.display = 'block';
+            document.getElementById('nav-' + id).classList.add('active');
+        }
+
+        function logout() {
+            localStorage.removeItem('adminSession');
+            window.location.href = 'admin-login.html';
+        }
+
+        // Init
+        renderDashboard();
+
     </script>
 </body>
 

@@ -14,27 +14,135 @@
 
 <body>
 
-    <!-- Unified Header -->
+    <!-- Master Blueprint Header -->
     <nav class="navbar">
         <div class="container nav-content">
+            <!-- Left: Logo -->
             <a href="index.html" class="logo">
-                <i class="ph-fill ph-hexagon" style="color: var(--primary);"></i>
-                TeamWork<span>Solutions</span>
+                <div style="display: flex; flex-direction: column; line-height: 1.1;">
+                    <div style="display: flex; align-items: center; gap: 6px;">
+                        <i class="ph-fill ph-hexagon" style="color: var(--primary);"></i>
+                        <span>TeamWork</span>
+                    </div>
+                    <span
+                        style="font-size: 0.7rem; letter-spacing: 1px; color: var(--text-secondary); margin-left: 24px;">SOLUTIONS</span>
+                </div>
             </a>
+
+            <!-- Center: Links & Mega Menu -->
             <ul class="nav-links desktop-menu">
                 <li><a href="index.html" class="nav-link">Home</a></li>
-                <li><a href="global-hrx.html" class="nav-link text-gradient">Global HRX</a></li>
-                <li><a href="services.html" class="nav-link text-gradient-service">Services</a></li>
-                <li><a href="calculators.html" class="nav-link">Calculators</a></li>
+                <li><a href="global-hrx.html" class="nav-link">Global HRX</a></li>
+
+                <!-- Services Mega Menu -->
+                <li class="nav-item-dropdown">
+                    <a href="services.html" class="nav-link">Services <i class="ph-bold ph-caret-down"></i></a>
+                    <div class="mega-menu">
+                        <!-- Col 1: Core HR -->
+                        <div class="mega-column">
+                            <h4>Core HR & Operations</h4>
+                            <a href="services.html" class="mega-link">
+                                <i class="ph-duotone ph-currency-dollar mega-icon"></i>
+                                <div class="mega-text">
+                                    <h5>Payroll Management</h5>
+                                    <p>End-to-end processing & accuracy.</p>
+                                </div>
+                            </a>
+                            <a href="services.html" class="mega-link">
+                                <i class="ph-duotone ph-shield-check mega-icon"></i>
+                                <div class="mega-text">
+                                    <h5>Statutory Compliance</h5>
+                                    <p>PF, ESIC, Tax filing & audits.</p>
+                                </div>
+                            </a>
+                            <a href="services.html" class="mega-link">
+                                <i class="ph-duotone ph-briefcase mega-icon"></i>
+                                <div class="mega-text">
+                                    <h5>Recruitment</h5>
+                                    <p>Permanent & Contract hiring.</p>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- Col 2: Tech & Tools -->
+                        <div class="mega-column">
+                            <h4>Technology & Tools</h4>
+                            <a href="global-hrx.html" class="mega-link">
+                                <i class="ph-duotone ph-desktop mega-icon" style="color: var(--accent);"></i>
+                                <div class="mega-text">
+                                    <h5>Global HRX</h5>
+                                    <p>Enterprise System of Record.</p>
+                                </div>
+                            </a>
+                            <a href="services.html" class="mega-link">
+                                <i class="ph-duotone ph-scroll mega-icon" style="color: var(--accent);"></i>
+                                <div class="mega-text">
+                                    <h5>Labour Licenses</h5>
+                                    <p>Factory Act & CLRA registrations.</p>
+                                </div>
+                            </a>
+                            <a href="calculators.html" class="mega-link">
+                                <i class="ph-duotone ph-calculator mega-icon" style="color: var(--accent);"></i>
+                                <div class="mega-text">
+                                    <h5>HR Calculators</h5>
+                                    <p>TDS, PF, ESIC & Gratuity.</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+
+                <!-- Calculators Dropdown -->
+                <li class="nav-item-dropdown">
+                    <a href="calculators.html" class="nav-link">Calculators <i class="ph-bold ph-caret-down"></i></a>
+                    <div class="mega-menu" style="width: 400px; grid-template-columns: 1fr;">
+                        <!-- Single Col for Calculators -->
+                        <div class="mega-column">
+                            <h4>Financial Tools</h4>
+                            <a href="calculator-pf.html" class="mega-link">
+                                <i class="ph-duotone ph-piggy-bank mega-icon" style="color: #ec4899;"></i>
+                                <div class="mega-text">
+                                    <h5>PF Calculator</h5>
+                                    <p>12% vs 13% | Wage Ceiling Logic.</p>
+                                </div>
+                            </a>
+                            <a href="calculator-esic.html" class="mega-link">
+                                <i class="ph-duotone ph-first-aid-kit mega-icon" style="color: #ec4899;"></i>
+                                <div class="mega-text">
+                                    <h5>ESIC Calculator</h5>
+                                    <p>0.75% / 3.25% Contribution.</p>
+                                </div>
+                            </a>
+                            <a href="calculator-gratuity.html" class="mega-link">
+                                <i class="ph-duotone ph-coins mega-icon" style="color: #ec4899;"></i>
+                                <div class="mega-text">
+                                    <h5>Gratuity Calculator</h5>
+                                    <p>Eligibility & Payout Estimation.</p>
+                                </div>
+                            </a>
+                            <a href="calculator-tds.html" class="mega-link">
+                                <i class="ph-duotone ph-receipt mega-icon" style="color: #ec4899;"></i>
+                                <div class="mega-text">
+                                    <h5>TDS Smart Estimator</h5>
+                                    <p>Old vs New Regime Recommender.</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+
                 <li><a href="careers.html" class="nav-link active">Careers</a></li>
                 <li><a href="hrms-pricing.html" class="nav-link">Pricing</a></li>
                 <li><a href="about.html" class="nav-link">About</a></li>
                 <li><a href="contact.html" class="nav-link">Contact</a></li>
             </ul>
+
+            <!-- Right: Actions -->
             <div class="nav-actions">
-                <a href="login.html" class="btn btn-outline" style="padding: 8px 20px; font-size: 0.9rem;">Login</a>
-                <a href="request-access.html" class="btn btn-primary"
-                    style="padding: 8px 20px; font-size: 0.9rem;">Request Access</a>
+                <a href="login.html" class="nav-link" style="margin-right: 15px; font-size: 0.9rem;">Login</a>
+                <a href="request-access.html" class="btn btn-primary" style="padding: 8px 20px; font-size: 0.9rem;">
+                    Request Access
+                </a>
             </div>
         </div>
     </nav>
@@ -84,92 +192,139 @@
                             <i class="ph-duotone ph-desktop"
                                 style="font-size: 40px; color: var(--primary); margin-bottom: 20px;"></i>
                             <p>You learn enterprise systems.</p>
-                        </div>
-                    </div>
+                            <!-- Job Listings (Dynamic) -->
+                            <section class="section-padding">
+                                <div class="container">
+                                    <h2 class="fade-up" style="margin-bottom: 40px;">Current Openings</h2>
 
-                    <div
-                        style="background: rgba(255,255,255,0.05); padding: 40px; border-radius: 12px; margin-top: 20px;">
-                        <h3 style="margin-bottom: 20px;">Internal Hiring?</h3>
-                        <p style="color: var(--text-secondary); margin-bottom: 30px;">
-                            Career Administrators can login to post new requirements.
-                        </p>
-                        <a href="admin-login.html" class="btn btn-primary"><i class="ph-bold ph-lock-key"></i> Career
-                            Admin Login</a>
-                    </div>
-                </div>
-            </div>
-        </section>
+                                    <div id="jobContainer" class="job-grid">
+                                        <!-- Javascript will populate this -->
+                                        <div
+                                            style="text-align: center; grid-column: 1/-1; color: var(--text-tertiary);">
+                                            Loading positions...
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
 
-        <!-- Apply Modal -->
-        <div id="applyModal"
-            style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1000; align-items: center; justify-content: center;">
-            <div class="glass-panel"
-                style="width: 90%; max-width: 500px; padding: 30px; position: relative; border-color: var(--service);">
-                <button onclick="closeModal()"
-                    style="position: absolute; top: 15px; right: 15px; background: none; border: none; color: white; font-size: 24px; cursor: pointer;">&times;</button>
+                            <!-- Application Modal -->
+                            <div id="applyModal" class="modal-overlay"
+                                style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 2000; align-items: center; justify-content: center;">
+                                <div class="glass-panel"
+                                    style="width: 100%; max-width: 500px; padding: 40px; position: relative;">
+                                    <button onclick="closeModal()"
+                                        style="position: absolute; top: 20px; right: 20px; background: none; border: none; color: white; font-size: 1.2rem; cursor: pointer;"><i
+                                            class="ph-bold ph-x"></i></button>
+                                    <h3 style="margin-bottom: 20px;">Apply for <span id="modalJobTitle"
+                                            style="color: var(--primary);">Role</span></h3>
 
-                <h3 style="margin-bottom: 20px;">Apply for <span id="modalJobTitle"
-                        style="color: var(--service);">Job</span></h3>
+                                    <form onsubmit="submitApplication(event)">
+                                        <div class="form-group" style="margin-bottom: 15px;">
+                                            <label style="display: block; margin-bottom: 8px; font-size: 0.9rem;">Full
+                                                Name</label>
+                                            <input type="text" required
+                                                style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
+                                        </div>
+                                        <div class="form-group" style="margin-bottom: 15px;">
+                                            <label style="display: block; margin-bottom: 8px; font-size: 0.9rem;">Email
+                                                Address</label>
+                                            <input type="email" required
+                                                style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
+                                        </div>
 
-                <form onsubmit="handleApplySubmit(event)">
-                    <div class="form-group" style="margin-bottom: 15px;">
-                        <label style="display: block; margin-bottom: 8px; font-size: 0.9rem;">Full Name</label>
-                        <input type="text" required
-                            style="width: 100%; padding: 10px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: white; border-radius: 6px;">
-                    </div>
-                    <div class="form-group" style="margin-bottom: 15px;">
-                        <label style="display: block; margin-bottom: 8px; font-size: 0.9rem;">Email</label>
-                        <input type="email" required
-                            style="width: 100%; padding: 10px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: white; border-radius: 6px;">
-                    </div>
-                    <div class="form-group" style="margin-bottom: 20px;">
-                        <label style="display: block; margin-bottom: 8px; font-size: 0.9rem;">Upload Resume</label>
-                        <input type="file" required
-                            style="width: 100%; padding: 10px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: white; border-radius: 6px;">
-                    </div>
-                    <button type="submit" class="btn btn-service" style="width: 100%;">Submit Application</button>
-                </form>
-            </div>
-        </div>
+                                        <!-- Resume Sim -->
+                                        <div class="form-group" style="margin-bottom: 25px;">
+                                            <label style="display: block; margin-bottom: 8px; font-size: 0.9rem;">Resume
+                                                / CV</label>
+                                            <div style="border: 2px dashed var(--border-subtle); padding: 20px; text-align: center; border-radius: 8px; cursor: pointer;"
+                                                onclick="document.getElementById('resumeUpload').click()">
+                                                <i class="ph-duotone ph-upload-simple"
+                                                    style="font-size: 24px; color: var(--text-tertiary);"></i>
+                                                <p
+                                                    style="font-size: 0.8rem; margin-top: 10px; color: var(--text-secondary);">
+                                                    Click to Upload (PDF/DOC)</p>
+                                                <input type="file" id="resumeUpload" style="display: none;"
+                                                    onchange="showFileName(this)">
+                                                <p id="fileName"
+                                                    style="font-size: 0.8rem; color: #10b981; margin-top: 5px;"></p>
+                                            </div>
+                                        </div>
+
+                                        <button type="submit" class="btn btn-primary" style="width: 100%;">Submit
+                                            Application</button>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <!-- Success Toast -->
+                            <div id="successToast"
+                                style="display: none; position: fixed; bottom: 30px; right: 30px; background: #10b981; color: white; padding: 15px 25px; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); z-index: 3000;">
+                                <i class="ph-bold ph-check-circle" style="margin-right: 8px;"></i> Application Sent
+                                Successfully!
+                            </div>
 
     </main>
 
-    <script>
-        // Load Jobs on Page Load
-        document.addEventListener('DOMContentLoaded', () => {
-            const jobs = JSON.parse(localStorage.getItem('jobs') || '[]');
-            const container = document.getElementById('jobListContainer');
-            const noJobs = document.getElementById('noJobsMessage');
+    <!-- Unified Footer -->
+    <footer>
+        <div class="container"
+            style="text-align: center; padding: 40px 0; border-top: 1px solid var(--border-subtle); color: var(--text-tertiary);">
+            &copy; 2026 TeamWork Solutions.
+        </div>
+    </footer>
 
-            if (jobs.length === 0) {
-                noJobs.style.display = 'block';
-            } else {
-                jobs.forEach(job => {
-                    const jobCard = document.createElement('div');
-                    jobCard.className = 'glass-panel fade-up';
-                    jobCard.style.padding = '30px';
-                    jobCard.innerHTML = `
-                        <div style="display: flex; justify-content: space-between; align-items: start; flex-wrap: wrap; gap: 20px;">
-                            <div>
-                                <h3 style="margin-bottom: 8px; color: white;">${job.title}</h3>
-                                <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 15px;">
-                                    <span style="color: var(--primary); margin-right: 15px;"><i class="ph-fill ph-briefcase"></i> ${job.department}</span>
-                                    <span style="color: var(--accent); margin-right: 15px;"><i class="ph-fill ph-clock"></i> ${job.type}</span>
-                                    <span style="color: var(--service);"><i class="ph-fill ph-map-pin"></i> ${job.location}</span>
-                                </p>
-                                <p style="color: var(--text-secondary); max-width: 600px; line-height: 1.6;">${job.description}</p>
-                            </div>
-                            <button onclick="openApplyModal('${job.title}')" class="btn btn-outline">Apply Now</button>
-                        </div>
-                    `;
-                    container.appendChild(jobCard);
-                });
+    <script src="js/main.js"></script>
+    <script>
+        // Load Jobs
+        window.addEventListener('DOMContentLoaded', () => {
+            const jobs = JSON.parse(localStorage.getItem('jobs')) || [];
+            const container = document.getElementById('jobContainer');
+            container.innerHTML = '';
+
+            // Filter out 'Hired' jobs (Deleted from public view as per blueprint)
+            // Show 'Hold' jobs but disable apply
+            const publicJobs = jobs.filter(j => j.status !== 'Hired');
+
+            if (publicJobs.length === 0) {
+                container.innerHTML = `
+                    <div style="grid-column: 1/-1; text-align: center; padding: 60px;">
+                        <i class="ph-duotone ph-magnifying-glass" style="font-size: 48px; color: var(--text-tertiary); margin-bottom: 20px;"></i>
+                        <h3 style="color: var(--text-secondary);">No Openings Currently</h3>
+                        <p style="color: var(--text-tertiary);">Check back later or follow us on LinkedIn.</p>
+                    </div>
+                `;
+                return;
             }
+
+            publicJobs.forEach(job => {
+                const isHold = job.status === 'Hold';
+                const card = `
+                    <div class="job-card glass-panel" style="padding: 30px; position: relative;">
+                        ${isHold ? '<div style="position: absolute; top: 20px; right: 20px; background: rgba(234, 179, 8, 0.1); color: #eab308; padding: 4px 10px; border-radius: 4px; font-size: 0.75rem; border: 1px solid rgba(234, 179, 8, 0.2);">Positions on Hold</div>' : ''}
+                        
+                        <div style="color: var(--primary); font-size: 0.9rem; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px;">${job.dept}</div>
+                        <h3 style="margin-bottom: 15px; color: white;">${job.title}</h3>
+                        <div style="display: flex; gap: 15px; margin-bottom: 20px; font-size: 0.9rem; color: var(--text-secondary);">
+                            <span><i class="ph-bold ph-map-pin"></i> ${job.loc}</span>
+                            <span><i class="ph-bold ph-clock"></i> Full Time</span>
+                        </div>
+                        <p style="color: var(--text-tertiary); font-size: 0.9rem; line-height: 1.6; margin-bottom: 25px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">
+                            ${job.desc}
+                        </p>
+                        
+                        ${isHold
+                        ? '<button disabled class="btn btn-outline" style="width: 100%; opacity: 0.5; cursor: not-allowed;">Applications Paused</button>'
+                        : `<button onclick="openModal('${job.title}')" class="btn btn-primary" style="width: 100%;">Apply Now</button>`
+                    }
+                    </div>
+                `;
+                container.innerHTML += card;
+            });
         });
 
         // Modal Logic
-        function openApplyModal(jobTitle) {
-            document.getElementById('modalJobTitle').innerText = jobTitle;
+        function openModal(title) {
+            document.getElementById('modalJobTitle').innerText = title;
             document.getElementById('applyModal').style.display = 'flex';
         }
 
@@ -177,69 +332,77 @@
             document.getElementById('applyModal').style.display = 'none';
         }
 
-        function handleApplySubmit(e) {
-            e.preventDefault();
-            const btn = e.target.querySelector('button');
-            const originalText = btn.innerText;
-            btn.innerText = 'Submitting...';
-
-            setTimeout(() => {
-                alert('Application submitted successfully.');
-                closeModal();
-                btn.innerText = originalText;
-                e.target.reset();
-            }, 1000);
+        function showFileName(input) {
+            if (input.files && input.files[0]) {
+                document.getElementById('fileName').innerText = "Selected: " + input.files[0].name;
+            }
         }
 
-        // Close modal on outside click
-        window.onclick = function (event) {
-            if (event.target == document.getElementById('applyModal')) {
+        function submitApplication(e) {
+            e.preventDefault();
+            const btn = e.target.querySelector('button[type="submit"]');
+            const originalText = btn.innerText;
+
+            btn.innerText = "Uploading...";
+            btn.disabled = true;
+
+            // Simulate Network Delay for Resume Upload
+            setTimeout(() => {
                 closeModal();
-            }
+                btn.innerText = originalText;
+                btn.disabled = false;
+
+                // Show Success Toast
+                const toast = document.getElementById('successToast');
+                toast.style.display = 'block';
+                setTimeout(() => {
+                    toast.style.display = 'none';
+                }, 3000);
+
+                e.target.reset();
+                document.getElementById('fileName').innerText = "";
+            }, 1500);
         }
     </script>
 
-    <!-- Unified Footer -->
-    <footer>
-        <div class="container">
-            <div style="display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 60px; margin-bottom: 40px;">
-                <div>
-                    <a href="#" class="logo" style="margin-bottom: 20px;">
-                        <i class="ph-fill ph-hexagon" style="color: var(--primary);"></i> TeamWork<span>Solutions</span>
-                    </a>
-                    <p style="margin-bottom: 20px; color: var(--text-secondary);">
-                        TeamWork Solutions & Global HRX.<br>
-                        Your trusted partner for HR Technology, Outsourcing, and Compliance.
-                    </p>
-                    <p style="margin-bottom: 8px;"><i class="ph-fill ph-envelope"></i> teamwork.hrsolution@zohomail.in
-                    </p>
-                    <p><i class="ph-fill ph-phone"></i> +91 9518842774</p>
-                </div>
-
-                <div class="footer-col">
-                    <h4>Company</h4>
-                    <ul>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="team.html">Our Team</a></li>
-                        <li><a href="careers.html">Careers</a></li>
-                        <li><a href="contact.html">Contact Us</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-col">
-                    <h4>Key Services</h4>
-                    <ul>
-                        <li><a href="global-hrx.html">Global HRX Software</a></li>
-                        <li><a href="services.html">Payroll Outsourcing</a></li>
-                        <li><a href="services.html">Compliance Audit</a></li>
-                        <li><a href="services.html">Manpower Solutions</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div style="text-align: center; border-top: 1px solid var(--border-subtle); padding-top: 20px;">
-                &copy; 2026 TeamWork Solutions. Made with ❤️ in India.
-            </div>
+    <div style="display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 60px; margin-bottom: 40px;">
+        <div>
+            <a href="#" class="logo" style="margin-bottom: 20px;">
+                <i class="ph-fill ph-hexagon" style="color: var(--primary);"></i> TeamWork<span>Solutions</span>
+            </a>
+            <p style="margin-bottom: 20px; color: var(--text-secondary);">
+                TeamWork Solutions & Global HRX.<br>
+                Your trusted partner for HR Technology, Outsourcing, and Compliance.
+            </p>
+            <p style="margin-bottom: 8px;"><i class="ph-fill ph-envelope"></i> teamwork.hrsolution@zohomail.in
+            </p>
+            <p><i class="ph-fill ph-phone"></i> +91 9518842774</p>
         </div>
+
+        <div class="footer-col">
+            <h4>Company</h4>
+            <ul>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="team.html">Our Team</a></li>
+                <li><a href="careers.html">Careers</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h4>Key Services</h4>
+            <ul>
+                <li><a href="global-hrx.html">Global HRX Software</a></li>
+                <li><a href="services.html">Payroll Outsourcing</a></li>
+                <li><a href="services.html">Compliance Audit</a></li>
+                <li><a href="services.html">Manpower Solutions</a></li>
+            </ul>
+        </div>
+    </div>
+    <div style="text-align: center; border-top: 1px solid var(--border-subtle); padding-top: 20px;">
+        &copy; 2026 TeamWork Solutions. Made with ❤️ in India.
+    </div>
+    </div>
     </footer>
 
     <a href="https://wa.me/919518842774" class="whatsapp-float" target="_blank"><i

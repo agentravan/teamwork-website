@@ -1,0 +1,105 @@
+/* Mega Menu & Scroll Header Enhancements */
+
+/* Scroll Effect */
+.navbar {
+    padding: 1.2rem 2rem;
+    /* Initial Padding */
+    transition: all 0.4s ease;
+}
+
+.navbar.scrolled {
+    padding: 0.8rem 2rem;
+    /* Shrink padding */
+    background: rgba(10, 10, 10, 0.8) !important;
+    /* Glass dark background */
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Mega Menu Container */
+.nav-item-dropdown {
+    position: relative;
+}
+
+.mega-menu {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    width: 600px;
+    /* Wide mega menu */
+    background: #0f172a;
+    /* Dark sleek bg */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 24px;
+    display: none;
+    /* Hidden by default */
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Show Mega Menu on Hover */
+.nav-item-dropdown:hover .mega-menu {
+    display: grid;
+    opacity: 1;
+    transform: translateX(-50%) translateY(10px);
+}
+
+/* Mega Menu Columns */
+.mega-column h4 {
+    color: var(--text-tertiary);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 8px;
+}
+
+.mega-link {
+    display: flex;
+    align-items: start;
+    gap: 12px;
+    padding: 10px;
+    border-radius: 8px;
+    transition: background 0.2s;
+    text-decoration: none;
+    margin-bottom: 8px;
+}
+
+.mega-link:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.mega-icon {
+    font-size: 20px;
+    color: var(--primary);
+    margin-top: 2px;
+}
+
+.mega-text h5 {
+    color: white;
+    font-size: 0.95rem;
+    margin-bottom: 4px;
+    font-weight: 500;
+}
+
+.mega-text p {
+    color: var(--text-secondary);
+    font-size: 0.75rem;
+    line-height: 1.3;
+    margin: 0;
+}
+
+/* Mobile Tweaks (Hide Mega Menu on Mobile for now or simplify) */
+@media (max-width: 768px) {
+    .mega-menu {
+        display: none !important;
+        /* Simplified for demo, can be accordion later */
+    }
+}

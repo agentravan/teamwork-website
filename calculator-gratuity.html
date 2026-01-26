@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HR Calculators | TeamWork Solutions</title>
+    <title>Gratuity Calculator | TeamWork Solutions</title>
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
         rel="stylesheet">
@@ -15,9 +15,10 @@
 
 <body>
 
-    <!-- Unified Header -->
+    <!-- Master Blueprint Header -->
     <nav class="navbar">
         <div class="container nav-content">
+            <!-- Left: Logo -->
             <a href="index.html" class="logo">
                 <div style="display: flex; flex-direction: column; line-height: 1.1;">
                     <div style="display: flex; align-items: center; gap: 6px;">
@@ -28,6 +29,8 @@
                         style="font-size: 0.7rem; letter-spacing: 1px; color: var(--text-secondary); margin-left: 24px;">SOLUTIONS</span>
                 </div>
             </a>
+
+            <!-- Center: Links & Mega Menu -->
             <ul class="nav-links desktop-menu">
                 <li><a href="index.html" class="nav-link">Home</a></li>
                 <li><a href="global-hrx.html" class="nav-link">Global HRX</a></li>
@@ -121,10 +124,10 @@
                 <li><a href="about.html" class="nav-link">About</a></li>
                 <li><a href="contact.html" class="nav-link">Contact</a></li>
             </ul>
+
+            <!-- Right: Actions -->
             <div class="nav-actions">
-                <a href="login.html" class="btn btn-outline" style="padding: 8px 20px; font-size: 0.9rem;">
-                    Login
-                </a>
+                <a href="login.html" class="nav-link" style="margin-right: 15px; font-size: 0.9rem;">Login</a>
                 <a href="request-access.html" class="btn btn-primary" style="padding: 8px 20px; font-size: 0.9rem;">
                     Request Access
                 </a>
@@ -134,74 +137,96 @@
 
     <header class="section-padding" style="padding-top: 160px; text-align: center;">
         <div class="container">
-            <h1 class="fade-up" style="margin-bottom: 24px;">HR & Payroll <span class="text-gradient">Calculators</span>
-            </h1>
-            <p class="fade-up"
-                style="color: var(--text-secondary); max-width: 600px; margin: 0 auto; margin-bottom: 40px; font-size: 1.25rem;">
-                Free, advanced financial tools for Indian Compliance.
+            <h1 class="fade-up" style="margin-bottom: 24px;">Gratuity <span class="text-gradient">Estimator</span></h1>
+            <p class="fade-up" style="color: var(--text-secondary); max-width: 700px; margin: 0 auto;">
+                Calculate accrued gratuity as per Payment of Gratuity Act, 1972.
             </p>
         </div>
     </header>
 
     <main>
-        <section class="section-padding" style="padding-top: 20px;">
+        <section class="section-padding">
             <div class="container">
-                <div
-                    style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; max-width: 800px; margin: 0 auto;">
 
-                    <!-- PF -->
-                    <a href="calculator-pf.html" class="glass-panel"
-                        style="padding: 30px; text-decoration: none; transition: transform 0.3s; display: block;">
-                        <i class="ph-duotone ph-piggy-bank"
-                            style="font-size: 48px; color: #ec4899; margin-bottom: 20px;"></i>
-                        <h3 style="color: white; margin-bottom: 10px;">PF Calculator</h3>
-                        <p style="color: var(--text-secondary); font-size: 0.9rem;">Calculate EPF & EPS with wage
-                            ceiling options.</p>
-                    </a>
+                <!-- Info Section -->
+                <div class="glass-panel"
+                    style="padding: 30px; margin-bottom: 40px; border-left: 4px solid var(--warning, #eab308);">
+                    <h3 style="margin-bottom: 10px; color: var(--warning, #eab308);">Eligibility Criteria</h3>
+                    <p style="color: var(--text-secondary);">
+                        <strong>5 Years of Continuous Service</strong> is mandatory to claim Gratuity (except in cases
+                        of death/disablement).
+                        <br>Formula: <code>(Last Drawn Basic) * (15/26) * Years of Service</code>.
+                    </p>
+                </div>
 
-                    <!-- ESIC -->
-                    <a href="calculator-esic.html" class="glass-panel"
-                        style="padding: 30px; text-decoration: none; transition: transform 0.3s; display: block;">
-                        <i class="ph-duotone ph-first-aid-kit"
-                            style="font-size: 48px; color: var(--primary); margin-bottom: 20px;"></i>
-                        <h3 style="color: white; margin-bottom: 10px;">ESIC Calculator</h3>
-                        <p style="color: var(--text-secondary); font-size: 0.9rem;">Check eligibility and contribution
-                            rates.</p>
-                    </a>
+                <div class="glass-panel" style="padding: 40px; max-width: 600px; margin: 0 auto;">
+                    <h3 style="margin-bottom: 30px;">Calculate Gratuity</h3>
 
-                    <!-- Gratuity -->
-                    <a href="calculator-gratuity.html" class="glass-panel"
-                        style="padding: 30px; text-decoration: none; transition: transform 0.3s; display: block;">
-                        <i class="ph-duotone ph-coins"
-                            style="font-size: 48px; color: var(--warning, #eab308); margin-bottom: 20px;"></i>
-                        <h3 style="color: white; margin-bottom: 10px;">Gratuity Estimator</h3>
-                        <p style="color: var(--text-secondary); font-size: 0.9rem;">Estimate payout based on tenure and
-                            salary.</p>
-                    </a>
+                    <div class="form-group" style="margin-bottom: 20px;">
+                        <label style="display: block; margin-bottom: 8px; font-size: 0.9rem;">Last Drawn Basic
+                            Salary</label>
+                        <input type="number" id="gratBasic" placeholder="e.g. 50000"
+                            style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
+                    </div>
 
-                    <!-- TDS -->
-                    <a href="calculator-tds.html" class="glass-panel"
-                        style="padding: 30px; text-decoration: none; transition: transform 0.3s; display: block;">
-                        <i class="ph-duotone ph-receipt"
-                            style="font-size: 48px; color: var(--service); margin-bottom: 20px;"></i>
-                        <h3 style="color: white; margin-bottom: 10px;">TDS Smart Calc</h3>
-                        <p style="color: var(--text-secondary); font-size: 0.9rem;">Compare Old vs New Regime tax
-                            liability.</p>
-                    </a>
+                    <div class="form-group" style="margin-bottom: 30px;">
+                        <label style="display: block; margin-bottom: 8px; font-size: 0.9rem;">Years of Service</label>
+                        <input type="number" id="gratYears" placeholder="e.g. 7"
+                            style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
+                    </div>
+
+                    <button onclick="calculateGratuity()" class="btn btn-primary"
+                        style="width: 100%; margin-bottom: 30px;">Estimate Payout</button>
+
+                    <!-- Alert for Ineligibility -->
+                    <div id="gratAlert"
+                        style="display: none; padding: 15px; background: rgba(234, 179, 8, 0.1); border: 1px solid #eab308; color: #eab308; border-radius: 8px; text-align: center; margin-bottom: 20px;">
+                        Service period is less than 5 years. You may not be eligible for standard gratuity.
+                    </div>
+
+                    <!-- Results -->
+                    <div id="gratResult"
+                        style="display: none; border-top: 1px solid var(--border-subtle); padding-top: 30px; text-align: center;">
+                        <span style="color: var(--text-secondary); display: block; margin-bottom: 10px;">Estimated
+                            Payout</span>
+                        <span id="resGratuity" style="color: white; font-weight: 700; font-size: 2rem;">₹ 0</span>
+                    </div>
 
                 </div>
+
             </div>
         </section>
     </main>
 
     <footer>
         <div class="container"
-            style="text-align: center; padding-top: 40px; border-top: 1px solid var(--border-subtle); color: var(--text-tertiary);">
+            style="text-align: center; padding: 40px 0; border-top: 1px solid var(--border-subtle); color: var(--text-tertiary);">
             &copy; 2026 TeamWork Solutions.
         </div>
     </footer>
 
     <script src="js/main.js"></script>
+    <script>
+        function calculateGratuity() {
+            const basic = parseFloat(document.getElementById('gratBasic').value) || 0;
+            const years = parseFloat(document.getElementById('gratYears').value) || 0;
+            const alertBox = document.getElementById('gratAlert');
+            const resBox = document.getElementById('gratResult');
+
+            if (years < 5 && years > 0) {
+                alertBox.style.display = 'block';
+            } else {
+                alertBox.style.display = 'none';
+            }
+
+            if (basic > 0 && years > 0) {
+                resBox.style.display = 'block';
+                // Formula: (Basic * 15 * Years) / 26
+                const val = Math.round((basic * 15 * years) / 26);
+                document.getElementById('resGratuity').innerText = "₹ " + val.toLocaleString();
+            }
+        }
+    </script>
 </body>
 
 </html>
