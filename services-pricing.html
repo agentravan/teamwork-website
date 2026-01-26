@@ -14,33 +14,109 @@
 
 <body>
 
-    <!-- Unified Header -->
-    <nav class="navbar">
-        <div class="container nav-content">
-            <a href="index.html" class="logo">
-                <i class="ph-fill ph-hexagon" style="color: var(--primary);"></i>
-                TeamWork<span>Solutions</span>
+    <!-- MASTER HEADER (KEKA/HRONE STYLE) -->
+    <header class="site-header">
+        <div class="nav-container">
+            <!-- LOGO -->
+            <a href="index.html" class="logo" style="text-decoration: none;">
+                TeamWork <span>SOLUTIONS</span>
             </a>
-            <ul class="nav-links desktop-menu">
-                <li><a href="index.html" class="nav-link">Home</a></li>
-                <li><a href="global-hrx.html" class="nav-link text-gradient">Global HRX</a></li>
-                <li><a href="services.html" class="nav-link text-gradient-service">Services</a></li>
-                <li><a href="calculators.html" class="nav-link">Calculators</a></li>
-                <li><a href="careers.html" class="nav-link">Careers</a></li>
-                <li><a href="hrms-pricing.html" class="nav-link">Pricing</a></li>
-                <li><a href="about.html" class="nav-link">About</a></li>
-                <li><a href="contact.html" class="nav-link">Contact</a></li>
-            </ul>
+
+            <!-- MAIN NAVIGATION -->
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="global-hrx.html">Global HRX</a></li>
+
+                    <!-- SERVICES MEGA DROPDOWN -->
+                    <li class="dropdown">
+                        <a href="services.html">Services ▾</a>
+                        <div class="mega-menu">
+                            <!-- Item 1 -->
+                            <a href="services.html#payroll" class="mega-link">
+                                <div class="mega-icon blue"><i class="ph-duotone ph-currency-dollar"></i></div>
+                                <div class="mega-content">
+                                    <div class="mega-title">Payroll Management</div>
+                                    <div class="mega-desc">Automate salary processing & compliance.</div>
+                                </div>
+                            </a>
+                            <!-- Item 2 -->
+                            <a href="services.html#compliance" class="mega-link">
+                                <div class="mega-icon green"><i class="ph-duotone ph-shield-check"></i></div>
+                                <div class="mega-content">
+                                    <div class="mega-title">Compliance Outsourcing</div>
+                                    <div class="mega-desc">PF, ESIC, LWF, PT management.</div>
+                                </div>
+                            </a>
+                            <!-- Item 3 -->
+                            <a href="services.html#hrpolicy" class="mega-link">
+                                <div class="mega-icon purple"><i class="ph-duotone ph-files"></i></div>
+                                <div class="mega-content">
+                                    <div class="mega-title">HR Policy & Audit</div>
+                                    <div class="mega-desc">Policies, labor audit & compliance.</div>
+                                </div>
+                            </a>
+                            <!-- Item 4 -->
+                            <a href="services.html#startup" class="mega-link">
+                                <div class="mega-icon orange"><i class="ph-duotone ph-rocket"></i></div>
+                                <div class="mega-content">
+                                    <div class="mega-title">Startup Registration</div>
+                                    <div class="mega-desc">Company, labor & statutory setup.</div>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+
+                    <!-- CALCULATORS MEGA DROPDOWN -->
+                    <li class="dropdown">
+                        <a href="#">Calculators ▾</a>
+                        <div class="mega-menu calculators-grid">
+                            <a href="calculator-pf.html" class="mega-link">
+                                <div class="mega-icon orange"><i class="ph-duotone ph-piggy-bank"></i></div>
+                                <div class="mega-content">
+                                    <div class="mega-title">PF Calculator</div>
+                                </div>
+                            </a>
+                            <a href="calculator-esic.html" class="mega-link">
+                                <div class="mega-icon pink"><i class="ph-duotone ph-first-aid-kit"></i></div>
+                                <div class="mega-content">
+                                    <div class="mega-title">ESIC Calculator</div>
+                                </div>
+                            </a>
+                            <a href="calculator-tds.html" class="mega-link">
+                                <div class="mega-icon blue"><i class="ph-duotone ph-calculator"></i></div>
+                                <div class="mega-content">
+                                    <div class="mega-title">TDS Calculator</div>
+                                </div>
+                            </a>
+                            <a href="calculator-gratuity.html" class="mega-link">
+                                <div class="mega-icon green"><i class="ph-duotone ph-coins"></i></div>
+                                <div class="mega-content">
+                                    <div class="mega-title">Gratuity</div>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+
+                    <li><a href="careers.html">Careers</a></li>
+                    <li><a href="pricing.html">Pricing</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+
+            <!-- RIGHT SIDE ACTIONS (STRICT) -->
             <div class="nav-actions">
-                <a href="login.html" class="btn btn-outline" style="padding: 8px 20px; font-size: 0.9rem;">
-                    Login
-                </a>
-                <a href="request-access.html" class="btn btn-primary" style="padding: 8px 20px; font-size: 0.9rem;">
-                    Request Access
-                </a>
+                <a class="btn-ghost" href="login.html">Login</a>
+                <a class="btn-primary" href="request-access.html">Request Access</a>
+            </div>
+
+            <!-- MOBILE TOGGLE -->
+            <div class="hamburger">
+                <i class="ph-bold ph-list"></i>
             </div>
         </div>
-    </nav>
+    </header>
 
     <header class="section-padding" style="padding-top: 160px; text-align: center;">
         <div class="container">

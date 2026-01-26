@@ -1,23 +1,23 @@
-/* Mega Menu & Scroll Header Enhancements */
+/* =========================================
+   MEGA MENU & SCROLL ENHANCEMENTS (KEKA STYLE)
+   ========================================= */
 
 /* Scroll Effect */
-.navbar {
-    padding: 1.2rem 2rem;
-    /* Initial Padding */
+.site-header {
     transition: all 0.4s ease;
 }
 
-.navbar.scrolled {
-    padding: 0.8rem 2rem;
-    /* Shrink padding */
-    background: rgba(10, 10, 10, 0.8) !important;
-    /* Glass dark background */
-    backdrop-filter: blur(15px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+.site-header.scrolled {
+    background: rgba(2, 6, 23, 0.98);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    height: 72px;
+    /* Slightly compact on scroll */
 }
 
 /* Mega Menu Container */
 .nav-item-dropdown {
+    position: static;
+    /* Allows full width if needed, but we keep relative for aligned dropdowns */
     position: relative;
 }
 
@@ -26,80 +26,181 @@
     top: 100%;
     left: 50%;
     transform: translateX(-50%) translateY(20px);
-    width: 600px;
+    width: 650px;
     /* Wide mega menu */
-    background: #0f172a;
-    /* Dark sleek bg */
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: #ffffff;
+    /* White background as requested (Keka style) */
+    border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 12px;
     padding: 24px;
     display: none;
-    /* Hidden by default */
-    grid-template-columns: 1fr 1fr;
-    gap: 30px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-    z-index: 1000;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+    z-index: 2000;
     opacity: 0;
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
-/* Show Mega Menu on Hover */
-.nav-item-dropdown:hover .mega-menu {
+/* Dark mode support if body is dark? 
+   No, user specifically asked for "White / very light background" for the mega menu.
+   So we override the global dark theme for this component. 
+*/
+
+.mega-menu.calculators-grid {
+    width: 800px;
+    /* Wider for 4 columns */
+    grid-template-columns: repeat(4, 1fr);
+}
+
+/* Show on Hover */
+.dropdown:hover .mega-menu {
     display: grid;
     opacity: 1;
     transform: translateX(-50%) translateY(10px);
 }
 
-/* Mega Menu Columns */
-.mega-column h4 {
-    color: var(--text-tertiary);
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 16px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    padding-bottom: 8px;
-}
-
+/* Mega Link Items */
 .mega-link {
     display: flex;
-    align-items: start;
-    gap: 12px;
-    padding: 10px;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 16px;
     border-radius: 8px;
-    transition: background 0.2s;
     text-decoration: none;
-    margin-bottom: 8px;
+    transition: background 0.2s, transform 0.2s;
+    background: #f8fafc;
+    /* Subtle grey bg for cards */
+    border: 1px solid transparent;
 }
 
 .mega-link:hover {
-    background: rgba(255, 255, 255, 0.05);
+    background: #eff6ff;
+    /* Light blue tint */
+    border-color: #bfdbfe;
+    transform: translateY(-2px);
 }
 
 .mega-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: 20px;
-    color: var(--primary);
-    margin-top: 2px;
+    flex-shrink: 0;
 }
 
-.mega-text h5 {
-    color: white;
+.mega-icon.blue {
+    background: #dbeafe;
+    color: #2563eb;
+}
+
+.mega-icon.green {
+    background: #d1fae5;
+    color: #059669;
+}
+
+.mega-icon.orange {
+    background: #ffedd5;
+    color: #ea580c;
+}
+
+.mega-icon.purple {
+    background: #f3e8ff;
+    color: #9333ea;
+}
+
+.mega-icon.pink {
+    background: #fce7f3;
+    color: #db2777;
+}
+
+.mega-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.mega-title {
+    color: #0f172a;
+    /* Dark text for title */
+    font-weight: 700;
     font-size: 0.95rem;
     margin-bottom: 4px;
-    font-weight: 500;
+    font-family: 'Inter', sans-serif;
 }
 
-.mega-text p {
-    color: var(--text-secondary);
-    font-size: 0.75rem;
-    line-height: 1.3;
-    margin: 0;
+.mega-desc {
+    color: #64748b;
+    /* Slate 500 */
+    font-size: 0.8rem;
+    line-height: 1.4;
+    font-weight: 400;
 }
 
-/* Mobile Tweaks (Hide Mega Menu on Mobile for now or simplify) */
-@media (max-width: 768px) {
+/* Arrow indicator on top */
+.mega-menu::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+    width: 12px;
+    height: 12px;
+    background: #ffffff;
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Mobile Responsive */
+@media (max-width: 992px) {
     .mega-menu {
-        display: none !important;
-        /* Simplified for demo, can be accordion later */
+        position: static;
+        transform: none;
+        width: 100%;
+        box-shadow: none;
+        background: transparent;
+        border: none;
+        padding: 0;
+        display: none;
+        /* Controlled by JS or CSS hover if needed, but usually click */
+        grid-template-columns: 1fr;
+        /* Stack vertically */
+        gap: 10px;
+    }
+
+    .dropdown:hover .mega-menu {
+        /* Disable hover on mobile, rely on click/toggle class */
+        display: none;
+    }
+
+    .dropdown.active .mega-menu {
+        display: flex;
+        flex-direction: column;
+        padding: 10px 0;
+    }
+
+    .mega-link {
+        background: rgba(255, 255, 255, 0.05);
+        /* Dark theme on mobile */
+        padding: 12px;
+    }
+
+    .mega-title {
+        color: white;
+    }
+
+    .mega-desc {
+        color: #94a3b8;
+    }
+
+    .mega-menu::before {
+        display: none;
+    }
+
+    .mega-link:hover {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: transparent;
     }
 }

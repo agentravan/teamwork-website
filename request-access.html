@@ -21,40 +21,88 @@
 
 <body>
 
-    <!-- UNIFIED HEADER -->
+    <!-- MASTER HEADER (KEKA/HRONE STYLE) -->
     <header class="site-header">
         <div class="nav-container">
             <!-- LOGO -->
-            <div class="logo">
+            <a href="index.html" class="logo" style="text-decoration: none;">
                 TeamWork <span>SOLUTIONS</span>
-            </div>
+            </a>
 
-            <!-- NAV -->
+            <!-- MAIN NAVIGATION -->
             <nav class="main-nav">
                 <ul>
                     <li><a href="index.html">Home</a></li>
                     <li><a href="global-hrx.html">Global HRX</a></li>
 
-                    <!-- SERVICES DROPDOWN -->
+                    <!-- SERVICES MEGA DROPDOWN -->
                     <li class="dropdown">
-                        <a href="#">Services ▾</a>
-                        <ul class="dropdown-menu">
-                            <li><a href="services.html#payroll">Payroll Management</a></li>
-                            <li><a href="services.html#compliance">Compliance Outsourcing</a></li>
-                            <li><a href="services.html#hrpolicy">HR Policy & Audit</a></li>
-                            <li><a href="services.html#startup">Startup Registration</a></li>
-                        </ul>
+                        <a href="services.html">Services ▾</a>
+                        <div class="mega-menu">
+                            <!-- Item 1 -->
+                            <a href="services.html#payroll" class="mega-link">
+                                <div class="mega-icon blue"><i class="ph-duotone ph-currency-dollar"></i></div>
+                                <div class="mega-content">
+                                    <div class="mega-title">Payroll Management</div>
+                                    <div class="mega-desc">Automate salary processing & compliance.</div>
+                                </div>
+                            </a>
+                            <!-- Item 2 -->
+                            <a href="services.html#compliance" class="mega-link">
+                                <div class="mega-icon green"><i class="ph-duotone ph-shield-check"></i></div>
+                                <div class="mega-content">
+                                    <div class="mega-title">Compliance Outsourcing</div>
+                                    <div class="mega-desc">PF, ESIC, LWF, PT management.</div>
+                                </div>
+                            </a>
+                            <!-- Item 3 -->
+                            <a href="services.html#hrpolicy" class="mega-link">
+                                <div class="mega-icon purple"><i class="ph-duotone ph-files"></i></div>
+                                <div class="mega-content">
+                                    <div class="mega-title">HR Policy & Audit</div>
+                                    <div class="mega-desc">Policies, labor audit & compliance.</div>
+                                </div>
+                            </a>
+                            <!-- Item 4 -->
+                            <a href="services.html#startup" class="mega-link">
+                                <div class="mega-icon orange"><i class="ph-duotone ph-rocket"></i></div>
+                                <div class="mega-content">
+                                    <div class="mega-title">Startup Registration</div>
+                                    <div class="mega-desc">Company, labor & statutory setup.</div>
+                                </div>
+                            </a>
+                        </div>
                     </li>
 
-                    <!-- CALCULATORS DROPDOWN -->
+                    <!-- CALCULATORS MEGA DROPDOWN -->
                     <li class="dropdown">
                         <a href="#">Calculators ▾</a>
-                        <ul class="dropdown-menu">
-                            <li><a href="calculator-pf.html">PF Calculator</a></li>
-                            <li><a href="calculator-esic.html">ESIC Calculator</a></li>
-                            <li><a href="calculator-tds.html">TDS Calculator</a></li>
-                            <li><a href="calculator-gratuity.html">Gratuity Calculator</a></li>
-                        </ul>
+                        <div class="mega-menu calculators-grid">
+                            <a href="calculator-pf.html" class="mega-link">
+                                <div class="mega-icon orange"><i class="ph-duotone ph-piggy-bank"></i></div>
+                                <div class="mega-content">
+                                    <div class="mega-title">PF Calculator</div>
+                                </div>
+                            </a>
+                            <a href="calculator-esic.html" class="mega-link">
+                                <div class="mega-icon pink"><i class="ph-duotone ph-first-aid-kit"></i></div>
+                                <div class="mega-content">
+                                    <div class="mega-title">ESIC Calculator</div>
+                                </div>
+                            </a>
+                            <a href="calculator-tds.html" class="mega-link">
+                                <div class="mega-icon blue"><i class="ph-duotone ph-calculator"></i></div>
+                                <div class="mega-content">
+                                    <div class="mega-title">TDS Calculator</div>
+                                </div>
+                            </a>
+                            <a href="calculator-gratuity.html" class="mega-link">
+                                <div class="mega-icon green"><i class="ph-duotone ph-coins"></i></div>
+                                <div class="mega-content">
+                                    <div class="mega-title">Gratuity</div>
+                                </div>
+                            </a>
+                        </div>
                     </li>
 
                     <li><a href="careers.html">Careers</a></li>
@@ -64,7 +112,7 @@
                 </ul>
             </nav>
 
-            <!-- ACTIONS -->
+            <!-- RIGHT SIDE ACTIONS (STRICT) -->
             <div class="nav-actions">
                 <a class="btn-ghost" href="login.html">Login</a>
                 <a class="btn-primary" href="request-access.html">Request Access</a>
@@ -72,7 +120,7 @@
 
             <!-- MOBILE TOGGLE -->
             <div class="hamburger">
-                ☰
+                <i class="ph-bold ph-list"></i>
             </div>
         </div>
     </header>
