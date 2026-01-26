@@ -337,18 +337,58 @@ h3 {
         display: block;
     }
 
+    /* STRICT MOBILE ACTIONS */
     .nav-actions {
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-        width: 100%;
-        padding: 0 20px;
-        padding-bottom: 20px;
+        display: none;
+        /* Hide original container on mobile, moved inside menu via JS or just stacked */
     }
 
-    .nav-actions .btn {
-        width: 100%;
-        justify-content: center;
+    /* However, our HTML structure puts .nav-actions OUTSIDE .main-nav in header.
+       To show them in mobile menu, we must either:
+       1. Move them inside .main-nav in HTML (Breaking consistency)
+       2. Or styling .nav-actions to appear below .main-nav when hamburger is open?
+       
+       User PROMPT says: "Hamburger menu ke andar bhi same buttons dikhne chahiye".
+       
+       Let's stick to the current HTML:
+       <div class="nav-container">
+          <div class="logo">...</div>
+          <nav class="main-nav">...</nav>
+          <div class="nav-actions">...</div>
+          <div class="hamburger">...</div>
+       </div>
+
+       On Mobile:
+       .nav-actions by default is hidden or distorted. 
+       Let's hide the DESKTOP .nav-actions on mobile.
+       AND assume JS injects them into .main-nav? 
+       Adjusting strategy: The user prompt implies we should have them. 
+       
+       Let's make .nav-actions visible in the header on mobile? No, space is tight.
+       
+       Strict Rule: 
+       Desktop: .nav-actions { display: flex }
+       Mobile: .nav-actions { display: none } BUT inside .main-nav we need links.
+       
+       Actually, to satisfy "Hamburger menu ke andar bhi same buttons dikhne chahiye" without changing HTML everywhere:
+       We should add the buttons to the .main-nav UL via JS or manually in HTML? 
+       Manual HTML update across 15 files is risky. 
+       
+       Better: Use CSS to show .nav-actions ONLY on desktop.
+       And ensure JS clones them to Mobile Menu? 
+       Or just allow them to wrap on mobile? 
+       
+       Let's try to keeping them visible on mobile but styled differently?
+       No, "Hamburger menu ke andar".
+       
+       Let's check if we can make .nav-actions strictly visible on Desktop first.
+    */
+}
+
+/* ALWAYS VISIBLE ON DESKTOP */
+@media (min-width: 993px) {
+    .nav-actions {
+        display: flex !important;
     }
 }
 

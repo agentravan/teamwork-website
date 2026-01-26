@@ -332,13 +332,6 @@
                         <h2 style="margin-bottom: 10px;">Dashboard Overview</h2>
                         <p style="color: var(--text-secondary);">Real-time hiring metrics.</p>
                     </div>
-                    <div>
-                        <!-- Conditional Export Button handled by JS -->
-                        <button id="btnExport" onclick="exportApplications()" class="btn btn-outline"
-                            style="display: none;">
-                            <i class="ph-bold ph-download-simple"></i> Export Data
-                        </button>
-                    </div>
                 </div>
 
                 <!-- KPI Cards -->
@@ -361,11 +354,27 @@
                     </div>
                 </div>
 
-                <!-- Recent Jobs Section -->
-                <h3 style="margin-bottom: 25px;">Recent Job Posts</h3>
-                <div id="dashboardTableContainer">
-                    <!-- Populated by JS -->
-                </div>
+                <!-- RECENT JOB POSTS (Strict Full-Width Layout) -->
+                <section class="recent-jobs"
+                    style="margin-top: 40px; background: rgba(255,255,255,0.02); border-radius: 16px; padding: 24px;">
+                    <div class="section-header"
+                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                        <h2 style="font-size: 1.5rem; margin: 0;">Recent Job Posts</h2>
+
+                        <div style="display: flex; gap: 10px;">
+                            <!-- Export Button (Visible if apps > 0) -->
+                            <button id="btnExport" onclick="exportApplications()" class="btn btn-outline"
+                                style="display: none;">
+                                <i class="ph-bold ph-download-simple"></i> Export
+                            </button>
+                            <button onclick="openPostJobModal()" class="btn btn-primary">Post New Job</button>
+                        </div>
+                    </div>
+
+                    <div id="dashboardTableContainer" class="jobs-table" style="display: flex; flex-direction: column;">
+                        <!-- JS renders here -->
+                    </div>
+                </section>
             </div>
 
             <!-- VIEW: MANAGE -->
@@ -562,7 +571,7 @@
         }
 
         // SWAP LOGIN BUTTON FOR LOGOUT IN HEADER
-        const headerActions = document.getElementById('headerActions');
+        const headerActions = document.querySelector('.nav-actions');
         if (headerActions) {
             headerActions.innerHTML = `
                 <button onclick="handleLogout()" class="btn btn-outline" style="padding: 8px 20px; font-size: 0.9rem; border-color: rgba(255,255,255,0.2);">
@@ -674,68 +683,63 @@
 
         function renderTables(jobs, apps) {
             const container = document.getElementById('dashboardTableContainer');
-            const manageContainer = document.getElementById('manageTableContainer');
+            // We only update dashboard container in this function for the strict view.
+            // Manage view can reuse this or keep table, but for consistency let's update dashboard one strictly.
 
             if (jobs.length === 0) {
-                const emptyHTML = `
-                    <div class="empty-state">
-                        <i class="ph-duotone ph-briefcase" style="font-size: 48px; color: var(--text-tertiary); margin-bottom: 20px;"></i>
-                        <h3 style="color: white; margin-bottom: 10px;">No jobs posted yet</h3>
-                        <p style="color: var(--text-secondary); margin-bottom: 20px;">Create your first job opening to start receiving applications.</p>
-                        <button onclick="openPostJobModal()" class="btn btn-primary">Post a Job</button>
+                container.innerHTML = `
+                    <div class="empty-state" style="text-align: center; padding: 24px; color: #9ca3af;">
+                        No jobs posted yet. Click “Post New Job” to start hiring.
                     </div>
                 `;
-                container.innerHTML = emptyHTML;
-                manageContainer.innerHTML = emptyHTML;
+                // Also update manage container if it exists
+                const manageContainer = document.getElementById('manageTableContainer');
+                if (manageContainer) manageContainer.innerHTML = container.innerHTML;
                 return;
             }
 
-            // Render Job Table
+            // HEADER ROW
             let html = `
-                <table class="modern-table">
-                    <thead>
-                        <tr>
-                            <th>Job Title</th>
-                            <th>Status</th>
-                            <th>Applications</th>
-                            <th>Posted Date</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+                <div class="jobs-header" style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 2fr; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.08); font-weight: 600; color: #9ca3af;">
+                    <span>Job Title</span>
+                    <span>Posted On</span>
+                    <span>Status</span>
+                    <span>Applicants</span>
+                    <span>Actions</span>
+                </div>
             `;
 
+            // DATA ROWS
             jobs.forEach(job => {
                 const jobApps = apps.filter(a => a.jobId === job.id).length;
-                let badgeClass = 'bg-success';
-                if (job.status === 'Hold') badgeClass = 'bg-warning';
+
+                // Status Color Logic
+                let statusColor = '#22c55e'; // Active Green
+                if (job.status === 'Hold') statusColor = '#facc15'; // Hold Yellow
 
                 html += `
-                    <tr>
-                        <td>
-                            <div style="font-weight: 500;">${job.title}</div>
-                            <div style="font-size: 0.8rem; color: var(--text-tertiary);">${job.dept}</div>
-                        </td>
-                        <td><span class="status-badge ${badgeClass}">${job.status}</span></td>
-                        <td>${jobApps}</td>
-                        <td>${new Date(job.id).toLocaleDateString()}</td>
-                        <td>
-                            <div style="display: flex; gap: 10px;">
-                                <button onclick="toggleJobStatus(${job.id}, '${job.status}')" class="btn-outline" style="padding: 6px; border: none;" title="Toggle Status">
-                                    <i class="ph-bold ${job.status === 'Active' ? 'ph-pause' : 'ph-play'}"></i>
-                                </button>
-                                <button onclick="deleteJob(${job.id})" class="btn-outline" style="padding: 6px; border: none; color: #ef4444;" title="Delete">
-                                    <i class="ph-bold ph-trash"></i>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
+                    <div class="job-row" style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 2fr; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.08); color: white; align-items: center;">
+                        <span style="font-weight: 500;">${job.title}</span>
+                        <span style="font-size: 0.9rem; color: var(--text-secondary);">${new Date(job.id).toLocaleDateString()}</span>
+                        <span style="color: ${statusColor};">${job.status}</span>
+                        <span>${jobApps}</span>
+                        <div class="actions" style="display: flex; gap: 8px;">
+                            <button onclick="alert('View functionality to be implemented')" class="btn btn-ghost" style="padding: 4px 10px; font-size: 0.8rem;">View</button>
+                            <button onclick="toggleJobStatus(${job.id}, '${job.status}')" class="btn btn-outline" style="padding: 4px 10px; font-size: 0.8rem;">
+                                ${job.status === 'Active' ? 'Hold' : 'Activate'}
+                            </button>
+                            <button onclick="deleteJob(${job.id})" class="btn btn-outline" style="padding: 4px 10px; font-size: 0.8rem; border-color: #ef4444; color: #ef4444;">Delete</button>
+                        </div>
+                    </div>
                 `;
             });
 
-            html += `</tbody></table>`;
             container.innerHTML = html;
-            manageContainer.innerHTML = html;
+
+            // For View Manage, we can keep generic table or use same. 
+            // For now, let's keep Manage View Simple or Mirror it. 
+            const manageContainer = document.getElementById('manageTableContainer');
+            if (manageContainer) manageContainer.innerHTML = html;
         }
 
         function renderUsers() {

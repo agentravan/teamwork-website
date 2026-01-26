@@ -8,6 +8,27 @@ document.addEventListener('DOMContentLoaded', () => {
         hamburger.addEventListener('click', () => {
             mainNav.classList.toggle('show');
         });
+
+        // -- MOBILE MENU CLONE FIX --
+        // Inject Login/Request Access buttons into the mobile menu list
+        const navActions = document.querySelector('.nav-actions');
+        const navList = document.querySelector('.main-nav > ul');
+
+        if (navActions && navList && !document.querySelector('.mobile-actions-clone')) {
+            const clone = navActions.cloneNode(true);
+            clone.className = 'mobile-actions-clone';
+            clone.style.display = 'flex';
+            clone.style.flexDirection = 'column';
+            clone.style.gap = '12px';
+            clone.style.marginTop = '20px';
+            clone.style.width = '100%';
+
+            // Convert to list item for semantics or just append
+            const li = document.createElement('li');
+            li.style.width = '100%';
+            li.appendChild(clone);
+            navList.appendChild(li);
+        }
     }
 
     // Animation Observer
