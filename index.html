@@ -1,114 +1,179 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Team Work | Global HRX HRMS</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <style>
-    *{margin:0;padding:0;box-sizing:border-box;font-family:Inter,Arial,sans-serif}
-    body{color:#0f172a;background:#fff}
-    a{text-decoration:none;color:inherit}
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,Arial,sans-serif
+}
 
-    header{
-      display:flex;justify-content:space-between;align-items:center;
-      padding:22px 70px;border-bottom:1px solid #e5e7eb;
-    }
-    .logo{font-size:22px;font-weight:700}
-    nav a{margin-left:26px;font-weight:500}
-    .btn{background:#2563eb;color:#fff;padding:10px 18px;border-radius:8px}
-    .btn-outline{border:1px solid #2563eb;color:#2563eb;padding:10px 18px;border-radius:8px}
+body{
+  background:#ffffff;
+  color:#0f172a;
+  line-height:1.6;
+}
 
-    .hero{
-      padding:110px 70px;max-width:1200px;margin:auto;
-    }
-    .hero h1{font-size:52px;line-height:1.15}
-    .hero p{margin-top:20px;font-size:18px;color:#475569;max-width:650px}
-    .hero-actions{margin-top:34px}
-    .hero-actions a{margin-right:18px}
+/* ---------- HEADER ---------- */
+header{
+  position:sticky;
+  top:0;
+  z-index:10;
+  background:#fff;
+  border-bottom:1px solid #e5e7eb;
+  padding:14px 18px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
 
-    .section{
-      padding:90px 70px;max-width:1200px;margin:auto;
-    }
-    .section h2{font-size:38px;text-align:center;margin-bottom:50px}
+.logo{
+  font-size:18px;
+  font-weight:700;
+}
 
-    .grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-      gap:26px;
-    }
-    .card{
-      border:1px solid #e5e7eb;
-      padding:34px;border-radius:16px;
-      font-size:16px;font-weight:500;
-      background:#fff;
-    }
+nav{
+  display:flex;
+  gap:12px;
+}
 
-    .dark{background:#f8fafc}
+nav a{
+  font-size:14px;
+  font-weight:500;
+}
 
-    footer{
-      padding:32px;text-align:center;
-      border-top:1px solid #e5e7eb;color:#64748b;
-    }
+.btn{
+  background:#2563eb;
+  color:#fff;
+  padding:8px 14px;
+  border-radius:10px;
+  font-size:14px;
+}
 
-    @media(max-width:768px){
-      header{padding:20px}
-      .hero,.section{padding:70px 20px}
-      .hero h1{font-size:40px}
-    }
-  </style>
-</head>
+.btn-outline{
+  border:1px solid #2563eb;
+  color:#2563eb;
+  padding:8px 14px;
+  border-radius:10px;
+  font-size:14px;
+}
 
-<body>
+/* ---------- HERO ---------- */
+.hero{
+  padding:48px 18px;
+}
 
-<header>
-  <div class="logo">Team Work</div>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="global-hrx.html">Global HRX</a>
-    <a href="request-access.html" class="btn-outline">Request Access</a>
-    <a href="login.html" class="btn">Login</a>
-  </nav>
-</header>
+.hero h1{
+  font-size:28px;
+  font-weight:700;
+  line-height:1.25;
+}
 
-<section class="hero">
-  <h1>Modern HR, Payroll & Compliance<br>Built for Indian Companies</h1>
-  <p>
-    Team Work presents <strong>Global HRX</strong> — an enterprise-grade HRMS
-    inspired by Keka, Darwinbox & greytHR, designed to adapt to your company.
-  </p>
-  <div class="hero-actions">
-    <a href="request-access.html" class="btn">Request Access</a>
-    <a href="global-hrx.html" class="btn-outline">Explore Global HRX</a>
-  </div>
-</section>
+.hero p{
+  margin-top:14px;
+  font-size:15px;
+  color:#475569;
+}
 
-<section class="section dark">
-  <h2>Why Team Work?</h2>
-  <div class="grid">
-    <div class="card">End-to-End HRMS Platform</div>
-    <div class="card">Custom Payroll & Salary Structures</div>
-    <div class="card">PF, ESIC, PT, LWF, TDS Compliance</div>
-    <div class="card">Employee Self-Service (ESS)</div>
-    <div class="card">Manager & HR Dashboards</div>
-    <div class="card">Enterprise-Grade Security</div>
-  </div>
-</section>
+.hero-actions{
+  margin-top:22px;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
 
-<section class="section">
-  <h2>Global HRX – Our Flagship Product</h2>
-  <div class="grid">
-    <div class="card">Employee Lifecycle Management</div>
-    <div class="card">Custom Onboarding Workflows</div>
-    <div class="card">Attendance & Leave Management</div>
-    <div class="card">Powerful Payroll Engine</div>
-    <div class="card">Statutory Compliance Automation</div>
-    <div class="card">Reports & Analytics</div>
-  </div>
-</section>
+.hero-actions a{
+  text-align:center;
+}
 
-<footer>
-  © 2026 Team Work. All rights reserved.
-</footer>
+/* ---------- SECTIONS ---------- */
+.section{
+  padding:48px 18px;
+}
 
-</body>
-</html>
+.section h2{
+  font-size:22px;
+  text-align:center;
+  margin-bottom:26px;
+}
+
+.dark{
+  background:#f8fafc;
+}
+
+/* ---------- GRID / CARDS ---------- */
+.grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:16px;
+}
+
+.card{
+  border:1px solid #e5e7eb;
+  padding:22px;
+  border-radius:16px;
+  background:#fff;
+  font-size:14px;
+  font-weight:500;
+}
+
+/* ---------- FOOTER ---------- */
+footer{
+  padding:24px 16px;
+  text-align:center;
+  font-size:13px;
+  color:#64748b;
+  border-top:1px solid #e5e7eb;
+}
+
+/* ---------- DESKTOP ENHANCEMENTS ---------- */
+@media(min-width:768px){
+
+  header{
+    padding:22px 70px;
+  }
+
+  .logo{
+    font-size:22px;
+  }
+
+  nav a{
+    font-size:15px;
+  }
+
+  .hero{
+    padding:110px 70px;
+    max-width:1200px;
+    margin:auto;
+  }
+
+  .hero h1{
+    font-size:52px;
+  }
+
+  .hero p{
+    font-size:18px;
+    max-width:650px;
+  }
+
+  .hero-actions{
+    flex-direction:row;
+  }
+
+  .section{
+    padding:90px 70px;
+    max-width:1200px;
+    margin:auto;
+  }
+
+  .section h2{
+    font-size:38px;
+  }
+
+  .grid{
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:26px;
+  }
+
+  .card{
+    padding:34px;
+    font-size:16px;
+  }
+}
