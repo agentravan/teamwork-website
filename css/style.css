@@ -370,19 +370,59 @@ footer {
     transform: scale(1.1);
 }
 
+/* -- Mobile Bottom Nav -- */
+.mobile-bottom-nav {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    background: rgba(2, 6, 23, 0.95);
+    backdrop-filter: blur(12px);
+    border-top: 1px solid var(--border-subtle);
+    z-index: 998;
+    justify-content: space-around;
+    align-items: center;
+    padding-bottom: 5px;
+    /* iOS Safe Area */
+}
+
+.nav-item-mobile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-tertiary);
+    text-decoration: none;
+    font-size: 0.75rem;
+    gap: 4px;
+    width: 100%;
+    height: 100%;
+}
+
+.nav-item-mobile i {
+    font-size: 24px;
+    margin-bottom: 2px;
+    transition: transform 0.2s;
+}
+
+.nav-item-mobile.active {
+    color: var(--primary);
+}
+
+.nav-item-mobile.active i {
+    transform: translateY(-2px);
+}
+
 /* -- Responsive Media Queries -- */
 @media (max-width: 992px) {
     .desktop-menu {
         display: none;
     }
 
-    .mobile-toggle {
-        display: block;
-    }
-
     .nav-actions {
         display: none;
-        /* Hide login buttons on tiny screens or move to mobile menu */
     }
 
     .admin-layout {
@@ -391,7 +431,6 @@ footer {
 
     .sidebar {
         display: none;
-        /* Need a toggle for sidebar later */
     }
 
     .main-content {
@@ -401,6 +440,19 @@ footer {
 }
 
 @media (max-width: 768px) {
+
+    /* Show Bottom Nav */
+    .mobile-bottom-nav {
+        display: flex;
+    }
+
+    /* Move WhatsApp up */
+    .whatsapp-float {
+        bottom: 80px;
+        width: 50px;
+        height: 50px;
+        font-size: 24px;
+    }
 
     /* Stack Grids */
     div[style*="grid-template-columns: repeat(2"],
@@ -419,6 +471,10 @@ footer {
         font-size: 2rem;
     }
 
+    h3 {
+        font-size: 1.5rem;
+    }
+
     /* Padding */
     .section-padding {
         padding: 40px 0;
@@ -428,9 +484,15 @@ footer {
         padding: 20px !important;
     }
 
-    /* Buttons */
+    /* Buttons/Forms */
     .btn {
         width: 100%;
         margin-bottom: 10px;
+    }
+
+    input,
+    select {
+        font-size: 16px !important;
+        /* Prevent Zoom */
     }
 }
