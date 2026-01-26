@@ -342,12 +342,41 @@
             e.preventDefault();
             const btn = e.target.querySelector('button[type="submit"]');
             const originalText = btn.innerText;
+            const form = e.target;
 
+            // Get Job Title from Modal ID or closure
+            // Correct approach: The modal opened with a title. We'll grab it from DOM text.
+            const jobTitle = document.getElementById('modalJobTitle').innerText;
+
+            // Allow Button Loading State
             btn.innerText = "Uploading...";
             btn.disabled = true;
 
-            // Simulate Network Delay for Resume Upload
+            // Find Job ID (Reverse lookup or store in modal dataset)
+            // For simplicity, we find the first job with this title (titles should be unique ideally)
+            const jobs = JSON.parse(localStorage.getItem('jobs')) || [];
+            const job = jobs.find(j => j.title === jobTitle);
+            const jobId = job ? job.id : Date.now(); // Fallback if not found (should not happen)
+
             setTimeout(() => {
+                // Creates Application Object
+                const application = {
+                    id: Date.now(),
+                    jobId: jobId,
+                    jobTitle: jobTitle,
+                    name: form.querySelector('input[type="text"]').value,
+                    email: form.querySelector('input[type="email"]').value,
+                    phone: "N/A", // Add phone field if needed, for now N/A
+                    resumeLink: "https://drive.google.com/open?id=demo_resume_" + Date.now(), // Simulated Link
+                    appliedDate: Date.now()
+                };
+
+                // Save to LocalStorage
+                const apps = JSON.parse(localStorage.getItem('applications')) || [];
+                apps.push(application);
+                localStorage.setItem('applications', JSON.stringify(apps));
+
+                // Cleanup UI
                 closeModal();
                 btn.innerText = originalText;
                 btn.disabled = false;
@@ -359,7 +388,7 @@
                     toast.style.display = 'none';
                 }, 3000);
 
-                e.target.reset();
+                form.reset();
                 document.getElementById('fileName').innerText = "";
             }, 1500);
         }
