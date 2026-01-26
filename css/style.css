@@ -94,13 +94,6 @@ h3 {
     background-clip: text;
 }
 
-.text-gradient-service {
-    background: linear-gradient(135deg, #fff 0%, var(--service) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
 /* -- Layout -- */
 .container {
     width: 90%;
@@ -173,31 +166,38 @@ h3 {
     background: rgba(255, 255, 255, 0.05);
 }
 
-/* -- Navbar -- */
-.navbar {
+.btn-ghost {
+    background: transparent;
+    color: var(--text-white);
+    padding: 8px 16px;
+    font-weight: 500;
+}
+.btn-ghost:hover {
+    color: var(--primary);
+}
+
+
+/* -- LOCKED HEADER STYLES (FINAL) -- */
+.site-header {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    height: var(--header-height);
-    z-index: 100;
-    background: rgba(2, 6, 23, 0.85);
-    backdrop-filter: blur(16px);
+    height: 80px;
+    background: rgba(2, 6, 23, 0.95); /* Consistent dark background */
     border-bottom: 1px solid var(--border-subtle);
-    padding: 1.2rem 2rem;
-    transition: all 0.4s ease;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
 }
 
-.navbar.scrolled {
-    padding: 0.8rem 2rem;
-    background: rgba(10, 10, 10, 0.95);
-}
-
-.nav-content {
+.nav-container {
+    width: 90%;
+    max-width: var(--max-width);
+    margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 100%;
 }
 
 .logo {
@@ -205,132 +205,129 @@ h3 {
     font-size: 1.5rem;
     font-weight: 700;
     color: white;
-    text-decoration: none;
     display: flex;
-    align-items: center;
-    gap: 10px;
+    flex-direction: column;
+    line-height: 1;
 }
 
-.nav-links {
-    display: flex;
-    gap: 24px;
-    list-style: none;
-}
-
-.nav-link {
+.logo span {
+    font-size: 0.75rem;
+    letter-spacing: 2px;
     color: var(--text-secondary);
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+.main-nav ul {
+    display: flex;
+    list-style: none;
+    gap: 24px;
+    margin: 0;
+    padding: 0;
+}
+
+.main-nav a {
     text-decoration: none;
+    color: var(--text-secondary);
     font-weight: 500;
     font-size: 0.95rem;
     transition: color 0.2s;
 }
 
-.nav-link:hover,
-.nav-link.active {
+.main-nav a:hover {
     color: white;
 }
 
-/* -- Mobile Toggle -- */
-.mobile-toggle {
-    display: none;
-    font-size: 1.5rem;
-    background: none;
-    border: none;
-    color: white;
-    cursor: pointer;
-    z-index: 101;
+/* -- LOCKED DROPDOWN CSS -- */
+.dropdown {
+  position: relative;
 }
 
-/* -- Mobile Menu Drawer -- */
-.mobile-menu-overlay {
-    position: fixed;
-    top: var(--header-height);
-    right: -100%;
-    width: 100%;
-    height: calc(100vh - var(--header-height));
-    background: #020617;
-    z-index: 99;
-    transition: right 0.3s ease;
-    padding: 40px 20px;
-    overflow-y: auto;
-    border-top: 1px solid var(--border-subtle);
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #0b1220;
+  min-width: 220px;
+  display: none;
+  z-index: 2000;
+  border-radius: 8px;
+  padding: 10px 0;
+  border: 1px solid var(--border-subtle);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 
-.mobile-menu-overlay.active {
-    right: 0;
+.dropdown-menu li a {
+  display: block;
+  padding: 10px 20px;
+  color: #cfd3ff;
+  font-size: 14px;
 }
 
-.mobile-nav-link {
-    display: block;
-    font-size: 1.2rem;
-    padding: 15px;
-    border-bottom: 1px solid var(--border-subtle);
-    color: var(--text-secondary);
-    text-decoration: none;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.dropdown-menu li a:hover {
+  background: rgba(255,255,255,0.08);
+  color: #fff;
 }
 
-.mobile-nav-link:hover,
-.mobile-nav-link.active {
-    color: white;
-    padding-left: 20px;
-    transition: all 0.3s;
-    background: rgba(255, 255, 255, 0.02);
+.dropdown:hover .dropdown-menu {
+  display: block;
 }
 
-.mobile-nav-sub {
-    padding-left: 20px;
-    font-size: 1rem;
-    display: none;
-    /* JS to toggle */
+/* -- MOBILE HEADER FIX -- */
+.hamburger {
+  display: none;
+  font-size: 26px;
+  color: #fff;
+  cursor: pointer;
 }
 
-.mobile-nav-sub a {
-    display: block;
-    padding: 10px;
-    color: var(--text-tertiary);
-    text-decoration: none;
-}
+@media (max-width: 992px) { /* Trigger mobile menu slightly earlier for better tablet support */
+    .main-nav {
+        display: none; /* Hidden by default on mobile */
+    }
 
-.mobile-nav-sub.active {
-    display: block;
-}
+    .hamburger {
+        display: block;
+    }
 
+    .main-nav {
+        position: absolute;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        background: #070c1f;
+        border-bottom: 1px solid var(--border-subtle);
+        padding-bottom: 20px;
+    }
 
-/* -- Footer -- */
-footer {
-    background: #020617;
-    border-top: 1px solid var(--border-subtle);
-    padding: 60px 0 30px;
-    font-size: 0.9rem;
-    color: var(--text-tertiary);
-}
+    .main-nav ul {
+        flex-direction: column;
+        padding: 20px;
+        align-items: center;
+        gap: 15px;
+    }
+    
+    .dropdown-menu {
+        position: static; /* Stack naturally on mobile */
+        background: rgba(255,255,255,0.02);
+        box-shadow: none;
+        border: none;
+        min-width: 100%;
+        text-align: center;
+        display: none; /* Still hidden by default */
+    }
 
-.footer-col h4 {
-    margin-bottom: 20px;
-    color: white;
-}
+    .dropdown:hover .dropdown-menu {
+        display: block; /* Simple hover for now, or use JS click for mobile dropdowns specifically if needed */
+    }
 
-.footer-col ul {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.footer-col a {
-    color: var(--text-tertiary);
-    text-decoration: none;
-    transition: color 0.2s;
-}
-
-.footer-col a:hover {
-    color: var(--text-primary);
+    .main-nav.show {
+        display: block;
+    }
+    
+    .nav-actions {
+        display: none; /* Hide desktop actions, maybe add to mobile menu if needed or rely on hamburger menu having them? User code didn't strictly specify actions in mobile menu, but generally needed. I'll adhere to user's css. */
+    }
 }
 
 /* -- Animations -- */
@@ -370,129 +367,33 @@ footer {
     transform: scale(1.1);
 }
 
-/* -- Mobile Bottom Nav -- */
-.mobile-bottom-nav {
-    display: none;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 70px;
-    background: rgba(2, 6, 23, 0.95);
-    backdrop-filter: blur(12px);
+/* -- Footer -- */
+footer {
+    background: #020617;
     border-top: 1px solid var(--border-subtle);
-    z-index: 998;
-    justify-content: space-around;
-    align-items: center;
-    padding-bottom: 5px;
-    /* iOS Safe Area */
+    padding: 60px 0 30px;
+    font-size: 0.9rem;
+    color: var(--text-tertiary);
 }
 
-.nav-item-mobile {
+.footer-col h4 {
+    margin-bottom: 20px;
+    color: white;
+}
+
+.footer-col ul {
+    list-style: none;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    gap: 10px;
+}
+
+.footer-col a {
     color: var(--text-tertiary);
     text-decoration: none;
-    font-size: 0.75rem;
-    gap: 4px;
-    width: 100%;
-    height: 100%;
+    transition: color 0.2s;
 }
 
-.nav-item-mobile i {
-    font-size: 24px;
-    margin-bottom: 2px;
-    transition: transform 0.2s;
-}
-
-.nav-item-mobile.active {
-    color: var(--primary);
-}
-
-.nav-item-mobile.active i {
-    transform: translateY(-2px);
-}
-
-/* -- Responsive Media Queries -- */
-@media (max-width: 992px) {
-    .desktop-menu {
-        display: none;
-    }
-
-    .nav-actions {
-        display: none;
-    }
-
-    .admin-layout {
-        grid-template-columns: 1fr;
-    }
-
-    .sidebar {
-        display: none;
-    }
-
-    .main-content {
-        margin-left: 0;
-        padding: 20px;
-    }
-}
-
-@media (max-width: 768px) {
-
-    /* Show Bottom Nav */
-    .mobile-bottom-nav {
-        display: flex;
-    }
-
-    /* Move WhatsApp up */
-    .whatsapp-float {
-        bottom: 80px;
-        width: 50px;
-        height: 50px;
-        font-size: 24px;
-    }
-
-    /* Stack Grids */
-    div[style*="grid-template-columns: repeat(2"],
-    div[style*="grid-template-columns: repeat(3"],
-    div[style*="grid-template-columns: repeat(4"],
-    div[style*="grid-template-columns: 1fr 1fr"] {
-        grid-template-columns: 1fr !important;
-    }
-
-    /* Adjust Fonts */
-    h1 {
-        font-size: 2.5rem;
-    }
-
-    h2 {
-        font-size: 2rem;
-    }
-
-    h3 {
-        font-size: 1.5rem;
-    }
-
-    /* Padding */
-    .section-padding {
-        padding: 40px 0;
-    }
-
-    .glass-panel {
-        padding: 20px !important;
-    }
-
-    /* Buttons/Forms */
-    .btn {
-        width: 100%;
-        margin-bottom: 10px;
-    }
-
-    input,
-    select {
-        font-size: 16px !important;
-        /* Prevent Zoom */
-    }
+.footer-col a:hover {
+    color: var(--text-primary);
 }

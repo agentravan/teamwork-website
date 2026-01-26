@@ -14,22 +14,61 @@
 
 <body>
 
-    <nav class="navbar">
-        <div class="container nav-content">
-            <a href="index.html" class="logo"><i class="ph-fill ph-hexagon" style="color: var(--primary);"></i>
-                Team<span>Work</span></a>
-            <ul class="nav-links">
-                <li><a href="index.html" class="nav-link">Home</a></li>
-                <li><a href="global-hrx.html" class="nav-link">Global HRX</a></li>
-                <li><a href="solutions.html" class="nav-link">Solutions</a></li>
-                <li><a href="services.html" class="nav-link">Consultancy</a></li>
-                <li><a href="pricing.html" class="nav-link active">Pricing</a></li>
-            </ul>
+    <!-- UNIFIED HEADER -->
+    <header class="site-header">
+        <div class="nav-container">
+            <!-- LOGO -->
+            <div class="logo">
+                TeamWork <span>SOLUTIONS</span>
+            </div>
+
+            <!-- NAV -->
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="global-hrx.html">Global HRX</a></li>
+
+                    <!-- SERVICES DROPDOWN -->
+                    <li class="dropdown">
+                        <a href="#">Services ▾</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="services.html#payroll">Payroll Management</a></li>
+                            <li><a href="services.html#compliance">Compliance Outsourcing</a></li>
+                            <li><a href="services.html#hrpolicy">HR Policy & Audit</a></li>
+                            <li><a href="services.html#startup">Startup Registration</a></li>
+                        </ul>
+                    </li>
+
+                    <!-- CALCULATORS DROPDOWN -->
+                    <li class="dropdown">
+                        <a href="#">Calculators ▾</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="calculator-pf.html">PF Calculator</a></li>
+                            <li><a href="calculator-esic.html">ESIC Calculator</a></li>
+                            <li><a href="calculator-tds.html">TDS Calculator</a></li>
+                            <li><a href="calculator-gratuity.html">Gratuity Calculator</a></li>
+                        </ul>
+                    </li>
+
+                    <li><a href="careers.html">Careers</a></li>
+                    <li><a href="pricing.html">Pricing</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+
+            <!-- ACTIONS -->
             <div class="nav-actions">
-                <a href="request-access.html" class="btn btn-primary">Book Demo</a>
+                <a class="btn-ghost" href="login.html">Login</a>
+                <a class="btn-primary" href="request-access.html">Request Access</a>
+            </div>
+
+            <!-- MOBILE TOGGLE -->
+            <div class="hamburger">
+                ☰
             </div>
         </div>
-    </nav>
+    </header>
 
     <header class="section-padding" style="padding-top: 160px; text-align: center;">
         <div class="container">
