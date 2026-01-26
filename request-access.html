@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Request Access | Global HRX</title>
+    <title>Request Access | TeamWork Solutions</title>
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
         rel="stylesheet">
@@ -14,17 +14,6 @@
 
 <body>
 
-    <!-- Standard Header (as this is part of the main site flow, typically. 
-         Wait, user said "Global HRX pages only... remove WhatsApp". 
-         This is a form for Global HRX, but it's a standalone page. 
-         I will stick to the Standard Header for navigation consistency unless user meant *pages under Global HRX*. 
-         Actually, let's use the Special Global HRX header here too since it relates to the product.
-         BUT, the user instructions for Header Rule 2 says "Global HRX PAGES ONLY". 
-         Usually "Request Access" is the destination of the button on the Global HRX header.
-         Let's keep the Standard Header for navigation context, or better, the Global HRX header without the buttons (since we are on the page).
-         Actually, simpler: Use Standard Header but maybe without the specific CTA if it conflicts. 
-         Let's stick to Standard Header for now as it's a "website page".
-    -->
     <nav class="navbar">
         <div class="container nav-content">
             <a href="index.html" class="logo">
@@ -33,90 +22,99 @@
             </a>
             <ul class="nav-links desktop-menu">
                 <li><a href="index.html" class="nav-link">Home</a></li>
-                <li><a href="global-hrx.html" class="nav-link text-gradient">Global HRX</a></li>
-                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="global-hrx.html" class="nav-link">Global HRX</a></li>
                 <li><a href="contact.html" class="nav-link">Contact</a></li>
             </ul>
         </div>
     </nav>
 
-    <header class="section-padding" style="padding-top: 140px; text-align: center;">
+    <header class="section-padding" style="padding-top: 160px; text-align: center;">
         <div class="container">
-            <h1 class="fade-up" style="margin-bottom: 24px;">Get Early Access</h1>
+            <h1 class="fade-up" style="margin-bottom: 24px;">Experience <span class="text-gradient">Global HRX</span>
+            </h1>
             <p class="fade-up" style="color: var(--text-secondary); max-width: 600px; margin: 0 auto;">
-                Experience the power of Global HRX. Fill the form below to schedule a customized demo for your
-                organization.
+                Schedule a personalized demo audit of your current compliance status.
             </p>
         </div>
     </header>
 
     <main>
         <section class="section-padding">
-            <div class="container">
-                <div class="glass-panel" style="max-width: 600px; margin: 0 auto; padding: 40px;">
+            <div class="container" style="max-width: 800px;">
+                <div class="glass-panel" style="padding: 40px;">
+                    <form id="zohoDemoForm"
+                        action="https://forms.zoho.in/teamworkhrsolutionzoho1/form/TeamWorkContactUs" method="POST"
+                        target="hiddenDemoFrame" onsubmit="handleDemoSubmit(event)">
 
-                    <!-- Form Container -->
-                    <form id="zohoRequestForm"
-                        action="https://forms.zohopublic.in/teamworkhrsolutionzoho1/form/GlobalHRXRequestAccess/formperma/hGc_zpn5pwSqkB2yrYCXVMVtztCv0IfcD3WXrhU163o"
-                        method="POST" target="hiddenFrame" onsubmit="handleFormSubmit(event)">
-
-                        <div style="display: grid; gap: 20px;">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
                             <div class="form-group">
-                                <label style="display: block; margin-bottom: 8px; color: var(--text-secondary);">Company
-                                    Name <span style="color: red;">*</span></label>
+                                <label style="display: block; margin-bottom: 8px; font-size: 0.9rem;">Full Name
+                                    *</label>
+                                <input type="text" name="Name_First" required
+                                    style="width: 100%; padding: 10px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
+                            </div>
+                            <div class="form-group">
+                                <label style="display: block; margin-bottom: 8px; font-size: 0.9rem;">Company Name
+                                    *</label>
                                 <input type="text" name="SingleLine" required
-                                    style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
+                                    style="width: 100%; padding: 10px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
                             </div>
-
-                            <div class="form-group">
-                                <label
-                                    style="display: block; margin-bottom: 8px; color: var(--text-secondary);">Employee
-                                    Count</label>
-                                <select name="Dropdown"
-                                    style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
-                                    <option value="1-10" style="color: black;">1-10</option>
-                                    <option value="11-50" style="color: black;">11-50</option>
-                                    <option value="51-200" style="color: black;">51-200</option>
-                                    <option value="200+" style="color: black;">200+</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label
-                                    style="display: block; margin-bottom: 8px; color: var(--text-secondary);">Official
-                                    Email <span style="color: red;">*</span></label>
-                                <input type="email" name="Email" required
-                                    style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
-                            </div>
-
-                            <div class="form-group">
-                                <label style="display: block; margin-bottom: 8px; color: var(--text-secondary);">Mobile
-                                    Number <span style="color: red;">*</span></label>
-                                <input type="text" name="PhoneNumber" required
-                                    style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
-                            </div>
-
-                            <div class="form-group">
-                                <label
-                                    style="display: block; margin-bottom: 8px; color: var(--text-secondary);">Requirement</label>
-                                <textarea name="MultiLine" rows="4"
-                                    style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: white; border-radius: 8px;"></textarea>
-                            </div>
-
-                            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 10px;">Request
-                                Access</button>
                         </div>
+
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+                            <div class="form-group">
+                                <label style="display: block; margin-bottom: 8px; font-size: 0.9rem;">Work Email
+                                    *</label>
+                                <input type="email" name="Email" required
+                                    style="width: 100%; padding: 10px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
+                            </div>
+                            <div class="form-group">
+                                <label style="display: block; margin-bottom: 8px; font-size: 0.9rem;">Phone Number
+                                    *</label>
+                                <input type="text" name="PhoneNumber" required
+                                    style="width: 100%; padding: 10px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
+                            </div>
+                        </div>
+
+                        <div class="form-group" style="margin-bottom: 20px;">
+                            <label style="display: block; margin-bottom: 8px; font-size: 0.9rem;">Employee Count</label>
+                            <select name="Dropdown"
+                                style="width: 100%; padding: 10px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
+                                <option style="background: #0f172a;" value="10-50">10 - 50</option>
+                                <option style="background: #0f172a;" value="50-200">50 - 200</option>
+                                <option style="background: #0f172a;" value="200-500">200 - 500</option>
+                                <option style="background: #0f172a;" value="500+">500+</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group" style="margin-bottom: 30px;">
+                            <label style="display: block; margin-bottom: 8px; font-size: 0.9rem;">Interest Areas</label>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                                <label style="display: flex; gap: 8px; align-items: center; cursor: pointer;">
+                                    <input type="checkbox" name="Checkbox" value="Payroll" checked> Payroll Automation
+                                </label>
+                                <label style="display: flex; gap: 8px; align-items: center; cursor: pointer;">
+                                    <input type="checkbox" name="Checkbox" value="Compliance"> Compliance Audit
+                                </label>
+                                <label style="display: flex; gap: 8px; align-items: center; cursor: pointer;">
+                                    <input type="checkbox" name="Checkbox" value="Recruitment"> Recruitment
+                                </label>
+                                <label style="display: flex; gap: 8px; align-items: center; cursor: pointer;">
+                                    <input type="checkbox" name="Checkbox" value="Outsourcing"> Manpower Outsourcing
+                                </label>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Schedule Demo</button>
                     </form>
 
-                    <!-- Hidden Iframe for No-Redirect Submission -->
-                    <iframe name="hiddenFrame" style="display:none;" onload="handleFrameLoad()"></iframe>
+                    <iframe name="hiddenDemoFrame" style="display:none;" onload="handleDemoFrameLoad()"></iframe>
 
-                    <!-- Success Message -->
-                    <div id="successMessage"
+                    <div id="demoSuccessMessage"
                         style="display: none; text-align: center; margin-top: 20px; color: var(--service);">
-                        <i class="ph-fill ph-check-circle" style="font-size: 48px; margin-bottom: 10px;"></i>
-                        <h3>Request Sent!</h3>
-                        <p>Our team will contact you shortly.</p>
+                        <i class="ph-fill ph-check-circle" style="font-size: 40px; margin-bottom: 10px;"></i>
+                        <h3>Request Received!</h3>
+                        <p>Our audit team will contact you within 24 hours.</p>
                     </div>
 
                 </div>
@@ -124,33 +122,27 @@
         </section>
     </main>
 
-    <!-- Standard Footer -->
     <footer>
-        <div class="container">
-            <div style="text-align: center;">
-                <a href="#" class="logo" style="justify-content: center; margin-bottom: 20px;">
-                    <i class="ph-fill ph-hexagon" style="color: var(--primary);"></i> TeamWork<span>Solutions</span>
-                </a>
-                <p>&copy; 2026 TeamWork Solutions. +91 9518842774.</p>
-            </div>
+        <div class="container"
+            style="text-align: center; padding-top: 40px; border-top: 1px solid var(--border-subtle); color: var(--text-tertiary);">
+            &copy; 2026 TeamWork Solutions.
         </div>
     </footer>
 
     <script src="js/main.js"></script>
     <script>
-        let formSubmitted = false;
-        function handleFormSubmit(event) {
-            // Don't prevent default, let it submit to iframe
+        let demoSubmitted = false;
+        function handleDemoSubmit(event) {
             const btn = event.target.querySelector('button');
-            btn.innerHTML = '<i class="ph-bold ph-spinner ph-spin"></i> Sending...';
+            btn.innerHTML = '<i class="ph-bold ph-spinner ph-spin"></i> Scheduling...';
             btn.disabled = true;
-            formSubmitted = true;
+            demoSubmitted = true;
         }
 
-        function handleFrameLoad() {
-            if (formSubmitted) {
-                document.getElementById('zohoRequestForm').style.display = 'none';
-                document.getElementById('successMessage').style.display = 'block';
+        function handleDemoFrameLoad() {
+            if (demoSubmitted) {
+                document.getElementById('zohoDemoForm').style.display = 'none';
+                document.getElementById('demoSuccessMessage').style.display = 'block';
             }
         }
     </script>
