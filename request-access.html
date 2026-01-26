@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Request Access | Team Work</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .form-input,
+        .form-select {
+            width: 100%;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            color: #fff;
+            font-family: inherit;
+        }
+
+        .form-select option {
+            background: var(--bg-dark);
+            color: #fff;
+        }
+
+        .form-input:focus,
+        .form-select:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">Team<span>Work</span></a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="global-hrx.html" class="nav-link">Product</a></li>
+                <li><a href="solutions.html" class="nav-link">Solutions</a></li>
+                <li><a href="services.html" class="nav-link">Services</a></li>
+                <li><a href="pricing.html" class="nav-link">Pricing</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="login.html" class="nav-link">Login</a>
+                <a href="request-access.html" class="btn btn-primary">Book Demo</a>
+            </div>
+            <div class="mobile-toggle">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+        </div>
+    </nav>
+
+    <main style="padding-top: 80px;">
+        <section style="padding: 80px 0;">
+            <div class="container" style="max-width: 600px;">
+                <div style="text-align: center; margin-bottom: 40px;" class="fade-up">
+                    <h1 style="font-size: 2.5rem; margin-bottom: 16px;">Get Started with <span
+                            class="text-gradient">Global HRX</span></h1>
+                    <p style="color: var(--text-muted);">Fill out the form below to schedule a personalized demo or
+                        request access to the platform.</p>
+                </div>
+
+                <div class="glass-card fade-up" style="padding: 40px;">
+                    <form>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                            <div class="form-group">
+                                <label class="form-label">First Name</label>
+                                <input type="text" class="form-input">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Last Name</label>
+                                <input type="text" class="form-input">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Work Email</label>
+                            <input type="email" class="form-input">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Company Name</label>
+                            <input type="text" class="form-input">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Employee Count</label>
+                            <select class="form-select">
+                                <option>1 - 50</option>
+                                <option>51 - 200</option>
+                                <option>201 - 1000</option>
+                                <option>1000+</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Interested In</label>
+                            <select class="form-select">
+                                <option>Global HRX Platform</option>
+                                <option>HR Consultancy</option>
+                                <option>Payroll Outsourcing</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 10px;">Request
+                            Demo</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-bottom">
+                <div>&copy; 2026 Team Work.</div>
+            </div>
+        </div>
+    </footer>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
