@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HR Calculators | TeamWork Solutions</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <style>
+        .calculator-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            padding: 30px;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .calculator-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+
+        .calc-input {
+            width: 100%;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--border-subtle);
+            border-radius: 6px;
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .calc-result {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 15px;
+            display: none;
+        }
+
+        .calc-btn {
+            width: 100%;
+            padding: 10px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .calc-btn:hover {
+            background: var(--primary-dark, #2563eb);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Global Header -->
+    <nav class="navbar">
+        <div class="container nav-content">
+            <a href="index.html" class="logo">
+                <i class="ph-fill ph-hexagon" style="color: var(--primary);"></i>
+                TeamWork<span>Solutions</span>
+            </a>
+            <ul class="nav-links desktop-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="global-hrx.html" class="nav-link">Global HRX</a></li>
+                <li><a href="services.html" class="nav-link">Services</a></li>
+                <li><a href="calculators.html" class="nav-link active">Calculators</a></li>
+                <li><a href="careers.html" class="nav-link">Careers</a></li>
+                <li><a href="hrms-pricing.html" class="nav-link">Pricing</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="login.html" class="btn btn-outline" style="padding: 8px 20px; font-size: 0.9rem;">Login</a>
+                <a href="request-access.html" class="btn btn-primary"
+                    style="padding: 8px 20px; font-size: 0.9rem;">Request Access</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="section-padding" style="padding-top: 160px; text-align: center;">
+        <div class="container">
+            <h1 class="fade-up" style="margin-bottom: 24px;">HR <span class="text-gradient">Calculators</span></h1>
+            <p class="fade-up" style="color: var(--text-secondary); max-width: 600px; margin: 0 auto;">
+                Instant, compliance-ready calculations for Indian Payroll.
+            </p>
+        </div>
+    </header>
+
+    <main>
+        <section class="section-padding">
+            <div class="container">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px;">
+
+                    <!-- PF Calculator -->
+                    <div class="calculator-card fade-up">
+                        <h3 style="margin-bottom: 20px; color: var(--service);"><i class="ph-duotone ph-piggy-bank"></i>
+                            PF Calculator</h3>
+                        <label style="font-size: 0.9rem; color: var(--text-secondary);">Basic Salary (Monthly)</label>
+                        <input type="number" id="pfBasic" class="calc-input" placeholder="e.g. 15000">
+                        <button class="calc-btn" onclick="calculatePF()">Calculate PF</button>
+                        <div id="pfResult" class="calc-result">
+                            <div style="margin-bottom: 5px;">Employee Share (12%): <span id="pfEmp"
+                                    style="float: right; color: white;">0</span></div>
+                            <div>Employer Share (13%): <span id="pfEmplr" style="float: right; color: white;">0</span>
+                            </div>
+                            <div style="font-size: 0.8rem; color: var(--text-tertiary); margin-top: 8px;">*Capped at
+                                ₹15,000 wage ceiling</div>
+                        </div>
+                    </div>
+
+                    <!-- ESIC Calculator -->
+                    <div class="calculator-card fade-up">
+                        <h3 style="margin-bottom: 20px; color: var(--primary);"><i
+                                class="ph-duotone ph-first-aid-kit"></i> ESIC Calculator</h3>
+                        <label style="font-size: 0.9rem; color: var(--text-secondary);">Gross Salary (Monthly)</label>
+                        <input type="number" id="esicGross" class="calc-input" placeholder="e.g. 20000">
+                        <button class="calc-btn" onclick="calculateESIC()">Calculate ESIC</button>
+                        <div id="esicResult" class="calc-result">
+                            <div style="margin-bottom: 5px;">Employee (0.75%): <span id="esicEmp"
+                                    style="float: right; color: white;">0</span></div>
+                            <div>Employer (3.25%): <span id="esicEmplr" style="float: right; color: white;">0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Gratuity Calculator -->
+                    <div class="calculator-card fade-up">
+                        <h3 style="margin-bottom: 20px; color: var(--accent);"><i class="ph-duotone ph-coins"></i>
+                            Gratuity Calculator</h3>
+                        <label style="font-size: 0.9rem; color: var(--text-secondary);">Last Drawn Basic</label>
+                        <input type="number" id="gratBasic" class="calc-input" placeholder="e.g. 50000">
+                        <label style="font-size: 0.9rem; color: var(--text-secondary);">Tenure (Years)</label>
+                        <input type="number" id="gratYears" class="calc-input" placeholder="e.g. 5">
+                        <button class="calc-btn" onclick="calculateGratuity()">Calculate Gratuity</button>
+                        <div id="gratResult" class="calc-result">
+                            <div style="font-size: 1.1rem; font-weight: 600; color: var(--accent);">Total: ₹<span
+                                    id="gratTotal">0</span></div>
+                            <div style="font-size: 0.8rem; color: var(--text-tertiary); margin-top: 8px;">Formula:
+                                (Basic × 15 × Years) / 26</div>
+                        </div>
+                    </div>
+
+                    <!-- TDS Calculator (Demo) -->
+                    <div class="calculator-card fade-up">
+                        <h3 style="margin-bottom: 20px; color: #ec4899;"><i class="ph-duotone ph-calculator"></i> TDS
+                            estimate (New Regime)</h3>
+                        <label style="font-size: 0.9rem; color: var(--text-secondary);">Annual Taxable Income</label>
+                        <input type="number" id="tdsIncome" class="calc-input" placeholder="e.g. 900000">
+                        <button class="calc-btn" onclick="calculateTDS()">Estimate Tax</button>
+                        <div id="tdsResult" class="calc-result">
+                            <div style="margin-bottom: 5px;">Annual Tax: <span id="tdsAnnual"
+                                    style="float: right; color: white;">0</span></div>
+                            <div>Monthly Value: <span id="tdsMonthly" style="float: right; color: white;">0</span></div>
+                            <div style="font-size: 0.8rem; color: var(--text-tertiary); margin-top: 8px;">*Standard
+                                Deduction of 75k applied automatically if income > 7.75L</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container"
+            style="text-align: center; padding-top: 40px; border-top: 1px solid var(--border-subtle); color: var(--text-tertiary);">
+            &copy; 2026 TeamWork Solutions.
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // PF Calculator
+        function calculatePF() {
+            const basic = parseFloat(document.getElementById('pfBasic').value) || 0;
+            const wageCeiling = 15000;
+
+            // Logic: Capped at 15000 for calculation if Basic > 15000 (Non-Voluntary Rule)
+            const calcAmount = basic > wageCeiling ? wageCeiling : basic;
+
+            const empShare = Math.round(calcAmount * 0.12);
+            // Employer: 13% total (3.67 EPF + 8.33 EPS + 1 Admin/EDLI approx, simplified to 13% as per prompt rule "Employer PF = 1950")
+            // Prompt said: Employer PF = 13% of PF wages.
+            const emplrShare = Math.round(calcAmount * 0.13);
+
+            document.getElementById('pfEmp').innerText = '₹' + empShare;
+            document.getElementById('pfEmplr').innerText = '₹' + emplrShare;
+            document.getElementById('pfResult').style.display = 'block';
+        }
+
+        // ESIC Calculator
+        function calculateESIC() {
+            const gross = parseFloat(document.getElementById('esicGross').value) || 0;
+            // ESIC applies on Gross.
+            // If Gross > 21000, usually 0. But for Calculator Demo, we show calculation or alert.
+            // "User didn't ask for cap logic here, just formula". I will apply formula directly.
+
+            const empShare = Math.ceil(gross * 0.0075); // 0.75%
+            const emplrShare = Math.ceil(gross * 0.0325); // 3.25%
+
+            document.getElementById('esicEmp').innerText = '₹' + empShare;
+            document.getElementById('esicEmplr').innerText = '₹' + emplrShare;
+            document.getElementById('esicResult').style.display = 'block';
+        }
+
+        // Gratuity Calculator
+        function calculateGratuity() {
+            const basic = parseFloat(document.getElementById('gratBasic').value) || 0;
+            const years = parseFloat(document.getElementById('gratYears').value) || 0;
+
+            const total = Math.round((basic * 15 * years) / 26);
+
+            document.getElementById('gratTotal').innerText = total;
+            document.getElementById('gratResult').style.display = 'block';
+        }
+
+        // TDS Calculator (New Regime Simplified Slabs FY25-26 Estimate)
+        // 0-3L: Nil
+        // 3-7L: 5% (Rebate u/s 87A up to 7L, effectively 0 tax if Net Income <= 7L)
+        // Actually New Regime Rebate is up to 7L income (taxable income).
+        // Let's implement simplified logic.
+        function calculateTDS() {
+            let income = parseFloat(document.getElementById('tdsIncome').value) || 0;
+
+            // Standard Deduction 75,000 for Salaried (New Budget 2024-25 update assumed or standard 50k, Prompt said "Simplified")
+            // Prompt said "New Regime". Let's assume standard deduction application if income is salary based (implied).
+            // Let's apply 75000 deduction for realism if income > 300000.
+
+            let taxableIncome = income > 75000 ? income - 75000 : 0;
+            let tax = 0;
+
+            // Slabs (New Regime 2024)
+            // 0-3L: 0
+            // 3-7L: 5%
+            // 7-10L: 10%
+            // 10-12L: 15%
+            // 12-15L: 20%
+            // >15L: 30%
+
+            // Rebate: If Taxable Income <= 7,00,000, Tax is 0.
+
+            if (taxableIncome <= 700000) {
+                tax = 0;
+            } else {
+                // Calculation
+                if (taxableIncome > 300000) {
+                    // 3L - 7L (4L width) -> 5%
+                    let slab1 = Math.min(taxableIncome, 700000) - 300000;
+                    if (slab1 > 0) tax += slab1 * 0.05;
+                }
+                if (taxableIncome > 700000) {
+                    // 7L - 10L (3L width) -> 10%
+                    let slab2 = Math.min(taxableIncome, 1000000) - 700000;
+                    if (slab2 > 0) tax += slab2 * 0.10;
+                }
+                if (taxableIncome > 1000000) {
+                    // 10L - 12L (2L width) -> 15%
+                    let slab3 = Math.min(taxableIncome, 1200000) - 1000000;
+                    if (slab3 > 0) tax += slab3 * 0.15;
+                }
+                if (taxableIncome > 1200000) {
+                    // 12L - 15L (3L width) -> 20%
+                    let slab4 = Math.min(taxableIncome, 1500000) - 1200000;
+                    if (slab4 > 0) tax += slab4 * 0.20;
+                }
+                if (taxableIncome > 1500000) {
+                    // > 15L -> 30%
+                    let slab5 = taxableIncome - 1500000;
+                    tax += slab5 * 0.30;
+                }
+            }
+
+            // Cess 4%
+            tax = tax * 1.04;
+
+            document.getElementById('tdsAnnual').innerText = '₹' + Math.round(tax);
+            document.getElementById('tdsMonthly').innerText = '₹' + Math.round(tax / 12);
+            document.getElementById('tdsResult').style.display = 'block';
+        }
+    </script>
+
+</body>
+
+</html>

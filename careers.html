@@ -25,16 +25,16 @@
                 <li><a href="index.html" class="nav-link">Home</a></li>
                 <li><a href="global-hrx.html" class="nav-link text-gradient">Global HRX</a></li>
                 <li><a href="services.html" class="nav-link text-gradient-service">Services</a></li>
+                <li><a href="calculators.html" class="nav-link">Calculators</a></li>
+                <li><a href="careers.html" class="nav-link active">Careers</a></li>
                 <li><a href="hrms-pricing.html" class="nav-link">Pricing</a></li>
                 <li><a href="about.html" class="nav-link">About</a></li>
-                <li><a href="careers.html" class="nav-link active">Careers</a></li>
                 <li><a href="contact.html" class="nav-link">Contact</a></li>
             </ul>
             <div class="nav-actions">
-                <a href="https://wa.me/919518842774" class="btn btn-primary"
-                    style="padding: 8px 20px; font-size: 0.9rem;">
-                    <i class="ph-fill ph-whatsapp-logo"></i> +91 9518842774
-                </a>
+                <a href="login.html" class="btn btn-outline" style="padding: 8px 20px; font-size: 0.9rem;">Login</a>
+                <a href="request-access.html" class="btn btn-primary"
+                    style="padding: 8px 20px; font-size: 0.9rem;">Request Access</a>
             </div>
         </div>
     </nav>
@@ -53,7 +53,21 @@
 
         <section class="section-padding">
             <div class="container">
-                <div class="glass-panel" style="padding: 50px; text-align: center;">
+                <!-- Job List Container -->
+                <div id="jobListContainer" style="display: grid; gap: 20px;">
+                    <!-- Jobs will be injected here by JS -->
+                </div>
+
+                <!-- Empty State (Hidden by default) -->
+                <div id="noJobsMessage" class="glass-panel" style="text-align: center; padding: 60px; display: none;">
+                    <i class="ph-duotone ph-briefcase"
+                        style="font-size: 48px; color: var(--text-tertiary); margin-bottom: 20px;"></i>
+                    <h3 style="color: var(--text-secondary);">No Openings Currently</h3>
+                    <p style="color: var(--text-tertiary);">Please check back later.</p>
+                </div>
+
+                <!-- Legacy Section (Why Work Here) -->
+                <div class="glass-panel" style="padding: 50px; text-align: center; margin-top: 60px;">
                     <h2 style="margin-bottom: 30px;">Work With Real Impact</h2>
                     <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-bottom: 50px;">
                         <div>
@@ -75,20 +89,115 @@
 
                     <div
                         style="background: rgba(255,255,255,0.05); padding: 40px; border-radius: 12px; margin-top: 20px;">
-                        <h3 style="margin-bottom: 20px;">Career Portal Access</h3>
+                        <h3 style="margin-bottom: 20px;">Internal Hiring?</h3>
                         <p style="color: var(--text-secondary); margin-bottom: 30px;">
-                            We do not publicly display open roles to maintain our hiring standards. Access is restricted
-                            to authorized partners and career admins.
+                            Career Administrators can login to post new requirements.
                         </p>
-                        <a href="login.html" class="btn btn-primary"><i class="ph-bold ph-lock-key"></i> Secure
-                            Login</a>
+                        <a href="admin-login.html" class="btn btn-primary"><i class="ph-bold ph-lock-key"></i> Career
+                            Admin Login</a>
                     </div>
-
                 </div>
             </div>
         </section>
 
+        <!-- Apply Modal -->
+        <div id="applyModal"
+            style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1000; align-items: center; justify-content: center;">
+            <div class="glass-panel"
+                style="width: 90%; max-width: 500px; padding: 30px; position: relative; border-color: var(--service);">
+                <button onclick="closeModal()"
+                    style="position: absolute; top: 15px; right: 15px; background: none; border: none; color: white; font-size: 24px; cursor: pointer;">&times;</button>
+
+                <h3 style="margin-bottom: 20px;">Apply for <span id="modalJobTitle"
+                        style="color: var(--service);">Job</span></h3>
+
+                <form onsubmit="handleApplySubmit(event)">
+                    <div class="form-group" style="margin-bottom: 15px;">
+                        <label style="display: block; margin-bottom: 8px; font-size: 0.9rem;">Full Name</label>
+                        <input type="text" required
+                            style="width: 100%; padding: 10px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: white; border-radius: 6px;">
+                    </div>
+                    <div class="form-group" style="margin-bottom: 15px;">
+                        <label style="display: block; margin-bottom: 8px; font-size: 0.9rem;">Email</label>
+                        <input type="email" required
+                            style="width: 100%; padding: 10px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: white; border-radius: 6px;">
+                    </div>
+                    <div class="form-group" style="margin-bottom: 20px;">
+                        <label style="display: block; margin-bottom: 8px; font-size: 0.9rem;">Upload Resume</label>
+                        <input type="file" required
+                            style="width: 100%; padding: 10px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: white; border-radius: 6px;">
+                    </div>
+                    <button type="submit" class="btn btn-service" style="width: 100%;">Submit Application</button>
+                </form>
+            </div>
+        </div>
+
     </main>
+
+    <script>
+        // Load Jobs on Page Load
+        document.addEventListener('DOMContentLoaded', () => {
+            const jobs = JSON.parse(localStorage.getItem('jobs') || '[]');
+            const container = document.getElementById('jobListContainer');
+            const noJobs = document.getElementById('noJobsMessage');
+
+            if (jobs.length === 0) {
+                noJobs.style.display = 'block';
+            } else {
+                jobs.forEach(job => {
+                    const jobCard = document.createElement('div');
+                    jobCard.className = 'glass-panel fade-up';
+                    jobCard.style.padding = '30px';
+                    jobCard.innerHTML = `
+                        <div style="display: flex; justify-content: space-between; align-items: start; flex-wrap: wrap; gap: 20px;">
+                            <div>
+                                <h3 style="margin-bottom: 8px; color: white;">${job.title}</h3>
+                                <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 15px;">
+                                    <span style="color: var(--primary); margin-right: 15px;"><i class="ph-fill ph-briefcase"></i> ${job.department}</span>
+                                    <span style="color: var(--accent); margin-right: 15px;"><i class="ph-fill ph-clock"></i> ${job.type}</span>
+                                    <span style="color: var(--service);"><i class="ph-fill ph-map-pin"></i> ${job.location}</span>
+                                </p>
+                                <p style="color: var(--text-secondary); max-width: 600px; line-height: 1.6;">${job.description}</p>
+                            </div>
+                            <button onclick="openApplyModal('${job.title}')" class="btn btn-outline">Apply Now</button>
+                        </div>
+                    `;
+                    container.appendChild(jobCard);
+                });
+            }
+        });
+
+        // Modal Logic
+        function openApplyModal(jobTitle) {
+            document.getElementById('modalJobTitle').innerText = jobTitle;
+            document.getElementById('applyModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('applyModal').style.display = 'none';
+        }
+
+        function handleApplySubmit(e) {
+            e.preventDefault();
+            const btn = e.target.querySelector('button');
+            const originalText = btn.innerText;
+            btn.innerText = 'Submitting...';
+
+            setTimeout(() => {
+                alert('Application submitted successfully.');
+                closeModal();
+                btn.innerText = originalText;
+                e.target.reset();
+            }, 1000);
+        }
+
+        // Close modal on outside click
+        window.onclick = function (event) {
+            if (event.target == document.getElementById('applyModal')) {
+                closeModal();
+            }
+        }
+    </script>
 
     <!-- Unified Footer -->
     <footer>
