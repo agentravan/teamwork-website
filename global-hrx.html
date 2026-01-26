@@ -4,354 +4,230 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Global HRX Platform | TeamWork Solutions</title>
+    <title>Global HRX | Enterprise HRMS Platform</title>
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/mega-menu.css">
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 </head>
 
 <body>
 
-    <!-- Master Blueprint Header -->
+    <!-- PUBLIC HEADER -->
     <nav class="navbar">
         <div class="container nav-content">
-            <!-- Left: Logo -->
             <a href="index.html" class="logo">
                 <div style="display: flex; flex-direction: column; line-height: 1.1;">
-                    <div style="display: flex; align-items: center; gap: 6px;">
-                        <i class="ph-fill ph-hexagon" style="color: var(--primary);"></i>
-                        <span>TeamWork</span>
-                    </div>
+                    <span style="font-size: 1.5rem; font-weight: 700; letter-spacing: -0.5px;">TeamWork</span>
                     <span
-                        style="font-size: 0.7rem; letter-spacing: 1px; color: var(--text-secondary); margin-left: 24px;">SOLUTIONS</span>
+                        style="font-size: 0.8rem; letter-spacing: 2px; color: var(--text-secondary); text-transform: uppercase;">Solutions</span>
                 </div>
             </a>
-
-            <!-- Center: Links & Mega Menu -->
             <ul class="nav-links desktop-menu">
                 <li><a href="index.html" class="nav-link">Home</a></li>
                 <li><a href="global-hrx.html" class="nav-link active">Global HRX</a></li>
-
-                <!-- Services Mega Menu -->
-                <li class="nav-item-dropdown">
-                    <a href="services.html" class="nav-link">Services <i class="ph-bold ph-caret-down"></i></a>
-                    <div class="mega-menu">
-                        <!-- Col 1: Core HR -->
-                        <div class="mega-column">
-                            <h4>Core HR & Operations</h4>
-                            <a href="services.html" class="mega-link">
-                                <i class="ph-duotone ph-currency-dollar mega-icon"></i>
-                                <div class="mega-text">
-                                    <h5>Payroll Management</h5>
-                                    <p>End-to-end processing & accuracy.</p>
-                                </div>
-                            </a>
-                            <a href="services.html" class="mega-link">
-                                <i class="ph-duotone ph-shield-check mega-icon"></i>
-                                <div class="mega-text">
-                                    <h5>Statutory Compliance</h5>
-                                    <p>PF, ESIC, Tax filing & audits.</p>
-                                </div>
-                            </a>
-                            <a href="services.html" class="mega-link">
-                                <i class="ph-duotone ph-briefcase mega-icon"></i>
-                                <div class="mega-text">
-                                    <h5>Recruitment</h5>
-                                    <p>Permanent & Contract hiring.</p>
-                                </div>
-                            </a>
-                        </div>
-
-                        <!-- Col 2: Tech & Tools -->
-                        <div class="mega-column">
-                            <h4>Technology & Tools</h4>
-                            <a href="global-hrx.html" class="mega-link">
-                                <i class="ph-duotone ph-desktop mega-icon" style="color: var(--accent);"></i>
-                                <div class="mega-text">
-                                    <h5>Global HRX</h5>
-                                    <p>Enterprise System of Record.</p>
-                                </div>
-                            </a>
-                            <a href="services.html" class="mega-link">
-                                <i class="ph-duotone ph-scroll mega-icon" style="color: var(--accent);"></i>
-                                <div class="mega-text">
-                                    <h5>Labour Licenses</h5>
-                                    <p>Factory Act & CLRA registrations.</p>
-                                </div>
-                            </a>
-                            <a href="calculators.html" class="mega-link">
-                                <i class="ph-duotone ph-calculator mega-icon" style="color: var(--accent);"></i>
-                                <div class="mega-text">
-                                    <h5>HR Calculators</h5>
-                                    <p>TDS, PF, ESIC & Gratuity.</p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </li>
-
-                <!-- Calculators Dropdown -->
-                <li class="nav-item-dropdown">
-                    <a href="calculators.html" class="nav-link">Calculators <i class="ph-bold ph-caret-down"></i></a>
-                    <div class="mega-menu" style="width: 400px; grid-template-columns: 1fr;">
-                        <!-- Single Col for Calculators -->
-                        <div class="mega-column">
-                            <h4>Financial Tools</h4>
-                            <a href="calculator-pf.html" class="mega-link">
-                                <i class="ph-duotone ph-piggy-bank mega-icon" style="color: #ec4899;"></i>
-                                <div class="mega-text">
-                                    <h5>PF Calculator</h5>
-                                    <p>12% vs 13% | Wage Ceiling Logic.</p>
-                                </div>
-                            </a>
-                            <a href="calculator-esic.html" class="mega-link">
-                                <i class="ph-duotone ph-first-aid-kit mega-icon" style="color: #ec4899;"></i>
-                                <div class="mega-text">
-                                    <h5>ESIC Calculator</h5>
-                                    <p>0.75% / 3.25% Contribution.</p>
-                                </div>
-                            </a>
-                            <a href="calculator-gratuity.html" class="mega-link">
-                                <i class="ph-duotone ph-coins mega-icon" style="color: #ec4899;"></i>
-                                <div class="mega-text">
-                                    <h5>Gratuity Calculator</h5>
-                                    <p>Eligibility & Payout Estimation.</p>
-                                </div>
-                            </a>
-                            <a href="calculator-tds.html" class="mega-link">
-                                <i class="ph-duotone ph-receipt mega-icon" style="color: #ec4899;"></i>
-                                <div class="mega-text">
-                                    <h5>TDS Smart Estimator</h5>
-                                    <p>Old vs New Regime Recommender.</p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </li>
-
+                <li><a href="services.html" class="nav-link">Services</a></li>
+                <li><a href="calculators.html" class="nav-link">Calculators</a></li>
                 <li><a href="careers.html" class="nav-link">Careers</a></li>
-                <li><a href="hrms-pricing.html" class="nav-link">Pricing</a></li>
+                <li><a href="pricing.html" class="nav-link">Pricing</a></li>
                 <li><a href="about.html" class="nav-link">About</a></li>
                 <li><a href="contact.html" class="nav-link">Contact</a></li>
             </ul>
-
-            <!-- Right: Actions -->
             <div class="nav-actions">
-                <a href="login.html" class="nav-link" style="margin-right: 15px; font-size: 0.9rem;">Login</a>
-                <a href="request-access.html" class="btn btn-primary" style="padding: 8px 20px; font-size: 0.9rem;">
-                    Request Access
-                </a>
+                <a href="login.html" class="btn btn-outline" style="padding: 10px 24px;">Login</a>
+                <a href="request-access.html" class="btn btn-primary" style="padding: 10px 24px;">Request Access</a>
             </div>
         </div>
     </nav>
 
-    <header class="section-padding" style="padding-top: 160px; text-align: center;">
+    <!-- INTRO -->
+    <header class="section-padding"
+        style="padding-top: 180px; text-align: center; min-height: 70vh; display: flex; align-items: center;">
         <div class="container">
-            <div class="fade-up">
-                <span
-                    style="color: var(--accent); font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 16px; display: block;">The
-                    Enterprise System of Record</span>
-                <h1 style="margin-bottom: 24px;">Not Just Software. <br> <span class="text-gradient">A Governance
-                        Engine.</span>
-                </h1>
-                <p
-                    style="color: var(--text-secondary); font-size: 1.25rem; max-width: 800px; margin: 0 auto; line-height: 1.7;">
-                    Most HRMS platforms just store data. <strong>Global HRX</strong> enforces rules, tracks
-                    accountability, and protects your organization from compliance risk.
-                </p>
-                <!-- Hero Buttons also updated -->
-                <div style="margin-top: 40px; display: flex; justify-content: center; gap: 20px;">
-                    <a href="request-access.html" class="btn btn-primary">Request Audit Demo</a>
-                    <a href="hrms-pricing.html" class="btn btn-outline">View License Plans</a>
-                </div>
+            <h1 class="fade-up" style="margin-bottom: 24px;">Global HRX – <span class="text-gradient">Enterprise-Grade
+                    HRMS Platform</span></h1>
+            <p class="fade-up"
+                style="color: var(--text-secondary); max-width: 800px; margin: 0 auto; margin-bottom: 40px; font-size: 1.25rem;">
+                Global HRX is an advanced, scalable, and compliance-ready HRMS designed for modern enterprises,
+                startups, and global organizations. It combines HR operations, payroll, compliance, analytics, and
+                automation into one powerful platform.
+            </p>
+            <div class="fade-up" style="display: flex; gap: 20px; justify-content: center;">
+                <a href="request-access.html" class="btn btn-primary">Request Access</a>
+                <a href="contact.html" class="btn btn-outline">Book a Demo</a>
             </div>
         </div>
     </header>
 
-    <main>
-        <!-- Philosophy Section -->
-        <section class="section-padding">
-            <div class="container">
-                <div class="glass-panel" style="padding: 40px; text-align: center; border-color: var(--primary);">
-                    <h3 style="margin-bottom: 20px;">What Global HRX <span style="color: #ef4444;">WILL NEVER</span> Do
-                    </h3>
-                    <div
-                        style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; color: var(--text-secondary);">
-                        <div><i class="ph-bold ph-x-circle" style="color: #ef4444;"></i> Hide Calculations</div>
-                        <div><i class="ph-bold ph-x-circle" style="color: #ef4444;"></i> Allow Unauthorized Overrides
-                        </div>
-                        <div><i class="ph-bold ph-x-circle" style="color: #ef4444;"></i> Promote Shortcuts</div>
-                        <div><i class="ph-bold ph-x-circle" style="color: #ef4444;"></i> Lock Customer Data</div>
-                    </div>
+    <!-- WHAT GLOBAL HRX CAN DO -->
+    <section class="section-padding">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 60px;">
+                <h2 style="margin-bottom: 16px;">Core Capabilities</h2>
+                <p style="color: var(--text-secondary);">Everything you need to manage your workforce.</p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+                <!-- Capability 1 -->
+                <div class="glass-panel" style="padding: 40px;">
+                    <i class="ph-duotone ph-users-three"
+                        style="font-size: 40px; color: var(--primary); margin-bottom: 20px;"></i>
+                    <h3 style="margin-bottom: 10px; font-size: 1.3rem;">Employee Lifecycle Management</h3>
+                    <p style="color: var(--text-secondary);">Hire to Exit management with seamless transitions.</p>
+                </div>
+                <!-- Capability 2 -->
+                <div class="glass-panel" style="padding: 40px;">
+                    <i class="ph-duotone ph-currency-dollar"
+                        style="font-size: 40px; color: var(--service); margin-bottom: 20px;"></i>
+                    <h3 style="margin-bottom: 10px; font-size: 1.3rem;">Payroll Automation</h3>
+                    <p style="color: var(--text-secondary);">Salary processing, reimbursements, and payslips.</p>
+                </div>
+                <!-- Capability 3 -->
+                <div class="glass-panel" style="padding: 40px;">
+                    <i class="ph-duotone ph-clock"
+                        style="font-size: 40px; color: var(--accent); margin-bottom: 20px;"></i>
+                    <h3 style="margin-bottom: 10px; font-size: 1.3rem;">Attendance & Leave</h3>
+                    <p style="color: var(--text-secondary);">Real-time tracking and leave management.</p>
+                </div>
+                <!-- Capability 4 -->
+                <div class="glass-panel" style="padding: 40px;">
+                    <i class="ph-duotone ph-shield-check"
+                        style="font-size: 40px; color: #ec4899; margin-bottom: 20px;"></i>
+                    <h3 style="margin-bottom: 10px; font-size: 1.3rem;">Statutory Compliance</h3>
+                    <p style="color: var(--text-secondary);">PF, ESIC, PT, LWF, TDS Tracking.</p>
+                </div>
+                <!-- Capability 5 -->
+                <div class="glass-panel" style="padding: 40px;">
+                    <i class="ph-duotone ph-user-plus"
+                        style="font-size: 40px; color: #8b5cf6; margin-bottom: 20px;"></i>
+                    <h3 style="margin-bottom: 10px; font-size: 1.3rem;">Recruitment & Onboarding</h3>
+                    <p style="color: var(--text-secondary);">Automated workflows for new hires.</p>
+                </div>
+                <!-- Capability 6 -->
+                <div class="glass-panel" style="padding: 40px;">
+                    <i class="ph-duotone ph-chart-bar"
+                        style="font-size: 40px; color: #14b8a6; margin-bottom: 20px;"></i>
+                    <h3 style="margin-bottom: 10px; font-size: 1.3rem;">HR Analytics</h3>
+                    <p style="color: var(--text-secondary);">Insightful dashboards for decision making.</p>
+                </div>
+                <!-- Capability 7 -->
+                <div class="glass-panel" style="padding: 40px;">
+                    <i class="ph-duotone ph-lock-key" style="font-size: 40px; color: #f43f5e; margin-bottom: 20px;"></i>
+                    <h3 style="margin-bottom: 10px; font-size: 1.3rem;">RBAC Security</h3>
+                    <p style="color: var(--text-secondary);">Role-Based Access Control for data security.</p>
+                </div>
+                <!-- Capability 8 -->
+                <div class="glass-panel" style="padding: 40px;">
+                    <i class="ph-duotone ph-globe" style="font-size: 40px; color: #3b82f6; margin-bottom: 20px;"></i>
+                    <h3 style="margin-bottom: 10px; font-size: 1.3rem;">Multi-Entity Support</h3>
+                    <p style="color: var(--text-secondary);">Manage multiple locations and entities.</p>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Feature 1: Payroll -->
-        <section class="section-padding">
-            <div class="container">
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;">
-                    <div class="fade-up">
-                        <div
-                            style="width: 60px; height: 60px; background: rgba(59, 130, 246, 0.2); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 24px;">
-                            <i class="ph-duotone ph-currency-dollar"
-                                style="font-size: 32px; color: var(--primary);"></i>
-                        </div>
-                        <h2 style="margin-bottom: 20px;">Automate with Traceability</h2>
-                        <p style="color: var(--text-secondary); margin-bottom: 30px;">
-                            Our payroll engine is designed for audit readiness. Every calculation, every variable
-                            component, and every tax deduction is traceable back to the source rule.
-                        </p>
-                        <ul style="display: grid; gap: 16px;">
-                            <li style="display: flex; gap: 12px; align-items: center; color: var(--text-primary);">
-                                <i class="ph-fill ph-check-circle" style="color: var(--accent);"></i> Multi-entity
-                                structures
-                            </li>
-                            <li style="display: flex; gap: 12px; align-items: center; color: var(--text-primary);">
-                                <i class="ph-fill ph-check-circle" style="color: var(--accent);"></i> Variable heavy
-                                pay-scales
-                            </li>
-                            <li style="display: flex; gap: 12px; align-items: center; color: var(--text-primary);">
-                                <i class="ph-fill ph-check-circle" style="color: var(--accent);"></i> Complex tax
-                                regimes (Old vs New)
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- Placeholder visual -->
-                    <div class="glass-panel fade-up"
-                        style="height: 350px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(59, 130, 246, 0.3);">
-                        <div style="text-align: center;">
-                            <i class="ph-duotone ph-money" style="font-size: 80px; color: var(--primary);"></i>
-                            <p style="margin-top: 20px; color: var(--text-secondary);">Precision Payroll Engine</p>
-                        </div>
-                    </div>
+    <!-- WHY GLOBAL HRX -->
+    <section class="section-padding" style="background: rgba(15, 23, 42, 0.5);">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 60px;">
+                <h2 style="margin-bottom: 16px;">Built for Future-Ready Organizations</h2>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px;">
+                <div class="glass-panel" style="padding: 30px; border-left: 4px solid var(--primary);">
+                    <h4 style="margin-bottom: 10px;">For All Sizes</h4>
+                    <p style="color: var(--text-secondary);">Designed for SMEs, Enterprises & HR Consultancies.</p>
+                </div>
+                <div class="glass-panel" style="padding: 30px; border-left: 4px solid var(--service);">
+                    <h4 style="margin-bottom: 10px;">Compliance-First</h4>
+                    <p style="color: var(--text-secondary);">Architecture built around statutory regulations.</p>
+                </div>
+                <div class="glass-panel" style="padding: 30px; border-left: 4px solid var(--accent);">
+                    <h4 style="margin-bottom: 10px;">Secure & Scalable</h4>
+                    <p style="color: var(--text-secondary);">Audit-ready security for growing teams.</p>
+                </div>
+                <div class="glass-panel" style="padding: 30px; border-left: 4px solid #ec4899;">
+                    <h4 style="margin-bottom: 10px;">Customizable</h4>
+                    <p style="color: var(--text-secondary);">Flexible workflows and policy configurations.</p>
+                </div>
+                <div class="glass-panel" style="padding: 30px; border-left: 4px solid #8b5cf6;">
+                    <h4 style="margin-bottom: 10px;">India-Ready</h4>
+                    <p style="color: var(--text-secondary);">Specific features for Indian statutory compliance.</p>
                 </div>
             </div>
-        </section>
 
-        <!-- Feature 2: Compliance -->
-        <section class="section-padding" style="background: rgba(0,0,0,0.3);">
-            <div class="container">
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;">
-                    <div class="glass-panel fade-up"
-                        style="height: 350px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px;">
-                        <div
-                            style="background: rgba(3, 7, 18, 0.8); padding: 16px 24px; border-radius: 50px; border: 1px solid var(--border-highlight); color: var(--service);">
-                            <i class="ph-fill ph-check-circle"></i> Enforce Statutory Rules
-                        </div>
-                        <div
-                            style="background: rgba(3, 7, 18, 0.8); padding: 16px 24px; border-radius: 50px; border: 1px solid var(--border-highlight); color: var(--primary);">
-                            <i class="ph-fill ph-check-circle"></i> Track Accountability
-                        </div>
-                        <div
-                            style="background: rgba(3, 7, 18, 0.8); padding: 16px 24px; border-radius: 50px; border: 1px solid var(--border-highlight); color: var(--accent);">
-                            <i class="ph-fill ph-check-circle"></i> Maintain Audit Trails
-                        </div>
-                    </div>
-                    <div class="fade-up">
-                        <div
-                            style="width: 60px; height: 60px; background: rgba(16, 185, 129, 0.2); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 24px;">
-                            <i class="ph-duotone ph-shield-check" style="font-size: 32px; color: var(--service);"></i>
-                        </div>
-                        <h2 style="margin-bottom: 20px;">Engines before Modules</h2>
-                        <p style="color: var(--text-secondary); margin-bottom: 30px;">
-                            We don't build features; we build engines. Our compliance engine flags risks in real-time,
-                            effectively preventing you from making non-compliant decisions.
-                        </p>
-                        <p style="color: var(--text-primary);">
-                            It's the only HRMS that says "No" when you try to break a law.
-                        </p>
-                    </div>
-                </div>
+            <div style="margin-top: 60px; text-align: center;">
+                <a href="request-access.html" class="btn btn-primary" style="margin-right: 20px;">Request Access</a>
+                <a href="contact.html" class="btn btn-outline">Book a Demo</a>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Feature Grid: More Modules -->
-        <section class="section-padding">
-            <div class="container">
-                <h2 style="text-align: center; margin-bottom: 60px;">Core Capabilities</h2>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
-
-                    <div class="glass-panel fade-up" style="padding: 30px;">
-                        <i class="ph-duotone ph-users-three"
-                            style="font-size: 40px; color: var(--accent); margin-bottom: 20px;"></i>
-                        <h4>Workflow-Driven Actions</h4>
-                        <p style="color: var(--text-secondary); margin-top: 10px;">Nothing happens without an approval
-                            chain. Ensure complete control over sensitive HR data modifications.</p>
-                    </div>
-
-                    <div class="glass-panel fade-up" style="padding: 30px;">
-                        <i class="ph-duotone ph-chart-line-up"
-                            style="font-size: 40px; color: var(--primary); margin-bottom: 20px;"></i>
-                        <h4>Leadership Dashboards</h4>
-                        <p style="color: var(--text-secondary); margin-top: 10px;">Real-time visibility into headcount
-                            cost, attrition trends, and compliance health scores.</p>
-                    </div>
-
-                    <div class="glass-panel fade-up" style="padding: 30px;">
-                        <i class="ph-duotone ph-device-mobile"
-                            style="font-size: 40px; color: #8b5cf6; margin-bottom: 20px;"></i>
-                        <h4>Global Adaptability</h4>
-                        <p style="color: var(--text-secondary); margin-top: 10px;">Configurable to handle multi-country
-                            tax rules and labor laws within a single instance.</p>
-                    </div>
-
-                    <div class="glass-panel fade-up" style="padding: 30px;">
-                        <i class="ph-duotone ph-files"
-                            style="font-size: 40px; color: var(--service); margin-bottom: 20px;"></i>
-                        <h4>Statutory Reporting</h4>
-                        <p style="color: var(--text-secondary); margin-top: 10px;">Generate government-ready formats
-                            (Challans, ECRs) with a single click.</p>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Standard Footer -->
+    <!-- FOOTER -->
     <footer>
         <div class="container">
             <div
-                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-bottom: 40px;">
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 50px; margin-bottom: 60px;">
                 <div class="footer-col">
-                    <h4>Company</h4>
+                    <h4 style="margin-bottom: 24px;">Let's Simplify Your HR Journey</h4>
+                    <ul style="gap: 16px;">
+                        <li style="display: flex; gap: 12px; align-items: flex-start; color: var(--text-secondary);">
+                            <i class="ph-fill ph-phone"
+                                style="color: var(--primary); font-size: 1.2rem; margin-top: 2px;"></i>
+                            <div>
+                                <span style="display: block; color: white;">+91 95188 42774</span>
+                                <span style="font-size: 0.85rem;">(WhatsApp Available)</span>
+                            </div>
+                        </li>
+                        <li style="display: flex; gap: 12px; align-items: flex-start; color: var(--text-secondary);">
+                            <i class="ph-fill ph-envelope"
+                                style="color: var(--primary); font-size: 1.2rem; margin-top: 2px;"></i>
+                            <div>
+                                <span style="display: block; color: white;">teamwork.hrsolution@zohomail.in</span>
+                            </div>
+                        </li>
+                        <li style="display: flex; gap: 12px; align-items: flex-start; color: var(--text-secondary);">
+                            <i class="ph-fill ph-map-pin"
+                                style="color: var(--primary); font-size: 1.2rem; margin-top: 2px;"></i>
+                            <div>
+                                <span style="display: block; color: white;">Jind, Haryana</span>
+                                <span style="font-size: 0.85rem;">(Serving Clients Across India)</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4 style="margin-bottom: 24px;">Quick Links</h4>
                     <ul>
-                        <li><a href="about.html">About</a></li>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="global-hrx.html">Global HRX</a></li>
                         <li><a href="services.html">Services</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
                         <li><a href="careers.html">Careers</a></li>
                         <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </div>
-                <div class="footer-col">
-                    <h4>Compliance Tools</h4>
-                    <ul>
-                        <li><a href="calculator-pf.html">PF Calculator</a></li>
-                        <li><a href="calculator-esic.html">ESIC Calculator</a></li>
-                        <li><a href="calculator-tds.html">TDS Calculator</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Legal & Privacy</h4>
-                    <ul>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms</a></li>
-                        <li><a href="https://unifiedportal-mem.epfindia.gov.in" target="_blank">EPFO</a></li>
-                        <li><a href="https://www.esic.in" target="_blank">ESIC</a></li>
-                    </ul>
-                    <p style="margin-top:20px; font-size: 0.8rem; color: var(--text-tertiary);">Disclaimer: Calculations
-                        are indicative. Actual statutory deductions may vary.</p>
+
+                <div class="footer-col"
+                    style="display: flex; align-items: center; justify-content: center; text-align: center;">
+                    <div>
+                        <div
+                            style="font-family: 'Space Grotesk'; font-size: 1.5rem; font-weight: 700; color: white; margin-bottom: 10px;">
+                            TeamWork Solutions</div>
+                        <p style="font-style: italic; color: var(--text-tertiary);">Together, We Can Do So Much.</p>
+                    </div>
                 </div>
             </div>
+
             <div
-                style="text-align: center; padding-top: 40px; border-top: 1px solid var(--border-subtle); color: var(--text-tertiary);">
-                &copy; 2026 TeamWork Solutions | Payroll & Compliance Experts
+                style="text-align: center; padding-top: 40px; border-top: 1px solid var(--border-subtle); color: var(--text-tertiary); font-size: 0.9rem;">
+                &copy; 2026 TeamWork Solutions. All Rights Reserved.
             </div>
         </div>
     </footer>
-
 
     <script src="js/main.js"></script>
 </body>

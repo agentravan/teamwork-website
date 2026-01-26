@@ -4,153 +4,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact TeamWork Solutions</title>
+    <title>Contact Us | TeamWork Solutions</title>
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/mega-menu.css">
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 </head>
 
 <body>
 
-    <!-- Master Blueprint Header -->
+    <!-- PUBLIC HEADER -->
     <nav class="navbar">
         <div class="container nav-content">
-            <!-- Left: Logo -->
             <a href="index.html" class="logo">
                 <div style="display: flex; flex-direction: column; line-height: 1.1;">
-                    <div style="display: flex; align-items: center; gap: 6px;">
-                        <i class="ph-fill ph-hexagon" style="color: var(--primary);"></i>
-                        <span>TeamWork</span>
-                    </div>
+                    <span style="font-size: 1.5rem; font-weight: 700; letter-spacing: -0.5px;">TeamWork</span>
                     <span
-                        style="font-size: 0.7rem; letter-spacing: 1px; color: var(--text-secondary); margin-left: 24px;">SOLUTIONS</span>
+                        style="font-size: 0.8rem; letter-spacing: 2px; color: var(--text-secondary); text-transform: uppercase;">Solutions</span>
                 </div>
             </a>
-
-            <!-- Center: Links & Mega Menu -->
             <ul class="nav-links desktop-menu">
                 <li><a href="index.html" class="nav-link">Home</a></li>
                 <li><a href="global-hrx.html" class="nav-link">Global HRX</a></li>
-
-                <!-- Services Mega Menu -->
-                <li class="nav-item-dropdown">
-                    <a href="services.html" class="nav-link">Services <i class="ph-bold ph-caret-down"></i></a>
-                    <div class="mega-menu">
-                        <!-- Col 1: Core HR -->
-                        <div class="mega-column">
-                            <h4>Core HR & Operations</h4>
-                            <a href="services.html" class="mega-link">
-                                <i class="ph-duotone ph-currency-dollar mega-icon"></i>
-                                <div class="mega-text">
-                                    <h5>Payroll Management</h5>
-                                    <p>End-to-end processing & accuracy.</p>
-                                </div>
-                            </a>
-                            <a href="services.html" class="mega-link">
-                                <i class="ph-duotone ph-shield-check mega-icon"></i>
-                                <div class="mega-text">
-                                    <h5>Statutory Compliance</h5>
-                                    <p>PF, ESIC, Tax filing & audits.</p>
-                                </div>
-                            </a>
-                            <a href="services.html" class="mega-link">
-                                <i class="ph-duotone ph-briefcase mega-icon"></i>
-                                <div class="mega-text">
-                                    <h5>Recruitment</h5>
-                                    <p>Permanent & Contract hiring.</p>
-                                </div>
-                            </a>
-                        </div>
-
-                        <!-- Col 2: Tech & Tools -->
-                        <div class="mega-column">
-                            <h4>Technology & Tools</h4>
-                            <a href="global-hrx.html" class="mega-link">
-                                <i class="ph-duotone ph-desktop mega-icon" style="color: var(--accent);"></i>
-                                <div class="mega-text">
-                                    <h5>Global HRX</h5>
-                                    <p>Enterprise System of Record.</p>
-                                </div>
-                            </a>
-                            <a href="services.html" class="mega-link">
-                                <i class="ph-duotone ph-scroll mega-icon" style="color: var(--accent);"></i>
-                                <div class="mega-text">
-                                    <h5>Labour Licenses</h5>
-                                    <p>Factory Act & CLRA registrations.</p>
-                                </div>
-                            </a>
-                            <a href="calculators.html" class="mega-link">
-                                <i class="ph-duotone ph-calculator mega-icon" style="color: var(--accent);"></i>
-                                <div class="mega-text">
-                                    <h5>HR Calculators</h5>
-                                    <p>TDS, PF, ESIC & Gratuity.</p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </li>
-
-                <!-- Calculators Dropdown -->
-                <li class="nav-item-dropdown">
-                    <a href="calculators.html" class="nav-link">Calculators <i class="ph-bold ph-caret-down"></i></a>
-                    <div class="mega-menu" style="width: 400px; grid-template-columns: 1fr;">
-                        <!-- Single Col for Calculators -->
-                        <div class="mega-column">
-                            <h4>Financial Tools</h4>
-                            <a href="calculator-pf.html" class="mega-link">
-                                <i class="ph-duotone ph-piggy-bank mega-icon" style="color: #ec4899;"></i>
-                                <div class="mega-text">
-                                    <h5>PF Calculator</h5>
-                                    <p>12% vs 13% | Wage Ceiling Logic.</p>
-                                </div>
-                            </a>
-                            <a href="calculator-esic.html" class="mega-link">
-                                <i class="ph-duotone ph-first-aid-kit mega-icon" style="color: #ec4899;"></i>
-                                <div class="mega-text">
-                                    <h5>ESIC Calculator</h5>
-                                    <p>0.75% / 3.25% Contribution.</p>
-                                </div>
-                            </a>
-                            <a href="calculator-gratuity.html" class="mega-link">
-                                <i class="ph-duotone ph-coins mega-icon" style="color: #ec4899;"></i>
-                                <div class="mega-text">
-                                    <h5>Gratuity Calculator</h5>
-                                    <p>Eligibility & Payout Estimation.</p>
-                                </div>
-                            </a>
-                            <a href="calculator-tds.html" class="mega-link">
-                                <i class="ph-duotone ph-receipt mega-icon" style="color: #ec4899;"></i>
-                                <div class="mega-text">
-                                    <h5>TDS Smart Estimator</h5>
-                                    <p>Old vs New Regime Recommender.</p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </li>
-
+                <li><a href="services.html" class="nav-link">Services</a></li>
+                <li><a href="calculators.html" class="nav-link">Calculators</a></li>
                 <li><a href="careers.html" class="nav-link">Careers</a></li>
-                <li><a href="hrms-pricing.html" class="nav-link">Pricing</a></li>
+                <li><a href="pricing.html" class="nav-link">Pricing</a></li>
                 <li><a href="about.html" class="nav-link">About</a></li>
                 <li><a href="contact.html" class="nav-link active">Contact</a></li>
             </ul>
-
-            <!-- Right: Actions -->
             <div class="nav-actions">
-                <a href="login.html" class="nav-link" style="margin-right: 15px; font-size: 0.9rem;">Login</a>
-                <a href="request-access.html" class="btn btn-primary" style="padding: 8px 20px; font-size: 0.9rem;">
-                    Request Access
-                </a>
+                <a href="login.html" class="btn btn-outline" style="padding: 10px 24px;">Login</a>
+                <a href="request-access.html" class="btn btn-primary" style="padding: 10px 24px;">Request Access</a>
             </div>
         </div>
     </nav>
 
-    <header class="section-padding" style="padding-top: 160px; text-align: center;">
+    <!-- HEADER -->
+    <header class="section-padding" style="padding-top: 180px; text-align: center;">
         <div class="container">
-            <h1 class="fade-up" style="margin-bottom: 24px;">Let's Build Something <span
-                    class="text-gradient">Reliable</span></h1>
+            <h1 class="fade-up" style="margin-bottom: 24px;">Let's Simplify Your <span class="text-gradient">HR
+                    Journey</span></h1>
             <p class="fade-up" style="color: var(--text-secondary); max-width: 600px; margin: 0 auto;">
                 Whether you are a startup, a growing business, or an enterprise—we are ready to engage.
             </p>
@@ -163,13 +59,15 @@
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px;">
 
                     <!-- Contact Info -->
-                    <div class="glass-panel" style="padding: 60px; text-align: left;">
+                    <div class="glass-panel fade-up" style="padding: 60px; text-align: left;">
                         <h3 style="margin-bottom: 30px;">Contact Details</h3>
+
                         <div style="margin-bottom: 40px; display: flex; gap: 20px; align-items: start;">
-                            <i class="ph-fill ph-phone" style="font-size: 32px; color: var(--service);"></i>
+                            <i class="ph-fill ph-phone" style="font-size: 32px; color: var(--primary);"></i>
                             <div>
                                 <h4 style="color: var(--text-primary); margin-bottom: 5px;">Phone</h4>
-                                <p style="font-size: 1.1rem; color: white;">+91 9518842774</p>
+                                <p style="font-size: 1.1rem; color: white;">+91 95188 42774</p>
+                                <p style="font-size: 0.9rem; color: var(--text-secondary);">(WhatsApp Available)</p>
                             </div>
                         </div>
 
@@ -178,6 +76,16 @@
                             <div>
                                 <h4 style="color: var(--text-primary); margin-bottom: 5px;">Email</h4>
                                 <p style="font-size: 1.1rem; color: white;">teamwork.hrsolution@zohomail.in</p>
+                            </div>
+                        </div>
+
+                        <div style="margin-bottom: 40px; display: flex; gap: 20px; align-items: start;">
+                            <i class="ph-fill ph-map-pin" style="font-size: 32px; color: var(--primary);"></i>
+                            <div>
+                                <h4 style="color: var(--text-primary); margin-bottom: 5px;">Location</h4>
+                                <p style="font-size: 1.1rem; color: white;">Jind, Haryana</p>
+                                <p style="font-size: 0.9rem; color: var(--text-secondary);">(Serving Clients Across
+                                    India)</p>
                             </div>
                         </div>
 
@@ -192,7 +100,7 @@
                     </div>
 
                     <!-- Contact Form (Zoho) -->
-                    <div class="glass-panel" style="padding: 40px;">
+                    <div class="glass-panel fade-up" style="padding: 40px;">
                         <h3 style="margin-bottom: 24px;">Start a Conversation</h3>
 
                         <form id="zohoContactForm"
@@ -202,29 +110,29 @@
                                 <label style="display: block; margin-bottom: 8px; font-size: 0.9rem;">Full Name
                                     *</label>
                                 <input type="text" name="Name_First" required
-                                    style="width: 100%; padding: 10px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
+                                    style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
                             </div>
                             <div class="form-group" style="margin-bottom: 16px;">
                                 <label style="display: block; margin-bottom: 8px; font-size: 0.9rem;">Company *</label>
                                 <input type="text" name="SingleLine" required
-                                    style="width: 100%; padding: 10px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
+                                    style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
                             </div>
                             <div class="form-group" style="margin-bottom: 16px;">
                                 <label style="display: block; margin-bottom: 8px; font-size: 0.9rem;">Email *</label>
                                 <input type="email" name="Email" required
-                                    style="width: 100%; padding: 10px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
+                                    style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
                             </div>
                             <div class="form-group" style="margin-bottom: 16px;">
                                 <label style="display: block; margin-bottom: 8px; font-size: 0.9rem;">Phone *</label>
                                 <input type="text" name="PhoneNumber" required
-                                    style="width: 100%; padding: 10px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
+                                    style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
                             </div>
                             <div class="form-group" style="margin-bottom: 24px;">
                                 <label style="display: block; margin-bottom: 8px; font-size: 0.9rem;">Message</label>
-                                <textarea name="MultiLine" rows="3"
-                                    style="width: 100%; padding: 10px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: white; border-radius: 8px;"></textarea>
+                                <textarea name="MultiLine" rows="4"
+                                    style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: white; border-radius: 8px;"></textarea>
                             </div>
-                            <button type="submit" class="btn btn-service" style="width: 100%;">Send Message</button>
+                            <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
                         </form>
 
                         <iframe name="hiddenContactFrame" style="display:none;"
@@ -243,51 +151,70 @@
         </section>
     </main>
 
-    <!-- Unified Footer -->
+    <!-- FOOTER -->
     <footer>
         <div class="container">
-            <div style="display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 60px; margin-bottom: 40px;">
-                <div>
-                    <a href="#" class="logo" style="margin-bottom: 20px;">
-                        <i class="ph-fill ph-hexagon" style="color: var(--primary);"></i> TeamWork<span>Solutions</span>
-                    </a>
-                    <p style="margin-bottom: 20px; color: var(--text-secondary);">
-                        TeamWork Solutions & Global HRX.<br>
-                        Your trusted partner for HR Technology, Outsourcing, and Compliance.
-                    </p>
-                    <p style="margin-bottom: 8px;"><i class="ph-fill ph-envelope"></i> teamwork.hrsolution@zohomail.in
-                    </p>
-                    <p><i class="ph-fill ph-phone"></i> +91 9518842774</p>
+            <div
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 50px; margin-bottom: 60px;">
+                <div class="footer-col">
+                    <h4 style="margin-bottom: 24px;">Let's Simplify Your HR Journey</h4>
+                    <ul style="gap: 16px;">
+                        <li style="display: flex; gap: 12px; align-items: flex-start; color: var(--text-secondary);">
+                            <i class="ph-fill ph-phone"
+                                style="color: var(--primary); font-size: 1.2rem; margin-top: 2px;"></i>
+                            <div>
+                                <span style="display: block; color: white;">+91 95188 42774</span>
+                                <span style="font-size: 0.85rem;">(WhatsApp Available)</span>
+                            </div>
+                        </li>
+                        <li style="display: flex; gap: 12px; align-items: flex-start; color: var(--text-secondary);">
+                            <i class="ph-fill ph-envelope"
+                                style="color: var(--primary); font-size: 1.2rem; margin-top: 2px;"></i>
+                            <div>
+                                <span style="display: block; color: white;">teamwork.hrsolution@zohomail.in</span>
+                            </div>
+                        </li>
+                        <li style="display: flex; gap: 12px; align-items: flex-start; color: var(--text-secondary);">
+                            <i class="ph-fill ph-map-pin"
+                                style="color: var(--primary); font-size: 1.2rem; margin-top: 2px;"></i>
+                            <div>
+                                <span style="display: block; color: white;">Jind, Haryana</span>
+                                <span style="font-size: 0.85rem;">(Serving Clients Across India)</span>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
 
                 <div class="footer-col">
-                    <h4>Company</h4>
+                    <h4 style="margin-bottom: 24px;">Quick Links</h4>
                     <ul>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="team.html">Our Team</a></li>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="global-hrx.html">Global HRX</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
                         <li><a href="careers.html">Careers</a></li>
-                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </div>
 
-                <div class="footer-col">
-                    <h4>Key Services</h4>
-                    <ul>
-                        <li><a href="global-hrx.html">Global HRX Software</a></li>
-                        <li><a href="services.html">Payroll Outsourcing</a></li>
-                        <li><a href="services.html">Compliance Audit</a></li>
-                        <li><a href="services.html">Manpower Solutions</a></li>
-                    </ul>
+                <div class="footer-col"
+                    style="display: flex; align-items: center; justify-content: center; text-align: center;">
+                    <div>
+                        <div
+                            style="font-family: 'Space Grotesk'; font-size: 1.5rem; font-weight: 700; color: white; margin-bottom: 10px;">
+                            TeamWork Solutions</div>
+                        <p style="font-style: italic; color: var(--text-tertiary);">Together, We Can Do So Much.</p>
+                    </div>
                 </div>
             </div>
-            <div style="text-align: center; border-top: 1px solid var(--border-subtle); padding-top: 20px;">
-                &copy; 2026 TeamWork Solutions. Made with ❤️ in India.
+
+            <div
+                style="text-align: center; padding-top: 40px; border-top: 1px solid var(--border-subtle); color: var(--text-tertiary); font-size: 0.9rem;">
+                &copy; 2026 TeamWork Solutions. All Rights Reserved.
             </div>
         </div>
     </footer>
 
-    <a href="https://wa.me/919518842774" class="whatsapp-float" target="_blank"><i
-            class="ph-fill ph-whatsapp-logo"></i></a>
     <script src="js/main.js"></script>
     <script>
         let contactSubmitted = false;

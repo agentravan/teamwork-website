@@ -80,6 +80,7 @@ function initMobileMenu() {
 
         // Populate Menu
         menu.innerHTML = `
+        menu.innerHTML = `
             <a href="index.html" class="mobile-nav-link">Home</a>
             <a href="global-hrx.html" class="mobile-nav-link">Global HRX</a>
             
@@ -88,15 +89,16 @@ function initMobileMenu() {
                     Services <i class="ph-bold ph-caret-down"></i>
                 </div>
                 <div class="mobile-nav-sub">
-                    <a href="services.html"><i class="ph-duotone ph-currency-dollar"></i> Payroll</a>
-                    <a href="services.html"><i class="ph-duotone ph-shield-check"></i> Statutory</a>
+                    <a href="services.html"><i class="ph-duotone ph-currency-dollar"></i> Payroll Management</a>
+                    <a href="services.html"><i class="ph-duotone ph-shield-check"></i> Statutory Compliance</a>
                     <a href="services.html"><i class="ph-duotone ph-briefcase"></i> Recruitment</a>
+                    <a href="services.html"><i class="ph-duotone ph-scroll"></i> Labour Licenses</a>
                 </div>
             </div>
 
             <div class="mobile-dropdown-group">
                 <div class="mobile-nav-link" onclick="this.nextElementSibling.classList.toggle('active')">
-                    Tools <i class="ph-bold ph-caret-down"></i>
+                    Calculators <i class="ph-bold ph-caret-down"></i>
                 </div>
                 <div class="mobile-nav-sub">
                     <a href="calculator-pf.html"><i class="ph-duotone ph-piggy-bank"></i> PF Calculator</a>
@@ -107,6 +109,9 @@ function initMobileMenu() {
             </div>
 
             <a href="careers.html" class="mobile-nav-link">Careers</a>
+            <a href="pricing.html" class="mobile-nav-link">Pricing</a>
+            <a href="about.html" class="mobile-nav-link">About</a>
+            <a href="contact.html" class="mobile-nav-link">Contact</a>
             
             <div style="margin-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;">
                 <a href="login.html" class="btn btn-outline" style="width: 100%; text-align: center; margin-bottom: 10px;">Login</a>
