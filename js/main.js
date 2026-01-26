@@ -25,6 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Convert to list item for semantics or just append
             const li = document.createElement('li');
+            li.className = 'mobile-action-item'; // Add class for CSS targeting
             li.style.width = '100%';
             li.appendChild(clone);
             navList.appendChild(li);

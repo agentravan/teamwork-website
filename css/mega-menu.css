@@ -57,7 +57,21 @@
 .dropdown:hover .mega-menu {
     display: grid;
     opacity: 1;
-    transform: translateX(-50%) translateY(10px);
+    transform: translateX(-50%) translateY(0);
+    /* Remove gap offset for instant stable hover */
+    margin-top: 10px;
+    /* Use margin for visual gap instead of transform */
+}
+
+/* Invisible Bridge */
+.dropdown:hover::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    /* Bridge the gap */
 }
 
 /* Mega Link Items */
