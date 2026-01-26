@@ -14,20 +14,27 @@
 
 <body>
 
+    <!-- Unified Header -->
     <nav class="navbar">
         <div class="container nav-content">
-            <a href="index.html" class="logo"><i class="ph-fill ph-hexagon" style="color: var(--primary);"></i>
-                TeamWork<span>Solutions</span></a>
-            <ul class="nav-links">
+            <a href="index.html" class="logo">
+                <i class="ph-fill ph-hexagon" style="color: var(--primary);"></i>
+                TeamWork<span>Solutions</span>
+            </a>
+            <ul class="nav-links desktop-menu">
                 <li><a href="index.html" class="nav-link">Home</a></li>
-                <li><a href="global-hrx.html" class="nav-link">Global HRX</a></li>
-                <li><a href="services.html" class="nav-link active">Services</a></li>
-                <li><a href="services-pricing.html" class="nav-link">Service Pricing</a></li>
+                <li><a href="global-hrx.html" class="nav-link text-gradient">Global HRX</a></li>
+                <li><a href="services.html" class="nav-link text-gradient-service active">Services</a></li>
+                <li><a href="hrms-pricing.html" class="nav-link">Pricing</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="careers.html" class="nav-link">Careers</a></li>
                 <li><a href="contact.html" class="nav-link">Contact</a></li>
             </ul>
             <div class="nav-actions">
-                <a href="https://wa.me/919518842774" class="btn btn-primary"><i class="ph-fill ph-whatsapp-logo"></i>
-                    +91 9518842774</a>
+                <a href="https://wa.me/919518842774" class="btn btn-primary"
+                    style="padding: 8px 20px; font-size: 0.9rem;">
+                    <i class="ph-fill ph-whatsapp-logo"></i> +91 9518842774
+                </a>
             </div>
         </div>
     </nav>
@@ -67,8 +74,7 @@
                             <li><i class="ph-fill ph-check-circle" style="color: var(--service);"></i> Attendance Format
                                 Management</li>
                         </ul>
-                        <a href="https://wa.me/919518842774?text=Interested in Payroll Services"
-                            class="btn btn-service">Get Quote</a>
+                        <a href="services-pricing.html" class="btn btn-service">Get Quote</a>
                     </div>
                     <!-- Placeholder visual -->
                     <div
@@ -114,8 +120,7 @@
                             <li><i class="ph-fill ph-check-circle" style="color: var(--accent);"></i> Shop &
                                 Establishment Compliance</li>
                         </ul>
-                        <a href="https://wa.me/919518842774?text=Need Compliance Support"
-                            class="btn btn-outline">Consult Now</a>
+                        <a href="contact.html" class="btn btn-outline">Consult Now</a>
                     </div>
                 </div>
             </div>
@@ -145,16 +150,16 @@
                     <div class="glass-panel" style="padding: 40px;">
                         <i class="ph-duotone ph-file-text"
                             style="font-size: 40px; color: #ec4899; margin-bottom: 16px;"></i>
-                        <h3>HR Audits & Drafting</h3>
+                        <h3>HR Audits & Outsourcing</h3>
                         <p style="color: var(--text-secondary); margin-bottom: 20px;">
-                            Get a health check of your HR processes. We draft policies, appointment letters, and
-                            handbooks.
+                            Full manpower outsourcing and third-party HR management. We audit your processes to fix
+                            legal gaps.
                         </p>
                         <ul
                             style="display: grid; gap: 8px; color: var(--text-secondary); margin-bottom: 20px; font-size: 0.9rem;">
-                            <li>• HR Policy Manuals</li>
-                            <li>• Legal Gap Analysis</li>
-                            <li>• Employee Agreements</li>
+                            <li>• Third-party Payroll</li>
+                            <li>• Manpower Outsourcing</li>
+                            <li>• HR Policy Drafting</li>
                         </ul>
                         <a href="contact.html" class="btn btn-outline" style="font-size: 0.8rem;">Audit Request</a>
                     </div>
@@ -164,30 +169,52 @@
 
     </main>
 
+    <!-- Unified Footer -->
     <footer>
         <div class="container">
-            <div style="text-align: center; margin-bottom: 30px;">
-                <a href="index.html" class="logo" style="justify-content: center; margin-bottom: 20px;">
-                    <i class="ph-fill ph-hexagon" style="color: var(--primary);"></i> TeamWork<span>Solutions</span>
-                </a>
-                <p style="color: var(--text-tertiary);">End-to-End HR Backend Support</p>
+            <div style="display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 60px; margin-bottom: 40px;">
+                <div>
+                    <a href="#" class="logo" style="margin-bottom: 20px;">
+                        <i class="ph-fill ph-hexagon" style="color: var(--primary);"></i> TeamWork<span>Solutions</span>
+                    </a>
+                    <p style="margin-bottom: 20px; color: var(--text-secondary);">
+                        TeamWork Solutions & Global HRX.<br>
+                        Your trusted partner for HR Technology, Outsourcing, and Compliance.
+                    </p>
+                    <p style="margin-bottom: 8px;"><i class="ph-fill ph-envelope"></i> teamwork.hrsolution@zohomail.in
+                    </p>
+                    <p><i class="ph-fill ph-phone"></i> +91 9518842774</p>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="team.html">Our Team</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Key Services</h4>
+                    <ul>
+                        <li><a href="global-hrx.html">Global HRX Software</a></li>
+                        <li><a href="services.html">Payroll Outsourcing</a></li>
+                        <li><a href="services.html">Compliance Audit</a></li>
+                        <li><a href="services.html">Manpower Solutions</a></li>
+                    </ul>
+                </div>
             </div>
-            <div style="display: flex; justify-content: center; gap: 30px; margin-bottom: 30px; flex-wrap: wrap;">
-                <a href="global-hrx.html">Global HRX</a>
-                <a href="services.html">Services</a>
-                <a href="about.html">About</a>
-                <a href="contact.html">Contact</a>
-            </div>
-            <div style="text-align: center; color: var(--text-tertiary); font-size: 0.85rem;">
-                <p>Email: teamwork.hrsolution@zohomail.in | Phone: +91 9518842774</p>
-                <p style="margin-top: 10px;">&copy; 2026 TeamWork Solutions. Made with ❤️ in India.</p>
+            <div style="text-align: center; border-top: 1px solid var(--border-subtle); padding-top: 20px;">
+                &copy; 2026 TeamWork Solutions. Made with ❤️ in India.
             </div>
         </div>
     </footer>
 
     <a href="https://wa.me/919518842774" class="whatsapp-float" target="_blank"><i
             class="ph-fill ph-whatsapp-logo"></i></a>
-
+    <script src="js/main.js"></script>
 </body>
 
 </html>
