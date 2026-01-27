@@ -1,0 +1,244 @@
+/* =========================================
+   PREMIUM UNIFIED HEADER STYLES
+   ========================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap');
+
+:root {
+    --header-height: 80px;
+    --header-bg: rgba(255, 255, 255, 0.85);
+    --header-backdrop: blur(12px);
+    --header-border: 1px solid rgba(255, 255, 255, 0.3);
+    --header-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+
+    --nav-text: #334155;
+    --nav-text-hover: #0f172a;
+    --primary-brand: #2563eb;
+    --accent-brand: #0ea5e9;
+}
+
+/* Base Reset for Header context */
+#global-header-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.site-header {
+    height: var(--header-height);
+    background: var(--header-bg);
+    backdrop-filter: var(--header-backdrop);
+    -webkit-backdrop-filter: var(--header-backdrop);
+    border-bottom: var(--header-border);
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.site-header.scrolled {
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.1);
+    height: 70px;
+    /* Slight shrink */
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    padding: 0 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* -- LOGO DESIGN -- */
+.logo {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #0f172a;
+    text-decoration: none;
+    letter-spacing: -0.5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.logo span {
+    background: linear-gradient(135deg, var(--primary-brand) 0%, var(--accent-brand) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 800;
+}
+
+/* -- MAIN NAVIGATION -- */
+.main-nav>ul {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+}
+
+.main-nav>ul>li {
+    position: relative;
+    padding: 10px 0;
+    /* Increase hit area */
+}
+
+.main-nav a {
+    text-decoration: none;
+    color: var(--nav-text);
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: color 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.main-nav a:hover,
+.main-nav a.active {
+    color: var(--primary-brand);
+}
+
+.main-nav>ul>li>a {
+    position: relative;
+}
+
+/* Hover Underline Effect */
+.main-nav>ul>li>a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--primary-brand);
+    transition: width 0.3s ease;
+    border-radius: 2px;
+}
+
+.main-nav>ul>li>a:hover::after,
+.main-nav>ul>li>a.active::after {
+    width: 100%;
+}
+
+/* -- ACTION BUTTONS -- */
+.nav-actions {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
+
+.btn-ghost {
+    color: #64748b;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.2s;
+    font-family: 'Inter', sans-serif;
+}
+
+.btn-ghost:hover {
+    color: #0f172a;
+}
+
+.btn-primary-header {
+    background: #0f172a;
+    color: white !important;
+    padding: 10px 24px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px -1px rgba(15, 23, 42, 0.1);
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-primary-header:hover {
+    background: #1e293b;
+    transform: translateY(-1px);
+    box-shadow: 0 10px 15px -3px rgba(15, 23, 42, 0.15);
+}
+
+/* -- MOBILE HAMBURGER -- */
+.hamburger {
+    display: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #0f172a;
+}
+
+/* -- MEGA MENU OVERRIDES (If previously defined, refine here) -- */
+.dropdown {
+    cursor: pointer;
+}
+
+.mega-menu {
+    top: calc(100% + 10px);
+    /* Add some space */
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(20px);
+}
+
+/* -- RESPONSIVE -- */
+@media (max-width: 992px) {
+    .hamburger {
+        display: block;
+    }
+
+    .main-nav {
+        display: block;
+        /* Important for toggle */
+        position: fixed;
+        top: var(--header-height);
+        left: 0;
+        width: 100%;
+        height: 0;
+        background: white;
+        overflow: hidden;
+        transition: height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    }
+
+    .main-nav.show {
+        height: auto;
+        border-bottom: 1px solid #e2e8f0;
+        padding-bottom: 20px;
+    }
+
+    .main-nav>ul {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px 24px;
+        gap: 0;
+    }
+
+    .main-nav>ul>li {
+        width: 100%;
+        border-bottom: 1px solid #f1f5f9;
+        padding: 16px 0;
+    }
+
+    .main-nav>ul>li:last-child {
+        border-bottom: none;
+    }
+
+    .nav-actions {
+        display: none;
+        /* Hidden on desktop view, injected into menu via JS if needed, or simple media query */
+    }
+
+    /* Inject action buttons in mobile menu via JS? Or CSS display block if structured correctly. 
+       We will rely on JS injection for the mobile actions as seen in previous logic. 
+    */
+}
