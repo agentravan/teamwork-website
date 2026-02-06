@@ -22,7 +22,7 @@ const headerHTML = `
                     <a href="services.html" class="dropdown-trigger">Services ▾</a>
                     <div class="mega-menu">
                         <!-- Item 1 -->
-                        <a href="services.html#payroll" class="mega-link">
+                        <a href="services/payroll-management.html" class="mega-link">
                             <div class="mega-icon blue"><i class="ph-duotone ph-currency-dollar"></i></div>
                             <div class="mega-content">
                                 <div class="mega-title">Payroll Management</div>
@@ -30,7 +30,7 @@ const headerHTML = `
                             </div>
                         </a>
                         <!-- Item 2 -->
-                        <a href="services.html#compliance" class="mega-link">
+                        <a href="services/compliance-outsourcing.html" class="mega-link">
                             <div class="mega-icon green"><i class="ph-duotone ph-shield-check"></i></div>
                             <div class="mega-content">
                                 <div class="mega-title">Compliance Outsourcing</div>
@@ -38,7 +38,7 @@ const headerHTML = `
                             </div>
                         </a>
                         <!-- Item 3 -->
-                        <a href="services.html#hrpolicy" class="mega-link">
+                        <a href="services/hr-policy-audit.html" class="mega-link">
                             <div class="mega-icon purple"><i class="ph-duotone ph-files"></i></div>
                             <div class="mega-content">
                                 <div class="mega-title">HR Policy & Audit</div>
@@ -46,7 +46,7 @@ const headerHTML = `
                             </div>
                         </a>
                         <!-- Item 4 -->
-                        <a href="services.html#startup" class="mega-link">
+                        <a href="services/startup-registration.html" class="mega-link">
                             <div class="mega-icon orange"><i class="ph-duotone ph-rocket"></i></div>
                             <div class="mega-content">
                                 <div class="mega-title">Startup Registration</div>

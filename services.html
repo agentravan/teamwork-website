@@ -4,237 +4,163 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HR Consultancy Services | TeamWork Solutions</title>
+    <!-- SEO METADATA -->
+    <title>HR, Payroll & Compliance Services for Enterprises | TeamWork Solutions</title>
+    <meta name="description"
+        content="TeamWork Solutions offers end-to-end HR consulting, Payroll Outsourcing, and Statutory Compliance services for growing and enterprise businesses in India.">
+    <meta name="keywords"
+        content="hr services india, payroll outsourcing, compliance consulting, global hrx, hr audit, corporate services">
+
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
-    <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <link rel="stylesheet" href="css/header-premium.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <style>
+        .service-hub-card {
+            background: rgba(30, 41, 59, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 40px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .service-hub-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
+        }
+
+        .hub-link {
+            margin-top: auto;
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .hub-link:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 
 <body>
+    <!-- HEADER -->
     <div id="global-header-container"></div>
 
-
-
-    <header class="section-padding" style="padding-top: 160px; text-align: center;">
-        <div class="container">
-            <h1 class="fade-up" style="margin-bottom: 24px;">Our Service Architecture</h1>
-            <p class="fade-up"
-                style="color: var(--text-secondary); font-size: 1.25rem; max-width: 900px; margin: 0 auto;">
-                We don't deliver isolated activities. We deliver governed HR ecosystems where Legal Compliance, Audit
-                Readiness, and Long-term Scalability are non-negotiable.
-            </p>
-        </div>
-    </header>
-
     <main>
-
-        <!-- Service 1: Payroll -->
-        <section class="section-padding">
+        <!-- HERO -->
+        <section class="section-padding" style="padding-top: 180px; text-align: center;">
             <div class="container">
-                <div class="glass-panel"
-                    style="padding: 50px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;">
-                    <div>
-                        <div
-                            style="background: rgba(16, 185, 129, 0.1); padding: 10px; border-radius: 8px; width: fit-content; margin-bottom: 20px;">
-                            <i class="ph-duotone ph-files" style="font-size: 32px; color: var(--service);"></i>
-                        </div>
-                        <h2 style="margin-bottom: 16px;">1. Payroll Management Services</h2>
-                        <p style="color: var(--text-tertiary); margin-bottom: 10px; font-weight: 600;">Core Execution
-                            Layer</p>
-                        <p style="color: var(--text-secondary); margin-bottom: 24px;">
-                            End-to-end payroll processing with maker-checker approvals and locked payroll cycles to
-                            prevent errors.
+                <span
+                    style="color: var(--primary); font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;">Our
+                    Expertise</span>
+                <h1 class="fade-up"
+                    style="margin-bottom: 24px; font-size: 3rem; max-width: 900px; margin-left: auto; margin-right: auto;">
+                    Integrated <span class="text-gradient">HR, Payroll & Compliance</span> Solutions
+                </h1>
+                <p class="fade-up"
+                    style="color: var(--text-secondary); max-width: 700px; margin: 0 auto 60px; font-size: 1.2rem;">
+                    We function as your extended HR arm, delivering statutory compliance, error-free payroll, and
+                    strategic consulting to help modern enterprises scale without risk.
+                </p>
+            </div>
+        </section>
+
+        <!-- SERVICES GRID (HUB) -->
+        <section class="section-padding" style="background: rgba(15, 23, 42, 0.5);">
+            <div class="container">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px;">
+
+                    <!-- 1. PAYROLL -->
+                    <div class="service-hub-card">
+                        <i class="ph-duotone ph-currency-dollar"
+                            style="font-size: 48px; color: var(--primary); margin-bottom: 24px;"></i>
+                        <h2 style="font-size: 1.75rem; margin-bottom: 16px;">Payroll Management</h2>
+                        <p style="color: var(--text-secondary); margin-bottom: 30px; line-height: 1.6;">
+                            End-to-end payroll processing, tax management, and reimbursement administration. We ensure
+                            100% accuracy and timely disbursement for your workforce.
                         </p>
-                        <ul style="display: grid; gap: 10px; color: var(--text-primary); margin-bottom: 30px;">
-                            <li><i class="ph-fill ph-check-circle" style="color: var(--service);"></i> Salary Structure
-                                Design (CTC Optimization)</li>
-                            <li><i class="ph-fill ph-check-circle" style="color: var(--service);"></i> Monthly
-                                Processing (Gross-to-Net)</li>
-                            <li><i class="ph-fill ph-check-circle" style="color: var(--service);"></i> Bank Advice &
-                                Disbursement Files</li>
-                            <li><i class="ph-fill ph-check-circle" style="color: var(--service);"></i> Variance Analysis
-                                & Reconciliation</li>
-                        </ul>
-                        <a href="services-pricing.html" class="btn btn-service">Get Quote</a>
+                        <a href="services/payroll-management.html" class="hub-link">
+                            Explore Payroll Services <i class="ph-bold ph-arrow-right"></i>
+                        </a>
                     </div>
-                    <!-- Visual -->
-                    <div
-                        style="background: rgba(16, 185, 129, 0.05); height: 100%; border-radius: 20px; display: flex; flex-direction: column; justify-content: center; padding: 40px; border: 1px solid rgba(16, 185, 129, 0.2);">
-                        <div style="text-align: center;">
-                            <i class="ph-fill ph-table" style="font-size: 64px; color: var(--service);"></i>
-                            <h4 style="margin-top: 16px; color: white;">Audit Ready Payroll</h4>
-                            <p style="margin-top: 10px; color: var(--text-secondary); font-size: 0.9rem;">
-                                We track every change, every arrear, and every bonus with a full audit trail.
-                            </p>
-                        </div>
+
+                    <!-- 2. COMPLIANCE -->
+                    <div class="service-hub-card">
+                        <i class="ph-duotone ph-shield-check"
+                            style="font-size: 48px; color: #10b981; margin-bottom: 24px;"></i>
+                        <h2 style="font-size: 1.75rem; margin-bottom: 16px;">Compliance Outsourcing</h2>
+                        <p style="color: var(--text-secondary); margin-bottom: 30px; line-height: 1.6;">
+                            Comprehensive management of PF, ESIC, LWF, and Factory Act compliances. Mitigate legal risks
+                            with our audit-ready frameworks.
+                        </p>
+                        <a href="services/compliance-outsourcing.html" class="hub-link" style="color: #10b981;">
+                            View Compliance Solutions <i class="ph-bold ph-arrow-right"></i>
+                        </a>
                     </div>
+
+                    <!-- 3. HR ADVISORY -->
+                    <div class="service-hub-card">
+                        <i class="ph-duotone ph-files"
+                            style="font-size: 48px; color: #8b5cf6; margin-bottom: 24px;"></i>
+                        <h2 style="font-size: 1.75rem; margin-bottom: 16px;">HR Policy & Audit</h2>
+                        <p style="color: var(--text-secondary); margin-bottom: 30px; line-height: 1.6;">
+                            Strategic consulting to design employee handbooks, define culture, and conduct deep-dive HR
+                            audits for process optimization.
+                        </p>
+                        <a href="services/hr-policy-audit.html" class="hub-link" style="color: #8b5cf6;">
+                            Consulting Services <i class="ph-bold ph-arrow-right"></i>
+                        </a>
+                    </div>
+
+                    <!-- 4. STARTUP -->
+                    <div class="service-hub-card">
+                        <i class="ph-duotone ph-rocket"
+                            style="font-size: 48px; color: #f59e0b; margin-bottom: 24px;"></i>
+                        <h2 style="font-size: 1.75rem; margin-bottom: 16px;">Startup Setup</h2>
+                        <p style="color: var(--text-secondary); margin-bottom: 30px; line-height: 1.6;">
+                            From company incorporation to first-hire compliance. We handle the regulatory groundwork so
+                            you can focus on growth.
+                        </p>
+                        <a href="services/startup-registration.html" class="hub-link" style="color: #f59e0b;">
+                            Launch Your Business <i class="ph-bold ph-arrow-right"></i>
+                        </a>
+                    </div>
+
                 </div>
             </div>
         </section>
 
-        <!-- Service 2: Statutory -->
-        <section class="section-padding" style="background: rgba(255,255,255,0.02);">
+        <!-- CTA -->
+        <section class="section-padding" style="text-align: center;">
             <div class="container">
-                <div class="glass-panel"
-                    style="padding: 50px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;">
-                    <!-- Visual (Left) -->
-                    <div
-                        style="background: rgba(245, 158, 11, 0.05); height: 100%; border-radius: 20px; display: flex; flex-direction: column; justify-content: center; padding: 40px; border: 1px solid rgba(245, 158, 11, 0.2); order: 2 md:order-1;">
-                        <div style="text-align: center;">
-                            <i class="ph-fill ph-scales" style="font-size: 64px; color: var(--accent);"></i>
-                            <h4 style="margin-top: 16px; color: white;">Risk Protection</h4>
-                            <p style="margin-top: 10px; color: var(--text-secondary); font-size: 0.9rem;">
-                                Due-date monitoring, escalation alerts, and proof of payment storage.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div style="order: 1 md:order-2;">
-                        <div
-                            style="background: rgba(245, 158, 11, 0.1); padding: 10px; border-radius: 8px; width: fit-content; margin-bottom: 20px;">
-                            <i class="ph-duotone ph-shield-check" style="font-size: 32px; color: var(--accent);"></i>
-                        </div>
-                        <h2 style="margin-bottom: 16px;">2. Statutory Compliance Services</h2>
-                        <p style="color: var(--text-tertiary); margin-bottom: 10px; font-weight: 600;">Risk Protection
-                            Layer</p>
-                        <p style="color: var(--text-secondary); margin-bottom: 24px;">
-                            We navigate the complex Indian labor laws. From registrations to monthly filings and annual
-                            returns.
-                        </p>
-                        <ul style="display: grid; gap: 10px; color: var(--text-primary); margin-bottom: 30px;">
-                            <li><i class="ph-fill ph-check-circle" style="color: var(--accent);"></i> PF, ESIC, LWF, PT
-                                & TDS</li>
-                            <li><i class="ph-fill ph-check-circle" style="color: var(--accent);"></i> Monthly Challans &
-                                Returns</li>
-                            <li><i class="ph-fill ph-check-circle" style="color: var(--accent);"></i> Notice Handling &
-                                Inspections</li>
-                            <li><i class="ph-fill ph-check-circle" style="color: var(--accent);"></i> Contract Labour
-                                (CLRA)</li>
-                        </ul>
-                        <a href="contact.html" class="btn btn-outline">Consult Now</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Service 3 & 4 Grid -->
-        <section class="section-padding">
-            <div class="container">
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px;">
-                    <div class="glass-panel" style="padding: 40px;">
-                        <i class="ph-duotone ph-users-three"
-                            style="font-size: 40px; color: #8b5cf6; margin-bottom: 16px;"></i>
-                        <h3>Recruitment & Talent Acquisition</h3>
-                        <p style="color: var(--text-secondary); margin-bottom: 20px;">
-                            Governance-led hiring. We track Offer-to-Join ratios and Cost-per-Hire.
-                        </p>
-                        <ul
-                            style="display: grid; gap: 8px; color: var(--text-secondary); margin-bottom: 20px; font-size: 0.9rem;">
-                            <li>• Permanent & Contract Staffing</li>
-                            <li>• Bulk Hiring (Blue & White Collar)</li>
-                            <li>• Executive Search</li>
-                        </ul>
-                        <a href="services-pricing.html" class="btn btn-outline" style="font-size: 0.8rem;">View
-                            Packages</a>
-                    </div>
-
-                    <div class="glass-panel" style="padding: 40px;">
-                        <i class="ph-duotone ph-file-text"
-                            style="font-size: 40px; color: #ec4899; margin-bottom: 16px;"></i>
-                        <h3>HR Operations Management</h3>
-                        <p style="color: var(--text-secondary); margin-bottom: 20px;">
-                            Process Control Layer. We standardize your internal HR functions.
-                        </p>
-                        <ul
-                            style="display: grid; gap: 8px; color: var(--text-secondary); margin-bottom: 20px; font-size: 0.9rem;">
-                            <li>• Attendance & Leave Governance</li>
-                            <li>• Policy Drafting (Handbooks)</li>
-                            <li>• Employee Lifecycle Management</li>
-                        </ul>
-                        <a href="contact.html" class="btn btn-outline" style="font-size: 0.8rem;">Audit Request</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Calculators Section -->
-        <section class="section-padding" style="background: rgba(255,255,255,0.02); text-align: center;">
-            <div class="container">
-                <h2 style="margin-bottom: 16px;">Tools & Resources</h2>
-                <p style="margin-bottom: 40px; color: var(--text-secondary);">Free utilities for HR professionals.</p>
-                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;">
-                    <div class="glass-panel" style="padding: 20px;">
-                        <i class="ph-duotone ph-calculator"
-                            style="font-size: 32px; color: var(--primary); margin-bottom: 10px;"></i>
-                        <h5>TDS Calculator</h5>
-                    </div>
-                    <div class="glass-panel" style="padding: 20px;">
-                        <i class="ph-duotone ph-coins"
-                            style="font-size: 32px; color: var(--service); margin-bottom: 10px;"></i>
-                        <h5>Gratuity Calculator</h5>
-                    </div>
-                    <div class="glass-panel" style="padding: 20px;">
-                        <i class="ph-duotone ph-piggy-bank"
-                            style="font-size: 32px; color: var(--accent); margin-bottom: 10px;"></i>
-                        <h5>PF Calculator</h5>
-                    </div>
-                    <div class="glass-panel" style="padding: 20px;">
-                        <i class="ph-duotone ph-first-aid-kit"
-                            style="font-size: 32px; color: #ec4899; margin-bottom: 10px;"></i>
-                        <h5>ESIC Calculator</h5>
-                    </div>
+                <h2 style="margin-bottom: 24px;">Not sure what you need?</h2>
+                <div style="display: flex; gap: 20px; justify-content: center;">
+                    <a href="contact.html" class="btn btn-primary">Talk to an Expert</a>
                 </div>
             </div>
         </section>
 
     </main>
 
-    <!-- Standard Footer -->
     <footer>
         <div class="container">
-            <div
-                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-bottom: 40px;">
-                <div class="footer-col">
-                    <h4>Company</h4>
-                    <ul>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="services.html">Services</a></li>
-                        <li><a href="careers.html">Careers</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Compliance Tools</h4>
-                    <ul>
-                        <li><a href="calculator-pf.html">PF Calculator</a></li>
-                        <li><a href="calculator-esic.html">ESIC Calculator</a></li>
-                        <li><a href="calculator-tds.html">TDS Calculator</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Legal & Privacy</h4>
-                    <ul>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms</a></li>
-                        <li><a href="https://unifiedportal-mem.epfindia.gov.in" target="_blank">EPFO</a></li>
-                        <li><a href="https://www.esic.in" target="_blank">ESIC</a></li>
-                    </ul>
-                    <p style="margin-top:20px; font-size: 0.8rem; color: var(--text-tertiary);">Disclaimer: Calculations
-                        are indicative. Actual statutory deductions may vary.</p>
-                </div>
-            </div>
-            <div
-                style="text-align: center; padding-top: 40px; border-top: 1px solid var(--border-subtle); color: var(--text-tertiary);">
-                &copy; 2026 TeamWork Solutions | Payroll & Compliance Experts
+            <div style="text-align: center; padding: 40px 0; color: var(--text-tertiary);">
+                &copy; 2026 TeamWork Solutions.
             </div>
         </div>
     </footer>
 
-    <a href="https://wa.me/919518842774" class="whatsapp-float" target="_blank"><i
-            class="ph-fill ph-whatsapp-logo"></i></a>
     <script src="js/main.js"></script>
     <script src="js/unified-header.js"></script>
 </body>
