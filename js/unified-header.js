@@ -104,8 +104,10 @@ const headerHTML = `
 
         <!-- RIGHT SIDE ACTIONS -->
         <div class="nav-actions">
-            <a class="btn-ghost" href="login.html">Login</a>
-            <a class="btn-primary-header" href="request-access.html">Request Access</a>
+            <a class="btn-ghost" href="login.html">Log In</a>
+            <a class="btn-primary-header" href="request-access.html">
+                Request Access <i class="ph-bold ph-arrow-right"></i>
+            </a>
         </div>
 
         <!-- MOBILE TOGGLE -->
