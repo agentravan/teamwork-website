@@ -1,119 +1,120 @@
 /**
- * HRMS STATE MANAGER
- * Handles localStorage persistence, system reset, and data retrieval.
+ * GlobalHRX Enterprise SaaS - State Management System
+ * Simulates Backend Database, Auth, and Business Logic
  */
 
-const HRMS_STATE_KEY = 'global_hrx_state';
-const HRMS_SESSION_KEY = 'global_hrx_session';
-
-const DEFAULT_SUPER_ADMIN = {
-    id: 'ADMIN_001',
-    name: 'Super Admin',
-    email: 'admin@globalhrx.com',
-    role: 'Super Admin',
-    permissions: ['*'], // Access to everything
-    avatar: 'ph-student'
-};
-
-const HRMS = {
-    // --- AUTHENTICATION ---
-    login: function (email, password) {
-        // In a real app, verify password. Here, we allow access.
-        // If it's the first time or specific admin email, ensure Super Admin is set up.
-        if (email.toLowerCase() === 'admin@globalhrx.com' || !this.getSystemState()) {
-            this.provisionSuperAdmin();
-        }
-
-        const user = {
-            email: email,
-            role: email.toLowerCase().includes('admin') ? 'Super Admin' : 'Employee',
-            name: email.split('@')[0].toUpperCase(),
-            loginTime: new Date().toISOString()
-        };
-
-        localStorage.setItem(HRMS_SESSION_KEY, JSON.stringify(user));
-        return user;
-    },
-
-    logout: function () {
-        localStorage.removeItem(HRMS_SESSION_KEY);
-        window.location.href = 'login-hrx.html';
-    },
-
-    getCurrentUser: function () {
-        return JSON.parse(localStorage.getItem(HRMS_SESSION_KEY));
-    },
-
-    // --- SYSTEM GOVERNANCE ---
-    provisionSuperAdmin: function () {
-        // RESET SYSTEM DATA but keep structure
-        const emptyState = {
-            users: [DEFAULT_SUPER_ADMIN],
-            modules: {}, // Will house data for each module ID
-            config: {
-                companyName: 'TeamWork Solutions',
-                setupComplete: true,
-                version: '2.0.0'
+const HRMS_STATE = {
+    // --- DATABASE SCHEMA ---
+    db: {
+        superAdmin: {
+            id: 'SA_001',
+            name: 'Harshit Bhardwaj',
+            email: 'admin@globalhrx.com',
+            password: 'GlobalHRX@2026', // Stored for demo only
+            role: 'SUPER_ADMIN',
+            avatar: 'HB'
+        },
+        tenants: [
+            {
+                id: 'T_001',
+                name: 'Acme Corp Pvt Ltd',
+                plan: 'ENTERPRISE',
+                status: 'ACTIVE',
+                employees: 1250,
+                nextBilling: '2026-03-01',
+                revenue: 125000, // Monthly
+                adminEmail: 'hr@acmecorp.com'
             },
-            logs: []
-        };
-
-        // Initialize empty arrays for all known modules (from dashboard.js if accessible, or lazy load)
-        // We will do lazy persistence: if a module needs data, it creates the array.
-
-        localStorage.setItem(HRMS_STATE_KEY, JSON.stringify(emptyState));
-        console.log("System Provisioned: Super Admin Ready. Zero Data Mode.");
+            {
+                id: 'T_002',
+                name: 'TechFlow Systems',
+                plan: 'PROFESSIONAL',
+                status: 'ACTIVE',
+                employees: 85,
+                nextBilling: '2026-03-01',
+                revenue: 10200,
+                adminEmail: 'admin@techflow.io'
+            },
+            {
+                id: 'T_003',
+                name: 'Stark Industries India',
+                plan: 'ENTERPRISE',
+                status: 'SUSPENDED', // Non-payment
+                employees: 5000,
+                nextBilling: '2026-02-01', // Overdue
+                revenue: 500000,
+                adminEmail: 'tony@stark.com'
+            }
+        ],
+        accessRequests: [
+            { id: 'R_991', company: 'Nexus AI', contact: 'Priya S', email: 'priya@nexus.ai', status: 'PENDING', date: '2026-02-07' },
+            { id: 'R_992', company: 'Vortex Logistics', contact: 'Rahul K', email: 'rahul@vortex.com', status: 'APPROVED', date: '2026-02-06' }
+        ]
     },
 
-    resetSystem: function () {
-        console.warn("WARNING: Performing Full System Reset...");
-        localStorage.removeItem(HRMS_STATE_KEY);
-        this.provisionSuperAdmin();
-        alert("System HRMS has been reset to Factory Settings (Fresh Super Admin).");
-        window.location.reload();
+    // --- AUTH SERVICE ---
+    auth: {
+        login: function (email, password) {
+            // Check Super Admin
+            if (email === HRMS_STATE.db.superAdmin.email && password === HRMS_STATE.db.superAdmin.password) {
+                const user = { ...HRMS_STATE.db.superAdmin };
+                delete user.password; // Don't return password
+                localStorage.setItem('hrms_user', JSON.stringify(user));
+                return user;
+            }
+            // Future: Check Tenant Admins
+            return null;
+        },
+        logout: function () {
+            localStorage.removeItem('hrms_user');
+            window.location.href = 'super-admin-login.html';
+        },
+        getCurrentUser: function () {
+            return JSON.parse(localStorage.getItem('hrms_user'));
+        },
+        checkSession: function () {
+            const user = this.getCurrentUser();
+            if (!user) {
+                window.location.href = 'super-admin-login.html';
+                return null;
+            }
+            return user;
+        }
     },
 
-    // --- DATA ACCESS ---
-    getSystemState: function () {
-        return JSON.parse(localStorage.getItem(HRMS_STATE_KEY));
+    // --- TENANT MANAGEMENT SERVICE ---
+    tenants: {
+        getAll: function () {
+            return HRMS_STATE.db.tenants;
+        },
+        getStats: function () {
+            const tenants = this.getAll();
+            const totalRevenue = tenants.reduce((acc, t) => acc + (t.status === 'ACTIVE' ? t.revenue : 0), 0);
+            return {
+                totalTenants: tenants.length,
+                activeTenants: tenants.filter(t => t.status === 'ACTIVE').length,
+                totalEmployees: tenants.reduce((acc, t) => acc + t.employees, 0),
+                mrr: totalRevenue
+            };
+        }
     },
 
-    saveSystemState: function (state) {
-        localStorage.setItem(HRMS_STATE_KEY, JSON.stringify(state));
-    },
-
-    // Get records for a specific module
-    getModuleData: function (moduleId) {
-        const state = this.getSystemState();
-        if (!state || !state.modules) return [];
-        return state.modules[moduleId] || [];
-    },
-
-    // Add a record to a module
-    addRecord: function (moduleId, record) {
-        const state = this.getSystemState() || { modules: {} };
-        if (!state.modules[moduleId]) state.modules[moduleId] = [];
-
-        // Add Metadata
-        record.id = record.id || `REC-${Date.now()}`;
-        record.createdAt = new Date().toISOString();
-        record.createdBy = this.getCurrentUser().email;
-
-        state.modules[moduleId].unshift(record);
-        this.saveSystemState(state);
-        return record;
-    },
-
-    // Delete record
-    deleteRecord: function (moduleId, recordId) {
-        const state = this.getSystemState();
-        if (!state.modules[moduleId]) return;
-        state.modules[moduleId] = state.modules[moduleId].filter(r => r.id !== recordId);
-        this.saveSystemState(state);
+    // --- ACCESS REQUEST SERVICE ---
+    requests: {
+        getPending: function () {
+            return HRMS_STATE.db.accessRequests.filter(r => r.status === 'PENDING');
+        },
+        approve: function (requestId) {
+            // Simulate approval logic
+            const req = HRMS_STATE.db.accessRequests.find(r => r.id === requestId);
+            if (req) req.status = 'APPROVED';
+            return true;
+        }
     }
 };
 
-// Auto-initialize if empty
-if (!localStorage.getItem(HRMS_STATE_KEY)) {
-    HRMS.provisionSuperAdmin();
+// Auto-initialize if needed
+if (!localStorage.getItem('global_hrx_init')) {
+    console.log('GlobalHRX System Initialized');
+    localStorage.setItem('global_hrx_init', 'true');
 }
