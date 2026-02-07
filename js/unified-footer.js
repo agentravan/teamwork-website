@@ -43,7 +43,7 @@ const footerHTML = `
                 <h3 style="color: white; font-size: 1.1rem; margin-bottom: 20px;">Legal</h3>
                 <ul style="list-style: none; padding: 0;">
                     <li style="margin-bottom: 10px;"><a href="/privacy-policy.html" style="color: var(--text-muted); text-decoration: none;">Privacy Policy</a></li>
-                    <li style="margin-bottom: 10px;"><a href="/terms.html" style="color: var(--text-muted); text-decoration: none;">Terms of Use</a></li>
+                    <li style="margin-bottom: 10px;"><a href="/terms-of-use.html" style="color: var(--text-muted); text-decoration: none;">Terms of Use</a></li>
                 </ul>
             </div>
         </div>
