@@ -117,7 +117,7 @@ function renderSuperAdminDashboard() {
                     </tr>
                 </thead>
                 <tbody>
-                    ${HRMS_STATE.db.tenants.map(t => `
+                    ${HRMS_STATE.db.tenants.length > 0 ? HRMS_STATE.db.tenants.map(t => `
                         <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
                             <td style="padding: 15px; color: white;">${t.name}<br><span style="font-size: 0.8rem; color: var(--text-tertiary);">${t.adminEmail}</span></td>
                             <td style="padding: 15px; color: var(--text-secondary);"><span style="background: rgba(59, 130, 246, 0.1); color: #60a5fa; padding: 4px 8px; border-radius: 4px; font-size: 0.8rem;">${t.plan}</span></td>
@@ -133,7 +133,14 @@ function renderSuperAdminDashboard() {
                                 <button style="background: none; border: 1px solid rgba(255,255,255,0.1); color: white; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 0.8rem;">Manage</button>
                             </td>
                         </tr>
-                    `).join('')}
+                    `).join('') : `
+                        <tr>
+                            <td colspan="5" style="padding: 40px; text-align: center; color: var(--text-tertiary);">
+                                <i class="ph-bold ph-folder-open" style="font-size: 2rem; margin-bottom: 10px; display: block;"></i>
+                                No data available yet. Add a tenant to get started.
+                            </td>
+                        </tr>
+                    `}
                 </tbody>
             </table>
         </div>

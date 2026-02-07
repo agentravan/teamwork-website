@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GlobalHRX | Enterprise Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --bg-dark: #0f172a;
+            --surface: #ffffff;
+            --text-main: #1e293b;
+            --text-sub: #64748b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            height: 100vh;
+            display: flex;
+            background: #f8fafc;
+        }
+
+        /* LEFT BRANDING PANEL */
+        .brand-panel {
+            width: 45%;
+            background: var(--bg-dark);
+            color: white;
+            padding: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .brand-panel::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at top right, rgba(37, 99, 235, 0.2), transparent 70%);
+            z-index: 1;
+        }
+
+        .brand-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .logo i {
+            color: var(--primary);
+            font-size: 2rem;
+        }
+
+        .value-props h2 {
+            font-size: 2.5rem;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .value-props p {
+            color: #94a3b8;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 40px;
+        }
+
+        .feature-list {
+            list-style: none;
+        }
+
+        .feature-list li {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            align-items: center;
+            color: #cbd5e1;
+        }
+
+        .feature-list li i {
+            color: #10b981;
+        }
+
+        /* RIGHT LOGIN PANEL */
+        .login-panel {
+            width: 55%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            padding: 40px;
+        }
+
+        .login-card {
+            width: 100%;
+            max-width: 420px;
+        }
+
+        .login-header {
+            margin-bottom: 30px;
+        }
+
+        .login-header h1 {
+            font-size: 1.8rem;
+            color: var(--text-main);
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .login-header p {
+            color: var(--text-sub);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-main);
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.2s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .forgot-pass {
+            text-align: right;
+            margin-bottom: 24px;
+        }
+
+        .forgot-pass a {
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 14px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-login:hover {
+            background: #1d4ed8;
+        }
+
+        .error-banner {
+            background: #fer2f2;
+            border: 1px solid #fecaca;
+            color: #dc2626;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            display: none;
+            text-align: center;
+        }
+
+        .footer-links {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-sub);
+        }
+
+        .footer-links a {
+            color: var(--text-main);
+            text-decoration: none;
+            margin: 0 5px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .brand-panel {
+                display: none;
+            }
+
+            .login-panel {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- LEFT SIDE -->
+    <div class="brand-panel">
+        <div class="brand-content">
+            <div class="logo">
+                <i class="ph-fill ph-hexagon"></i> Global HRX
+            </div>
+            <div class="value-props">
+                <h2>Enterprise Grade<br>HR Automation</h2>
+                <p>Manage your entire workforce lifecycle on a single, secure, and compliant platform.</p>
+                <ul class="feature-list">
+                    <li><i class="ph-bold ph-check-circle"></i> AI-Driven Recruitment</li>
+                    <li><i class="ph-bold ph-check-circle"></i> One-Click Payroll Processing</li>
+                    <li><i class="ph-bold ph-check-circle"></i> Real-time Attendance Integration</li>
+                    <li><i class="ph-bold ph-check-circle"></i> 100% Statutory Compliance</li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright" style="font-size: 0.85rem; opacity: 0.6;">
+            &copy; 2026 TeamWork Solutions. All rights reserved.
+        </div>
+    </div>
+
+    <!-- RIGHT SIDE -->
+    <div class="login-panel">
+        <div class="login-card">
+
+            <div class="login-header">
+                <h1>Welcome Back</h1>
+                <p>Please sign in to access your organization dashboard.</p>
+            </div>
+
+            <div id="errorBanner" class="error-banner">
+                Invalid credentials or account suspended.
+            </div>
+
+            <form id="loginForm">
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" id="email" placeholder="name@company.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="password" placeholder="••••••••" required>
+                </div>
+
+                <div class="forgot-pass">
+                    <a href="#">Forgot password?</a>
+                </div>
+
+                <button type="submit" class="btn-login" id="loginBtn">Sign In</button>
+            </form>
+
+            <div class="footer-links">
+                <a href="https://teamwork-website.vercel.app/">← Back to Website</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/hrms-state.js"></script>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const btn = document.getElementById('loginBtn');
+            const error = document.getElementById('errorBanner');
+
+            btn.innerHTML = '<i class="ph-bold ph-spinner ph-spin"></i> Authenticating...';
+            btn.disabled = true;
+            error.style.display = 'none';
+
+            setTimeout(() => {
+                const user = HRMS_STATE.auth.login(email, password);
+
+                if (user) {
+                    window.location.href = 'hrms-dashboard.html';
+                } else {
+                    error.style.display = 'block';
+                    btn.innerHTML = 'Sign In';
+                    btn.disabled = false;
+                }
+            }, 1200);
+        });
+    </script>
+</body>
+
+</html>

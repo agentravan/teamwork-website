@@ -1,6 +1,8 @@
 /**
  * GlobalHRX Enterprise SaaS - State Management System
  * Simulates Backend Database, Auth, and Business Logic
+ * 
+ * STRICT ENTERPRISE MODE: NO FAKE DATA
  */
 
 const HRMS_STATE = {
@@ -14,60 +16,51 @@ const HRMS_STATE = {
             role: 'SUPER_ADMIN',
             avatar: 'HB'
         },
-        tenants: [
-            {
-                id: 'T_001',
-                name: 'Acme Corp Pvt Ltd',
-                plan: 'ENTERPRISE',
-                status: 'ACTIVE',
-                employees: 1250,
-                nextBilling: '2026-03-01',
-                revenue: 125000, // Monthly
-                adminEmail: 'hr@acmecorp.com'
-            },
-            {
-                id: 'T_002',
-                name: 'TechFlow Systems',
-                plan: 'PROFESSIONAL',
-                status: 'ACTIVE',
-                employees: 85,
-                nextBilling: '2026-03-01',
-                revenue: 10200,
-                adminEmail: 'admin@techflow.io'
-            },
-            {
-                id: 'T_003',
-                name: 'Stark Industries India',
-                plan: 'ENTERPRISE',
-                status: 'SUSPENDED', // Non-payment
-                employees: 5000,
-                nextBilling: '2026-02-01', // Overdue
-                revenue: 500000,
-                adminEmail: 'tony@stark.com'
-            }
-        ],
-        accessRequests: [
-            { id: 'R_991', company: 'Nexus AI', contact: 'Priya S', email: 'priya@nexus.ai', status: 'PENDING', date: '2026-02-07' },
-            { id: 'R_992', company: 'Vortex Logistics', contact: 'Rahul K', email: 'rahul@vortex.com', status: 'APPROVED', date: '2026-02-06' }
-        ]
+        tenants: [], // NO DEMO TENANTS
+        accessRequests: [], // NO FAKE REQUESTS
+        auditLogs: []
     },
 
     // --- AUTH SERVICE ---
     auth: {
         login: function (email, password) {
-            // Check Super Admin
+            // 1. Check Super Admin
             if (email === HRMS_STATE.db.superAdmin.email && password === HRMS_STATE.db.superAdmin.password) {
                 const user = { ...HRMS_STATE.db.superAdmin };
-                delete user.password; // Don't return password
-                localStorage.setItem('hrms_user', JSON.stringify(user));
+                delete user.password;
+                this.createSession(user);
                 return user;
             }
-            // Future: Check Tenant Admins
+
+            // 2. Check Client Tenants
+            const tenants = HRMS_STATE.db.tenants;
+            for (const tenant of tenants) {
+                if (tenant.adminEmail === email && tenant.password === password && tenant.status === 'ACTIVE') {
+                    const user = {
+                        id: tenant.id,
+                        name: tenant.adminName || tenant.name,
+                        email: tenant.adminEmail,
+                        role: 'CLIENT_ADMIN',
+                        tenantId: tenant.id,
+                        avatar: tenant.name.substring(0, 2).toUpperCase()
+                    };
+                    this.createSession(user);
+                    return user;
+                }
+            }
+
             return null;
         },
+        createSession: function (user) {
+            localStorage.setItem('hrms_user', JSON.stringify(user));
+            // Log Audit
+            HRMS_STATE.audit.log(user.id, 'LOGIN', 'User logged into the system');
+        },
         logout: function () {
+            const user = this.getCurrentUser();
+            if (user) HRMS_STATE.audit.log(user.id, 'LOGOUT', 'User logged out');
             localStorage.removeItem('hrms_user');
-            window.location.href = 'super-admin-login.html';
+            window.location.href = 'login-hrms.html';
         },
         getCurrentUser: function () {
             return JSON.parse(localStorage.getItem('hrms_user'));
@@ -75,10 +68,28 @@ const HRMS_STATE = {
         checkSession: function () {
             const user = this.getCurrentUser();
             if (!user) {
-                window.location.href = 'super-admin-login.html';
+                window.location.href = 'login-hrms.html';
                 return null;
             }
             return user;
+        }
+    },
+
+    // --- AUDIT SYSTEM ---
+    audit: {
+        log: function (actorId, action, details) {
+            const logEntry = {
+                id: 'LOG_' + Date.now(),
+                timestamp: new Date().toISOString(),
+                actorId: actorId,
+                action: action,
+                details: details
+            };
+            HRMS_STATE.db.auditLogs.unshift(logEntry);
+            HRMS_STATE.persist();
+        },
+        getLogs: function () {
+            return HRMS_STATE.db.auditLogs;
         }
     },
 
@@ -86,6 +97,20 @@ const HRMS_STATE = {
     tenants: {
         getAll: function () {
             return HRMS_STATE.db.tenants;
+        },
+        create: function (tenantData) {
+            const newTenant = {
+                id: 'T_' + Date.now(),
+                status: 'ACTIVE',
+                joinedDate: new Date().toISOString(),
+                employees: 0,
+                revenue: tenantData.planPrice || 0,
+                ...tenantData
+            };
+            HRMS_STATE.db.tenants.push(newTenant);
+            HRMS_STATE.audit.log('SA_001', 'CREATE_TENANT', `Created tenant ${newTenant.name}`);
+            HRMS_STATE.persist();
+            return newTenant;
         },
         getStats: function () {
             const tenants = this.getAll();
@@ -101,20 +126,43 @@ const HRMS_STATE = {
 
     // --- ACCESS REQUEST SERVICE ---
     requests: {
+        add: function (requestData) {
+            const newRequest = {
+                id: 'R_' + Date.now(),
+                status: 'PENDING',
+                date: new Date().toISOString(),
+                ...requestData
+            };
+            HRMS_STATE.db.accessRequests.unshift(newRequest);
+            HRMS_STATE.persist();
+        },
         getPending: function () {
             return HRMS_STATE.db.accessRequests.filter(r => r.status === 'PENDING');
-        },
-        approve: function (requestId) {
-            // Simulate approval logic
-            const req = HRMS_STATE.db.accessRequests.find(r => r.id === requestId);
-            if (req) req.status = 'APPROVED';
-            return true;
         }
+    },
+
+    // --- PERSISTENCE ---
+    persist: function () {
+        // In a real app, this would be an API call.
+        // Here we just ensure memory state is consistent.
+        // For strict enterprise demo, we might NOT want to use LocalStorage for DB 
+        // to prevent 'magic' data appearing on refresh if we want a clean slate every time.
+        // But to keep constraints of "Store request", we will use memory for this session.
+        // or we can use LocalStorage if persistent across reloads is needed.
+        // Let's use LocalStorage for PERSISTENCE to act like a real DB.
+        localStorage.setItem('hrms_db', JSON.stringify(HRMS_STATE.db));
+    },
+    load: function () {
+        const saved = localStorage.getItem('hrms_db');
+        if (saved) {
+            HRMS_STATE.db = JSON.parse(saved);
+        }
+    },
+    reset: function () {
+        localStorage.removeItem('hrms_db');
+        window.location.reload();
     }
 };
 
-// Auto-initialize if needed
-if (!localStorage.getItem('global_hrx_init')) {
-    console.log('GlobalHRX System Initialized');
-    localStorage.setItem('global_hrx_init', 'true');
-}
+// Initialize
+HRMS_STATE.load();
