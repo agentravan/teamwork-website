@@ -28,21 +28,21 @@ const headerHTML = `
                 <li class="dropdown">
                     <a href="/services.html" class="dropdown-trigger">Services ▾</a>
                     <div class="mega-menu">
-                        <a href="/service-details.html?id=payroll" class="mega-link">
+                        <a href="/payroll-management.html" class="mega-link">
                             <div class="mega-icon blue"><i class="ph-duotone ph-currency-dollar"></i></div>
                             <div class="mega-content">
                                 <div class="mega-title">Payroll Management</div>
                                 <div class="mega-desc">Automate salary processing & compliance.</div>
                             </div>
                         </a>
-                        <a href="/service-details.html?id=compliance" class="mega-link">
+                        <a href="/compliance-outsourcing.html" class="mega-link">
                             <div class="mega-icon green"><i class="ph-duotone ph-shield-check"></i></div>
                             <div class="mega-content">
                                 <div class="mega-title">Compliance Outsourcing</div>
                                 <div class="mega-desc">PF, ESIC, LWF, PT management.</div>
                             </div>
                         </a>
-                        <a href="/service-details.html?id=policy" class="mega-link">
+                        <a href="/hr-policy-audit.html" class="mega-link">
                             <div class="mega-icon purple"><i class="ph-duotone ph-files"></i></div>
                             <div class="mega-content">
                                 <div class="mega-title">HR Policy & Audit</div>
@@ -56,7 +56,7 @@ const headerHTML = `
                                 <div class="mega-desc">End-to-end talent acquisition.</div>
                             </div>
                         </a>
-                        <a href="/service-details.html?id=hrms" class="mega-link">
+                        <a href="/globalhrx-hrms.html" class="mega-link">
                             <div class="mega-icon blue"><i class="ph-duotone ph-desktop"></i></div>
                             <div class="mega-content">
                                 <div class="mega-title">GlobalHRX HRMS</div>

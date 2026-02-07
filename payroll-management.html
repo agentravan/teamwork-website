@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payroll Management Services | TeamWork Solutions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/header-premium.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <style>
+        .service-section {
+            padding: 80px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .service-section:last-of-type {
+            border-bottom: none;
+        }
+
+        .section-number {
+            font-size: 0.9rem;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+            padding: 4px 12px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .content-list {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            gap: 15px;
+        }
+
+        .content-list li {
+            position: relative;
+            padding-left: 25px;
+            color: var(--text-secondary);
+        }
+
+        .content-list li::before {
+            content: '•';
+            color: var(--primary);
+            font-size: 1.5rem;
+            position: absolute;
+            left: 5px;
+            top: -5px;
+        }
+
+        .h-sub {
+            color: #94a3b8;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        .pricing-card {
+            background: rgba(30, 41, 59, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 25px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+
+        .tag {
+            background: rgba(59, 130, 246, 0.15);
+            color: #60a5fa;
+            padding: 8px 16px;
+            border-radius: 6px;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="global-header-container"></div>
+
+    <main>
+        <!-- HERO -->
+        <section class="section-padding"
+            style="padding-top: 180px; text-align: center; background: radial-gradient(circle at center, rgba(37, 99, 235, 0.1) 0%, rgba(15, 23, 42, 1) 70%);">
+            <div class="container">
+                <span style="color: var(--primary); font-weight: 600; letter-spacing: 1px;">OUR EXPERTISE</span>
+                <h1 style="font-size: 3.5rem; margin-top: 10px; margin-bottom: 20px;">Payroll Management Services</h1>
+                <p style="font-size: 1.25rem; color: #cbd5e1; max-width: 800px; margin: 0 auto;">
+                    Accurate, compliant, and scalable payroll solutions designed for modern organizations.
+                </p>
+                <p
+                    style="font-size: 1.1rem; color: var(--text-secondary); max-width: 800px; margin: 20px auto 0; line-height: 1.6;">
+                    We manage your complete payroll lifecycle so that salaries are processed on time, compliances are
+                    met, and employees receive a seamless payroll experience.
+                </p>
+            </div>
+        </section>
+
+        <div class="container">
+            <!-- 1. What We Do -->
+            <section class="service-section">
+                <div style="max-width: 800px; margin: 0 auto;">
+                    <span class="section-number">01</span>
+                    <h2 style="font-size: 2rem; margin-bottom: 15px;">What We Do</h2>
+                    <p class="h-sub">Comprehensive payroll processing services.</p>
+
+                    <div style="background: rgba(255,255,255,0.03); padding: 30px; border-radius: 12px;">
+                        <ul class="content-list" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                            <li>Monthly salary processing</li>
+                            <li>Attendance & leave integration</li>
+                            <li>Payslip generation</li>
+                            <li>Reimbursements & deductions</li>
+                            <li>Full & Final settlements</li>
+                            <li>Payroll MIS & reports</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. Who It's For -->
+            <section class="service-section">
+                <div style="max-width: 800px; margin: 0 auto;">
+                    <span class="section-number">02</span>
+                    <h2 style="font-size: 2rem; margin-bottom: 15px;">Who It's For</h2>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px;">
+                        <span class="tag">Startups & SMEs</span>
+                        <span class="tag">Manufacturing units</span>
+                        <span class="tag">Sales & field workforce</span>
+                        <span class="tag">Multi-location organizations</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. Benefits -->
+            <section class="service-section">
+                <div style="max-width: 800px; margin: 0 auto;">
+                    <span class="section-number">03</span>
+                    <h2 style="font-size: 2rem; margin-bottom: 15px;">Benefits</h2>
+                    <div
+                        style="background: rgba(16, 185, 129, 0.1); padding: 30px; border-radius: 12px; border: 1px solid rgba(16, 185, 129, 0.2);">
+                        <ul class="content-list" style="grid-template-columns: 1fr 1fr;">
+                            <li>Zero payroll errors</li>
+                            <li>100% statutory alignment</li>
+                            <li>Confidential data handling</li>
+                            <li>Audit-ready payroll records</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. Payroll Pricing -->
+            <section class="service-section">
+                <div style="max-width: 1000px; margin: 0 auto;">
+                    <span class="section-number">04</span>
+                    <h2 style="font-size: 2rem; margin-bottom: 10px;">Payroll Pricing</h2>
+                    <p class="h-sub">Transparent pricing packages for every stage of growth.</p>
+
+                    <div
+                        style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 40px;">
+
+                        <!-- Starter -->
+                        <div class="pricing-card">
+                            <div style="color: #10b981; font-weight: 600; margin-bottom: 5px;">STARTER PAYROLL</div>
+                            <div style="font-size: 1.5rem; font-weight: 700; color: white; margin: 15px 0 5px;">₹2,500
+                            </div>
+                            <div style="color: #94a3b8; font-size: 0.9rem; margin-bottom: 15px;">per month</div>
+                            <ul class="content-list"
+                                style="grid-template-columns: 1fr; gap: 10px; margin-bottom: 20px;">
+                                <li>Up to 10 employees</li>
+                            </ul>
+                            <a href="quote-request.html?service=payroll&plan=starter" class="btn btn-outline"
+                                style="width: 100%; text-align: center;">Get Quote</a>
+                        </div>
+
+                        <!-- Growth -->
+                        <div class="pricing-card" style="border-color: var(--primary);">
+                            <div style="color: var(--primary); font-weight: 600; margin-bottom: 5px;">GROWTH PAYROLL
+                            </div>
+                            <div style="font-size: 1.5rem; font-weight: 700; color: white; margin: 15px 0 5px;">₹5,000
+                            </div>
+                            <div style="color: #94a3b8; font-size: 0.9rem; margin-bottom: 15px;">per month</div>
+                            <ul class="content-list"
+                                style="grid-template-columns: 1fr; gap: 10px; margin-bottom: 20px;">
+                                <li>Up to 25 employees</li>
+                            </ul>
+                            <a href="quote-request.html?service=payroll&plan=growth" class="btn btn-primary"
+                                style="width: 100%; text-align: center;">Get Quote</a>
+                        </div>
+
+                        <!-- Professional -->
+                        <div class="pricing-card">
+                            <div style="color: #8b5cf6; font-weight: 600; margin-bottom: 5px;">PROFESSIONAL</div>
+                            <div style="font-size: 1.5rem; font-weight: 700; color: white; margin: 15px 0 5px;">₹8,000
+                            </div>
+                            <div style="color: #94a3b8; font-size: 0.9rem; margin-bottom: 15px;">per month</div>
+                            <ul class="content-list"
+                                style="grid-template-columns: 1fr; gap: 10px; margin-bottom: 20px;">
+                                <li>Up to 50 employees</li>
+                            </ul>
+                            <a href="quote-request.html?service=payroll&plan=professional" class="btn btn-outline"
+                                style="width: 100%; text-align: center;">Get Quote</a>
+                        </div>
+
+                        <!-- Enterprise -->
+                        <div class="pricing-card">
+                            <div style="color: #cbd5e1; font-weight: 600; margin-bottom: 5px;">ENTERPRISE</div>
+                            <div style="font-size: 1.5rem; font-weight: 700; color: white; margin: 15px 0 5px;">Custom
+                            </div>
+                            <div style="color: #94a3b8; font-size: 0.9rem; margin-bottom: 15px;">Pricing</div>
+                            <ul class="content-list"
+                                style="grid-template-columns: 1fr; gap: 10px; margin-bottom: 20px;">
+                                <li>Multi-location & large workforce</li>
+                            </ul>
+                            <a href="quote-request.html?service=payroll&plan=enterprise" class="btn btn-outline"
+                                style="width: 100%; text-align: center;">Get Quote</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- CTA -->
+        <section class="section-padding" style="text-align: center; background: rgba(30, 41, 59, 0.5);">
+            <div class="container">
+                <h2 style="margin-bottom: 24px;">Need a reliable payroll partner?</h2>
+                <div style="display: flex; gap: 20px; justify-content: center;">
+                    <a href="quote-request.html?service=payroll" class="btn btn-primary">Get Payroll Quote</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="global-footer-container"></div>
+
+    <script src="js/service-store.js"></script>
+    <script src="js/unified-header.js"></script>
+    <script src="js/unified-footer.js"></script>
+</body>
+
+</html>
