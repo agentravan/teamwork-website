@@ -19,12 +19,22 @@ const footerHTML = `
 
             <!-- SOLUTIONS -->
             <div>
-                <h3 style="color: white; font-size: 1.1rem; margin-bottom: 20px;">Solutions</h3>
+                <h3 style="color: white; font-size: 1.1rem; margin-bottom: 20px;">Global HRX</h3>
                 <ul style="list-style: none; padding: 0;">
                     <li style="margin-bottom: 10px;"><a href="/services/payroll-management.html" style="color: var(--text-muted); text-decoration: none;">Payroll Management</a></li>
                     <li style="margin-bottom: 10px;"><a href="/services/compliance-outsourcing.html" style="color: var(--text-muted); text-decoration: none;">Compliance Outsourcing</a></li>
-                    <li style="margin-bottom: 10px;"><a href="/services/global-hrx-hrms.html" style="color: var(--text-muted); text-decoration: none;">HRMS – GlobalHRX</a></li>
+                    <li style="margin-bottom: 10px;"><a href="/services/global-hrx-hrms.html" style="color: var(--text-muted); text-decoration: none;">HRMS Software</a></li>
                     <li style="margin-bottom: 10px;"><a href="/services/hr-policy-audit.html" style="color: var(--text-muted); text-decoration: none;">HR Policy & Audit</a></li>
+                </ul>
+            </div>
+
+            <!-- RESOURCES -->
+            <div>
+                <h3 style="color: white; font-size: 1.1rem; margin-bottom: 20px;">Resources</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 10px;"><a href="/calculators/hr-salary-calculator.html" style="color: var(--text-muted); text-decoration: none;">Salary Calculator</a></li>
+                    <li style="margin-bottom: 10px;"><a href="javascript:void(0)" onclick="openLeadModal()" style="color: var(--text-muted); text-decoration: none;">HR Reports</a></li>
+                    <li style="margin-bottom: 10px;"><a href="/blog.html" style="color: var(--text-muted); text-decoration: none;">Blogs</a></li>
                 </ul>
             </div>
 
@@ -33,13 +43,13 @@ const footerHTML = `
                 <h3 style="color: white; font-size: 1.1rem; margin-bottom: 20px;">Legal</h3>
                 <ul style="list-style: none; padding: 0;">
                     <li style="margin-bottom: 10px;"><a href="/privacy-policy.html" style="color: var(--text-muted); text-decoration: none;">Privacy Policy</a></li>
-                    <li style="margin-bottom: 10px;"><a href="/terms.html" style="color: var(--text-muted); text-decoration: none;">Terms & Conditions</a></li>
+                    <li style="margin-bottom: 10px;"><a href="/terms.html" style="color: var(--text-muted); text-decoration: none;">Terms of Use</a></li>
                 </ul>
             </div>
         </div>
 
         <div style="text-align: center; margin-top: 60px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.05); color: var(--text-tertiary);">
-            &copy; 2026 TeamWork Solutions | All Rights Reserved
+            &copy; 2026 TeamWork Solutions. All rights reserved.
         </div>
     </div>
 </footer>
@@ -50,15 +60,5 @@ document.addEventListener('DOMContentLoaded', () => {
     const container = document.getElementById('global-footer-container');
     if (container) {
         container.innerHTML = footerHTML;
-    } else {
-        // Fallback: append to body if no container exists, but preferably use the container
-        const existingFooter = document.querySelector('footer');
-        if (!existingFooter && !document.querySelector('.no-footer')) {
-            // Create a container if it doesn't exist and no other footer exists
-            const newFooterDiv = document.createElement('div');
-            newFooterDiv.id = 'global-footer-container';
-            newFooterDiv.innerHTML = footerHTML;
-            document.body.appendChild(newFooterDiv);
-        }
     }
 });

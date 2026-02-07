@@ -1,9 +1,12 @@
 /**
  * UNIFIED HEAD LOADER
- * Injects a premium header into #global-header-container
+ * Injects a premium SaaS header into #global-header-container
  */
 
 const headerHTML = `
+<!-- PROMO STRIP (Injected via JS on Home only) -->
+<div id="promo-strip-container"></div>
+
 <header class="site-header">
     <div class="nav-container">
         <!-- LOGO -->
@@ -21,7 +24,6 @@ const headerHTML = `
                 <li class="dropdown">
                     <a href="/services.html" class="dropdown-trigger">Services ▾</a>
                     <div class="mega-menu">
-                        <!-- Item 1 -->
                         <a href="/services/payroll-management.html" class="mega-link">
                             <div class="mega-icon blue"><i class="ph-duotone ph-currency-dollar"></i></div>
                             <div class="mega-content">
@@ -29,7 +31,6 @@ const headerHTML = `
                                 <div class="mega-desc">Automate salary processing & compliance.</div>
                             </div>
                         </a>
-                        <!-- Item 2 -->
                         <a href="/services/compliance-outsourcing.html" class="mega-link">
                             <div class="mega-icon green"><i class="ph-duotone ph-shield-check"></i></div>
                             <div class="mega-content">
@@ -37,7 +38,6 @@ const headerHTML = `
                                 <div class="mega-desc">PF, ESIC, LWF, PT management.</div>
                             </div>
                         </a>
-                        <!-- Item 3 -->
                         <a href="/services/hr-policy-audit.html" class="mega-link">
                             <div class="mega-icon purple"><i class="ph-duotone ph-files"></i></div>
                             <div class="mega-content">
@@ -45,7 +45,6 @@ const headerHTML = `
                                 <div class="mega-desc">Policies, labor audit & compliance.</div>
                             </div>
                         </a>
-                        <!-- Item 4 -->
                         <a href="/services/startup-registration.html" class="mega-link">
                             <div class="mega-icon orange"><i class="ph-duotone ph-rocket"></i></div>
                             <div class="mega-content">
@@ -53,7 +52,6 @@ const headerHTML = `
                                 <div class="mega-desc">Company, labor & statutory setup.</div>
                             </div>
                         </a>
-                        <!-- Item 5 - NEW -->
                         <a href="/services/global-hrx-hrms.html" class="mega-link">
                             <div class="mega-icon blue"><i class="ph-duotone ph-desktop"></i></div>
                             <div class="mega-content">
@@ -64,10 +62,17 @@ const headerHTML = `
                     </div>
                 </li>
 
-                <!-- CALCULATORS MEGA DROPDOWN -->
+                <!-- CALCULATORS DROPDOWN -->
                 <li class="dropdown">
                     <a href="#" class="dropdown-trigger">Calculators ▾</a>
                     <div class="mega-menu calculators-grid">
+                         <a href="/calculators/hr-salary-calculator.html" class="mega-link">
+                            <div class="mega-icon blue"><i class="ph-duotone ph-calculator"></i></div>
+                            <div class="mega-content">
+                                <div class="mega-title">HR Salary Calculator</div>
+                                <div class="mega-desc">Market benchmarking tool.</div>
+                            </div>
+                        </a>
                         <a href="/calculator-pf.html" class="mega-link">
                             <div class="mega-icon orange"><i class="ph-duotone ph-piggy-bank"></i></div>
                             <div class="mega-content">
@@ -95,12 +100,30 @@ const headerHTML = `
                     </div>
                 </li>
 
+                <!-- RESOURCES DROPDOWN -->
+                <li class="dropdown">
+                    <a href="#" class="dropdown-trigger">Resources ▾</a>
+                    <div class="mega-menu calculators-grid" style="grid-template-columns: 1fr;">
+                        <a href="/calculators/hr-salary-calculator.html" class="mega-link">
+                            <div class="mega-icon blue"><i class="ph-duotone ph-chart-bar"></i></div>
+                            <div class="mega-content">
+                                <div class="mega-title">Salary Benchmark Report</div>
+                                <div class="mega-desc">Download 2025-26 India HR Report.</div>
+                            </div>
+                        </a>
+                         <a href="/blog.html" class="mega-link">
+                            <div class="mega-icon purple"><i class="ph-duotone ph-newspaper"></i></div>
+                            <div class="mega-content">
+                                <div class="mega-title">HR Blogs</div>
+                                <div class="mega-desc">Latest trends and compliance updates.</div>
+                            </div>
+                        </a>
+                    </div>
+                </li>
+
                 <li><a href="/careers.html">Careers</a></li>
-                <li><a href="/pricing.html">Pricing</a></li>
-                <li><a href="/about.html">About</a></li>
-                <li><a href="/contact.html">Contact</a></li>
                 
-                <!-- MOBILE CLONE TARGET (Will disappear on Desktop via CSS) -->
+                <!-- MOBILE CLONE TARGET -->
                 <li class="mobile-only-actions" style="display:none; width: 100%; margin-top: 20px;">
                     <div style="display: flex; flex-direction: column; gap: 12px;">
                         <a class="btn-ghost" href="/login.html" style="justify-content: center;">Login</a>
@@ -110,10 +133,12 @@ const headerHTML = `
             </ul>
         </nav>
 
-        <!-- RIGHT SIDE ACTIONS -->
+        <!-- RIGHT SIDE ACTIONS (SaaS Style) -->
         <div class="nav-actions">
-            <a class="btn-ghost" href="/login.html">Log In</a>
-            <a class="btn-primary-header" href="/request-access.html">
+            <!-- Ghost Button for Login -->
+            <a href="/login.html" class="btn-ghost-header">Login</a>
+            <!-- Primary Action -->
+            <a href="/request-access.html" class="btn-primary-header">
                 Request Access <i class="ph-bold ph-arrow-right"></i>
             </a>
         </div>
@@ -124,6 +149,86 @@ const headerHTML = `
         </div>
     </div>
 </header>
+
+<!-- LEAD CAPTURE MODAL -->
+<div id="lead-modal" class="modal-overlay" style="display:none;">
+    <div class="modal-content">
+        <button class="close-modal">&times;</button>
+        <div style="text-align: center; margin-bottom: 20px;">
+             <i class="ph-duotone ph-file-pdf" style="font-size: 48px; color: var(--primary);"></i>
+             <h3>Download 2025-26 Report</h3>
+             <p style="font-size: 0.9rem; color: var(--text-secondary);">Enter your details to get the full benchmarking report.</p>
+        </div>
+        <form id="lead-form" onsubmit="handleLeadSubmit(event)">
+            <div class="form-group">
+                <input type="text" placeholder="Full Name" required class="form-input">
+            </div>
+            <div class="form-group">
+                <input type="email" placeholder="Work Email" required class="form-input">
+            </div>
+             <div class="form-group">
+                <input type="text" placeholder="Company Name" required class="form-input">
+            </div>
+             <div class="form-group">
+                <input type="text" placeholder="Designation" required class="form-input">
+            </div>
+            <button type="submit" class="btn btn-primary" style="width: 100%;">Download Now</button>
+        </form>
+    </div>
+</div>
+
+<style>
+/* Header Specific Styles */
+.btn-ghost-header {
+    background: transparent;
+    color: var(--text-muted);
+    padding: 8px 16px;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+.btn-ghost-header:hover {
+    border-color: white;
+    color: white;
+}
+
+/* Modal Styles */
+.modal-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.8); z-index: 20000;
+    backdrop-filter: blur(5px);
+    display: flex; align-items: center; justify-content: center;
+}
+.modal-content {
+    background: #1e293b; border: 1px solid rgba(255,255,255,0.1);
+    padding: 30px; border-radius: 12px; width: 90%; max-width: 400px;
+    position: relative;
+}
+.close-modal {
+    position: absolute; top: 10px; right: 15px; background: none; border: none;
+    color: white; font-size: 24px; cursor: pointer;
+}
+.form-input {
+    width: 100%; padding: 10px; margin-bottom: 10px;
+    background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1);
+    color: white; border-radius: 6px;
+}
+
+/* Promo Strip */
+.promo-strip {
+    background: linear-gradient(90deg, #2563eb, #1e40af);
+    color: white; text-align: center; padding: 10px;
+    font-size: 0.9rem; font-weight: 500;
+    display: flex; justify-content: center; align-items: center; gap: 20px;
+}
+.promo-btn {
+    background: white; color: #2563eb; padding: 4px 12px;
+    border-radius: 4px; text-decoration: none; font-weight: 600; font-size: 0.8rem;
+}
+</style>
 `;
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -132,24 +237,46 @@ document.addEventListener('DOMContentLoaded', () => {
     if (container) {
         container.innerHTML = headerHTML;
         initializeHeaderLogic();
-    } else {
-        console.warn('Integrated Header: #global-header-container not found.');
     }
+
+    // 2. Inject Promo Strip on Home Page Only
+    const path = window.location.pathname;
+    if (path === '/' || path.endsWith('index.html')) {
+        const promoContainer = document.getElementById('promo-strip-container');
+        if (promoContainer) {
+            promoContainer.innerHTML = `
+                <div class="promo-strip">
+                    <span>📊 Explore India’s HR Salary Benchmarking Report 2025–26</span>
+                    <div style="display: flex; gap: 10px;">
+                        <button onclick="openLeadModal()" class="promo-btn" style="border:none; cursor:pointer;">Download Free Report</button>
+                        <a href="/calculators/hr-salary-calculator.html" class="promo-btn" style="background: rgba(255,255,255,0.2); color: white;">Open Salary Calculator</a>
+                    </div>
+                </div>
+            `;
+            // Adjust header top if promo is present (optional, usually absolute header needs top offset)
+            // But if header is fixed, promo should push it down or overlay.
+            // Assuming fixed header, let's just make promo part of the flow or push header.
+            // For now, simple injection.
+        }
+    }
+
+    // 3. Modal Logic
+    document.querySelector('.close-modal').addEventListener('click', () => {
+        document.getElementById('lead-modal').style.display = 'none';
+    });
 });
 
 function initializeHeaderLogic() {
-    // 1. Highlight Active Link
+    // ... (Existing logic for active links, mobile toggle, scroll) ...
+    // ... kept same as before but abbreviated here for clarity when rewriting ...
     const currentPath = window.location.pathname.split('/').pop() || 'index.html';
     const navLinks = document.querySelectorAll('.main-nav a');
 
     navLinks.forEach(link => {
         const hRef = link.getAttribute('href');
-        // Exact match or sub-links (e.g. services.html matches services.html#payroll)
         if (hRef === currentPath || (hRef && hRef.startsWith(currentPath + '#'))) {
-            // Check if it's not the logo
-            if (!link.classList.contains('logo')) {
+            if (!link.classList.contains('logo') && !link.classList.contains('btn-ghost-header')) {
                 link.classList.add('active');
-                // Also highlight parent if it's a dropdown
                 const parentLi = link.closest('li.dropdown');
                 if (parentLi) {
                     const parentTrigger = parentLi.querySelector('.dropdown-trigger');
@@ -159,7 +286,6 @@ function initializeHeaderLogic() {
         }
     });
 
-    // 2. Mobile Menu Toggle
     const hamburger = document.querySelector('.hamburger');
     const mainNav = document.querySelector('.main-nav');
     const mobileActions = document.querySelector('.mobile-only-actions');
@@ -167,12 +293,7 @@ function initializeHeaderLogic() {
     if (hamburger && mainNav) {
         hamburger.addEventListener('click', () => {
             const isExpanded = mainNav.classList.toggle('show');
-            // Show mobile actions only when expanded
-            if (mobileActions) {
-                mobileActions.style.display = isExpanded ? 'block' : 'none';
-            }
-
-            // Toggle Icon
+            if (mobileActions) mobileActions.style.display = isExpanded ? 'block' : 'none';
             const icon = hamburger.querySelector('i');
             if (isExpanded) {
                 icon.classList.remove('ph-list');
@@ -184,7 +305,6 @@ function initializeHeaderLogic() {
         });
     }
 
-    // 3. Scroll Effect
     const header = document.querySelector('.site-header');
     window.addEventListener('scroll', () => {
         if (window.scrollY > 10) {
@@ -194,10 +314,40 @@ function initializeHeaderLogic() {
         }
     });
 
-    // 4. Ensure Phosphor Icons Scripts are loaded if not present
     if (!document.querySelector('script[src*="phosphor-icons"]')) {
         const script = document.createElement('script');
         script.src = "https://unpkg.com/@phosphor-icons/web";
         document.head.appendChild(script);
     }
+}
+
+// Global functions for Lead Form
+function openLeadModal() {
+    document.getElementById('lead-modal').style.display = 'flex';
+}
+
+function handleLeadSubmit(e) {
+    e.preventDefault();
+    // Simulate API call
+    const btn = e.target.querySelector('button');
+    const originalText = btn.innerText;
+    btn.innerText = 'Processing...';
+
+    setTimeout(() => {
+        // Trigger Download
+        const link = document.createElement('a');
+        link.href = '/assets/downloads/India-HR-Salary-Benchmarking-Report-2025-26.pdf';
+        link.download = 'India-HR-Salary-Benchmarking-Report-2025-26.pdf';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        // Reset
+        btn.innerText = 'Download Started!';
+        setTimeout(() => {
+            document.getElementById('lead-modal').style.display = 'none';
+            btn.innerText = originalText;
+            e.target.reset();
+        }, 1500);
+    }, 1000);
 }

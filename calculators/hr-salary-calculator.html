@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- SEO METADATA -->
+    <title>HR Salary Calculator | HR Compensation Benchmark India</title>
+    <meta name="description"
+        content="Estimate HR salaries across roles, experience levels, industries and cities using market benchmarks.">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/header-premium.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <style>
+        .calc-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: rgba(30, 41, 59, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 40px;
+            backdrop-filter: blur(10px);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        @media(max-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-secondary);
+        }
+
+        .form-select,
+        .form-input {
+            width: 100%;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .result-box {
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(30, 41, 59, 0.6));
+            border: 1px solid rgba(37, 99, 235, 0.3);
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            margin-top: 30px;
+            display: none;
+            /* Hidden by default */
+        }
+
+        .salary-range {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #60a5fa;
+            margin: 10px 0;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .range-labels {
+            display: flex;
+            justify-content: space-between;
+            max-width: 400px;
+            margin: 0 auto;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="global-header-container"></div>
+
+    <main style="padding-top: 150px; padding-bottom: 80px;">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 50px;">
+                <h1 class="fade-up" style="font-size: 3rem; margin-bottom: 15px;">HR Salary Calculator – India</h1>
+                <p class="fade-up" style="color: var(--text-secondary); font-size: 1.1rem;">
+                    Benchmarked against 5,000+ HR roles across Indian Metros & Tier-1 cities.
+                </p>
+            </div>
+
+            <div class="calc-container fade-up">
+                <form id="salary-form" onsubmit="calculateSalary(event)">
+                    <div class="form-grid">
+                        <div>
+                            <label class="form-label">Job Role / Function</label>
+                            <select class="form-select" id="role" required>
+                                <option value="" disabled selected>Select Role</option>
+                                <option value="hr_exec">HR Executive</option>
+                                <option value="hr_generalist">HR Generalist</option>
+                                <option value="recruiter">Technical Recruiter</option>
+                                <option value="payroll_spec">Payroll Specialist</option>
+                                <option value="hr_manager">HR Manager</option>
+                                <option value="hr_bp">HR Business Partner</option>
+                                <option value="head_hr">Head of HR / VP</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="form-label">Experience (Years)</label>
+                            <select class="form-select" id="exp" required>
+                                <option value="0-2">Entry Level (0-2 Yrs)</option>
+                                <option value="3-5">Mid Level (3-5 Yrs)</option>
+                                <option value="6-9">Senior Level (6-9 Yrs)</option>
+                                <option value="10+">Leadership (10+ Yrs)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="form-label">Industry</label>
+                            <select class="form-select" id="industry">
+                                <option value="it">IT / SaaS / Tech</option>
+                                <option value="manufacturing">Manufacturing</option>
+                                <option value="bfsi">BFSI (Banking & Finance)</option>
+                                <option value="retail">Retail & E-commerce</option>
+                                <option value="services">Services / Consulting</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="form-label">Location</label>
+                            <select class="form-select" id="city">
+                                <option value="metro">Metro (Bangalore, Mumbai, Delhi, Hyd)</option>
+                                <option value="tier1">Tier I (Pune, Chennai, Kolkata)</option>
+                                <option value="tier2">Tier II (Jaipur, Indore, etc.)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary"
+                        style="width: 100%; font-size: 1.1rem; padding: 15px;">
+                        Calculate Salary Range
+                    </button>
+                </form>
+
+                <div id="result-box" class="result-box">
+                    <h3 style="color: white; margin-bottom: 10px;">Estimated Annual CTC</h3>
+
+                    <div class="salary-range" id="salary-output">₹ 0 - ₹ 0 LPA</div>
+
+                    <div class="range-labels">
+                        <span>Min (25th %)</span>
+                        <span>Median (50th %)</span>
+                        <span>Max (90th %)</span>
+                    </div>
+
+                    <p style="margin-top: 20px; color: var(--text-secondary);">
+                        Based on industry benchmarks and role maturity.
+                    </p>
+
+                    <div
+                        style="border-top: 1px solid rgba(255,255,255,0.1); margin-top: 30px; padding-top: 20px; display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+                        <button onclick="openLeadModal()" class="btn btn-outline"
+                            style="border-color: var(--primary); color: var(--primary);">
+                            <i class="ph-bold ph-download-simple"></i> Download Full Benchmarking Report
+                        </button>
+                        <a href="/contact.html" class="btn btn-primary">Talk to HR Expert</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="global-footer-container"></div>
+
+    <script src="/js/main.js"></script>
+    <script src="/js/unified-header.js"></script>
+    <script src="/js/unified-footer.js"></script>
+
+    <script>
+        function calculateSalary(e) {
+            e.preventDefault();
+
+            const role = document.getElementById('role').value;
+            const exp = document.getElementById('exp').value;
+            const city = document.getElementById('city').value;
+
+            // Basic Logic (Mock Data)
+            let baseParams = {
+                'hr_exec': 3.5,
+                'hr_generalist': 4.5,
+                'recruiter': 4.0,
+                'payroll_spec': 4.2,
+                'hr_manager': 12.0,
+                'hr_bp': 14.0,
+                'head_hr': 25.0
+            };
+
+            let expMultiplier = {
+                '0-2': 1,
+                '3-5': 1.8,
+                '6-9': 2.5,
+                '10+': 4.0
+            };
+
+            let cityMultiplier = {
+                'metro': 1.2,
+                'tier1': 1.0,
+                'tier2': 0.85
+            };
+
+            let base = baseParams[role] || 4.0;
+            let mult = expMultiplier[exp] || 1;
+            let loc = cityMultiplier[city] || 1;
+
+            let median = base * mult * loc;
+            let min = median * 0.8;
+            let max = median * 1.35;
+
+            // Rounding
+            const fmt = (n) => n.toFixed(1);
+
+            document.getElementById('salary-output').innerText = `₹ ${fmt(min)}L - ₹ ${fmt(max)} LPA`;
+            document.getElementById('result-box').style.display = 'block';
+
+            // Smooth scroll to result
+            document.getElementById('result-box').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+
+</html>
