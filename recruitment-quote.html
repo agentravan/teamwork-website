@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Build Recruitment Quote | TeamWork Solutions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/header-premium.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <style>
+        .form-section {
+            background: rgba(30, 41, 59, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .form-section h3 {
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #cbd5e1;
+            font-size: 0.9rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid #475569;
+            border-radius: 6px;
+            color: white;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .checkbox-btn {
+            display: block;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .checkbox-btn input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .checkbox-btn .box {
+            display: block;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            transition: all 0.2s;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .checkbox-btn input:checked~.box {
+            background: rgba(59, 130, 246, 0.2);
+            border-color: var(--primary);
+            color: white;
+        }
+
+        .summary-card {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="global-header-container"></div>
+
+    <main class="section-padding" style="padding-top: 150px;">
+        <div class="container" style="max-width: 800px;">
+            <div style="text-align: center; margin-bottom: 40px;">
+                <h1 style="font-size: 2.5rem; margin-bottom: 10px;">Build Your Recruitment Quote</h1>
+                <p style="color: var(--text-secondary);">Select the services you require and receive a custom
+                    recruitment quote.</p>
+            </div>
+
+            <form id="recruitment-quote-form" onsubmit="handleRecruitmentSubmit(event)">
+
+                <!-- Step 1: Services -->
+                <div class="form-section">
+                    <h3><span
+                            style="background: var(--primary); color: white; width: 24px; height: 24px; border-radius: 50%; display: inline-flex; justify-content: center; align-items: center; font-size: 0.8rem;">1</span>
+                        Select Recruitment Services</h3>
+                    <div class="checkbox-group">
+                        <label class="checkbox-btn">
+                            <input type="checkbox" name="services" value="End-to-End Recruitment">
+                            <span class="box">End-to-End Recruitment</span>
+                        </label>
+                        <label class="checkbox-btn">
+                            <input type="checkbox" name="services" value="Bulk Hiring">
+                            <span class="box">Bulk / Volume Hiring</span>
+                        </label>
+                        <label class="checkbox-btn">
+                            <input type="checkbox" name="services" value="Professional Hiring">
+                            <span class="box">Professional Hiring</span>
+                        </label>
+                        <label class="checkbox-btn">
+                            <input type="checkbox" name="services" value="Leadership Hiring">
+                            <span class="box">Leadership Hiring</span>
+                        </label>
+                        <label class="checkbox-btn">
+                            <input type="checkbox" name="services" value="RPO">
+                            <span class="box">RPO Services</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Step 2: Hiring Details -->
+                <div class="form-section">
+                    <h3><span
+                            style="background: var(--primary); color: white; width: 24px; height: 24px; border-radius: 50%; display: inline-flex; justify-content: center; align-items: center; font-size: 0.8rem;">2</span>
+                        Hiring Details</h3>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                        <div class="form-group">
+                            <label>Number of Positions</label>
+                            <input type="number" name="positions" class="form-control" placeholder="e.g. 5">
+                        </div>
+                        <div class="form-group">
+                            <label>Job Location(s)</label>
+                            <input type="text" name="location" class="form-control"
+                                placeholder="e.g. Bangalore, Mumbai">
+                        </div>
+                        <div class="form-group" style="grid-column: 1 / -1;">
+                            <label>Job Role(s)</label>
+                            <input type="text" name="roles" class="form-control"
+                                placeholder="e.g. Sales Executive, Java Developer">
+                        </div>
+                        <div class="form-group">
+                            <label>Industry</label>
+                            <input type="text" name="industry" class="form-control"
+                                placeholder="e.g. IT, Manufacturing">
+                        </div>
+                        <div class="form-group">
+                            <label>Expected Timeline</label>
+                            <select name="timeline" class="form-control">
+                                <option>Immediate</option>
+                                <option>Within 15 Days</option>
+                                <option>Within 30 Days</option>
+                                <option>Next Quarter</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 3: Model -->
+                <div class="form-section">
+                    <h3><span
+                            style="background: var(--primary); color: white; width: 24px; height: 24px; border-radius: 50%; display: inline-flex; justify-content: center; align-items: center; font-size: 0.8rem;">3</span>
+                        Preferred Hiring Model</h3>
+                    <div class="checkbox-group">
+                        <label class="checkbox-btn">
+                            <input type="radio" name="model" value="Fixed Per-Hire">
+                            <span class="box">Fixed per-hire</span>
+                        </label>
+                        <label class="checkbox-btn">
+                            <input type="radio" name="model" value="Success-Based (%)">
+                            <span class="box">Success-based (%)</span>
+                        </label>
+                        <label class="checkbox-btn">
+                            <input type="radio" name="model" value="Volume-Based">
+                            <span class="box">Volume-based hiring</span>
+                        </label>
+                        <label class="checkbox-btn">
+                            <input type="radio" name="model" value="Custom Enterprise" checked>
+                            <span class="box">Custom Enterprise</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Step 4: Add-ons -->
+                <div class="form-section">
+                    <h3><span
+                            style="background: var(--primary); color: white; width: 24px; height: 24px; border-radius: 50%; display: inline-flex; justify-content: center; align-items: center; font-size: 0.8rem;">4</span>
+                        Optional Add-Ons</h3>
+                    <div class="checkbox-group">
+                        <label class="checkbox-btn">
+                            <input type="checkbox" name="addons" value="Replacement Guarantee">
+                            <span class="box">Replacement Guarantee</span>
+                        </label>
+                        <label class="checkbox-btn">
+                            <input type="checkbox" name="addons" value="Interview Coordination">
+                            <span class="box">Interview Coordination</span>
+                        </label>
+                        <label class="checkbox-btn">
+                            <input type="checkbox" name="addons" value="Offer Negotiation">
+                            <span class="box">Offer Negotiation</span>
+                        </label>
+                        <label class="checkbox-btn">
+                            <input type="checkbox" name="addons" value="Joining Assurance">
+                            <span class="box">Joining Assurance</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Summary Info -->
+                <div class="summary-card">
+                    <h4 style="color: #10b981; margin-bottom: 10px;">Quote Summary</h4>
+                    <p style="font-size: 0.9rem; opacity: 0.8; margin-bottom: 10px;">
+                        Based on your selection, our team will generate a detailed commercial proposal with relevant
+                        volume discounts.
+                    </p>
+                    <div style="font-weight: 600;">Status: Custom Quote Required</div>
+                </div>
+
+                <div class="form-section" style="margin-top: 30px;">
+                    <h3>Your Contact Details</h3>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                        <input type="text" name="companyName" placeholder="Company Name" required class="form-control">
+                        <input type="text" name="contactName" placeholder="Contact Person" required
+                            class="form-control">
+                        <input type="email" name="email" placeholder="Official Email" required class="form-control">
+                        <input type="tel" name="phone" placeholder="Phone Number" required class="form-control">
+                    </div>
+                </div>
+
+                <div style="margin-top: 40px; display: flex; gap: 20px; justify-content: center;">
+                    <button type="submit" class="btn btn-primary" style="padding: 15px 40px; font-size: 1.1rem;">
+                        <i class="ph-bold ph-paper-plane-right"></i> Submit Quote Request
+                    </button>
+                    <a href="contact.html" class="btn btn-outline" style="padding: 15px 30px;">Talk to Expert</a>
+                </div>
+                <p style="text-align: center; margin-top: 15px; color: #64748b; font-size: 0.85rem;">
+                    Request will be sent to teamwork.hrsolution@zohomail.in
+                </p>
+
+            </form>
+        </div>
+    </main>
+
+    <div id="global-footer-container"></div>
+
+    <script src="js/service-store.js"></script>
+    <script src="js/unified-header.js"></script>
+    <script src="js/unified-footer.js"></script>
+    <script>
+        // Check URL params to pre-select items
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const plan = params.get('plan');
+
+            if (plan) {
+                // Auto-select based on plan param (simplified logic)
+                const modelRadios = document.getElementsByName('model');
+                if (plan === 'starter' || plan === 'growth') {
+                    // logic to tick boxes or radios could go here
+                }
+            }
+        });
+
+        function handleRecruitmentSubmit(e) {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+
+            // Collect Arrays
+            const services = formData.getAll('services').join(', ');
+            const addons = formData.getAll('addons').join(', ');
+
+            const data = {
+                companyName: formData.get('companyName'),
+                contactName: formData.get('contactName'),
+                email: formData.get('email'),
+                phone: formData.get('phone'),
+                // Custom fields for body construction
+                services: services,
+                positions: formData.get('positions'),
+                location: formData.get('location'),
+                roles: formData.get('roles'),
+                industry: formData.get('industry'),
+                timeline: formData.get('timeline'),
+                model: formData.get('model'),
+                addons: addons
+            };
+
+            const recipient = 'teamwork.hrsolution@zohomail.in';
+            const subject = `Recruitment Quote Request - ${data.companyName}`;
+
+            let body = `Dear Team, %0D%0A%0D%0A`;
+            body += `I would like to request a recruitment quote.%0D%0A%0D%0A`;
+            body += `--- Requirements ---%0D%0A`;
+            body += `Services: ${data.services}%0D%0A`;
+            body += `Roles: ${data.roles}%0D%0A`;
+            body += `Positions: ${data.positions} | Loc: ${data.location}%0D%0A`;
+            body += `Industry: ${data.industry}%0D%0A`;
+            body += `Timeline: ${data.timeline}%0D%0A`;
+            body += `Preferred Model: ${data.model}%0D%0A`;
+            body += `Add-ons: ${data.addons}%0D%0A%0D%0A`;
+            body += `--- Contact Details ---%0D%0A`;
+            body += `Company: ${data.companyName}%0D%0A`;
+            body += `Person: ${data.contactName}%0D%0A`;
+            body += `Email: ${data.email}%0D%0A`;
+            body += `Phone: ${data.phone}%0D%0A`;
+
+            window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;
+
+            alert("Redirecting to your email client...");
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recruitment Pricing | TeamWork Solutions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/header-premium.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <style>
+        .pricing-card {
+            background: rgba(30, 41, 59, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .pricing-card.highlight {
+            background: linear-gradient(145deg, rgba(30, 41, 59, 0.8), rgba(37, 99, 235, 0.2));
+            border-color: var(--primary);
+        }
+
+        .price-tag {
+            font-size: 2rem;
+            font-weight: 700;
+            color: white;
+            margin: 15px 0 5px;
+        }
+
+        .price-unit {
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+        .features-list {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+            flex-grow: 1;
+        }
+
+        .features-list li {
+            padding: 8px 0;
+            color: var(--text-secondary);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .features-list li:last-child {
+            border-bottom: none;
+        }
+
+        .features-list li i {
+            color: var(--primary);
+        }
+
+        .plan-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--primary);
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 20px;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="global-header-container"></div>
+
+    <main>
+        <!-- HERO -->
+        <section class="section-padding"
+            style="padding-top: 180px; text-align: center; background: radial-gradient(circle at center, rgba(16, 185, 129, 0.1) 0%, rgba(15, 23, 42, 1) 70%);">
+            <div class="container">
+                <span style="color: #10b981; font-weight: 600; letter-spacing: 1px;">TRANSPARENT & FLEXIBLE</span>
+                <h1 style="font-size: 3rem; margin-top: 10px; margin-bottom: 20px;">Recruitment Pricing</h1>
+                <p style="font-size: 1.25rem; color: #cbd5e1; max-width: 800px; margin: 0 auto;">
+                    Simple, flexible, and scalable pricing models designed for your business needs.
+                </p>
+                <div style="margin-top: 30px; display: flex; gap: 15px; justify-content: center;">
+                    <div
+                        style="background: rgba(255,255,255,0.05); padding: 8px 16px; border-radius: 20px; font-size: 0.9rem;">
+                        <i class="ph-bold ph-check" style="color: #10b981;"></i> Standard Models
+                    </div>
+                    <div
+                        style="background: rgba(255,255,255,0.05); padding: 8px 16px; border-radius: 20px; font-size: 0.9rem;">
+                        <i class="ph-bold ph-check" style="color: #10b981;"></i> Custom Quotes
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRICING MODELS -->
+        <section class="section-padding">
+            <div class="container">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px;">
+
+                    <!-- 1. Starter -->
+                    <div class="pricing-card">
+                        <div style="color: #10b981; font-weight: 600;">STARTER HIRING</div>
+                        <h3 style="margin-top: 5px;">Entry-Level & Junior</h3>
+                        <div class="price-tag">₹3k - ₹5k</div>
+                        <div class="price-unit">per hire</div>
+                        <p style="color: #94a3b8; font-size: 0.9rem; margin-top: 15px;">Best for Small teams & Support
+                            roles.</p>
+
+                        <ul class="features-list">
+                            <li><i class="ph-bold ph-check"></i> Resume sourcing</li>
+                            <li><i class="ph-bold ph-check"></i> Initial screening</li>
+                            <li><i class="ph-bold ph-check"></i> Shortlisting support</li>
+                            <li><i class="ph-bold ph-check"></i> Replacement: 30 Days</li>
+                        </ul>
+
+                        <a href="recruitment-quote.html?plan=starter" class="btn btn-outline"
+                            style="width: 100%; text-align: center;">Add to Quote</a>
+                    </div>
+
+                    <!-- 2. Growth -->
+                    <div class="pricing-card highlight">
+                        <div class="plan-badge">POPULAR</div>
+                        <div style="color: var(--primary); font-weight: 600;">GROWTH HIRING</div>
+                        <h3 style="margin-top: 5px;">Professional Roles</h3>
+                        <div class="price-tag">₹6k - ₹8k</div>
+                        <div class="price-unit">per hire</div>
+                        <p style="color: #94a3b8; font-size: 0.9rem; margin-top: 15px;">For SMEs & Functional roles.</p>
+
+                        <ul class="features-list">
+                            <li><i class="ph-bold ph-check"></i> End-to-end lifecycle</li>
+                            <li><i class="ph-bold ph-check"></i> Interview coordination</li>
+                            <li><i class="ph-bold ph-check"></i> Candidate follow-ups</li>
+                            <li><i class="ph-bold ph-check"></i> Replacement: 45 Days</li>
+                        </ul>
+
+                        <a href="recruitment-quote.html?plan=growth" class="btn btn-primary"
+                            style="width: 100%; text-align: center;">Build Custom Quote</a>
+                    </div>
+
+                    <!-- 3. Professional -->
+                    <div class="pricing-card">
+                        <div style="color: #8b5cf6; font-weight: 600;">PROFESSIONAL</div>
+                        <h3 style="margin-top: 5px;">Business-Critical</h3>
+                        <div class="price-tag">8% - 10%</div>
+                        <div class="price-unit">of Annual CTC</div>
+                        <p style="color: #94a3b8; font-size: 0.9rem; margin-top: 15px;">Or Fixed Fee: ₹8k - ₹12k</p>
+
+                        <ul class="features-list">
+                            <li><i class="ph-bold ph-check"></i> Full ownership</li>
+                            <li><i class="ph-bold ph-check"></i> Offer rollout support</li>
+                            <li><i class="ph-bold ph-check"></i> Joining assurance</li>
+                            <li><i class="ph-bold ph-check"></i> Replacement: 90 Days</li>
+                        </ul>
+
+                        <a href="recruitment-quote.html?plan=professional" class="btn btn-outline"
+                            style="width: 100%; text-align: center;">Choose Hiring Model</a>
+                    </div>
+
+                    <!-- 4. Enterprise -->
+                    <div class="pricing-card"
+                        style="background: rgba(255,255,255,0.02); border-color: rgba(255,255,255,0.05);">
+                        <div style="color: #cbd5e1; font-weight: 600;">ENTERPRISE</div>
+                        <h3 style="margin-top: 5px;">Bulk & Leadership</h3>
+                        <div class="price-tag">Custom</div>
+                        <div class="price-unit">Volume / Success-based</div>
+                        <p style="color: #94a3b8; font-size: 0.9rem; margin-top: 15px;">For High-Volume & Strategic
+                            Hiring.</p>
+
+                        <ul class="features-list">
+                            <li><i class="ph-bold ph-check"></i> Bulk hiring execution</li>
+                            <li><i class="ph-bold ph-check"></i> Leadership search</li>
+                            <li><i class="ph-bold ph-check"></i> Dedicated recruiter</li>
+                            <li><i class="ph-bold ph-check"></i> Governance & tracking</li>
+                        </ul>
+
+                        <a href="recruitment-quote.html?plan=enterprise" class="btn btn-outline"
+                            style="width: 100%; text-align: center;">Request Custom Quote</a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ADD-ONS -->
+        <section class="section-padding" style="background: rgba(30, 41, 59, 0.3);">
+            <div class="container">
+                <h2 style="text-align: center; margin-bottom: 40px;">Optional Recruitment Add-Ons</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+                    <div
+                        style="background: rgba(0,0,0,0.2); padding: 20px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05); text-align: center;">
+                        <i class="ph-duotone ph-arrow-counter-clockwise"
+                            style="font-size: 32px; color: var(--primary); margin-bottom: 10px;"></i>
+                        <h4 style="margin-bottom: 5px;">Replacement Guarantee</h4>
+                        <div style="color: #94a3b8; font-size: 0.9rem;">30-90 Days Extension</div>
+                    </div>
+                    <div
+                        style="background: rgba(0,0,0,0.2); padding: 20px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05); text-align: center;">
+                        <i class="ph-duotone ph-user-check"
+                            style="font-size: 32px; color: var(--primary); margin-bottom: 10px;"></i>
+                        <h4 style="margin-bottom: 5px;">Background Verification</h4>
+                        <div style="color: #94a3b8; font-size: 0.9rem;">Coordination Support</div>
+                    </div>
+                    <div
+                        style="background: rgba(0,0,0,0.2); padding: 20px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05); text-align: center;">
+                        <i class="ph-duotone ph-chat-circle-text"
+                            style="font-size: 32px; color: var(--primary); margin-bottom: 10px;"></i>
+                        <h4 style="margin-bottom: 5px;">Offer Negotiation</h4>
+                        <div style="color: #94a3b8; font-size: 0.9rem;">Expert Support</div>
+                    </div>
+                    <div
+                        style="background: rgba(0,0,0,0.2); padding: 20px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05); text-align: center;">
+                        <i class="ph-duotone ph-handshake"
+                            style="font-size: 32px; color: var(--primary); margin-bottom: 10px;"></i>
+                        <h4 style="margin-bottom: 5px;">Joining Assurance</h4>
+                        <div style="color: #94a3b8; font-size: 0.9rem;">Follow-ups & Engagement</div>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 30px;">
+                    <a href="recruitment-quote.html" class="btn btn-outline">Add Add-Ons to Quote</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- FINAL CTA -->
+        <section class="section-padding" style="text-align: center;">
+            <div class="container">
+                <h2 style="margin-bottom: 24px;">Not sure which pricing model fits?</h2>
+                <div style="display: flex; gap: 20px; justify-content: center;">
+                    <a href="recruitment-quote.html" class="btn btn-primary">Build Recruitment Quote</a>
+                    <a href="contact.html" class="btn btn-outline">Talk to Recruitment Expert</a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="global-footer-container"></div>
+
+    <script src="js/service-store.js"></script>
+    <script src="js/unified-header.js"></script>
+    <script src="js/unified-footer.js"></script>
+</body>
+
+</html>
