@@ -7,22 +7,22 @@ const headerHTML = `
 <header class="site-header">
     <div class="nav-container">
         <!-- LOGO -->
-        <a href="index.html" class="logo">
+        <a href="/index.html" class="logo">
             TeamWork <span>SOLUTIONS</span>
         </a>
 
         <!-- MAIN NAVIGATION -->
         <nav class="main-nav">
             <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="global-hrx.html">Global HRX</a></li>
+                <li><a href="/index.html">Home</a></li>
+                <li><a href="/global-hrx.html">Global HRX</a></li>
 
                 <!-- SERVICES MEGA DROPDOWN -->
                 <li class="dropdown">
-                    <a href="services.html" class="dropdown-trigger">Services ▾</a>
+                    <a href="/services.html" class="dropdown-trigger">Services ▾</a>
                     <div class="mega-menu">
                         <!-- Item 1 -->
-                        <a href="services/payroll-management.html" class="mega-link">
+                        <a href="/services/payroll-management.html" class="mega-link">
                             <div class="mega-icon blue"><i class="ph-duotone ph-currency-dollar"></i></div>
                             <div class="mega-content">
                                 <div class="mega-title">Payroll Management</div>
@@ -30,7 +30,7 @@ const headerHTML = `
                             </div>
                         </a>
                         <!-- Item 2 -->
-                        <a href="services/compliance-outsourcing.html" class="mega-link">
+                        <a href="/services/compliance-outsourcing.html" class="mega-link">
                             <div class="mega-icon green"><i class="ph-duotone ph-shield-check"></i></div>
                             <div class="mega-content">
                                 <div class="mega-title">Compliance Outsourcing</div>
@@ -38,7 +38,7 @@ const headerHTML = `
                             </div>
                         </a>
                         <!-- Item 3 -->
-                        <a href="services/hr-policy-audit.html" class="mega-link">
+                        <a href="/services/hr-policy-audit.html" class="mega-link">
                             <div class="mega-icon purple"><i class="ph-duotone ph-files"></i></div>
                             <div class="mega-content">
                                 <div class="mega-title">HR Policy & Audit</div>
@@ -46,11 +46,19 @@ const headerHTML = `
                             </div>
                         </a>
                         <!-- Item 4 -->
-                        <a href="services/startup-registration.html" class="mega-link">
+                        <a href="/services/startup-registration.html" class="mega-link">
                             <div class="mega-icon orange"><i class="ph-duotone ph-rocket"></i></div>
                             <div class="mega-content">
                                 <div class="mega-title">Startup Registration</div>
                                 <div class="mega-desc">Company, labor & statutory setup.</div>
+                            </div>
+                        </a>
+                        <!-- Item 5 - NEW -->
+                        <a href="/services/global-hrx-hrms.html" class="mega-link">
+                            <div class="mega-icon blue"><i class="ph-duotone ph-desktop"></i></div>
+                            <div class="mega-content">
+                                <div class="mega-title">GlobalHRX HRMS</div>
+                                <div class="mega-desc">Digital HR transformation & automation.</div>
                             </div>
                         </a>
                     </div>
@@ -60,25 +68,25 @@ const headerHTML = `
                 <li class="dropdown">
                     <a href="#" class="dropdown-trigger">Calculators ▾</a>
                     <div class="mega-menu calculators-grid">
-                        <a href="calculator-pf.html" class="mega-link">
+                        <a href="/calculator-pf.html" class="mega-link">
                             <div class="mega-icon orange"><i class="ph-duotone ph-piggy-bank"></i></div>
                             <div class="mega-content">
                                 <div class="mega-title">PF Calculator</div>
                             </div>
                         </a>
-                        <a href="calculator-esic.html" class="mega-link">
+                        <a href="/calculator-esic.html" class="mega-link">
                             <div class="mega-icon pink"><i class="ph-duotone ph-first-aid-kit"></i></div>
                             <div class="mega-content">
                                 <div class="mega-title">ESIC Calculator</div>
                             </div>
                         </a>
-                        <a href="calculator-tds.html" class="mega-link">
+                        <a href="/calculator-tds.html" class="mega-link">
                             <div class="mega-icon blue"><i class="ph-duotone ph-calculator"></i></div>
                             <div class="mega-content">
                                 <div class="mega-title">TDS Calculator</div>
                             </div>
                         </a>
-                        <a href="calculator-gratuity.html" class="mega-link">
+                        <a href="/calculator-gratuity.html" class="mega-link">
                             <div class="mega-icon green"><i class="ph-duotone ph-coins"></i></div>
                             <div class="mega-content">
                                 <div class="mega-title">Gratuity</div>
@@ -87,16 +95,16 @@ const headerHTML = `
                     </div>
                 </li>
 
-                <li><a href="careers.html">Careers</a></li>
-                <li><a href="pricing.html">Pricing</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="/careers.html">Careers</a></li>
+                <li><a href="/pricing.html">Pricing</a></li>
+                <li><a href="/about.html">About</a></li>
+                <li><a href="/contact.html">Contact</a></li>
                 
                 <!-- MOBILE CLONE TARGET (Will disappear on Desktop via CSS) -->
                 <li class="mobile-only-actions" style="display:none; width: 100%; margin-top: 20px;">
                     <div style="display: flex; flex-direction: column; gap: 12px;">
-                        <a class="btn-ghost" href="login.html" style="justify-content: center;">Login</a>
-                        <a class="btn-primary-header" href="request-access.html" style="text-align: center;">Request Access</a>
+                        <a class="btn-ghost" href="/login.html" style="justify-content: center;">Login</a>
+                        <a class="btn-primary-header" href="/request-access.html" style="text-align: center;">Request Access</a>
                     </div>
                 </li>
             </ul>
@@ -104,8 +112,8 @@ const headerHTML = `
 
         <!-- RIGHT SIDE ACTIONS -->
         <div class="nav-actions">
-            <a class="btn-ghost" href="login.html">Log In</a>
-            <a class="btn-primary-header" href="request-access.html">
+            <a class="btn-ghost" href="/login.html">Log In</a>
+            <a class="btn-primary-header" href="/request-access.html">
                 Request Access <i class="ph-bold ph-arrow-right"></i>
             </a>
         </div>
