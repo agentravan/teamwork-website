@@ -33,19 +33,40 @@
                 <p style="color: var(--text-secondary); font-size: 0.9rem;">Join the TeamWork Enterprise Ecosystem.</p>
             </div>
 
-            <form>
+            <form id="access-form" onsubmit="handleRequestSubmit(event)">
                 <div class="form-group" style="margin-bottom: 20px;">
                     <label style="display: block; margin-bottom: 8px; font-size: 0.9rem;">Work Email</label>
-                    <input type="email" placeholder="you@company.com" required
+                    <input type="email" id="req-email" placeholder="you@company.com" required
                         style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
                 </div>
                 <div class="form-group" style="margin-bottom: 25px;">
                     <label style="display: block; margin-bottom: 8px; font-size: 0.9rem;">Organization Name</label>
-                    <input type="text" placeholder="Company Ltd." required
+                    <input type="text" id="req-org" placeholder="Company Ltd." required
                         style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
                 </div>
                 <button type="submit" class="btn btn-service" style="width: 100%;">Submit Request</button>
             </form>
+
+            <script>
+                function handleRequestSubmit(e) {
+                    e.preventDefault();
+                    const email = document.getElementById('req-email').value;
+                    const org = document.getElementById('req-org').value;
+
+                    const newRequest = {
+                        email: email,
+                        org: org,
+                        date: new Date().toLocaleString()
+                    };
+
+                    const existing = JSON.parse(localStorage.getItem('accessRequests') || '[]');
+                    existing.unshift(newRequest); // Add to top
+                    localStorage.setItem('accessRequests', JSON.stringify(existing));
+
+                    alert('Request submitted successfully! Our team will contact you shortly.');
+                    e.target.reset();
+                }
+            </script>
         </div>
     </main>
 

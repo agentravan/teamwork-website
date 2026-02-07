@@ -4,236 +4,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard | TeamWork Solutions</title>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
-        rel="stylesheet">
+    <title>Admin Panel | TeamWork Solutions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/mega-menu.css">
     <link rel="stylesheet" href="css/header-premium.css">
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <style>
-        /* Admin Specific Overrides */
-        .admin-layout {
-            display: grid;
-            grid-template-columns: 260px 1fr;
-            min-height: calc(100vh - 80px);
-            margin-top: 80px;
-        }
-
-        .sidebar {
-            background: rgba(2, 6, 23, 0.95);
-            border-right: 1px solid var(--border-subtle);
-            padding: 30px 20px;
-            position: fixed;
-            width: 260px;
-            height: calc(100vh - 80px);
-            overflow-y: auto;
-            top: 80px;
-        }
-
-        .main-content {
-            margin-left: 260px;
-            padding: 40px 60px;
-            width: calc(100% - 260px);
-        }
-
-        .sidebar-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 14px 16px;
-            color: var(--text-tertiary);
-            text-decoration: none;
-            border-radius: 8px;
-            margin-bottom: 8px;
-            transition: all 0.2s;
-            cursor: pointer;
-            font-weight: 500;
-        }
-
-        .sidebar-item:hover {
-            background: rgba(255, 255, 255, 0.05);
+        body {
+            background: #0f172a;
             color: white;
+            font-family: 'Inter', sans-serif;
         }
 
-        .sidebar-item.active {
-            background: rgba(59, 130, 246, 0.1);
-            color: var(--primary);
-            border-left: 3px solid var(--primary);
-        }
-
-        .sidebar-item.disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            pointer-events: none;
-        }
-
-        /* KPI Cards */
-        .kpi-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 30px;
-            margin-bottom: 50px;
-        }
-
-        .kpi-card {
-            background: rgba(30, 41, 59, 0.3);
-            border: 1px solid var(--border-subtle);
-            padding: 30px;
-            border-radius: 12px;
-        }
-
-        .kpi-label {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            margin-bottom: 12px;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .kpi-value {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: white;
-            font-family: 'Space Grotesk', sans-serif;
-        }
-
-        /* Tables & Empty States */
-        .modern-table {
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 0 8px;
-        }
-
-        .modern-table th {
-            text-align: left;
-            padding: 15px 20px;
-            color: var(--text-tertiary);
-            font-weight: 600;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .modern-table td {
-            background: rgba(255, 255, 255, 0.02);
+        .admin-container {
+            max-width: 1000px;
+            margin: 100px auto;
             padding: 20px;
-            color: white;
-            font-size: 0.95rem;
-            border-top: 1px solid var(--border-subtle);
-            border-bottom: 1px solid var(--border-subtle);
         }
 
-        .modern-table td:first-child {
-            border-left: 1px solid var(--border-subtle);
-            border-radius: 8px 0 0 8px;
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: rgba(30, 41, 59, 0.5);
+            border-radius: 8px;
+            overflow: hidden;
         }
 
-        .modern-table td:last-child {
-            border-right: 1px solid var(--border-subtle);
-            border-radius: 0 8px 8px 0;
+        .data-table th,
+        .data-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .data-table th {
+            background: rgba(59, 130, 246, 0.2);
+            color: #60a5fa;
+            font-weight: 600;
+        }
+
+        .data-table tr:hover {
+            background: rgba(255, 255, 255, 0.02);
         }
 
         .empty-state {
             text-align: center;
-            padding: 80px 40px;
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 12px;
-            border: 1px dashed var(--border-subtle);
-            margin-top: 20px;
+            padding: 40px;
+            color: var(--text-muted);
         }
 
-        /* Badge Styles */
         .status-badge {
-            padding: 6px 12px;
-            border-radius: 20px;
+            padding: 4px 8px;
+            border-radius: 4px;
             font-size: 0.8rem;
-            font-weight: 500;
-        }
-
-        .bg-success {
-            background: rgba(16, 185, 129, 0.15);
-            color: #10b981;
-        }
-
-        .bg-warning {
-            background: rgba(234, 179, 8, 0.15);
-            color: #eab308;
-        }
-
-        .bg-danger {
-            background: rgba(239, 68, 68, 0.15);
-            color: #ef4444;
-        }
-
-        /* Modal */
-        .modal-overlay-custom {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(8px);
-            z-index: 2000;
-            display: none;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal-content-custom {
-            background: #0f172a;
-            border: 1px solid var(--border-highlight);
-            width: 600px;
-            max-height: 90vh;
-            border-radius: 16px;
-            overflow-y: auto;
-            position: relative;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-        }
-
-        .modal-header {
-            padding: 24px;
-            border-bottom: 1px solid var(--border-subtle);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .modal-body {
-            padding: 30px;
-        }
-
-        .modal-footer {
-            padding: 20px 30px;
-            border-top: 1px solid var(--border-subtle);
-            display: flex;
-            justify-content: flex-end;
-            gap: 15px;
-            background: rgba(0, 0, 0, 0.2);
-        }
-
-        @media(max-width: 992px) {
-            .admin-layout {
-                grid-template-columns: 1fr;
-            }
-
-            .sidebar {
-                display: none;
-            }
-
-            /* Mobile Menu takes over */
-            .main-content {
-                margin-left: 0;
-                width: 100%;
-                padding: 20px;
-            }
-
-            .kpi-grid {
-                grid-template-columns: 1fr 1fr;
-            }
+            background: rgba(34, 197, 94, 0.2);
+            color: #4ade80;
         }
     </style>
 </head>
@@ -241,614 +67,60 @@
 <body>
     <div id="global-header-container"></div>
 
+    <div class="admin-container">
+        <h1>Requested Access Submissions</h1>
+        <p style="color: var(--text-secondary);">These are the leads captured from the "Request Access" page.</p>
 
-
-    <!-- 2. ADMIN LAYOUT -->
-    <div class="admin-layout">
-        <!-- Sidebar -->
-        <aside class="sidebar">
-            <div
-                style="margin-bottom: 25px; padding-left: 12px; color: var(--text-tertiary); font-size: 0.75rem; letter-spacing: 1.5px; text-transform: uppercase;">
-                Admin Console</div>
-            <a onclick="switchView('dashboard')" id="nav-dashboard" class="sidebar-item active">
-                <i class="ph-bold ph-squares-four"></i> Dashboard
-            </a>
-            <a onclick="openPostJobModal()" class="sidebar-item">
-                <i class="ph-bold ph-plus-circle"></i> Post a Job
-            </a>
-            <a onclick="switchView('manage')" id="nav-manage" class="sidebar-item">
-                <i class="ph-bold ph-briefcase"></i> Manage Jobs
-            </a>
-            <a onclick="switchView('users')" id="nav-users" class="sidebar-item">
-                <i class="ph-bold ph-users"></i> Users
-            </a>
-            <div style="margin-top: auto; padding-top: 20px; border-top: 1px solid var(--border-subtle);">
-                <div style="padding-left: 12px; font-size: 0.85rem; color: white;">Admin User</div>
-                <div style="padding-left: 12px; font-size: 0.75rem; color: var(--text-tertiary);" id="currentUserEmail">
-                    admin@teamwork.com
-                </div>
-            </div>
-        </aside>
-
-        <!-- Main Content -->
-        <main class="main-content">
-
-            <!-- VIEW: DASHBOARD -->
-            <div id="view-dashboard">
-                <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px;">
-                    <div>
-                        <h2 style="margin-bottom: 10px;">Dashboard Overview</h2>
-                        <p style="color: var(--text-secondary);">Real-time hiring metrics.</p>
-                    </div>
-                </div>
-
-                <!-- KPI Cards -->
-                <div class="kpi-grid">
-                    <div class="kpi-card">
-                        <div class="kpi-label">Total Jobs</div>
-                        <div class="kpi-value" id="kpiTotal">0</div>
-                    </div>
-                    <div class="kpi-card" style="border-color: rgba(16, 185, 129, 0.3);">
-                        <div class="kpi-label" style="color: #10b981;">Active</div>
-                        <div class="kpi-value" id="kpiActive" style="color: #10b981;">0</div>
-                    </div>
-                    <div class="kpi-card" style="border-color: rgba(234, 179, 8, 0.3);">
-                        <div class="kpi-label" style="color: #eab308;">On Hold</div>
-                        <div class="kpi-value" id="kpiHold" style="color: #eab308;">0</div>
-                    </div>
-                    <div class="kpi-card">
-                        <div class="kpi-label">Applications</div>
-                        <div class="kpi-value" id="kpiApps">0</div>
-                    </div>
-                </div>
-
-                <!-- RECENT JOB POSTS (Strict Full-Width Layout) -->
-                <section class="recent-jobs"
-                    style="margin-top: 40px; background: rgba(255,255,255,0.02); border-radius: 16px; padding: 24px;">
-                    <div class="section-header"
-                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-                        <h2 style="font-size: 1.5rem; margin: 0;">Recent Job Posts</h2>
-
-                        <div style="display: flex; gap: 10px;">
-                            <!-- Export Button (Visible if apps > 0) -->
-                            <button id="btnExport" onclick="exportApplications()" class="btn btn-outline"
-                                style="display: none;">
-                                <i class="ph-bold ph-download-simple"></i> Export
-                            </button>
-                            <button onclick="openPostJobModal()" class="btn btn-primary">Post New Job</button>
-                        </div>
-                    </div>
-
-                    <div id="dashboardTableContainer" class="jobs-table" style="display: flex; flex-direction: column;">
-                        <!-- JS renders here -->
-                    </div>
-                </section>
-            </div>
-
-            <!-- VIEW: MANAGE -->
-            <div id="view-manage" style="display: none;">
-                <h2 style="margin-bottom: 30px;">Manage Jobs</h2>
-                <div id="manageTableContainer">
-                    <!-- Populated by JS -->
-                </div>
-            </div>
-
-            <!-- VIEW: USERS -->
-            <div id="view-users" style="display: none;">
-                <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px;">
-                    <div>
-                        <h2 style="margin-bottom: 10px;">User Management</h2>
-                        <p style="color: var(--text-secondary);">Manage admin access and permissions.</p>
-                    </div>
-                    <div>
-                        <button onclick="openCreateUserModal()" class="btn btn-primary">
-                            <i class="ph-bold ph-plus"></i> Create User
-                        </button>
-                    </div>
-                </div>
-                <div id="usersTableContainer">
-                    <!-- Populated by JS -->
-                </div>
-            </div>
-
-        </main>
-    </div>
-
-    <!-- Standard Footer -->
-    <footer>
-        <div class="container">
-            <div
-                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-bottom: 40px;">
-                <div class="footer-col">
-                    <h4>Company</h4>
-                    <ul>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="services.html">Services</a></li>
-                        <li><a href="careers.html">Careers</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Compliance Tools</h4>
-                    <ul>
-                        <li><a href="calculator-pf.html">PF Calculator</a></li>
-                        <li><a href="calculator-esic.html">ESIC Calculator</a></li>
-                        <li><a href="calculator-tds.html">TDS Calculator</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Legal & Privacy</h4>
-                    <ul>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms</a></li>
-                        <li><a href="https://unifiedportal-mem.epfindia.gov.in" target="_blank">EPFO</a></li>
-                        <li><a href="https://www.esic.in" target="_blank">ESIC</a></li>
-                    </ul>
-                    <p style="margin-top:20px; font-size: 0.8rem; color: var(--text-tertiary);">Disclaimer: Calculations
-                        are indicative. Actual statutory deductions may vary.</p>
-                </div>
-            </div>
-            <div
-                style="text-align: center; padding-top: 40px; border-top: 1px solid var(--border-subtle); color: var(--text-tertiary);">
-                &copy; 2026 TeamWork Solutions | Payroll & Compliance Experts
-            </div>
-        </div>
-    </footer>
-
-    <!-- 3. POST ITEM MODAL -->
-    <div id="postJobModal" class="modal-overlay-custom">
-        <div class="modal-content-custom">
-            <div class="modal-header">
-                <h3 style="margin: 0; font-size: 1.25rem;">Post New Job</h3>
-                <button onclick="closePostJobModal()"
-                    style="background: none; border: none; color: white; cursor: pointer;"><i class="ph-bold ph-x"
-                        style="font-size: 20px;"></i></button>
-            </div>
-            <form onsubmit="handlePostJob(event)">
-                <div class="modal-body">
-                    <div class="form-group" style="margin-bottom: 20px;">
-                        <label style="display: block; margin-bottom: 8px; font-size: 0.9rem;">Job Title <span
-                                style="color: #ef4444">*</span></label>
-                        <input type="text" name="title" required placeholder="e.g. Senior Product Manager"
-                            style="width: 100%; padding: 12px; background: rgba(0,0,0,0.2); border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
-                    </div>
-
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
-                        <div class="form-group">
-                            <label style="display: block; margin-bottom: 8px; font-size: 0.9rem;">Department</label>
-                            <select name="dept" required
-                                style="width: 100%; padding: 12px; background: #0f172a; border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
-                                <option value="Engineering">Engineering</option>
-                                <option value="Product">Product</option>
-                                <option value="HR & Ops">HR & Ops</option>
-                                <option value="Sales">Sales</option>
-                                <option value="Marketing">Marketing</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label style="display: block; margin-bottom: 8px; font-size: 0.9rem;">Employment
-                                Type</label>
-                            <select name="type" required
-                                style="width: 100%; padding: 12px; background: #0f172a; border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
-                                <option value="Full-Time">Full-Time</option>
-                                <option value="Contract">Contract</option>
-                                <option value="Internship">Internship</option>
-                                <option value="Consultant">Consultant</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="form-group" style="margin-bottom: 20px;">
-                        <label style="display: block; margin-bottom: 8px; font-size: 0.9rem;">Location <span
-                                style="color: #ef4444">*</span></label>
-                        <input type="text" name="loc" required placeholder="e.g. Remote / Bangalore"
-                            style="width: 100%; padding: 12px; background: rgba(0,0,0,0.2); border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
-                    </div>
-
-                    <div class="form-group" style="margin-bottom: 20px;">
-                        <label style="display: block; margin-bottom: 8px; font-size: 0.9rem;">Description</label>
-                        <textarea name="desc" rows="5" required
-                            placeholder="Describe responsibilities and requirements..."
-                            style="width: 100%; padding: 12px; background: rgba(0,0,0,0.2); border: 1px solid var(--border-subtle); color: white; border-radius: 8px; font-family: inherit;"></textarea>
-                    </div>
-
-                    <div class="form-group" style="margin-bottom: 20px;">
-                        <label style="display: block; margin-bottom: 8px; font-size: 0.9rem;">Status</label>
-                        <select name="status"
-                            style="width: 100%; padding: 12px; background: #0f172a; border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
-                            <option value="Active">Active (Visible)</option>
-                            <option value="Hold">On Hold (Hidden from Applicants)</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" onclick="closePostJobModal()" class="btn btn-outline"
-                        style="border: none;">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Publish Job</button>
-                </div>
-            </form>
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Timestamp</th>
+                    <th>Email</th>
+                    <th>Organization</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody id="requests-body">
+                <!-- Data will be injected here -->
+            </tbody>
+        </table>
+        <div style="margin-top: 20px; text-align: right;">
+            <button onclick="clearData()"
+                style="background: #ef4444; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer;">Clear
+                Data</button>
         </div>
     </div>
 
-    <!-- 4. CREATE USER MODAL -->
-    <div id="createUserModal" class="modal-overlay-custom">
-        <div class="modal-content-custom" style="width: 450px;">
-            <div class="modal-header">
-                <h3 style="margin: 0; font-size: 1.25rem;">Create Admin User</h3>
-                <button onclick="closeCreateUserModal()"
-                    style="background: none; border: none; color: white; cursor: pointer;"><i class="ph-bold ph-x"
-                        style="font-size: 20px;"></i></button>
-            </div>
-            <form onsubmit="handleCreateUser(event)">
-                <div class="modal-body">
-                    <div class="form-group" style="margin-bottom: 20px;">
-                        <label style="display: block; margin-bottom: 8px; font-size: 0.9rem;">Username</label>
-                        <input type="text" name="newUsername" required placeholder="e.g. jdoe"
-                            style="width: 100%; padding: 12px; background: rgba(0,0,0,0.2); border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
-                    </div>
-                    <div class="form-group" style="margin-bottom: 20px;">
-                        <label style="display: block; margin-bottom: 8px; font-size: 0.9rem;">Password</label>
-                        <input type="password" name="newPassword" required placeholder="••••••••"
-                            style="width: 100%; padding: 12px; background: rgba(0,0,0,0.2); border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
-                    </div>
-                    <div class="form-group" style="margin-bottom: 20px;">
-                        <label style="display: block; margin-bottom: 8px; font-size: 0.9rem;">Role</label>
-                        <select name="newRole"
-                            style="width: 100%; padding: 12px; background: #0f172a; border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
-                            <option value="Admin">Admin</option>
-                            <option value="Manager">Manager</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" onclick="closeCreateUserModal()" class="btn btn-outline"
-                        style="border: none;">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Create User</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Scripts -->
-    <script src="js/main.js"></script>
     <script src="js/unified-header.js"></script>
     <script>
-        // --- 1. SESSION GUARD & HEADER SETUP ---
-        const session = JSON.parse(localStorage.getItem('adminSession'));
-        if (!session || session.expiry < Date.now()) {
-            window.location.href = 'career-admin-login.html';
-        }
+        function loadRequests() {
+            const requests = JSON.parse(localStorage.getItem('accessRequests') || '[]');
+            const tbody = document.getElementById('requests-body');
 
-        // SWAP LOGIN BUTTON FOR LOGOUT IN HEADER
-        const headerActions = document.querySelector('.nav-actions');
-        if (headerActions) {
-            headerActions.innerHTML = `
-                <button onclick="handleLogout()" class="btn btn-outline" style="padding: 8px 20px; font-size: 0.9rem; border-color: rgba(255,255,255,0.2);">
-                    <i class="ph-bold ph-sign-out" style="margin-right: 6px;"></i> Logout
-                </button>
-            `;
-        }
-
-        // Show current user in sidebar
-        /* We don't store username in session yet, but we will fix that in login logic. 
-           For now default to admin@teamwork.com or session username if available */
-        if (session.username) {
-            document.getElementById('currentUserEmail').innerText = session.username;
-        }
-
-        // --- 2. DATA SERVICE LAYERS ---
-        const JobService = {
-            getAll: () => JSON.parse(localStorage.getItem('jobs')) || [],
-            save: (jobs) => localStorage.setItem('jobs', JSON.stringify(jobs)),
-            add: (job) => {
-                const jobs = JobService.getAll();
-                jobs.unshift(job); // Newest first
-                JobService.save(jobs);
-            },
-            updateStatus: (id, status) => {
-                const jobs = JobService.getAll();
-                const idx = jobs.findIndex(j => j.id === id);
-                if (idx !== -1) {
-                    jobs[idx].status = status;
-                    JobService.save(jobs);
-                }
-            },
-            delete: (id) => {
-                const jobs = JobService.getAll();
-                const newJobs = jobs.filter(j => j.id !== id);
-                JobService.save(newJobs);
-                // Cascade Delete Applications
-                const apps = AppService.getAll().filter(a => a.jobId !== id);
-                AppService.save(apps);
-            }
-        };
-
-        const AppService = {
-            getAll: () => JSON.parse(localStorage.getItem('applications')) || [],
-            save: (apps) => localStorage.setItem('applications', JSON.stringify(apps)),
-            getByJobId: (jobId) => AppService.getAll().filter(a => a.jobId === jobId)
-        };
-
-        const UserService = {
-            getAll: () => {
-                const users = JSON.parse(localStorage.getItem('adminUsers'));
-                // Ensure default admin always exists if empty
-                if (!users || users.length === 0) {
-                    const defaultAdmin = { username: 'admin', password: 'admin123', role: 'Super Admin', created: Date.now() };
-                    localStorage.setItem('adminUsers', JSON.stringify([defaultAdmin]));
-                    return [defaultAdmin];
-                }
-                return users;
-            },
-            add: (user) => {
-                const users = UserService.getAll();
-                if (users.find(u => u.username === user.username)) {
-                    alert('Username already exists!');
-                    return false;
-                }
-                users.push(user);
-                localStorage.setItem('adminUsers', JSON.stringify(users));
-                return true;
-            },
-            delete: (username) => {
-                if (username === 'admin') {
-                    alert('Cannot delete the root admin.');
-                    return;
-                }
-                const users = UserService.getAll().filter(u => u.username !== username);
-                localStorage.setItem('adminUsers', JSON.stringify(users));
-            }
-        };
-
-        // --- 3. CORE LOGIC ---
-        function initDashboard() {
-            const jobs = JobService.getAll();
-            const apps = AppService.getAll();
-
-            // Calculate KPIs
-            const total = jobs.length;
-            const active = jobs.filter(j => j.status === 'Active').length;
-            const hold = jobs.filter(j => j.status === 'Hold').length;
-            const appCount = total === 0 ? 0 : apps.length;
-
-            // Update UI
-            document.getElementById('kpiTotal').innerText = total;
-            document.getElementById('kpiActive').innerText = active;
-            document.getElementById('kpiHold').innerText = hold;
-            document.getElementById('kpiApps').innerText = appCount;
-
-            // Update Tables
-            renderTables(jobs, apps);
-            renderUsers();
-
-            // Export Button Visibility
-            const btnExport = document.getElementById('btnExport');
-            if (appCount > 0) {
-                btnExport.style.display = 'inline-flex';
-            } else {
-                btnExport.style.display = 'none';
-            }
-        }
-
-        function renderTables(jobs, apps) {
-            const container = document.getElementById('dashboardTableContainer');
-            // We only update dashboard container in this function for the strict view.
-            // Manage view can reuse this or keep table, but for consistency let's update dashboard one strictly.
-
-            if (jobs.length === 0) {
-                container.innerHTML = `
-                    <div class="empty-state" style="text-align: center; padding: 24px; color: #9ca3af;">
-                        No jobs posted yet. Click “Post New Job” to start hiring.
-                    </div>
-                `;
-                // Also update manage container if it exists
-                const manageContainer = document.getElementById('manageTableContainer');
-                if (manageContainer) manageContainer.innerHTML = container.innerHTML;
+            if (requests.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="4" class="empty-state">No requests found. Try submitting the form on the Request Access page.</td></tr>';
                 return;
             }
 
-            // HEADER ROW
-            let html = `
-                <div class="jobs-header" style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 2fr; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.08); font-weight: 600; color: #9ca3af;">
-                    <span>Job Title</span>
-                    <span>Posted On</span>
-                    <span>Status</span>
-                    <span>Applicants</span>
-                    <span>Actions</span>
-                </div>
-            `;
-
-            // DATA ROWS
-            jobs.forEach(job => {
-                const jobApps = apps.filter(a => a.jobId === job.id).length;
-
-                // Status Color Logic
-                let statusColor = '#22c55e'; // Active Green
-                if (job.status === 'Hold') statusColor = '#facc15'; // Hold Yellow
-
-                html += `
-                    <div class="job-row" style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 2fr; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.08); color: white; align-items: center;">
-                        <span style="font-weight: 500;">${job.title}</span>
-                        <span style="font-size: 0.9rem; color: var(--text-secondary);">${new Date(job.id).toLocaleDateString()}</span>
-                        <span style="color: ${statusColor};">${job.status}</span>
-                        <span>${jobApps}</span>
-                        <div class="actions" style="display: flex; gap: 8px;">
-                            <button onclick="alert('View functionality to be implemented')" class="btn btn-ghost" style="padding: 4px 10px; font-size: 0.8rem;">View</button>
-                            <button onclick="toggleJobStatus(${job.id}, '${job.status}')" class="btn btn-outline" style="padding: 4px 10px; font-size: 0.8rem;">
-                                ${job.status === 'Active' ? 'Hold' : 'Activate'}
-                            </button>
-                            <button onclick="deleteJob(${job.id})" class="btn btn-outline" style="padding: 4px 10px; font-size: 0.8rem; border-color: #ef4444; color: #ef4444;">Delete</button>
-                        </div>
-                    </div>
-                `;
-            });
-
-            container.innerHTML = html;
-
-            // For View Manage, we can keep generic table or use same. 
-            // For now, let's keep Manage View Simple or Mirror it. 
-            const manageContainer = document.getElementById('manageTableContainer');
-            if (manageContainer) manageContainer.innerHTML = html;
+            tbody.innerHTML = requests.map(req => `
+                <tr>
+                    <td>${req.date}</td>
+                    <td>${req.email}</td>
+                    <td>${req.org}</td>
+                    <td><span class="status-badge">Pending Review</span></td>
+                </tr>
+            `).join('');
         }
 
-        function renderUsers() {
-            const users = UserService.getAll();
-            const container = document.getElementById('usersTableContainer');
-
-            let html = `
-                <table class="modern-table">
-                    <thead>
-                        <tr>
-                            <th>Username</th>
-                            <th>Role</th>
-                            <th>Created</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-            `;
-
-            users.forEach(u => {
-                html += `
-                    <tr>
-                        <td>
-                            <div style="font-weight: 500;">${u.username}</div>
-                        </td>
-                        <td><span class="status-badge bg-success">${u.role || 'Admin'}</span></td>
-                        <td>${u.created ? new Date(u.created).toLocaleDateString() : 'N/A'}</td>
-                        <td>
-                             <button onclick="deleteUser('${u.username}')" class="btn-outline" style="padding: 6px; border: none; color: #ef4444;" ${u.username === 'admin' ? 'disabled style="opacity:0.3; cursor:not-allowed;"' : ''}>
-                                <i class="ph-bold ph-trash"></i>
-                             </button>
-                        </td>
-                    </tr>
-                `;
-            });
-
-            html += `</tbody></table>`;
-            container.innerHTML = html;
-        }
-
-        // --- 4. ACTION HANDLERS ---
-        function openPostJobModal() {
-            document.getElementById('postJobModal').style.display = 'flex';
-        }
-
-        function closePostJobModal() {
-            document.getElementById('postJobModal').style.display = 'none';
-        }
-
-        function openCreateUserModal() {
-            document.getElementById('createUserModal').style.display = 'flex';
-        }
-
-        function closeCreateUserModal() {
-            document.getElementById('createUserModal').style.display = 'none';
-        }
-
-        function handlePostJob(e) {
-            e.preventDefault();
-            const form = e.target;
-            const job = {
-                id: Date.now(),
-                title: form.title.value,
-                dept: form.dept.value,
-                type: form.type.value,
-                loc: form.loc.value,
-                desc: form.desc.value,
-                status: form.status.value
-            };
-
-            JobService.add(job);
-            closePostJobModal();
-            form.reset();
-            initDashboard(); // Refresh
-        }
-
-        function handleCreateUser(e) {
-            e.preventDefault();
-            const form = e.target;
-            const newUser = {
-                username: form.newUsername.value,
-                password: form.newPassword.value,
-                role: form.newRole.value,
-                created: Date.now()
-            };
-
-            if (UserService.add(newUser)) {
-                closeCreateUserModal();
-                form.reset();
-                renderUsers();
+        function clearData() {
+            if (confirm('Are you sure you want to clear all requests?')) {
+                localStorage.removeItem('accessRequests');
+                loadRequests();
             }
         }
 
-        function deleteUser(username) {
-            if (confirm('Delete user ' + username + '?')) {
-                UserService.delete(username);
-                renderUsers();
-            }
-        }
-
-        function toggleJobStatus(id, currentStatus) {
-            const newStatus = currentStatus === 'Active' ? 'Hold' : 'Active';
-            JobService.updateStatus(id, newStatus);
-            initDashboard();
-        }
-
-        function deleteJob(id) {
-            if (confirm('Are you sure? This will delete the job AND all associated applications.')) {
-                JobService.delete(id);
-                initDashboard();
-            }
-        }
-
-        function handleLogout() {
-            localStorage.removeItem('adminSession');
-            window.location.href = 'career-admin-login.html';
-        }
-
-        function switchView(viewName) {
-            // Hide all
-            ['dashboard', 'manage', 'users'].forEach(v => {
-                const el = document.getElementById('view-' + v);
-                if (el) el.style.display = 'none';
-
-                const nav = document.getElementById('nav-' + v);
-                if (nav) nav.classList.remove('active');
-            });
-
-            // Show target
-            document.getElementById('view-' + viewName).style.display = 'block';
-            document.getElementById('nav-' + viewName).classList.add('active');
-        }
-
-        function exportApplications() {
-            const apps = AppService.getAll();
-            if (apps.length === 0) {
-                alert('No applications to export.');
-                return;
-            }
-
-            // Generate CSV
-            let csv = 'Job Title,Candidate Name,Email,Phone,Applied Date,Resume Link\\n';
-            apps.forEach(app => {
-                csv += `"${app.jobTitle}","${app.name}","${app.email}","${app.phone}","${new Date(app.appliedDate).toLocaleDateString()}","${app.resumeLink}"\\n`;
-            });
-
-            const blob = new Blob([csv], { type: 'text/csv' });
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `Applications_${new Date().toISOString().slice(0, 10)}.csv`;
-            a.click();
-        }
-
-        // Initialize on Load
-        window.addEventListener('DOMContentLoaded', initDashboard);
-
+        document.addEventListener('DOMContentLoaded', loadRequests);
     </script>
-
-    <script src="js/main.js"></script>
 </body>
 
 </html>

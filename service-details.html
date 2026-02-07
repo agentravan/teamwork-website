@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Details | TeamWork Solutions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/header-premium.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+
+<body>
+    <div id="global-header-container"></div>
+
+    <main id="details-container" style="min-height: 80vh; padding-top: 150px;">
+        <!-- CONTENT LOADED VIA JS -->
+        <div style="text-align: center; color: white;">Loading Service Details...</div>
+    </main>
+
+    <script src="js/service-store.js"></script>
+    <script src="js/unified-header.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const id = params.get('id');
+            const service = ServiceStore.getServiceById(id);
+
+            if (!service) {
+                document.getElementById('details-container').innerHTML = `
+                    <div class="container" style="text-align: center;">
+                        <h1>Service Not Found</h1>
+                        <a href="services.html" class="btn btn-primary">Back to Services</a>
+                    </div>
+                `;
+                return;
+            }
+
+            document.title = `${service.name} | TeamWork Solutions`;
+
+            document.getElementById('details-container').innerHTML = `
+                <div class="container">
+                    <a href="services.html" style="color: var(--text-secondary); text-decoration: none; display: inline-flex; align-items: center; gap: 5px; margin-bottom: 20px;">
+                        <i class="ph-bold ph-arrow-left"></i> Back to Services
+                    </a>
+                    
+                    <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 50px;">
+                        <!-- LEFT -->
+                        <div>
+                            <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
+                                <i class="ph-duotone ${service.icon}" style="font-size: 48px; color: var(--primary);"></i>
+                                <span style="background: rgba(59, 130, 246, 0.2); color: #60a5fa; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">${service.category}</span>
+                            </div>
+                            <h1 style="font-size: 3rem; margin-bottom: 20px;">${service.name}</h1>
+                            <p style="font-size: 1.2rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 40px;">
+                                ${service.fullDesc}
+                            </p>
+
+                            <h3 style="margin-bottom: 20px;">What's Included</h3>
+                            <ul style="list-style: none; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                                ${service.features.map(f => `
+                                    <li style="display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px;">
+                                        <i class="ph-fill ph-check-circle" style="color: #10b981;"></i>
+                                        ${f}
+                                    </li>
+                                `).join('')}
+                            </ul>
+                        </div>
+
+                        <!-- RIGHT -->
+                        <div>
+                            <div style="background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(255,255,255,0.1); padding: 40px; border-radius: 16px; position: sticky; top: 120px;">
+                                <h3 style="margin-bottom: 20px; color: #cbd5e1;">Pricing Model</h3>
+                                <div style="font-size: 2.5rem; font-weight: 700; color: white; margin-bottom: 5px;">${service.price}</div>
+                                <div style="color: #64748b; margin-bottom: 30px;">${service.priceType}</div>
+                                
+                                <button onclick="ServiceStore.addToCart('${service.id}')" class="btn btn-primary" style="width: 100%; justify-content: center; margin-bottom: 15px;">
+                                    Add to Quote Request
+                                </button>
+                                <a href="contact.html" class="btn btn-outline" style="width: 100%; justify-content: center;">
+                                    Talk to Sales
+                                </a>
+                                
+                                <div style="margin-top: 20px; font-size: 0.9rem; color: #94a3b8; text-align: center;">
+                                    * Final pricing may vary based on customization.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+    </script>
+</body>
+
+</html>

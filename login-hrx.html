@@ -60,12 +60,22 @@
 
     <script src="js/main.js"></script>
     <script src="js/unified-header.js"></script>
+    <script src="js/hrms-state.js"></script>
     <script>
         function handleHRXLogin(e) {
             e.preventDefault();
-            // Mock Login
-            alert("This is a demo environment. Redirecting to dashboard...");
-            window.location.href = 'hrms-dashboard.html'; // Ensure this page exists or use index
+            const emailInput = e.target.querySelector('input[type="email"]');
+            const passwordInput = e.target.querySelector('input[type="password"]');
+
+            if (emailInput && passwordInput) {
+                // Call System Auth
+                const user = HRMS.login(emailInput.value, passwordInput.value);
+
+                // Redirect on success
+                if (user) {
+                    window.location.href = 'hrms-dashboard.html';
+                }
+            }
         }
     </script>
 </body>

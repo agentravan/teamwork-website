@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Request Custom Package | TeamWork Solutions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/header-premium.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+
+<body>
+    <div id="global-header-container"></div>
+
+    <main class="section-padding" style="padding-top: 150px; min-height: 80vh;">
+        <div class="container">
+            <h1 style="margin-bottom: 40px; font-size: 2.5rem;">Your Custom Package Quote</h1>
+
+            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 40px;">
+                <!-- LEFT: LIST -->
+                <div id="quote-list">
+                    <p>Loading your selection...</p>
+                </div>
+
+                <!-- RIGHT: FORM -->
+                <div>
+                    <div
+                        style="background: rgba(30, 41, 59, 0.5); padding: 30px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); position: sticky; top: 120px;">
+                        <h3 style="margin-bottom: 20px;">Finalize Request</h3>
+                        <form id="quote-form" onsubmit="handleQuoteSubmit(event)">
+                            <div class="form-group" style="margin-bottom: 15px;">
+                                <label style="font-size: 0.9rem; color: #cbd5e1;">Company Name</label>
+                                <input type="text" name="companyName" required
+                                    style="width: 100%; padding: 10px; background: rgba(0,0,0,0.2); border: 1px solid #475569; color: white; border-radius: 6px;">
+                            </div>
+                            <div class="form-group" style="margin-bottom: 15px;">
+                                <label style="font-size: 0.9rem; color: #cbd5e1;">Contact Person</label>
+                                <input type="text" name="contactName" required
+                                    style="width: 100%; padding: 10px; background: rgba(0,0,0,0.2); border: 1px solid #475569; color: white; border-radius: 6px;">
+                            </div>
+                            <div class="form-group" style="margin-bottom: 15px;">
+                                <label style="font-size: 0.9rem; color: #cbd5e1;">Email</label>
+                                <input type="email" name="email" required
+                                    style="width: 100%; padding: 10px; background: rgba(0,0,0,0.2); border: 1px solid #475569; color: white; border-radius: 6px;">
+                            </div>
+                            <div class="form-group" style="margin-bottom: 15px;">
+                                <label style="font-size: 0.9rem; color: #cbd5e1;">Phone</label>
+                                <input type="tel" name="phone" required
+                                    style="width: 100%; padding: 10px; background: rgba(0,0,0,0.2); border: 1px solid #475569; color: white; border-radius: 6px;">
+                            </div>
+                            <div class="form-group" style="margin-bottom: 15px;">
+                                <label style="font-size: 0.9rem; color: #cbd5e1;">Employee Count</label>
+                                <select name="empCount"
+                                    style="width: 100%; padding: 10px; background: rgba(0,0,0,0.2); border: 1px solid #475569; color: white; border-radius: 6px;">
+                                    <option>1-10</option>
+                                    <option>11-50</option>
+                                    <option>50-200</option>
+                                    <option>200+</option>
+                                </select>
+                            </div>
+                            <div class="form-group" style="margin-bottom: 20px;">
+                                <label style="font-size: 0.9rem; color: #cbd5e1;">Specific Requirements</label>
+                                <textarea name="requirements" rows="3"
+                                    style="width: 100%; padding: 10px; background: rgba(0,0,0,0.2); border: 1px solid #475569; color: white; border-radius: 6px;"></textarea>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary" style="width: 100%;">
+                                <i class="ph-bold ph-paper-plane-right"></i> Send Request
+                            </button>
+                            <p style="font-size: 0.8rem; color: #94a3b8; margin-top: 10px; text-align: center;">
+                                Request will be sent to teamwork.hrsolution@zohomail.in
+                            </p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/service-store.js"></script>
+    <script src="js/unified-header.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', renderQuoteList);
+
+        function renderQuoteList() {
+            const cart = ServiceStore.getCart();
+            const services = ServiceStore.getAllServices();
+            const container = document.getElementById('quote-list');
+
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div style="text-align: center; padding: 60px; background: rgba(255,255,255,0.05); border-radius: 12px;">
+                        <i class="ph-duotone ph-shopping-cart" style="font-size: 48px; color: #64748b;"></i>
+                        <h3 style="margin: 20px 0;">Your quote list is empty</h3>
+                        <a href="services.html" class="btn btn-outline">Browse Services</a>
+                    </div>
+                `;
+                return;
+            }
+
+            const cartItems = services.filter(s => cart.includes(s.id));
+
+            container.innerHTML = cartItems.map(item => `
+                <div style="display: flex; gap: 20px; padding: 20px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 8px; margin-bottom: 20px; align-items: center;">
+                    <div style="background: rgba(59, 130, 246, 0.1); padding: 15px; border-radius: 8px;">
+                        <i class="ph-duotone ${item.icon}" style="font-size: 32px; color: var(--primary);"></i>
+                    </div>
+                    <div style="flex-grow: 1;">
+                        <h3 style="margin-bottom: 5px;">${item.name}</h3>
+                        <p style="font-size: 0.9rem; color: var(--text-secondary);">${item.shortDesc}</p>
+                    </div>
+                    <div style="text-align: right; min-width: 120px;">
+                        <div style="font-weight: 700; font-size: 1.1rem;">${item.price}</div>
+                        <div style="font-size: 0.8rem; color: #94a3b8;">${item.priceType}</div>
+                    </div>
+                    <button onclick="removeItem('${item.id}')" style="background: none; border: none; color: #ef4444; cursor: pointer; padding: 10px;">
+                        <i class="ph-bold ph-trash"></i>
+                    </button>
+                </div>
+            `).join('');
+
+            // Add Clear Button
+            container.innerHTML += `
+                <div style="text-align: right; margin-top: 20px;">
+                    <button onclick="ServiceStore.clearCart(); renderQuoteList();" class="btn btn-ghost" style="color: #ef4444;">Clear All</button>
+                    <a href="services.html" class="btn btn-outline" style="margin-left: 10px;">+ Add More Services</a>
+                </div>
+            `;
+        }
+
+        function removeItem(id) {
+            ServiceStore.removeFromCart(id);
+            renderQuoteList();
+        }
+
+        function handleQuoteSubmit(e) {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const data = Object.fromEntries(formData.entries());
+
+            const mailtoLink = ServiceStore.generateEmailLink(data);
+
+            // Open Mail Client
+            window.location.href = mailtoLink;
+
+            // Show Success Logic (Optional: Clear cart or show message)
+            alert("Redirecting to your email client to send the request...");
+        }
+    </script>
+</body>
+
+</html>
