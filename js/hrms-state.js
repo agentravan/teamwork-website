@@ -124,7 +124,7 @@ const HRMS_STATE = {
         }
     },
 
-    // --- RECRUITMENT SERVICE (CAREER ADMIN) ---
+    // --- RECRUITMENT SERVICE (CAREER ADMIN - JOBI STYLE) ---
     recruitment: {
         getJobs: function () {
             // Sync with existing public localStorage key 'jobs'
@@ -135,7 +135,10 @@ const HRMS_STATE = {
             const jobs = this.getJobs();
             const newJob = {
                 id: Date.now(),
-                status: 'Open',
+                status: 'Open', // Default to Open (Active)
+                applications: 0,
+                type: 'Full Time',
+                exp: '0-2 Years',
                 ...jobData
             };
             jobs.unshift(newJob);
@@ -158,6 +161,35 @@ const HRMS_STATE = {
             let jobs = this.getJobs();
             jobs = jobs.filter(j => j.id !== jobId);
             localStorage.setItem('jobs', JSON.stringify(jobs));
+        },
+        // Applicant Tracking
+        getApplications: function () {
+            return JSON.parse(localStorage.getItem('applications')) || [];
+        },
+        getSavedCandidates: function () {
+            return JSON.parse(localStorage.getItem('savedCandidates')) || [];
+        },
+        toggleSaveCandidate: function (candidateId) {
+            let saved = this.getSavedCandidates();
+            if (saved.includes(candidateId)) {
+                saved = saved.filter(id => id !== candidateId);
+            } else {
+                saved.push(candidateId);
+            }
+            localStorage.setItem('savedCandidates', JSON.stringify(saved));
+            return saved.includes(candidateId);
+        },
+        getStats: function () {
+            const jobs = this.getJobs();
+            const apps = this.getApplications();
+            const saved = this.getSavedCandidates();
+
+            return {
+                postedJobs: jobs.filter(j => j.status !== 'Closed').length,
+                shortlisted: apps.filter(a => a.status === 'Shortlisted').length,
+                applications: apps.length,
+                savedCandidates: saved.length
+            };
         }
     },
 

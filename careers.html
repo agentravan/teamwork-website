@@ -153,9 +153,8 @@
             const container = document.getElementById('jobContainer');
             container.innerHTML = '';
 
-            // Filter out 'Hired' jobs (Deleted from public view as per blueprint)
-            // Show 'Hold' jobs but disable apply
-            const publicJobs = jobs.filter(j => j.status !== 'Hired');
+            // 1. Filter: Open OR Hold. (Closed are hidden)
+            const publicJobs = jobs.filter(j => j.status === 'Open' || j.status === 'Hold');
 
             if (publicJobs.length === 0) {
                 container.innerHTML = `
@@ -178,7 +177,8 @@
                         <h3 style="margin-bottom: 15px; color: white;">${job.title}</h3>
                         <div style="display: flex; gap: 15px; margin-bottom: 20px; font-size: 0.9rem; color: var(--text-secondary);">
                             <span><i class="ph-bold ph-map-pin"></i> ${job.loc}</span>
-                            <span><i class="ph-bold ph-clock"></i> Full Time</span>
+                            <span><i class="ph-bold ph-briefcase"></i> ${job.type || 'Full Time'}</span>
+                            <span><i class="ph-bold ph-clock"></i> ${job.exp || 'Exp: N/A'}</span>
                         </div>
                         <p style="color: var(--text-tertiary); font-size: 0.9rem; line-height: 1.6; margin-bottom: 25px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">
                             ${job.desc}
