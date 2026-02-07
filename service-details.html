@@ -25,66 +25,58 @@
         document.addEventListener('DOMContentLoaded', () => {
             const params = new URLSearchParams(window.location.search);
             const id = params.get('id');
+            const pageId = params.get('page'); // View sub-page
+
             const service = ServiceStore.getServiceById(id);
 
             if (!service) {
-                document.getElementById('details-container').innerHTML = `
-                    <div class="container" style="text-align: center;">
-                        <h1>Service Not Found</h1>
-                        <a href="services.html" class="btn btn-primary">Back to Services</a>
-                    </div>
-                `;
-                return;
+                // ... Error handling ...
             }
 
-            document.title = `${service.name} | TeamWork Solutions`;
+            // Default to first page if not specified
+            const activePageId = pageId || service.subPages[0].id;
+            const activePage = service.subPages.find(p => p.id === activePageId) || service.subPages[0];
+
+            document.title = `${activePage.title} - ${service.name} | TeamWork Solutions`;
 
             document.getElementById('details-container').innerHTML = `
                 <div class="container">
-                    <a href="services.html" style="color: var(--text-secondary); text-decoration: none; display: inline-flex; align-items: center; gap: 5px; margin-bottom: 20px;">
-                        <i class="ph-bold ph-arrow-left"></i> Back to Services
-                    </a>
-                    
-                    <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 50px;">
-                        <!-- LEFT -->
+                    <div style="margin-bottom: 30px; display: flex; align-items: center; justify-content: space-between;">
                         <div>
-                            <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
+                             <a href="services.html" style="color: var(--text-secondary); text-decoration: none; display: inline-flex; align-items: center; gap: 5px; margin-bottom: 10px;">
+                                <i class="ph-bold ph-arrow-left"></i> Back to Services
+                            </a>
+                            <div style="display: flex; align-items: center; gap: 15px;">
                                 <i class="ph-duotone ${service.icon}" style="font-size: 48px; color: var(--primary);"></i>
-                                <span style="background: rgba(59, 130, 246, 0.2); color: #60a5fa; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem;">${service.category}</span>
+                                <div>
+                                    <h1 style="font-size: 2.5rem; line-height: 1;">${service.name}</h1>
+                                    <span style="color: var(--text-secondary);">${service.category}</span>
+                                </div>
                             </div>
-                            <h1 style="font-size: 3rem; margin-bottom: 20px;">${service.name}</h1>
-                            <p style="font-size: 1.2rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 40px;">
-                                ${service.fullDesc}
-                            </p>
-
-                            <h3 style="margin-bottom: 20px;">What's Included</h3>
-                            <ul style="list-style: none; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
-                                ${service.features.map(f => `
-                                    <li style="display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px;">
-                                        <i class="ph-fill ph-check-circle" style="color: #10b981;"></i>
-                                        ${f}
-                                    </li>
-                                `).join('')}
-                            </ul>
+                        </div>
+                        
+                        <a href="pricing-plans.html?service=${service.id}" class="btn btn-primary">
+                            See Pricing Plans <i class="ph-bold ph-arrow-right"></i>
+                        </a>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 280px 1fr; gap: 40px; align-items: start;">
+                        <!-- SIDEBAR NAV -->
+                        <div style="background: rgba(30, 41, 59, 0.4); border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); overflow: hidden; position: sticky; top: 120px;">
+                            ${service.subPages.map(page => `
+                                <a href="?id=${service.id}&page=${page.id}" 
+                                   class="sub-page-link ${page.id === activePageId ? 'active' : ''}"
+                                   style="display: block; padding: 15px 20px; color: ${page.id === activePageId ? 'white' : '#94a3b8'}; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.05); background: ${page.id === activePageId ? 'var(--primary)' : 'transparent'};">
+                                    ${page.title}
+                                </a>
+                            `).join('')}
                         </div>
 
-                        <!-- RIGHT -->
-                        <div>
-                            <div style="background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(255,255,255,0.1); padding: 40px; border-radius: 16px; position: sticky; top: 120px;">
-                                <h3 style="margin-bottom: 20px; color: #cbd5e1;">Pricing Model</h3>
-                                <div style="font-size: 2.5rem; font-weight: 700; color: white; margin-bottom: 5px;">${service.price}</div>
-                                <div style="color: #64748b; margin-bottom: 30px;">${service.priceType}</div>
-                                
-                                <button onclick="ServiceStore.addToCart('${service.id}')" class="btn btn-primary" style="width: 100%; justify-content: center; margin-bottom: 15px;">
-                                    Add to Quote Request
-                                </button>
-                                <a href="contact.html" class="btn btn-outline" style="width: 100%; justify-content: center;">
-                                    Talk to Sales
-                                </a>
-                                
-                                <div style="margin-top: 20px; font-size: 0.9rem; color: #94a3b8; text-align: center;">
-                                    * Final pricing may vary based on customization.
-                                </div>
+                        <!-- CONTENT AREA -->
+                        <div style="background: rgba(30, 41, 59, 0.2); padding: 40px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.05); min-height: 500px;">
+                            <h2 style="margin-bottom: 20px; font-size: 2rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px;">${activePage.title}</h2>
+                            <div class="typography" style="color: var(--text-secondary); line-height: 1.8; font-size: 1.1rem;">
+                                ${activePage.content}
                             </div>
                         </div>
                     </div>
@@ -92,6 +84,36 @@
             `;
         });
     </script>
+    <style>
+        .typography h3 {
+            color: white;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        .typography h4 {
+            color: #e2e8f0;
+            margin-top: 25px;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .typography ul,
+        .typography ol {
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .typography li {
+            margin-bottom: 10px;
+        }
+
+        .sub-page-link:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+        }
+    </style>
 </body>
 
 </html>

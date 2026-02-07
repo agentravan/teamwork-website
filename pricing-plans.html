@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing Plans | TeamWork Solutions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/header-premium.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <style>
+        .pricing-card {
+            background: rgba(30, 41, 59, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+        }
+
+        .pricing-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .pricing-card.highlight {
+            background: rgba(59, 130, 246, 0.1);
+            border-color: var(--primary);
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+
+        .feature-list li {
+            margin-bottom: 10px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .feature-list li i {
+            color: #10b981;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="global-header-container"></div>
+
+    <main class="section-padding" style="padding-top: 150px; min-height: 80vh;">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 60px;">
+                <span style="color: var(--primary);">Plans & Pricing</span>
+                <h1 style="font-size: 3rem;">Transparent Pricing for Every Stage</h1>
+                <p style="color: var(--text-secondary); max-width: 600px; margin: 10px auto;">Choose the plan that fits
+                    your workforce size and compliance needs. No hidden fees.</p>
+            </div>
+
+            <!-- TABS -->
+            <div id="pricing-tabs"
+                style="display: flex; justify-content: center; gap: 10px; margin-bottom: 40px; flex-wrap: wrap;">
+                <!-- Injected via JS -->
+            </div>
+
+            <!-- PRICING GRID -->
+            <div id="pricing-grid"
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px;">
+                <!-- Injected via JS -->
+            </div>
+        </div>
+    </main>
+
+    <script src="js/service-store.js"></script>
+    <script src="js/unified-header.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabsContainer = document.getElementById('pricing-tabs');
+            const gridContainer = document.getElementById('pricing-grid');
+
+            const services = ServiceStore.getAllServices();
+
+            // Get selected service from URL or default to first
+            const params = new URLSearchParams(window.location.search);
+            let activeServiceId = params.get('service') || services[0].id;
+
+            // Render Tabs
+            tabsContainer.innerHTML = services.map(s => `
+                <button onclick="switchPricing('${s.id}')" 
+                    class="btn ${s.id === activeServiceId ? 'btn-primary' : 'btn-outline'}" 
+                    style="border-radius: 20px; padding: 8px 20px;">
+                    ${s.category}
+                </button>
+            `).join('');
+
+            renderPricing(activeServiceId);
+        });
+
+        function switchPricing(serviceId) {
+            // Update URL without reload
+            const url = new URL(window.location);
+            url.searchParams.set('service', serviceId);
+            window.history.pushState({}, '', url);
+
+            // Update Tabs UI
+            document.querySelectorAll('#pricing-tabs .btn').forEach(btn => {
+                const isActive = btn.innerText.includes(ServiceStore.getServiceById(serviceId).category);
+                btn.className = isActive ? 'btn btn-primary' : 'btn btn-outline';
+            });
+
+            renderPricing(serviceId);
+        }
+
+        function renderPricing(serviceId) {
+            const service = ServiceStore.getServiceById(serviceId);
+            if (!service || !service.pricingPlans) return;
+
+            const grid = document.getElementById('pricing-grid');
+
+            grid.innerHTML = service.pricingPlans.map((plan, index) => `
+                <div class="pricing-card ${index === 2 ? 'highlight' : ''}"> <!-- Highlight 3rd plan (Professional) usually -->
+                    <div style="margin-bottom: 20px;">
+                        <h3 style="font-size: 1.25rem;">${plan.name}</h3>
+                        ${plan.isCustom ?
+                    `<div style="font-size: 2rem; font-weight: 700; color: white;">Custom</div>` :
+                    `<div style="font-size: 2rem; font-weight: 700; color: white;">${plan.price}</div>`
+                }
+                        ${plan.priceUnit ? `<div style="font-size: 0.9rem; color: #64748b;">${plan.priceUnit}</div>` : ''}
+                    </div>
+                    
+                    <ul class="feature-list" style="flex-grow: 1;">
+                        ${plan.features.map(f => `<li><i class="ph-bold ph-check"></i> ${f}</li>`).join('')}
+                    </ul>
+                    
+                    <a href="quote-request.html?plan=${encodeURIComponent(plan.name)}" class="btn ${index === 2 ? 'btn-primary' : 'btn-outline'}" style="text-align: center; justify-content: center;">
+                        ${plan.isCustom ? 'Request Quote' : 'Choose Plan'}
+                    </a>
+                </div>
+            `).join('');
+        }
+    </script>
+</body>
+
+</html>

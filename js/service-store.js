@@ -8,116 +8,469 @@ const SERVICES_KEY = 'global_hrx_services';
 const CART_KEY = 'global_hrx_cart';
 
 // INITIAL SEED DATA (As per User Request)
+// INITIAL SEED DATA (5-Pillar Structure)
 const INITIAL_SERVICES = [
     {
-        id: 'bulk-hiring',
+        id: 'payroll',
+        category: 'Payroll Management',
+        name: 'Payroll Management Services',
+        icon: 'ph-currency-dollar',
+        shortDesc: 'End-to-end payroll processing with 100% accuracy and compliance.',
+        // CONTENT PAGES (Information Only)
+        subPages: [
+            {
+                id: 'overview',
+                title: 'Payroll Management (Overview)',
+                content: `
+                    <h3>What We Do</h3>
+                    <p>We deliver end-to-end payroll management services ensuring 100% accuracy, statutory compliance, and on-time salary processing.</p>
+                    
+                    <h4>Key Services</h4>
+                    <ul>
+                        <li>Salary processing (monthly / weekly)</li>
+                        <li>Attendance & leave integration</li>
+                        <li>Payslip & salary structure design</li>
+                        <li>Reimbursement & arrears handling</li>
+                        <li>Final settlement (F&F)</li>
+                        <li>Payroll MIS & reports</li>
+                    </ul>
+
+                    <h4>Benefits</h4>
+                    <ul>
+                        <li>Zero payroll errors</li>
+                        <li>Fully compliant payroll</li>
+                        <li>Confidential & secure processing</li>
+                        <li>Scalable for any workforce size</li>
+                    </ul>
+                `
+            },
+            {
+                id: 'processing',
+                title: 'Payroll Processing & Automation',
+                content: `
+                    <h3>Core Processing Engine</h3>
+                    <ul>
+                        <li>Gross-to-net calculation</li>
+                        <li>Variable pay & incentives management</li>
+                        <li>Overtime & shift allowance logic</li>
+                        <li>Bonus & ex-gratia processing</li>
+                        <li>Automated salary sheets generation</li>
+                        <li>Bank transfer files (generic & bank-specific)</li>
+                    </ul>
+                `
+            },
+            {
+                id: 'compliance',
+                title: 'Payroll Compliance Support',
+                content: `
+                    <h3>Statutory Excellence</h3>
+                    <ul>
+                        <li>PF, ESIC, PT, LWF calculation</li>
+                        <li>Challans & returns generation and filing</li>
+                        <li>Monthly & annual filings</li>
+                        <li>Audit support & advisory</li>
+                        <li>Notices & inspections handling</li>
+                    </ul>
+                `
+            },
+            {
+                id: 'reporting',
+                title: 'Payroll Reporting & Analytics',
+                content: `
+                    <h3>Data-Driven Insights</h3>
+                    <ul>
+                        <li>Payroll cost analysis</li>
+                        <li>Department-wise payroll segmentation</li>
+                        <li>Compliance MIS reports</li>
+                        <li>Yearly payroll summaries (Form 16 ready)</li>
+                    </ul>
+                `
+            },
+            {
+                id: 'faq',
+                title: 'Payroll FAQ & Use Cases',
+                content: `
+                    <h3>Who is this for?</h3>
+                    <ul>
+                        <li><strong>SMEs & Startups:</strong> Streamline operations without a dedicated payroll team.</li>
+                        <li><strong>Enterprises:</strong> Manage multi-location complexity.</li>
+                    </ul>
+                    <h4>Capabilities</h4>
+                    <ul>
+                        <li>Manufacturing workforce payroll</li>
+                        <li>IT & Services payroll</li>
+                        <li>Sales workforce incentive structures</li>
+                        <li>Multi-location payroll handling</li>
+                    </ul>
+                `
+            }
+        ],
+        // PRICING PLANS (Detailed)
+        pricingPlans: [
+            {
+                name: 'Starter Payroll',
+                price: '₹3,999 / month',
+                features: ['Up to 10 employees', 'Salary sheets', 'Payslips', 'Basic compliance']
+            },
+            {
+                name: 'Growth Payroll',
+                price: '₹5,499 / month',
+                features: ['Up to 25 employees', 'Attendance integration', 'PF & ESIC filing', 'Monthly MIS']
+            },
+            {
+                name: 'Professional Payroll',
+                price: '₹7,999 / month',
+                features: ['Up to 50 employees', 'Full compliance', 'F&F settlement', 'Payroll analytics']
+            },
+            {
+                name: 'Enterprise Payroll',
+                price: 'Custom Pricing',
+                isCustom: true,
+                features: ['Unlimited employees', 'Multi-location payroll', 'Audit & inspection support', 'Dedicated payroll manager']
+            }
+        ]
+    },
+    {
+        id: 'compliance',
+        category: 'Compliance',
+        name: 'Compliance Outsourcing Services',
+        icon: 'ph-shield-check',
+        shortDesc: 'Manage complete statutory compliance so you stay legally safe without stress.',
+        subPages: [
+            {
+                id: 'overview',
+                title: 'Compliance Overview',
+                content: `
+                    <h3>We manage complete statutory compliance</h3>
+                    <p>Stay legally safe without stress. We handle the complexities of Indian labor laws so you can focus on business.</p>
+                    
+                    <h4>Compliance Covered</h4>
+                    <ul>
+                        <li>Provident Fund (PF)</li>
+                        <li>Employee State Insurance (ESIC)</li>
+                        <li>Professional Tax (PT)</li>
+                        <li>Labour Welfare Fund (LWF)</li>
+                        <li>Contract Labour (Regulation & Abolition) Act (CLRA)</li>
+                        <li>Factory Act Compliance</li>
+                        <li>Shops & Establishment Act</li>
+                    </ul>
+                `
+            },
+            {
+                id: 'monthly',
+                title: 'Monthly Statutory Compliance',
+                content: `
+                    <p>Routine filing and challan generation to ensure zero penalties.</p>
+                    <ul>
+                        <li>Monthly Challan Generation (PF/ESIC/PT)</li>
+                        <li>Employee Mapping & KYP</li>
+                        <li>UAN Generation & Linking</li>
+                        <li>Monthly Return Filing</li>
+                    </ul>
+                `
+            },
+            {
+                id: 'registrations',
+                title: 'Registrations & Amendments',
+                content: `
+                    <p>End-to-end support for new registrations and changes.</p>
+                    <ul>
+                        <li>New Code Allocation (PF/ESIC)</li>
+                        <li>Shops & Establishment Registration</li>
+                        <li>Factory License</li>
+                        <li>PAN/TAN updates</li>
+                    </ul>
+                `
+            },
+            {
+                id: 'audit',
+                title: 'Audit & Inspection Support',
+                content: `
+                    <p>Be audit-ready at all times.</p>
+                    <ul>
+                        <li>Pre-audit health checkups</li>
+                        <li>Representation during inspections</li>
+                        <li>Record reconstruction</li>
+                        <li>Notices handling</li>
+                    </ul>
+                `
+            },
+            {
+                id: 'advisory',
+                title: 'Legal Notices & Advisory',
+                content: `
+                    <p>Expert legal counsel for labor law matters.</p>
+                    <ul>
+                        <li>Drafting responses to legal notices</li>
+                        <li>Advisory on law amendments</li>
+                        <li>Risk assessment</li>
+                    </ul>
+                `
+            }
+        ],
+        pricingPlans: [
+            {
+                name: 'Basic Compliance',
+                price: '₹2,499 / month',
+                features: ['PF or ESIC (any one)', 'Challans & returns']
+            },
+            {
+                name: 'Standard Compliance',
+                price: '₹4,999 / month',
+                features: ['PF + ESIC', 'PT & LWF']
+            },
+            {
+                name: 'Advanced Compliance',
+                price: '₹6,999 / month',
+                features: ['All compliances', 'Audit support']
+            },
+            {
+                name: 'Enterprise Compliance',
+                price: 'Custom Plan',
+                isCustom: true,
+                features: ['Multi-state', 'Factory + CLRA', 'Legal advisory']
+            }
+        ]
+    },
+    {
+        id: 'recruitment',
         category: 'Recruitment',
-        name: 'Bulk Hiring Service',
-        shortDesc: 'High-volume recruitment for scaling teams rapidly.',
-        fullDesc: 'End-to-end bulk recruitment solution designed for startups and enterprises needing to scale fast. We handle sourcing, screening, and scheduling for 50+ positions.',
-        price: 'On Request',
-        priceType: 'Volume Based',
-        features: ['Dedicated Recruitment Team', 'Screening & L1 Interview', 'Onboarding Support', 'Replacement Guarantee'],
-        icon: 'ph-users-three'
+        name: 'Recruitment Services',
+        icon: 'ph-users-three',
+        shortDesc: 'End-to-end hiring solutions for startups, SMEs, and enterprises.',
+        subPages: [
+            {
+                id: 'overview',
+                title: 'Recruitment Overview',
+                content: `
+                    <h3>End-to-End Hiring Solutions</h3>
+                    <p>We provide comprehensive recruitment services tailored for startups, SMEs, and enterprises, ensuring you get the right talent at the right time.</p>
+                `
+            },
+            {
+                id: 'bulk',
+                title: 'Bulk Hiring',
+                content: `
+                    <h4>Rapid Scaling Support</h4>
+                    <ul>
+                        <li>Factory workforce recruitment</li>
+                        <li>Sales promoters & feet-on-street</li>
+                        <li>BPO & support staff</li>
+                        <li>Campus hiring drives</li>
+                    </ul>
+                `
+            },
+            {
+                id: 'white-collar',
+                title: 'White-Collar Hiring',
+                content: `
+                    <h4>Professional Talent Acquisition</h4>
+                    <ul>
+                        <li>HR Professionals</li>
+                        <li>Accounts & Finance</li>
+                        <li>Sales Managers</li>
+                        <li>Engineers & Technical Staff</li>
+                        <li>IT Professionals</li>
+                    </ul>
+                `
+            },
+            {
+                id: 'executive',
+                title: 'Executive & Leadership Hiring',
+                content: `
+                    <h4>Leadership Search</h4>
+                    <ul>
+                        <li>Senior Managers & Directors</li>
+                        <li>CXO Support (CEO, CTO, CFO)</li>
+                        <li>Confidential Hiring mandates</li>
+                    </ul>
+                `
+            },
+            {
+                id: 'sla',
+                title: 'Recruitment Process & SLA',
+                content: `
+                    <h4>Our Methodology</h4>
+                    <ol>
+                        <li><strong>JD Understanding:</strong> Deep dive into role requirements.</li>
+                        <li><strong>Screening:</strong> Multi-level candidate filtering.</li>
+                        <li><strong>Interview Coordination:</strong> Seamless scheduling.</li>
+                        <li><strong>Offer Rollout:</strong> Salary negotiation and structuring.</li>
+                        <li><strong>Joining Assurance:</strong> Post-offer engagement.</li>
+                    </ol>
+                `
+            }
+        ],
+        pricingPlans: [
+            {
+                name: 'Bulk Hiring',
+                price: '₹5,000 – ₹8,000',
+                priceUnit: 'per hire',
+                features: ['Volume hiring', 'Factory/Sales roles']
+            },
+            {
+                name: 'White-Collar Hiring',
+                price: '₹6,000 – ₹12,000',
+                priceUnit: 'per hire',
+                features: ['Mid-level professionals', 'Domain experts']
+            },
+            {
+                name: 'Executive Hiring',
+                price: '8% – 15%',
+                priceUnit: 'of CTC',
+                features: ['Leadership roles', 'Headhunting']
+            },
+            {
+                name: 'Enterprise Hiring',
+                price: 'Custom Pricing',
+                isCustom: true,
+                features: ['Volume discounts', 'Dedicated recruiter']
+            }
+        ]
     },
     {
-        id: 'recruitment-service',
-        category: 'Recruitment',
-        name: 'Recruitment Service',
-        shortDesc: 'Strategic hiring for key roles and niche skills.',
-        fullDesc: 'Focused recruitment for mid-to-senior level positions. We help you find the right talent with specific domain expertise.',
-        price: '8.33% of CTC',
-        priceType: 'Per Hire',
-        features: ['Domain Specialist Recruiters', 'Background Verification Check', '3 Months Replacement', 'Candidate Engagement'],
-        icon: 'ph-user-focus'
-    },
-    {
-        id: 'white-collar',
-        category: 'Recruitment',
-        name: 'Professional & White-Collar Hiring',
-        shortDesc: 'Premium talent acquisition for executive roles.',
-        fullDesc: 'Executive search and headhunting for C-suite and top management roles. Confidential and precise.',
-        price: '10-15% of CTC',
-        priceType: 'Per Hire',
-        features: ['Executive Search', 'Confidential Hiring', 'Leadership Assessment', 'Global Talent Pool'],
-        icon: 'ph-briefcase'
-    },
-    {
-        id: 'monthly-payroll',
-        category: 'Payroll',
-        name: 'Monthly Payroll Handling',
-        shortDesc: 'Complete monthly payroll processing and taxation.',
-        fullDesc: 'Outsource your entire payroll burden. We handle salary calculations, TDS, tax slips, and compliance reporting every month.',
-        price: '₹150',
-        priceType: 'Per Employee / Month',
-        features: ['Salary Calculation', 'Tax Deductions (TDS/PT)', 'Payslip Generation', 'Bank Upload Files'],
-        icon: 'ph-currency-inr'
-    },
-    {
-        id: 'starter-payroll',
-        category: 'Payroll',
-        name: 'Starter Payroll Care (≤10 staff)',
-        shortDesc: 'Affordable payroll package for small businesses.',
-        fullDesc: 'Designed specifically for small teams under 10 employees. Flat rate for complete peace of mind.',
-        price: '₹2,500',
-        priceType: 'Flat / Month',
-        features: ['Up to 10 Employees', 'Digital Payslips', 'Basic Compliance', 'Email Support'],
-        icon: 'ph-rocket-launch'
-    },
-    {
-        id: 'payroll-recruitment',
-        category: 'Bundle',
-        name: 'Payroll + Recruitment Solution',
-        shortDesc: 'Integrated hiring and payroll management bundle.',
-        fullDesc: 'The perfect starter pack. Hire through us and get 3 months of payroll processing for free for those candidates.',
-        price: 'Custom Bundle',
-        priceType: 'Custom',
-        features: ['Discounted Recruitment Fees', 'Free Payroll Setup', 'Unified Dashboard', 'Priority Support'],
-        icon: 'ph-intersect'
-    },
-    {
-        id: 'small-hr-compliance',
+        id: 'policy',
         category: 'HR Services',
-        name: 'Small Quick HR Services',
-        shortDesc: 'Ad-hoc HR operational support for small needs.',
-        fullDesc: 'Need an HR letter? Policy review? Grievance handling? Get quick HR support without hiring a full-time HR.',
-        price: '₹5,000',
-        priceType: 'Block of 10 Hours',
-        features: ['HR Letters & Docs', 'Policy Operational Tasks', 'Employee Queries', 'Remote Support'],
-        icon: 'ph-handshake'
+        name: 'HR Policy & Audit Services',
+        icon: 'ph-book-bookmark',
+        shortDesc: 'Robust HR frameworks, labor audits, and risk mitigation strategies.',
+        subPages: [
+            {
+                id: 'policy',
+                title: 'HR Policy Design',
+                content: `
+                    <p>Customized HR handbooks and policy manuals aligning with your company culture and law.</p>
+                `
+            },
+            {
+                id: 'audit',
+                title: 'Labour Law Audit',
+                content: `
+                    <p>Comprehensive check of statutory records to identify risks and liabilities.</p>
+                `
+            },
+            {
+                id: 'docs',
+                title: 'HR Documentation',
+                content: `
+                    <p>Offer letters, appointment letters, NDAs, PIPs, and exit documentation.</p>
+                `
+            },
+            {
+                id: 'gap',
+                title: 'Compliance Gap Analysis',
+                content: `
+                    <p>Identifying the delta between current practices and legal requirements.</p>
+                `
+            },
+            {
+                id: 'implementation',
+                title: 'Implementation Support',
+                content: `
+                    <p>Hand-holding your team to implement new policies effectively.</p>
+                `
+            }
+        ],
+        pricingPlans: [
+            {
+                name: 'HR Policy Starter',
+                price: '₹9,999',
+                priceUnit: 'one-time',
+                features: ['Standard Employee Handbook', 'Basic Policies']
+            },
+            {
+                name: 'HR Audit',
+                price: '₹14,999',
+                priceUnit: 'one-time',
+                features: ['Statutory Health Check', 'Risk Report']
+            },
+            {
+                name: 'Full HR Compliance Audit',
+                price: '₹24,999',
+                features: ['Deep Dive Audit', 'Gap Analysis', 'Correction Plan']
+            },
+            {
+                name: 'Enterprise HR Audit',
+                price: 'Custom Pricing',
+                isCustom: true,
+                features: ['Multi-location', 'Complex Structure']
+            }
+        ]
     },
     {
-        id: 'full-compliance',
-        category: 'Compliance',
-        name: 'Full Compliance Suite (10–50 staff)',
-        shortDesc: 'Total statutory compliance coverage for growing/mid-sized orgs.',
-        fullDesc: 'We take legal responsibility for your compliance. PF, ESIC, LWF, Shops & Est, and all monthly filings.',
-        price: '₹8,000',
-        priceType: 'Month',
-        features: ['PF/ESIC Monthly Challans', 'Labor Law Registrations', 'Audit Support', 'Legal Updates'],
-        icon: 'ph-shield-check'
-    },
-    {
-        id: 'compliance-filing',
-        category: 'Compliance',
-        name: 'Compliance & PF/ESIC Filing',
-        shortDesc: 'Filing-only service for established teams.',
-        fullDesc: 'You do the calculation, we do the filing. Professional filing service for PF, ESIC, and PT.',
-        price: '₹50',
-        priceType: 'Per Employee / Month',
-        features: ['Challan Generation', 'Return Filing', 'Error Correction', 'Record Maintenance'],
-        icon: 'ph-file-text'
-    },
-    {
-        id: 'hrms-setup',
+        id: 'hrms',
         category: 'HRMS',
-        name: 'HRMS Server Setup & Support',
-        shortDesc: 'On-premise or Private Cloud HRMS deployment.',
-        fullDesc: 'Deploy GlobalHRX on your own servers. Full white-label setup, security configuration, and annual maintenance.',
-        price: 'Request Quote',
-        priceType: 'One Time',
-        features: ['Private Server Deployment', 'Brand Customization', 'Data Migration', 'Annual Maintenance Contract'],
-        icon: 'ph-server'
+        name: 'GlobalHRX HRMS Software',
+        icon: 'ph-desktop',
+        shortDesc: 'An enterprise-grade HRMS covering HR, payroll, attendance, recruitment, compliance & analytics.',
+        subPages: [
+            {
+                id: 'overview',
+                title: 'HRMS Overview',
+                content: `
+                    <p>GlobalHRX is an enterprise-grade HRMS covering HR, payroll, attendance, recruitment, compliance & analytics in one unified platform.</p>
+                `
+            },
+            {
+                id: 'modules',
+                title: 'Core Modules',
+                content: `
+                    <ul>
+                        <li>Employee Master Database</li>
+                        <li>Attendance & Leave Management</li>
+                        <li>Payroll Engine (Automated)</li>
+                        <li>Recruitment ATS</li>
+                    </ul>
+                `
+            },
+            {
+                id: 'engine',
+                title: 'Compliance Engine',
+                content: `
+                    <p>Built-in statutory compliance checks to ensure your payroll is always legal.</p>
+                `
+            },
+            {
+                id: 'analytics',
+                title: 'Analytics Dashboard',
+                content: `
+                    <p>Real-time insights into headcount, costs, attrition, and performance.</p>
+                `
+            },
+            {
+                id: 'tech',
+                title: 'Technology & Security',
+                content: `
+                    <p>Cloud-based (or On-premise), secure, and scalable architecture.</p>
+                `
+            }
+        ],
+        pricingPlans: [
+            {
+                name: 'HRMS Basic',
+                price: '₹49',
+                priceUnit: '/ emp / month',
+                features: ['Core HR', 'Leave & attendance']
+            },
+            {
+                name: 'HRMS Standard',
+                price: '₹79',
+                priceUnit: '/ emp / month',
+                features: ['Payroll', 'Reports', 'ESS portal']
+            },
+            {
+                name: 'HRMS Professional',
+                price: '₹119',
+                priceUnit: '/ emp / month',
+                features: ['Compliance', 'Recruitment', 'Analytics']
+            },
+            {
+                name: 'HRMS Enterprise',
+                price: 'Custom Pricing',
+                isCustom: true,
+                features: ['Multi-entity', 'API integration', 'Dedicated support']
+            }
+        ]
     }
 ];
 
