@@ -263,8 +263,132 @@ function switchView(viewName) {
         renderSuperAdminDashboard();
     } else if (viewName === 'recruitment') {
         renderRecruitmentView();
+    } else if (viewName === 'tenants') {
+        renderTenantManagement();
     } else {
         const content = document.getElementById('dynamic-content');
         content.innerHTML = `<div style="padding: 40px; text-align: center; color: var(--text-tertiary);">Module '${viewName}' is under construction.</div>`;
     }
 }
+
+function renderTenantManagement() {
+    const content = document.getElementById('dynamic-content');
+    const tenants = HRMS_STATE.tenants.getAll();
+
+    content.innerHTML = `
+        <div class="dashboard-header" style="margin-bottom: 30px; display: flex; justify-content: space-between; align-items: center;">
+            <div>
+                <h1 style="color: white; font-size: 1.8rem;">Tenant Management</h1>
+                <p style="color: var(--text-tertiary);">Oversee all client organizations and their subscription status.</p>
+            </div>
+            <button onclick="showTenantForm()" style="background: var(--primary); color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: 600; display: flex; align-items: center; gap: 8px;">
+                <i class="ph-bold ph-plus-circle"></i> Onboard New Tenant
+            </button>
+        </div>
+
+        <!-- CREATE TENANT FORM -->
+        <div id="tenant-form-container" style="display: none; background: rgba(30, 41, 59, 0.4); padding: 30px; border-radius: 12px; margin-bottom: 30px; border: 1px solid rgba(255,255,255,0.1);">
+            <h3 style="margin-bottom: 20px; color: white;">Onboard New Client Organization</h3>
+            <form onsubmit="handleCreateTenant(event)" style="display: grid; gap: 20px;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <div>
+                        <label style="display: block; color: var(--text-secondary); margin-bottom: 8px;">Organization Name</label>
+                        <input type="text" name="name" required placeholder="e.g. Acme Corp" style="width: 100%; padding: 12px; background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.1); color: white; border-radius: 8px;">
+                    </div>
+                    <div>
+                        <label style="display: block; color: var(--text-secondary); margin-bottom: 8px;">Admin Email</label>
+                        <input type="email" name="email" required placeholder="admin@acme.com" style="width: 100%; padding: 12px; background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.1); color: white; border-radius: 8px;">
+                    </div>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px;">
+                     <div>
+                        <label style="display: block; color: var(--text-secondary); margin-bottom: 8px;">Subscription Plan</label>
+                        <select name="plan" required style="width: 100%; padding: 12px; background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.1); color: white; border-radius: 8px;">
+                            <option value="Startup">Startup (₹50k/mo)</option>
+                            <option value="Growth">Growth (₹1.5L/mo)</option>
+                            <option value="Enterprise">Enterprise (Custom)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label style="display: block; color: var(--text-secondary); margin-bottom: 8px;">License Seats</label>
+                        <input type="number" name="employees" value="50" style="width: 100%; padding: 12px; background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.1); color: white; border-radius: 8px;">
+                    </div>
+                    <div>
+                        <label style="display: block; color: var(--text-secondary); margin-bottom: 8px;">Admin Password</label>
+                        <input type="text" name="password" value="welcome123" required style="width: 100%; padding: 12px; background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.1); color: white; border-radius: 8px;">
+                    </div>
+                </div>
+                <div style="display: flex; gap: 10px;">
+                    <button type="submit" style="background: #10b981; color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: 600;">Create Tenant</button>
+                    <button type="button" onclick="document.getElementById('tenant-form-container').style.display='none'" style="background: transparent; color: var(--text-tertiary); border: 1px solid rgba(255,255,255,0.1); padding: 10px 20px; border-radius: 6px; cursor: pointer;">Cancel</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- TENANT LIST -->
+        <div style="background: rgba(30, 41, 59, 0.4); border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); overflow: hidden;">
+            <table style="width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr style="background: rgba(255,255,255,0.02); text-align: left;">
+                         <th style="padding: 15px; color: var(--text-secondary);">Organization</th>
+                         <th style="padding: 15px; color: var(--text-secondary);">Plan</th>
+                         <th style="padding: 15px; color: var(--text-secondary);">Users</th>
+                         <th style="padding: 15px; color: var(--text-secondary);">Joined</th>
+                         <th style="padding: 15px; color: var(--text-secondary);">Status</th>
+                         <th style="padding: 15px; color: var(--text-secondary);">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${tenants.length > 0 ? tenants.map(t => `
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                            <td style="padding: 15px; color: white;">
+                                <div style="display:flex; align-items:center; gap:10px;">
+                                    <div style="width: 32px; height: 32px; background: var(--primary); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-weight: bold;">${t.name.substring(0, 2).toUpperCase()}</div>
+                                    <div>
+                                        ${t.name}
+                                        <div style="font-size: 0.8rem; color: var(--text-tertiary);">${t.adminEmail}</div>
+                                    </div>
+                                </div>
+                            </td>
+                             <td style="padding: 15px; color: var(--text-secondary);"><span style="background: rgba(59, 130, 246, 0.1); color: #60a5fa; padding: 4px 8px; border-radius: 4px; font-size: 0.8rem;">${t.plan}</span></td>
+                             <td style="padding: 15px; color: var(--text-secondary);">${t.employees}</td>
+                             <td style="padding: 15px; color: var(--text-secondary); font-size: 0.9rem;">${new Date(t.joinedDate).toLocaleDateString()}</td>
+                             <td style="padding: 15px;">
+                                <span style="background: rgba(16, 185, 129, 0.1); color: #34d399; padding: 4px 8px; border-radius: 4px; font-size: 0.8rem;">${t.status}</span>
+                             </td>
+                             <td style="padding: 15px;">
+                                <button style="background: none; border: 1px solid rgba(255,255,255,0.1); color: white; padding: 4px 10px; border-radius: 6px; cursor: pointer; font-size: 0.8rem;">Manage</button>
+                             </td>
+                        </tr>
+                    `).join('') : `
+                         <tr><td colspan="6" style="padding: 40px; text-align: center; color: var(--text-tertiary);">No tenants found. Onboard your first client.</td></tr>
+                    `}
+                </tbody>
+            </table>
+        </div>
+    `;
+}
+
+window.showTenantForm = function () {
+    document.getElementById('tenant-form-container').style.display = 'block';
+};
+
+window.handleCreateTenant = function (e) {
+    e.preventDefault();
+    const form = e.target;
+
+    // Simple Plan Price mapping
+    const prices = { 'Startup': 50000, 'Growth': 150000, 'Enterprise': 500000 };
+
+    const data = {
+        name: form.name.value,
+        adminEmail: form.email.value,
+        password: form.password.value,
+        plan: form.plan.value,
+        employees: parseInt(form.employees.value),
+        planPrice: prices[form.plan.value] || 0
+    };
+
+    HRMS_STATE.tenants.create(data);
+    renderTenantManagement(); // Refresh view
+};

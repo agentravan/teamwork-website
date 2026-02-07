@@ -179,6 +179,15 @@ const HRMS_STATE = {
             localStorage.setItem('savedCandidates', JSON.stringify(saved));
             return saved.includes(candidateId);
         },
+        updateApplicationStatus: function (appId, newStatus) {
+            const apps = this.getApplications();
+            const app = apps.find(a => a.id === appId);
+            if (app) {
+                app.status = newStatus;
+                localStorage.setItem('applications', JSON.stringify(apps));
+                HRMS_STATE.audit.log(HRMS_STATE.auth.getCurrentUser().id, 'REVIEW_CANDIDATE', `Updated application ${appId} to ${newStatus}`);
+            }
+        },
         getStats: function () {
             const jobs = this.getJobs();
             const apps = this.getApplications();
