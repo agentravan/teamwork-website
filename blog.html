@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- SEO METADATA -->
+    <title>HR Trends & Compliance Blog | TeamWork Solutions</title>
+    <meta name="description"
+        content="Latest insights on HR transformation, payroll governance, statutory compliance, and HR technology from TeamWork Solutions.">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/header-premium.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <style>
+        .blog-header {
+            padding: 160px 0 80px;
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0) 0%, #0f172a 100%),
+                radial-gradient(circle at top center, rgba(37, 99, 235, 0.1), transparent 50%);
+            text-align: center;
+        }
+
+        .post-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .blog-card {
+            background: rgba(30, 41, 59, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+
+        .blog-content {
+            padding: 25px;
+        }
+
+        .blog-meta {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .blog-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            line-height: 1.4;
+            color: white;
+        }
+
+        .blog-snippet {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .linkedin-badge {
+            background: #0077b5;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="global-header-container"></div>
+
+    <main>
+        <!-- BLOG HEADER -->
+        <section class="blog-header">
+            <div class="container">
+                <span style="color: var(--primary); font-weight: 600; letter-spacing: 0.1em;">THOUGHT LEADERSHIP</span>
+                <h1 class="fade-up" style="font-size: 3rem; margin-top: 15px; margin-bottom: 20px;">
+                    Insights, Updates & <span class="text-gradient">HR Trends</span>
+                </h1>
+                <p class="fade-up"
+                    style="max-width: 700px; margin: 0 auto; color: var(--text-secondary); font-size: 1.1rem;">
+                    Stay updated with the latest insights on HR transformation, payroll governance, statutory
+                    compliance, and HR technology.
+                    Our blog brings together real-world HR experiences directly from our LinkedIn knowledge base.
+                </p>
+            </div>
+        </section>
+
+        <!-- LATEST POSTS -->
+        <section class="section-padding">
+            <div class="container">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px;">
+                    <h2>Latest from LinkedIn</h2>
+                    <a href="https://www.linkedin.com/company/teamhrpro" target="_blank" class="btn btn-outline">
+                        <i class="ph-bold ph-linkedin-logo"></i> Follow Us
+                    </a>
+                </div>
+
+                <div class="post-grid" id="linkedin-feed">
+                    <!-- Posts will be injected here -->
+                    <div style="grid-column: 1/-1; text-align: center; padding: 40px;">
+                        <i class="ph-duotone ph-spinner"
+                            style="font-size: 32px; animation: spin 1s linear infinite;"></i>
+                        <p>Loading updates...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="global-footer-container"></div>
+
+    <script src="/js/main.js"></script>
+    <script src="/js/unified-header.js"></script>
+    <script src="/js/unified-footer.js"></script>
+
+    <script>
+        // Simulated LinkedIn Feed Fetcher
+        // In a real scenario, this would hit a backend proxy or use a widget
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                const posts = [
+                    {
+                        title: "The Future of Payroll Governance in 2026",
+                        date: "Feb 5, 2026",
+                        snippet: "Automation isn't just about speed; it's about compliance. Learn how the new wage code impacts your payroll structure...",
+                        link: "https://www.linkedin.com/company/teamhrpro"
+                    },
+                    {
+                        title: "Startup Compliance Checklist: Don't Miss These Steps",
+                        date: "Jan 28, 2026",
+                        snippet: "Starting a new venture? From Shop & Establishment to PF registration, here is your essential guide to staying compliant from Day 1...",
+                        link: "https://www.linkedin.com/company/teamhrpro"
+                    },
+                    {
+                        title: "GlobalHRX: Transforming Employee Experience",
+                        date: "Jan 15, 2026",
+                        snippet: "We are thrilled to announce new modules in GlobalHRX designed to enhance remote workforce engagement and performance tracking...",
+                        link: "https://www.linkedin.com/company/teamhrpro"
+                    },
+                    {
+                        title: "Understanding TDS on Salaries: A Guide for HRs",
+                        date: "Jan 10, 2026",
+                        snippet: "Tax season is approaching. Ensure your tax declarations and TDS deductions are accurate to avoid penalties. Read our full breakdown...",
+                        link: "https://www.linkedin.com/company/teamhrpro"
+                    },
+                    {
+                        title: "Why HR Audits are Crucial for Enterprises",
+                        date: "Dec 05, 2025",
+                        snippet: "Regular HR audits help identify gaps in compliance and policy enforcement. Discover the key areas every audit should cover...",
+                        link: "https://www.linkedin.com/company/teamhrpro"
+                    }
+                ];
+
+                const feedContainer = document.getElementById('linkedin-feed');
+                let html = '';
+
+                posts.forEach(post => {
+                    html += `
+                        <div class="blog-card fade-up">
+                            <div class="blog-content">
+                                <div class="blog-meta">
+                                    <span class="linkedin-badge">LinkedIn</span>
+                                    <span>${post.date}</span>
+                                </div>
+                                <h3 class="blog-title">${post.title}</h3>
+                                <p class="blog-snippet">${post.snippet}</p>
+                                <a href="${post.link}" target="_blank" style="color: var(--primary); font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 5px;">
+                                    Read on LinkedIn <i class="ph-bold ph-arrow-up-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                feedContainer.innerHTML = html;
+            }, 800); // Simulate network delay
+        });
+    </script>
+</body>
+
+</html>

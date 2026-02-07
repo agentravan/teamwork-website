@@ -1,13 +1,16 @@
 /**
  * UNIFIED HEAD LOADER
  * Injects a premium SaaS header into #global-header-container
+ * Logic: One component, conditional styling for Dropdowns (Home vs Inner)
  */
+
+const isHome = window.location.pathname === '/' || window.location.pathname.endsWith('index.html') || window.location.pathname.endsWith('/');
 
 const headerHTML = `
 <!-- PROMO STRIP (Injected via JS on Home only) -->
 <div id="promo-strip-container"></div>
 
-<header class="site-header">
+<header class="site-header ${isHome ? 'home-mode' : 'inner-mode'}">
     <div class="nav-container">
         <!-- LOGO -->
         <a href="/index.html" class="logo">
@@ -178,6 +181,50 @@ const headerHTML = `
 </div>
 
 <style>
+/* Header CSS Variables Override based on mode */
+.home-mode .mega-menu {
+    /* Home Mode: Minimal, Soft */
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(0,0,0,0.05);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+.home-mode .mega-link {
+    background: transparent;
+    border: none;
+    padding: 10px 15px;
+}
+.home-mode .mega-link:hover {
+    background: rgba(0,0,0,0.03);
+    transform: none; /* No lift on home */
+    border-color: transparent;
+}
+.home-mode .mega-title {
+    color: #0f172a;
+    font-weight: 600;
+}
+.home-mode .mega-desc {
+    color: #64748b;
+}
+
+/* Inner Mode: Card/Pill Style (Already Default in CSS, but reinforcing) */
+.inner-mode .mega-menu {
+    background: rgba(15, 23, 42, 0.95); /* Darker, Enterprise feel */
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.inner-mode .mega-link {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px; /* Pill/Card shape */
+    margin-bottom: 8px;
+}
+.inner-mode .mega-link:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--primary);
+    transform: translateX(5px);
+}
+
+
 /* Header Specific Styles */
 .btn-ghost-header {
     background: transparent;
@@ -240,8 +287,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // 2. Inject Promo Strip on Home Page Only
-    const path = window.location.pathname;
-    if (path === '/' || path.endsWith('index.html')) {
+    if (isHome) {
         const promoContainer = document.getElementById('promo-strip-container');
         if (promoContainer) {
             promoContainer.innerHTML = `
@@ -261,8 +307,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // 3. Modal Logic
-    document.querySelector('.close-modal').addEventListener('click', () => {
-        document.getElementById('lead-modal').style.display = 'none';
+    document.body.addEventListener('click', (e) => {
+        if (e.target.classList.contains('close-modal')) {
+            document.getElementById('lead-modal').style.display = 'none';
+        }
+        if (e.target.classList.contains('modal-overlay')) {
+            document.getElementById('lead-modal').style.display = 'none';
+        }
     });
 });
 
@@ -292,6 +343,7 @@ function initializeHeaderLogic() {
 
     if (hamburger && mainNav) {
         hamburger.addEventListener('click', () => {
+            // Toggle logic
             const isExpanded = mainNav.classList.toggle('show');
             if (mobileActions) mobileActions.style.display = isExpanded ? 'block' : 'none';
             const icon = hamburger.querySelector('i');
