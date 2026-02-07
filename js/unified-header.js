@@ -10,7 +10,8 @@ const headerHTML = `
 <!-- PROMO STRIP (Injected via JS on Home only) -->
 <div id="promo-strip-container"></div>
 
-<header class="site-header ${isHome ? 'home-mode' : 'inner-mode'}">
+<!-- Force HOME MODE globally as per user request -->
+<header class="site-header home-mode">
     <div class="nav-container">
         <!-- LOGO -->
         <a href="/index.html" class="logo">
