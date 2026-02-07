@@ -71,6 +71,53 @@
         <h1>Requested Access Submissions</h1>
         <p style="color: var(--text-secondary);">These are the leads captured from the "Request Access" page.</p>
 
+        <div
+            style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px; margin-bottom: 20px;">
+            <h2>Job Management</h2>
+            <button onclick="toggleJobForm()"
+                style="background: var(--primary); color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer;">+
+                Post New Job</button>
+        </div>
+
+        <!-- JOB FORM -->
+        <div id="jobFormContainer"
+            style="display: none; background: rgba(30, 41, 59, 0.5); padding: 20px; border-radius: 8px; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.1);">
+            <form onsubmit="handlePostJob(event)" style="display: grid; gap: 15px;">
+                <input type="text" id="jobTitle" placeholder="Job Title" required
+                    style="padding: 10px; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); color: white; border-radius: 4px;">
+                <input type="text" id="jobDept" placeholder="Department" required
+                    style="padding: 10px; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); color: white; border-radius: 4px;">
+                <input type="text" id="jobLoc" placeholder="Location" value="Gurugram, India (On-site)" required
+                    style="padding: 10px; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); color: white; border-radius: 4px;">
+                <textarea id="jobDesc" placeholder="Job Description" rows="4" required
+                    style="padding: 10px; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); color: white; border-radius: 4px;"></textarea>
+                <div style="display: flex; gap: 10px;">
+                    <button type="submit"
+                        style="background: #10b981; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer;">Publish
+                        Job</button>
+                    <button type="button" onclick="toggleJobForm()"
+                        style="background: transparent; color: #94a3b8; border: 1px solid #94a3b8; padding: 10px 20px; border-radius: 4px; cursor: pointer;">Cancel</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- JOB LIST -->
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Department</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="jobs-body">
+                <!-- Jobs injected here -->
+            </tbody>
+        </table>
+
+        <!-- REQUESTS SECTION -->
+        <h2 style="margin-top: 50px;">Requested Access Submissions</h2>
         <table class="data-table">
             <thead>
                 <tr>
@@ -87,7 +134,7 @@
         <div style="margin-top: 20px; text-align: right;">
             <button onclick="clearData()"
                 style="background: #ef4444; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer;">Clear
-                Data</button>
+                Requests</button>
         </div>
     </div>
 
@@ -112,6 +159,26 @@
             `).join('');
         }
 
+        // --- REQUESTS LOGIC ---
+        function loadRequests() {
+            const requests = JSON.parse(localStorage.getItem('accessRequests') || '[]');
+            const tbody = document.getElementById('requests-body');
+
+            if (requests.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="4" class="empty-state">No requests found.</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = requests.map(req => `
+                <tr>
+                    <td>${req.date}</td>
+                    <td>${req.email}</td>
+                    <td>${req.org}</td>
+                    <td><span class="status-badge">Pending Review</span></td>
+                </tr>
+            `).join('');
+        }
+
         function clearData() {
             if (confirm('Are you sure you want to clear all requests?')) {
                 localStorage.removeItem('accessRequests');
@@ -119,7 +186,66 @@
             }
         }
 
-        document.addEventListener('DOMContentLoaded', loadRequests);
+        // --- JOBS LOGIC ---
+        function loadJobs() {
+            const jobs = JSON.parse(localStorage.getItem('jobs') || '[]');
+            const tbody = document.getElementById('jobs-body');
+
+            if (jobs.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="4" class="empty-state">No active jobs posted.</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = jobs.map(job => `
+                <tr>
+                    <td>${job.title}</td>
+                    <td>${job.dept}</td>
+                    <td><span class="status-badge" style="background: rgba(16, 185, 129, 0.2); color: #10b981;">${job.status || 'Open'}</span></td>
+                    <td>
+                        <button onclick="deleteJob(${job.id})" style="color: #ef4444; background: none; border: none; cursor: pointer;"><i class="ph-bold ph-trash"></i></button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function toggleJobForm() {
+            const form = document.getElementById('jobFormContainer');
+            form.style.display = form.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function handlePostJob(e) {
+            e.preventDefault();
+            const job = {
+                id: Date.now(),
+                title: document.getElementById('jobTitle').value,
+                dept: document.getElementById('jobDept').value,
+                loc: document.getElementById('jobLoc').value,
+                desc: document.getElementById('jobDesc').value,
+                status: 'Open'
+            };
+
+            const jobs = JSON.parse(localStorage.getItem('jobs') || '[]');
+            jobs.unshift(job);
+            localStorage.setItem('jobs', JSON.stringify(jobs));
+
+            e.target.reset();
+            toggleJobForm();
+            loadJobs();
+        }
+
+        function deleteJob(id) {
+            if (confirm('Delete this job?')) {
+                let jobs = JSON.parse(localStorage.getItem('jobs') || '[]');
+                jobs = jobs.filter(j => j.id !== id);
+                localStorage.setItem('jobs', JSON.stringify(jobs));
+                loadJobs();
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadRequests();
+            loadJobs();
+        });
     </script>
 </body>
 

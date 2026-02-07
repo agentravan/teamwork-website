@@ -34,6 +34,7 @@ function renderSidebar(user) {
     if (user.role === 'SUPER_ADMIN') {
         menuItems = [
             { icon: 'ph-squares-four', label: 'Platform Overview', active: true, view: 'overview' },
+            { icon: 'ph-briefcase', label: 'Recruitment (Jobs)', active: false, view: 'recruitment' },
             { icon: 'ph-buildings', label: 'Tenant Management', active: false, view: 'tenants' },
             { icon: 'ph-users-three', label: 'Access Requests', active: false, view: 'requests', badge: HRMS_STATE.requests.getPending().length },
             { icon: 'ph-chart-line-up', label: 'Revenue Analytics', active: false, view: 'revenue' },
@@ -147,10 +148,121 @@ function renderSuperAdminDashboard() {
     `;
 }
 
+function renderRecruitmentView() {
+    const content = document.getElementById('dynamic-content');
+    const jobs = HRMS_STATE.recruitment.getJobs();
+
+    content.innerHTML = `
+        <div class="dashboard-header" style="margin-bottom: 30px; display: flex; justify-content: space-between; align-items: center;">
+            <div>
+                <h1 style="color: white; font-size: 1.8rem;">Recruitment & Job Posting</h1>
+                <p style="color: var(--text-tertiary);">Manage open positions on the careers page.</p>
+            </div>
+            <button onclick="showJobForm()" style="background: var(--primary); color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: 600; display: flex; align-items: center; gap: 8px;">
+                <i class="ph-bold ph-plus"></i> Post New Job
+            </button>
+        </div>
+
+        <div id="job-form-container" style="display: none; background: rgba(30, 41, 59, 0.4); padding: 30px; border-radius: 12px; margin-bottom: 30px; border: 1px solid rgba(255,255,255,0.1);">
+            <h3 style="margin-bottom: 20px; color: white;">Post a New Role</h3>
+            <form onsubmit="handlePostJob(event)" style="display: grid; gap: 20px;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <div>
+                        <label style="display: block; color: var(--text-secondary); margin-bottom: 8px;">Job Title</label>
+                        <input type="text" name="title" required style="width: 100%; padding: 12px; background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.1); color: white; border-radius: 8px;">
+                    </div>
+                    <div>
+                        <label style="display: block; color: var(--text-secondary); margin-bottom: 8px;">Department</label>
+                         <select name="dept" required style="width: 100%; padding: 12px; background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.1); color: white; border-radius: 8px;">
+                            <option value="Engineering">Engineering</option>
+                            <option value="HR & Admin">HR & Admin</option>
+                            <option value="Sales">Sales</option>
+                            <option value="Marketing">Marketing</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                     <label style="display: block; color: var(--text-secondary); margin-bottom: 8px;">Location</label>
+                     <input type="text" name="loc" value="Gurugram, India (On-site)" required style="width: 100%; padding: 12px; background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.1); color: white; border-radius: 8px;">
+                </div>
+                <div>
+                     <label style="display: block; color: var(--text-secondary); margin-bottom: 8px;">Description</label>
+                     <textarea name="desc" rows="4" required style="width: 100%; padding: 12px; background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.1); color: white; border-radius: 8px;"></textarea>
+                </div>
+                <div style="display: flex; gap: 10px;">
+                    <button type="submit" style="background: #10b981; color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: 600;">Publish Job</button>
+                    <button type="button" onclick="document.getElementById('job-form-container').style.display='none'" style="background: transparent; color: var(--text-tertiary); border: 1px solid rgba(255,255,255,0.1); padding: 10px 20px; border-radius: 6px; cursor: pointer;">Cancel</button>
+                </div>
+            </form>
+        </div>
+
+        <div style="background: rgba(30, 41, 59, 0.4); border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); overflow: hidden;">
+            <table style="width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr style="background: rgba(255,255,255,0.02); text-align: left;">
+                         <th style="padding: 15px; color: var(--text-secondary);">Role</th>
+                         <th style="padding: 15px; color: var(--text-secondary);">Department</th>
+                         <th style="padding: 15px; color: var(--text-secondary);">Status</th>
+                         <th style="padding: 15px; color: var(--text-secondary);">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${jobs.length > 0 ? jobs.map(j => `
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                            <td style="padding: 15px; color: white;">${j.title}<br><span style="font-size: 0.8rem; color: var(--text-tertiary);">${j.loc}</span></td>
+                             <td style="padding: 15px; color: var(--text-secondary);">${j.dept}</td>
+                             <td style="padding: 15px;">
+                                <span style="
+                                    background: ${j.status === 'Open' ? 'rgba(16, 185, 129, 0.1)' : 'rgba(234, 179, 8, 0.1)'}; 
+                                    color: ${j.status === 'Open' ? '#34d399' : '#eab308'}; 
+                                    padding: 4px 8px; border-radius: 4px; font-size: 0.8rem;
+                                ">${j.status}</span>
+                             </td>
+                             <td style="padding: 15px;">
+                                <button onclick="deleteJob(${j.id})" style="background: none; border: none; color: #ef4444; cursor: pointer; font-size: 1.2rem;" title="Delete"><i class="ph-bold ph-trash"></i></button>
+                             </td>
+                        </tr>
+                    `).join('') : `
+                         <tr><td colspan="4" style="padding: 40px; text-align: center; color: var(--text-tertiary);">No active job postings.</td></tr>
+                    `}
+                </tbody>
+            </table>
+        </div>
+    `;
+}
+
+window.showJobForm = function () {
+    document.getElementById('job-form-container').style.display = 'block';
+};
+
+window.handlePostJob = function (e) {
+    e.preventDefault();
+    const form = e.target;
+    const data = {
+        title: form.title.value,
+        dept: form.dept.value,
+        loc: form.loc.value,
+        desc: form.desc.value
+    };
+
+    HRMS_STATE.recruitment.addJob(data);
+    renderRecruitmentView(); // Refresh
+};
+
+window.deleteJob = function (id) {
+    if (confirm('Delete this job post?')) {
+        HRMS_STATE.recruitment.deleteJob(id);
+        renderRecruitmentView();
+    }
+};
+
+
 function switchView(viewName) {
-    // Handling view switching (placeholder for now)
+    // Handling view switching
     if (viewName === 'overview') {
         renderSuperAdminDashboard();
+    } else if (viewName === 'recruitment') {
+        renderRecruitmentView();
     } else {
         const content = document.getElementById('dynamic-content');
         content.innerHTML = `<div style="padding: 40px; text-align: center; color: var(--text-tertiary);">Module '${viewName}' is under construction.</div>`;

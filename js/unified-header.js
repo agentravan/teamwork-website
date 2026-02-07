@@ -139,12 +139,8 @@ const headerHTML = `
 
         <!-- RIGHT SIDE ACTIONS (SaaS Style) -->
         <div class="nav-actions">
-            <!-- Ghost Button for Login -->
-            <a href="/login.html" class="btn-ghost-header">Login</a>
-            <!-- Primary Action -->
-            <a href="/request-access.html" class="btn-primary-header">
-                Request Access <i class="ph-bold ph-arrow-right"></i>
-            </a>
+            <a href="login.html" class="btn-login" style="margin-right: 15px;">Login</a>
+            <a href="request-access.html" class="btn-request">Request Access <i class="ph-bold ph-arrow-right"></i></a>
         </div>
 
         <!-- MOBILE TOGGLE -->

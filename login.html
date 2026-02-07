@@ -5,21 +5,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Selection | TeamWork Solutions</title>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/mega-menu.css">
-    <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <link rel="stylesheet" href="css/header-premium.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <style>
+        body {
+            background-color: #0f172a;
+            font-family: 'Inter', sans-serif;
+            color: #fff;
+        }
+
+        .login-choice-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 80vh;
+            gap: 30px;
+            padding: 20px;
+            flex-wrap: wrap;
+        }
+
         .login-card {
             background: rgba(30, 41, 59, 0.4);
-            border: 1px solid var(--border-subtle);
-            border-radius: 12px;
-            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 40px;
+            width: 100%;
+            max-width: 400px;
             text-align: center;
-            transition: transform 0.3s ease, border-color 0.3s ease;
+            transition: all 0.3s ease;
             cursor: pointer;
             text-decoration: none;
             display: block;
@@ -27,30 +43,45 @@
 
         .login-card:hover {
             transform: translateY(-5px);
-            border-color: var(--primary);
             background: rgba(30, 41, 59, 0.6);
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
 
-        .card-icon {
+        .login-card i {
             font-size: 48px;
+            color: #fff;
             margin-bottom: 20px;
-            color: var(--text-secondary);
+            display: inline-block;
         }
 
-        .login-card:hover .card-icon {
-            color: var(--primary);
-        }
-
-        .card-title {
-            font-size: 1.25rem;
-            color: white;
+        .login-card h2 {
+            font-size: 1.5rem;
             margin-bottom: 10px;
+            color: white;
             font-weight: 600;
         }
 
-        .card-desc {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
+        .login-card p {
+            font-size: 0.95rem;
+            color: #94a3b8;
+            line-height: 1.5;
+        }
+
+        .page-title {
+            text-align: center;
+            margin-top: 100px;
+            margin-bottom: -40px;
+        }
+
+        .page-title h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .page-title p {
+            color: #94a3b8;
         }
     </style>
 </head>
@@ -58,47 +89,37 @@
 <body>
     <div id="global-header-container"></div>
 
+    <div class="page-title">
+        <h1>Welcome Back</h1>
+        <p>Choose your portal to login.</p>
+    </div>
 
+    <div class="login-choice-container">
+        <!-- HRMS Login -->
+        <a href="login-hrms.html" class="login-card">
+            <i class="ph-duotone ph-globe"></i>
+            <h2>Global HRX Login</h2>
+            <p>For Employees & Clients accessing the HRMS Dashboard.</p>
+        </a>
 
-    <main style="min-height: 100vh; display: flex; align-items: center; justify-content: center; padding-top: 80px;">
-        <div class="container">
-            <div style="text-align: center; margin-bottom: 50px;">
-                <h1 style="margin-bottom: 15px;">Welcome Back</h1>
-                <p style="color: var(--text-secondary);">Choose your portal to login.</p>
-            </div>
+        <!-- Career Admin Login -->
+        <a href="career-admin-login.html" class="login-card">
+            <i class="ph-duotone ph-briefcase"></i>
+            <h2>Career Admin</h2>
+            <p>For Hiring Managers to post jobs and manage applications.</p>
+        </a>
+    </div>
 
-            <div
-                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; max-width: 800px; margin: 0 auto;">
-
-                <!-- HRMS Login -->
-                <a href="login-hrx.html" class="login-card">
-                    <i class="ph-duotone ph-globe-hemisphere-west card-icon"></i>
-                    <div class="card-title">Global HRX Login</div>
-                    <div class="card-desc">For Employees & Clients accessing the HRMS Dashboard.</div>
-                </a>
-
-                <!-- Career Admin Login -->
-                <a href="career-admin-login.html" class="login-card">
-                    <i class="ph-duotone ph-briefcase card-icon"></i>
-                    <div class="card-title">Career Admin</div>
-                    <div class="card-desc">For Hiring Managers to post jobs and manage applications.</div>
-                </a>
-
-            </div>
-        </div>
-    </main>
-
-    <footer>
-        <div class="container">
-            <div
-                style="text-align: center; padding-top: 40px; border-top: 1px solid var(--border-subtle); color: var(--text-tertiary);">
-                &copy; 2026 TeamWork Solutions
-            </div>
-        </div>
-    </footer>
-
-    <script src="js/main.js"></script>
     <script src="js/unified-header.js"></script>
+    <!-- Override login link to avoid loop -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const loginBtns = document.querySelectorAll('a[href="login.html"]');
+            loginBtns.forEach(btn => {
+                btn.classList.add('active'); // Highlight current page
+            });
+        });
+    </script>
 </body>
 
 </html>

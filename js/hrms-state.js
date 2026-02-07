@@ -124,6 +124,43 @@ const HRMS_STATE = {
         }
     },
 
+    // --- RECRUITMENT SERVICE (CAREER ADMIN) ---
+    recruitment: {
+        getJobs: function () {
+            // Sync with existing public localStorage key 'jobs'
+            const existing = JSON.parse(localStorage.getItem('jobs')) || [];
+            return existing;
+        },
+        addJob: function (jobData) {
+            const jobs = this.getJobs();
+            const newJob = {
+                id: Date.now(),
+                status: 'Open',
+                ...jobData
+            };
+            jobs.unshift(newJob);
+            localStorage.setItem('jobs', JSON.stringify(jobs));
+
+            // Also log to audit
+            HRMS_STATE.audit.log(HRMS_STATE.auth.getCurrentUser().id, 'POST_JOB', `Posted job: ${newJob.title}`);
+            return newJob;
+        },
+        updateStatus: function (jobId, status) {
+            const jobs = this.getJobs();
+            const job = jobs.find(j => j.id === jobId);
+            if (job) {
+                job.status = status;
+                localStorage.setItem('jobs', JSON.stringify(jobs));
+                HRMS_STATE.audit.log(HRMS_STATE.auth.getCurrentUser().id, 'UPDATE_JOB', `Updated job ${jobId} status to ${status}`);
+            }
+        },
+        deleteJob: function (jobId) {
+            let jobs = this.getJobs();
+            jobs = jobs.filter(j => j.id !== jobId);
+            localStorage.setItem('jobs', JSON.stringify(jobs));
+        }
+    },
+
     // --- ACCESS REQUEST SERVICE ---
     requests: {
         add: function (requestData) {
