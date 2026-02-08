@@ -364,10 +364,14 @@
             // GlobalHRX Security: Redirect to login if no active session
             window.location.href = 'career-admin-login.html';
         }
+        // Identifty Recruiter
+        const currentRecruiterId = session ? session.username : (localStorage.getItem('hrms_user') ? JSON.parse(localStorage.getItem('hrms_user')).id : 'guest');
+
 
         // --- RENDER KPI ---
         function renderKPIs() {
-            const stats = HRMS_STATE.recruitment.getStats();
+            // Pass Recruiter ID to get scoped stats
+            const stats = HRMS_STATE.recruitment.getStats(currentRecruiterId);
 
             const kpis = [
                 { label: 'Posted Job', value: stats.postedJobs, icon: 'ph-briefcase', color: '#d1fae5', iconColor: '#059669' },
@@ -413,7 +417,8 @@
         }
 
         function renderJobList(container) {
-            const jobs = HRMS_STATE.recruitment.getJobs();
+            // Get Jobs for THIS recruiter
+            const jobs = HRMS_STATE.recruitment.getJobs(currentRecruiterId);
 
             container.innerHTML = `
                 <div class="card-container">
@@ -439,6 +444,7 @@
                                     <td style="padding: 15px;">
                                         <div style="font-weight: 600;">${j.title}</div>
                                         <div style="font-size: 0.85rem; color: var(--text-secondary);">${j.type} • ${j.loc}</div>
+                                        <div style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 4px;">Posted: ${new Date(j.postedDate || j.id).toLocaleDateString()}</div>
                                     </td>
                                     <td style="padding: 15px;">
                                         <div style="display: flex; -webkit-box-align: center; align-items: center; gap: 8px; cursor: pointer;" onclick="showView('applications', ${j.id})">
@@ -461,7 +467,7 @@
                             `).join('') : `
                                 <tr>
                                     <td colspan="4" style="text-align: center; padding: 40px; color: var(--text-secondary);">
-                                        No active jobs found. Post one to get started.
+                                        No active jobs found for this account.
                                     </td>
                                 </tr>
                             `}
@@ -469,6 +475,89 @@
                     </table>
                 </div>
             `;
+        }
+
+        function renderApplications(container, jobId) {
+            // Get Applications for THIS recruiter
+            const allApps = HRMS_STATE.recruitment.getApplications(currentRecruiterId);
+            // Filter by job if jobId provided, else show all
+            const apps = jobId ? allApps.filter(a => a.jobId === jobId) : allApps;
+            // Get jobs for title lookup
+            const jobs = HRMS_STATE.recruitment.getJobs(currentRecruiterId);
+            const jobTitle = jobId ? (jobs.find(j => j.id === jobId)?.title || 'Unknown Job') : 'All Applications';
+
+            container.innerHTML = `
+                <div class="card-container">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
+                        <div>
+                            <button onclick="showView('dashboard')" style="background:none; border:none; cursor:pointer; color: var(--text-secondary); display: flex; align-items: center; gap: 5px; margin-bottom: 10px;">
+                                <i class="ph-bold ph-arrow-left"></i> Back to Jobs
+                            </button>
+                            <h2 style="font-size: 1.4rem;">${jobTitle} <span style="font-weight: 400; color: var(--text-secondary);">(${apps.length})</span></h2>
+                        </div>
+                    </div>
+
+                    ${apps.length > 0 ? `
+                        <div style="display: grid; gap: 15px;">
+                            ${apps.map(app => `
+                                <div class="kpi-card" style="padding: 20px; align-items: flex-start;">
+                                    <div style="flex: 1;">
+                                        <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                                            <h3 style="font-size: 1.1rem; font-weight: 600;">${app.name}</h3>
+                                            <span class="status-badge" style="${getAppStatusStyle(app.status || 'New')}">${app.status || 'New'}</span>
+                                        </div>
+                                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 15px;">
+                                            <span><i class="ph-bold ph-envelope"></i> ${app.email}</span>
+                                            <span><i class="ph-bold ph-phone"></i> ${app.phone || 'N/A'}</span>
+                                            <span><i class="ph-bold ph-briefcase"></i> ${app.jobTitle}</span>
+                                            <span><i class="ph-bold ph-calendar"></i> ${new Date(app.appliedDate).toLocaleDateString()}</span>
+                                        </div>
+                                        <div style="display: flex; gap: 10px;">
+                                            <a href="${app.resumeLink}" target="_blank" class="btn-outline" style="padding: 6px 12px; font-size: 0.85rem; border-radius: 6px; text-decoration: none; display: inline-flex; align-items: center; gap: 5px;">
+                                                <i class="ph-bold ph-file-pdf"></i> View Resume
+                                            </a>
+                                            ${getActionButtons(app)}
+                                        </div>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    ` : `
+                         <div style="text-align: center; padding: 60px; color: var(--text-secondary);">
+                            <i class="ph-duotone ph-users-three" style="font-size: 3rem; margin-bottom: 15px;"></i>
+                            <p>No applications found.</p>
+                        </div>
+                    `}
+                </div>
+            `;
+        }
+
+        function getAppStatusStyle(status) {
+            switch (status) {
+                case 'Shortlisted': return 'background: #dbeafe; color: #2563eb;';
+                case 'Rejected': return 'background: #fee2e2; color: #dc2626;';
+                case 'Hired': return 'background: #d1fae5; color: #059669;';
+                default: return 'background: #f3f4f6; color: #4b5563;';
+            }
+        }
+
+        function getActionButtons(app) {
+            if (app.status === 'Rejected' || app.status === 'Hired') return '';
+
+            return `
+                <button onclick="updateStatus(${app.id}, 'Shortlisted')" style="background: #eff6ff; color: #2563eb; border: 1px solid #bfdbfe; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-weight: 500;">
+                    Shortlist
+                </button>
+                <button onclick="updateStatus(${app.id}, 'Rejected')" style="background: #fef2f2; color: #b91c1c; border: 1px solid #fecaca; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-weight: 500;">
+                    Reject
+                </button>
+            `;
+        }
+
+        function updateStatus(appId, status) {
+            HRMS_STATE.recruitment.updateApplicationStatus(appId, status);
+            renderKPIs();
+            renderApplications(document.getElementById('view-container'), HRMS_STATE.recruitment.getApplications().find(a => a.id === appId)?.jobId);
         }
 
         function renderJobForm(container) {
@@ -567,7 +656,8 @@
                 desc: form.desc.value
             };
 
-            HRMS_STATE.recruitment.addJob(data);
+            // Pass Recruiter ID here
+            HRMS_STATE.recruitment.addJob(data, currentRecruiterId);
             renderKPIs(); // Update counters
             showView('dashboard'); // Go back to list
         }

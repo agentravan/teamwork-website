@@ -126,50 +126,64 @@ const HRMS_STATE = {
 
     // --- RECRUITMENT SERVICE (CAREER ADMIN - JOBI STYLE) ---
     recruitment: {
-        getJobs: function () {
+        getJobs: function (recruiterId = null) {
             // Sync with existing public localStorage key 'jobs'
-            const existing = JSON.parse(localStorage.getItem('jobs')) || [];
-            return existing;
+            const allJobs = JSON.parse(localStorage.getItem('jobs')) || [];
+            if (recruiterId) {
+                return allJobs.filter(j => j.recruiterId === recruiterId);
+            }
+            return allJobs; // Candidates/Public see all active (filtered elsewhere)
         },
-        addJob: function (jobData) {
-            const jobs = this.getJobs();
+        addJob: function (jobData, recruiterId) {
+            const allJobs = JSON.parse(localStorage.getItem('jobs')) || [];
             const newJob = {
                 id: Date.now(),
                 status: 'Open', // Default to Open (Active)
                 applications: 0,
                 type: 'Full Time',
                 exp: '0-2 Years',
+                recruiterId: recruiterId || 'admin', // Bind to recruiter
+                postedDate: new Date().toISOString(),
                 ...jobData
             };
-            jobs.unshift(newJob);
-            localStorage.setItem('jobs', JSON.stringify(jobs));
+            allJobs.unshift(newJob);
+            localStorage.setItem('jobs', JSON.stringify(allJobs));
 
             // Also log to audit
-            HRMS_STATE.audit.log(HRMS_STATE.auth.getCurrentUser().id, 'POST_JOB', `Posted job: ${newJob.title}`);
+            HRMS_STATE.audit.log(recruiterId || 'unknown', 'POST_JOB', `Posted job: ${newJob.title}`);
             return newJob;
         },
         updateStatus: function (jobId, status) {
-            const jobs = this.getJobs();
-            const job = jobs.find(j => j.id === jobId);
+            const allJobs = JSON.parse(localStorage.getItem('jobs')) || [];
+            const job = allJobs.find(j => j.id === jobId);
             if (job) {
                 job.status = status;
-                localStorage.setItem('jobs', JSON.stringify(jobs));
-                HRMS_STATE.audit.log(HRMS_STATE.auth.getCurrentUser().id, 'UPDATE_JOB', `Updated job ${jobId} status to ${status}`);
+                localStorage.setItem('jobs', JSON.stringify(allJobs));
+                // HRMS_STATE.audit.log(..., 'UPDATE_JOB', ...);
             }
         },
         deleteJob: function (jobId) {
-            let jobs = this.getJobs();
-            jobs = jobs.filter(j => j.id !== jobId);
-            localStorage.setItem('jobs', JSON.stringify(jobs));
+            let allJobs = JSON.parse(localStorage.getItem('jobs')) || [];
+            allJobs = allJobs.filter(j => j.id !== jobId);
+            localStorage.setItem('jobs', JSON.stringify(allJobs));
         },
         // Applicant Tracking
-        getApplications: function () {
-            return JSON.parse(localStorage.getItem('applications')) || [];
+        getApplications: function (recruiterId = null) {
+            const allApps = JSON.parse(localStorage.getItem('applications')) || [];
+            if (recruiterId) {
+                // Get this recruiter's job IDs first
+                const myJobs = this.getJobs(recruiterId).map(j => j.id);
+                return allApps.filter(a => myJobs.includes(a.jobId));
+            }
+            return allApps;
         },
-        getSavedCandidates: function () {
+        getSavedCandidates: function (recruiterId = null) {
+            // Can implement recruiter-specific saves if needed, sharing storage for now or filtering
             return JSON.parse(localStorage.getItem('savedCandidates')) || [];
         },
         toggleSaveCandidate: function (candidateId) {
+            // ... existing logic (ideally should be scoped to recruiter too)
+            // Keeping simple for now as per previous instruction, but adhering to isolation principle broadly
             let saved = this.getSavedCandidates();
             if (saved.includes(candidateId)) {
                 saved = saved.filter(id => id !== candidateId);
@@ -180,18 +194,17 @@ const HRMS_STATE = {
             return saved.includes(candidateId);
         },
         updateApplicationStatus: function (appId, newStatus) {
-            const apps = this.getApplications();
-            const app = apps.find(a => a.id === appId);
+            const allApps = JSON.parse(localStorage.getItem('applications')) || [];
+            const app = allApps.find(a => a.id === appId);
             if (app) {
                 app.status = newStatus;
-                localStorage.setItem('applications', JSON.stringify(apps));
-                HRMS_STATE.audit.log(HRMS_STATE.auth.getCurrentUser().id, 'REVIEW_CANDIDATE', `Updated application ${appId} to ${newStatus}`);
+                localStorage.setItem('applications', JSON.stringify(allApps));
             }
         },
-        getStats: function () {
-            const jobs = this.getJobs();
-            const apps = this.getApplications();
-            const saved = this.getSavedCandidates();
+        getStats: function (recruiterId) {
+            const jobs = this.getJobs(recruiterId);
+            const apps = this.getApplications(recruiterId);
+            const saved = this.getSavedCandidates(recruiterId);
 
             return {
                 postedJobs: jobs.filter(j => j.status !== 'Closed').length,
