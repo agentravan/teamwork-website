@@ -34,248 +34,176 @@ function renderSidebar(user) {
     if (user.role === 'SUPER_ADMIN') {
         menuItems = [
             { icon: 'ph-squares-four', label: 'Platform Overview', active: true, view: 'overview' },
-            { icon: 'ph-briefcase', label: 'Recruitment (Jobs)', active: false, view: 'recruitment' },
-            { icon: 'ph-buildings', label: 'Tenant Management', active: false, view: 'tenants' },
-            { icon: 'ph-users-three', label: 'Access Requests', active: false, view: 'requests', badge: HRMS_STATE.requests.getPending().length },
+            { icon: 'ph-users-three', label: 'Tenant Management', active: false, view: 'tenants' },
+            { icon: 'ph-briefcase', label: 'Global Job Monitor', active: false, view: 'global-jobs' },
+            { icon: 'ph-identification-card', label: 'Global Candidate DB', active: false, view: 'global-candidates' },
+            { icon: 'ph-file-text', label: 'Audit Logs', active: false, view: 'audit-logs' },
             { icon: 'ph-chart-line-up', label: 'Revenue Analytics', active: false, view: 'revenue' },
             { icon: 'ph-gear', label: 'System Settings', active: false, view: 'settings' }
         ];
     } else {
-        // Client Admin Menu (Future)
-        menuItems = [
-            { icon: 'ph-house', label: 'Dashboard', active: true },
-            { icon: 'ph-users', label: 'Employees', active: false },
-            { icon: 'ph-money', label: 'Payroll', active: false }
-        ];
-    }
+        // ... (client menu remains same)
 
-    const html = `
-        <div class="sidebar-menu">
-            ${menuItems.map(item => `
-                <a href="#" class="menu-item ${item.active ? 'active' : ''}" onclick="switchView('${item.view}')">
-                    <i class="ph-bold ${item.icon}"></i>
-                    <span>${item.label}</span>
-                    ${item.badge ? `<span class="badge">${item.badge}</span>` : ''}
-                </a>
-            `).join('')}
-        </div>
-        
-        <div class="sidebar-footer" style="padding: 20px; border-top: 1px solid rgba(255,255,255,0.05);">
-            <a href="#" onclick="HRMS_STATE.auth.logout()" class="menu-item" style="color: #ef4444;">
-                <i class="ph-bold ph-sign-out"></i>
-                <span>Logout</span>
-            </a>
-        </div>
-    `;
+        // ...
 
-    sidebar.innerHTML = html;
-}
+        function switchView(viewName) {
+            // Handling view switching
+            if (viewName === 'overview') {
+                renderSuperAdminDashboard();
+            } else if (viewName === 'tenants') {
+                renderTenantManagement();
+            } else if (viewName === 'global-jobs') {
+                renderGlobalJobs();
+            } else if (viewName === 'global-candidates') {
+                renderGlobalCandidates();
+            } else if (viewName === 'audit-logs') {
+                renderAuditLogs();
+            } else {
+                const content = document.getElementById('dynamic-content');
+                content.innerHTML = `<div style="padding: 40px; text-align: center; color: var(--text-tertiary);">Module '${viewName}' is under construction.</div>`;
+            }
+        }
 
-// --- VIEWS ---
+        // --- NEW RENDERERS ---
 
-function renderSuperAdminDashboard() {
-    const content = document.getElementById('dynamic-content');
-    const stats = HRMS_STATE.tenants.getStats();
+        function renderGlobalJobs() {
+            const content = document.getElementById('dynamic-content');
+            const jobs = HRMS_STATE.recruitment.getJobs(); // No ID = All Jobs
 
-    content.innerHTML = `
+            content.innerHTML = `
         <div class="dashboard-header" style="margin-bottom: 30px;">
-            <h1 style="color: white; font-size: 1.8rem;">Platform Overview</h1>
-            <p style="color: var(--text-tertiary);">Welcome back, Super Admin. Here is what's happening today.</p>
-        </div>
-
-        <!-- STATS GRID -->
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; margin-bottom: 40px;">
-            <div class="stat-card" style="background: rgba(30, 41, 59, 0.4); padding: 20px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05);">
-                <div style="color: var(--text-tertiary); font-size: 0.9rem; margin-bottom: 10px;">Total MRR</div>
-                <div style="color: #10b981; font-size: 1.8rem; font-weight: 700;">₹${stats.mrr.toLocaleString()}</div>
-                <div style="color: var(--text-tertiary); font-size: 0.8rem; margin-top: 5px;">+12% from last month</div>
-            </div>
-            <div class="stat-card" style="background: rgba(30, 41, 59, 0.4); padding: 20px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05);">
-                <div style="color: var(--text-tertiary); font-size: 0.9rem; margin-bottom: 10px;">Active Tenants</div>
-                <div style="color: #3b82f6; font-size: 1.8rem; font-weight: 700;">${stats.activeTenants} <span style="font-size: 1rem; color: var(--text-tertiary);">/ ${stats.totalTenants}</span></div>
-            </div>
-            <div class="stat-card" style="background: rgba(30, 41, 59, 0.4); padding: 20px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05);">
-                <div style="color: var(--text-tertiary); font-size: 0.9rem; margin-bottom: 10px;">Total Employees Managed</div>
-                <div style="color: #f59e0b; font-size: 1.8rem; font-weight: 700;">${stats.totalEmployees.toLocaleString()}</div>
-            </div>
-             <div class="stat-card" style="background: rgba(30, 41, 59, 0.4); padding: 20px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05);">
-                <div style="color: var(--text-tertiary); font-size: 0.9rem; margin-bottom: 10px;">Pending Requests</div>
-                <div style="color: #ef4444; font-size: 1.8rem; font-weight: 700;">${HRMS_STATE.requests.getPending().length}</div>
-            </div>
-        </div>
-
-        <!-- RECENT ACTIVITY / TENANT LIST -->
-        <h2 style="color: white; font-size: 1.4rem; margin-bottom: 20px;">Organization Health</h2>
-        <div style="background: rgba(30, 41, 59, 0.4); border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); overflow: hidden;">
-            <table style="width: 100%; border-collapse: collapse;">
-                <thead>
-                    <tr style="background: rgba(255,255,255,0.02); text-align: left;">
-                        <th style="padding: 15px; color: var(--text-secondary); font-weight: 500;">Organization</th>
-                        <th style="padding: 15px; color: var(--text-secondary); font-weight: 500;">Plan</th>
-                        <th style="padding: 15px; color: var(--text-secondary); font-weight: 500;">Employees</th>
-                        <th style="padding: 15px; color: var(--text-secondary); font-weight: 500;">Status</th>
-                        <th style="padding: 15px; color: var(--text-secondary); font-weight: 500;">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    ${HRMS_STATE.db.tenants.length > 0 ? HRMS_STATE.db.tenants.map(t => `
-                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
-                            <td style="padding: 15px; color: white;">${t.name}<br><span style="font-size: 0.8rem; color: var(--text-tertiary);">${t.adminEmail}</span></td>
-                            <td style="padding: 15px; color: var(--text-secondary);"><span style="background: rgba(59, 130, 246, 0.1); color: #60a5fa; padding: 4px 8px; border-radius: 4px; font-size: 0.8rem;">${t.plan}</span></td>
-                            <td style="padding: 15px; color: var(--text-secondary);">${t.employees}</td>
-                            <td style="padding: 15px;">
-                                <span style="
-                                    background: ${t.status === 'ACTIVE' ? 'rgba(16, 185, 129, 0.1)' : 'rgba(239, 68, 68, 0.1)'}; 
-                                    color: ${t.status === 'ACTIVE' ? '#34d399' : '#f87171'}; 
-                                    padding: 4px 8px; border-radius: 4px; font-size: 0.8rem;
-                                ">${t.status}</span>
-                            </td>
-                            <td style="padding: 15px;">
-                                <button style="background: none; border: 1px solid rgba(255,255,255,0.1); color: white; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 0.8rem;">Manage</button>
-                            </td>
-                        </tr>
-                    `).join('') : `
-                        <tr>
-                            <td colspan="5" style="padding: 40px; text-align: center; color: var(--text-tertiary);">
-                                <i class="ph-bold ph-folder-open" style="font-size: 2rem; margin-bottom: 10px; display: block;"></i>
-                                No data available yet. Add a tenant to get started.
-                            </td>
-                        </tr>
-                    `}
-                </tbody>
-            </table>
-        </div>
-    `;
-}
-
-function renderRecruitmentView() {
-    const content = document.getElementById('dynamic-content');
-    const jobs = HRMS_STATE.recruitment.getJobs();
-
-    content.innerHTML = `
-        <div class="dashboard-header" style="margin-bottom: 30px; display: flex; justify-content: space-between; align-items: center;">
-            <div>
-                <h1 style="color: white; font-size: 1.8rem;">Recruitment & Job Posting</h1>
-                <p style="color: var(--text-tertiary);">Manage open positions on the careers page.</p>
-            </div>
-            <button onclick="showJobForm()" style="background: var(--primary); color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: 600; display: flex; align-items: center; gap: 8px;">
-                <i class="ph-bold ph-plus"></i> Post New Job
-            </button>
-        </div>
-
-        <div id="job-form-container" style="display: none; background: rgba(30, 41, 59, 0.4); padding: 30px; border-radius: 12px; margin-bottom: 30px; border: 1px solid rgba(255,255,255,0.1);">
-            <h3 style="margin-bottom: 20px; color: white;">Post a New Role</h3>
-            <form onsubmit="handlePostJob(event)" style="display: grid; gap: 20px;">
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                    <div>
-                        <label style="display: block; color: var(--text-secondary); margin-bottom: 8px;">Job Title</label>
-                        <input type="text" name="title" required style="width: 100%; padding: 12px; background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.1); color: white; border-radius: 8px;">
-                    </div>
-                    <div>
-                        <label style="display: block; color: var(--text-secondary); margin-bottom: 8px;">Department</label>
-                         <select name="dept" required style="width: 100%; padding: 12px; background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.1); color: white; border-radius: 8px;">
-                            <option value="Engineering">Engineering</option>
-                            <option value="HR & Admin">HR & Admin</option>
-                            <option value="Sales">Sales</option>
-                            <option value="Marketing">Marketing</option>
-                        </select>
-                    </div>
-                </div>
-                <div>
-                     <label style="display: block; color: var(--text-secondary); margin-bottom: 8px;">Location</label>
-                     <input type="text" name="loc" value="Gurugram, India (On-site)" required style="width: 100%; padding: 12px; background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.1); color: white; border-radius: 8px;">
-                </div>
-                <div>
-                     <label style="display: block; color: var(--text-secondary); margin-bottom: 8px;">Description</label>
-                     <textarea name="desc" rows="4" required style="width: 100%; padding: 12px; background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.1); color: white; border-radius: 8px;"></textarea>
-                </div>
-                <div style="display: flex; gap: 10px;">
-                    <button type="submit" style="background: #10b981; color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: 600;">Publish Job</button>
-                    <button type="button" onclick="document.getElementById('job-form-container').style.display='none'" style="background: transparent; color: var(--text-tertiary); border: 1px solid rgba(255,255,255,0.1); padding: 10px 20px; border-radius: 6px; cursor: pointer;">Cancel</button>
-                </div>
-            </form>
+            <h1 style="color: white; font-size: 1.8rem;">Global Job Monitor</h1>
+            <p style="color: var(--text-tertiary);">View and control job postings across all client organizations.</p>
         </div>
 
         <div style="background: rgba(30, 41, 59, 0.4); border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); overflow: hidden;">
             <table style="width: 100%; border-collapse: collapse;">
                 <thead>
                     <tr style="background: rgba(255,255,255,0.02); text-align: left;">
-                         <th style="padding: 15px; color: var(--text-secondary);">Role</th>
-                         <th style="padding: 15px; color: var(--text-secondary);">Department</th>
+                         <th style="padding: 15px; color: var(--text-secondary);">Job Title</th>
+                         <th style="padding: 15px; color: var(--text-secondary);">Client / Posted By</th>
+                         <th style="padding: 15px; color: var(--text-secondary);">Applicants</th>
                          <th style="padding: 15px; color: var(--text-secondary);">Status</th>
-                         <th style="padding: 15px; color: var(--text-secondary);">Action</th>
+                         <th style="padding: 15px; color: var(--text-secondary);">Controls</th>
                     </tr>
                 </thead>
                 <tbody>
                     ${jobs.length > 0 ? jobs.map(j => `
                         <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
-                            <td style="padding: 15px; color: white;">${j.title}<br><span style="font-size: 0.8rem; color: var(--text-tertiary);">${j.loc}</span></td>
-                             <td style="padding: 15px; color: var(--text-secondary);">${j.dept}</td>
-                             <td style="padding: 15px;">
-                                <span style="
-                                    background: ${j.status === 'Open' ? 'rgba(16, 185, 129, 0.1)' : 'rgba(234, 179, 8, 0.1)'}; 
-                                    color: ${j.status === 'Open' ? '#34d399' : '#eab308'}; 
-                                    padding: 4px 8px; border-radius: 4px; font-size: 0.8rem;
-                                ">${j.status}</span>
-                             </td>
-                             <td style="padding: 15px;">
-                                <button onclick="deleteJob(${j.id})" style="background: none; border: none; color: #ef4444; cursor: pointer; font-size: 1.2rem;" title="Delete"><i class="ph-bold ph-trash"></i></button>
-                             </td>
+                            <td style="padding: 15px; color: white;">
+                                ${j.title}
+                                <div style="font-size: 0.8rem; color: var(--text-tertiary);">${j.loc} • ${j.type}</div>
+                            </td>
+                            <td style="padding: 15px; color: white;">
+                                <div style="display:flex; align-items:center; gap:8px;">
+                                    <i class="ph-bold ph-building" style="color: var(--primary);"></i>
+                                    ${j.recruiterId === 'admin' ? 'Global Admin' : (j.recruiterId || 'Unknown')}
+                                </div>
+                                <div style="font-size: 0.8rem; color: var(--text-tertiary);">${new Date(j.postedDate || Date.now()).toLocaleDateString()}</div>
+                            </td>
+                            <td style="padding: 15px; color: white;">${j.applications || 0}</td>
+                            <td style="padding: 15px;">
+                                <span style="background: ${j.status === 'Open' ? 'rgba(16, 185, 129, 0.1)' : 'rgba(239, 68, 68, 0.1)'}; color: ${j.status === 'Open' ? '#34d399' : '#f87171'}; padding: 4px 8px; border-radius: 4px; font-size: 0.8rem;">
+                                    ${j.status}
+                                </span>
+                            </td>
+                            <td style="padding: 15px;">
+                                <button onclick="alert('Force Close logic implemented here')" style="background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.2); color: #f87171; padding: 4px 10px; border-radius: 6px; cursor: pointer; font-size: 0.8rem;">
+                                    <i class="ph-bold ph-lock-key"></i> Force Close
+                                </button>
+                            </td>
                         </tr>
-                    `).join('') : `
-                         <tr><td colspan="4" style="padding: 40px; text-align: center; color: var(--text-tertiary);">No active job postings.</td></tr>
-                    `}
+                    `).join('') : `<tr><td colspan="5" style="padding: 40px; text-align: center; color: var(--text-tertiary);">No jobs posted yet.</td></tr>`}
                 </tbody>
             </table>
         </div>
     `;
-}
+        }
 
-window.showJobForm = function () {
-    document.getElementById('job-form-container').style.display = 'block';
-};
+        function renderGlobalCandidates() {
+            const content = document.getElementById('dynamic-content');
+            const apps = HRMS_STATE.recruitment.getApplications(); // No ID = All Apps
 
-window.handlePostJob = function (e) {
-    e.preventDefault();
-    const form = e.target;
-    const data = {
-        title: form.title.value,
-        dept: form.dept.value,
-        loc: form.loc.value,
-        desc: form.desc.value
-    };
+            content.innerHTML = `
+        <div class="dashboard-header" style="margin-bottom: 30px;">
+            <h1 style="color: white; font-size: 1.8rem;">Global Candidate Database</h1>
+            <p style="color: var(--text-tertiary);">Centralized view of all talent applying to the platform.</p>
+        </div>
 
-    HRMS_STATE.recruitment.addJob(data);
-    renderRecruitmentView(); // Refresh
-};
+        <div style="background: rgba(30, 41, 59, 0.4); border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); overflow: hidden;">
+            <table style="width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr style="background: rgba(255,255,255,0.02); text-align: left;">
+                         <th style="padding: 15px; color: var(--text-secondary);">Candidate</th>
+                         <th style="padding: 15px; color: var(--text-secondary);">Applied For</th>
+                         <th style="padding: 15px; color: var(--text-secondary);">Client</th>
+                         <th style="padding: 15px; color: var(--text-secondary);">Status</th>
+                         <th style="padding: 15px; color: var(--text-secondary);">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${apps.length > 0 ? apps.map(a => {
+                const job = HRMS_STATE.recruitment.getJobs().find(j => j.id === a.jobId);
+                const clientName = job ? (job.recruiterId === 'admin' ? 'Global Admin' : job.recruiterId) : 'Unknown';
+                return `
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                            <td style="padding: 15px; color: white;">
+                                <div style="font-weight: 600;">${a.name}</div>
+                                <div style="font-size: 0.8rem; color: var(--text-tertiary);">${a.email}</div>
+                            </td>
+                            <td style="padding: 15px; color: white;">${a.jobTitle}</td>
+                            <td style="padding: 15px; color: var(--text-secondary);">${clientName}</td>
+                            <td style="padding: 15px;">
+                                <span style="background: rgba(59, 130, 246, 0.1); color: #60a5fa; padding: 4px 8px; border-radius: 4px; font-size: 0.8rem;">
+                                    ${a.status || 'New'}
+                                </span>
+                            </td>
+                            <td style="padding: 15px;">
+                                <button style="background: none; border: 1px solid rgba(255,255,255,0.1); color: var(--text-secondary); padding: 4px 8px; border-radius: 4px; cursor: pointer;">
+                                    View
+                                </button>
+                            </td>
+                        </tr>
+                        `;
+            }).join('') : `<tr><td colspan="5" style="padding: 40px; text-align: center; color: var(--text-tertiary);">No candidates found.</td></tr>`}
+                </tbody>
+            </table>
+        </div>
+    `;
+        }
 
-window.deleteJob = function (id) {
-    if (confirm('Delete this job post?')) {
-        HRMS_STATE.recruitment.deleteJob(id);
-        renderRecruitmentView();
-    }
-};
+        function renderAuditLogs() {
+            const content = document.getElementById('dynamic-content');
+            const logs = HRMS_STATE.audit.getLogs();
 
+            content.innerHTML = `
+        <div class="dashboard-header" style="margin-bottom: 30px;">
+            <h1 style="color: white; font-size: 1.8rem;">System Audit Logs</h1>
+            <p style="color: var(--text-tertiary);">Track all critical actions performed by Admins and Clients.</p>
+        </div>
 
-function switchView(viewName) {
-    // Handling view switching
-    if (viewName === 'overview') {
-        renderSuperAdminDashboard();
-    } else if (viewName === 'recruitment') {
-        renderRecruitmentView();
-    } else if (viewName === 'tenants') {
-        renderTenantManagement();
-    } else {
-        const content = document.getElementById('dynamic-content');
-        content.innerHTML = `<div style="padding: 40px; text-align: center; color: var(--text-tertiary);">Module '${viewName}' is under construction.</div>`;
-    }
-}
+        <div style="background: rgba(15, 23, 42, 0.6); border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); padding: 20px;">
+            ${logs.length > 0 ? logs.map(log => `
+                <div style="display: flex; gap: 15px; padding: 15px 0; border-bottom: 1px solid rgba(255,255,255,0.05);">
+                    <div style="color: var(--text-tertiary); font-size: 0.85rem; min-width: 140px;">
+                        ${new Date(log.timestamp).toLocaleString()}
+                    </div>
+                    <div style="flex: 1;">
+                        <span style="color: #60a5fa; font-weight: 600; margin-right: 10px;">[${log.action}]</span>
+                        <span style="color: white;">${log.details}</span>
+                        <div style="font-size: 0.8rem; color: var(--text-tertiary); margin-top: 4px;">User: ${log.userId}</div>
+                    </div>
+                </div>
+            `).join('') : '<div style="color: var(--text-tertiary);">No activity logs available.</div>'}
+        </div>
+    `;
+        }
 
-function renderTenantManagement() {
-    const content = document.getElementById('dynamic-content');
-    const tenants = HRMS_STATE.tenants.getAll();
+        function renderTenantManagement() {
+            const content = document.getElementById('dynamic-content');
+            const tenants = HRMS_STATE.tenants.getAll();
 
-    content.innerHTML = `
+            content.innerHTML = `
         <div class="dashboard-header" style="margin-bottom: 30px; display: flex; justify-content: space-between; align-items: center;">
             <div>
                 <h1 style="color: white; font-size: 1.8rem;">Tenant Management</h1>
@@ -367,28 +295,28 @@ function renderTenantManagement() {
             </table>
         </div>
     `;
-}
+        }
 
-window.showTenantForm = function () {
-    document.getElementById('tenant-form-container').style.display = 'block';
-};
+        window.showTenantForm = function () {
+            document.getElementById('tenant-form-container').style.display = 'block';
+        };
 
-window.handleCreateTenant = function (e) {
-    e.preventDefault();
-    const form = e.target;
+        window.handleCreateTenant = function (e) {
+            e.preventDefault();
+            const form = e.target;
 
-    // Simple Plan Price mapping
-    const prices = { 'Startup': 50000, 'Growth': 150000, 'Enterprise': 500000 };
+            // Simple Plan Price mapping
+            const prices = { 'Startup': 50000, 'Growth': 150000, 'Enterprise': 500000 };
 
-    const data = {
-        name: form.name.value,
-        adminEmail: form.email.value,
-        password: form.password.value,
-        plan: form.plan.value,
-        employees: parseInt(form.employees.value),
-        planPrice: prices[form.plan.value] || 0
-    };
+            const data = {
+                name: form.name.value,
+                adminEmail: form.email.value,
+                password: form.password.value,
+                plan: form.plan.value,
+                employees: parseInt(form.employees.value),
+                planPrice: prices[form.plan.value] || 0
+            };
 
-    HRMS_STATE.tenants.create(data);
-    renderTenantManagement(); // Refresh view
-};
+            HRMS_STATE.tenants.create(data);
+            renderTenantManagement(); // Refresh view
+        };

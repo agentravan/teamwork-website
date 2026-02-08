@@ -210,21 +210,8 @@
             }
         }
 
-        function submitApplication(e) {
+        document.getElementById('applicationForm').addEventListener('submit', function (e) {
             e.preventDefault();
-            const btn = e.target.querySelector('button[type="submit"]');
-            const originalText = btn.innerText;
-            const form = e.target;
-
-            // Get Job Title from Modal ID or closure
-            // Correct approach: The modal opened with a title. We'll grab it from DOM text.
-            const jobTitle = document.getElementById('modalJobTitle').innerText;
-
-            // Allow Button Loading State
-            btn.innerText = "Uploading...";
-            btn.disabled = true;
-
-            // Find Job ID (Reverse lookup or store in modal dataset)
             // For simplicity, we find the first job with this title (titles should be unique ideally)
             const jobs = JSON.parse(localStorage.getItem('jobs')) || [];
             const job = jobs.find(j => j.title === jobTitle);

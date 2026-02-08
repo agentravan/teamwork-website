@@ -7,6 +7,7 @@
     <title>Career Admin | TeamWork Solutions</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <style>
         :root {
@@ -478,81 +479,121 @@
         }
 
         function renderApplications(container, jobId) {
-            // Get Applications for THIS recruiter
+            // Get Applications
             const allApps = HRMS_STATE.recruitment.getApplications(currentRecruiterId);
-            // Filter by job if jobId provided, else show all
             const apps = jobId ? allApps.filter(a => a.jobId === jobId) : allApps;
-            // Get jobs for title lookup
+
+            // Get Job Title for Header
             const jobs = HRMS_STATE.recruitment.getJobs(currentRecruiterId);
             const jobTitle = jobId ? (jobs.find(j => j.id === jobId)?.title || 'Unknown Job') : 'All Applications';
 
+            // Define Stages
+            const stages = [
+                { id: 'New', label: 'Applied', color: '#3b82f6', icon: 'ph-file-text' },
+                { id: 'Shortlisted', label: 'Shortlisted', color: '#f59e0b', icon: 'ph-star' },
+                { id: 'Interview', label: 'Interview', color: '#8b5cf6', icon: 'ph-video-camera' },
+                { id: 'Offer', label: 'Offer / Hired', color: '#10b981', icon: 'ph-medal' }
+            ];
+
             container.innerHTML = `
-                <div class="card-container">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
+                <div class="card-container" style="background: transparent; box-shadow: none; padding: 0;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
                         <div>
-                            <button onclick="showView('dashboard')" style="background:none; border:none; cursor:pointer; color: var(--text-secondary); display: flex; align-items: center; gap: 5px; margin-bottom: 10px;">
+                            <button onclick="showView('dashboard')" style="background:none; border:none; cursor:pointer; color: var(--text-secondary); display: flex; align-items: center; gap: 5px; margin-bottom: 5px;">
                                 <i class="ph-bold ph-arrow-left"></i> Back to Jobs
                             </button>
-                            <h2 style="font-size: 1.4rem;">${jobTitle} <span style="font-weight: 400; color: var(--text-secondary);">(${apps.length})</span></h2>
+                            <h2 style="font-size: 1.5rem;">${jobTitle} <span style="font-weight: 400; color: var(--text-secondary); font-size: 1.2rem;">(${apps.length})</span></h2>
+                        </div>
+                        <div style="display: flex; gap: 10px;">
+                            <button class="btn-outline" style="background: white;">Filter</button>
+                            <button class="btn-primary" onclick="alert('Bulk actions coming soon!')">Bulk Action</button>
                         </div>
                     </div>
 
-                    ${apps.length > 0 ? `
-                        <div style="display: grid; gap: 15px;">
-                            ${apps.map(app => `
-                                <div class="kpi-card" style="padding: 20px; align-items: flex-start;">
-                                    <div style="flex: 1;">
-                                        <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                                            <h3 style="font-size: 1.1rem; font-weight: 600;">${app.name}</h3>
-                                            <span class="status-badge" style="${getAppStatusStyle(app.status || 'New')}">${app.status || 'New'}</span>
+                    <div class="kanban-board">
+                        ${stages.map(stage => {
+                // Filter apps for this stage
+                // Handle 'New' capturing undefined or 'New' status
+                const stageApps = apps.filter(a => {
+                    if (stage.id === 'New') return !a.status || a.status === 'New';
+                    if (stage.id === 'Offer') return a.status === 'Offer' || a.status === 'Hired';
+                    return a.status === stage.id;
+                });
+
+                return `
+                                <div class="kanban-column">
+                                    <div class="kanban-header" style="border-top: 3px solid ${stage.color};">
+                                        <div style="display:flex; align-items:center; gap:8px;">
+                                            <i class="ph-bold ${stage.icon}" style="color: ${stage.color}"></i> ${stage.label}
                                         </div>
-                                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 15px;">
-                                            <span><i class="ph-bold ph-envelope"></i> ${app.email}</span>
-                                            <span><i class="ph-bold ph-phone"></i> ${app.phone || 'N/A'}</span>
-                                            <span><i class="ph-bold ph-briefcase"></i> ${app.jobTitle}</span>
-                                            <span><i class="ph-bold ph-calendar"></i> ${new Date(app.appliedDate).toLocaleDateString()}</span>
-                                        </div>
-                                        <div style="display: flex; gap: 10px;">
-                                            <a href="${app.resumeLink}" target="_blank" class="btn-outline" style="padding: 6px 12px; font-size: 0.85rem; border-radius: 6px; text-decoration: none; display: inline-flex; align-items: center; gap: 5px;">
-                                                <i class="ph-bold ph-file-pdf"></i> View Resume
-                                            </a>
-                                            ${getActionButtons(app)}
-                                        </div>
+                                        <span class="kanban-count">${stageApps.length}</span>
+                                    </div>
+                                    <div class="kanban-body">
+                                        ${stageApps.length > 0 ? stageApps.map(a => `
+                                            <div class="kanban-card">
+                                                <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 8px;">
+                                                    <h4 style="margin:0;">${a.name}</h4>
+                                                    ${a.aiScore ? `
+                                                        <div class="ai-badge" style="background: ${a.aiScore >= 70 ? '#10b981' : '#f59e0b'};">
+                                                            ${a.aiScore}%
+                                                        </div>
+                                                    ` : ''}
+                                                </div>
+                                                
+                                                <div style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 8px;">
+                                                    ${a.jobTitle} <br>
+                                                    <span style="font-size: 0.75rem; color: var(--text-secondary); opacity: 0.8;">${new Date(a.date || Date.now()).toLocaleDateString()}</span>
+                                                </div>
+
+                                                <!-- AI Skills -->
+                                                ${a.aiSkills && a.aiSkills.length > 0 ? `
+                                                    <div style="display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 12px;">
+                                                        ${a.aiSkills.slice(0, 3).map(s => `<span class="skill-tag">${s}</span>`).join('')}
+                                                        ${a.aiSkills.length > 3 ? `<span class="skill-tag">+${a.aiSkills.length - 3}</span>` : ''}
+                                                    </div>
+                                                ` : ''}
+
+                                                <!-- Actions -->
+                                                <div style="display: flex; justify-content: space-between; border-top: 1px solid #f3f4f6; padding-top: 8px;">
+                                                    <a href="${a.resumeLink || '#'}" target="_blank" style="color: var(--text-secondary); text-decoration: none; font-size: 0.8rem; display: flex; align-items: center;" title="View Resume">
+                                                        <i class="ph-bold ph-file-pdf"></i>
+                                                    </a>
+                                                    ${getKanbanActions(stage.id, a.id)}
+                                                    <button onclick="updateStatus(${a.id}, 'Rejected')" style="background:none; border:none; color: #ef4444; cursor: pointer;" title="Reject">
+                                                        <i class="ph-bold ph-x"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        `).join('') : `
+                                            <div style="text-align: center; padding: 20px; color: var(--text-secondary); font-size: 0.85rem;">
+                                                No candidates
+                                            </div>
+                                        `}
                                     </div>
                                 </div>
-                            `).join('')}
-                        </div>
-                    ` : `
-                         <div style="text-align: center; padding: 60px; color: var(--text-secondary);">
-                            <i class="ph-duotone ph-users-three" style="font-size: 3rem; margin-bottom: 15px;"></i>
-                            <p>No applications found.</p>
-                        </div>
-                    `}
+                            `;
+            }).join('')}
+                    </div>
                 </div>
             `;
         }
 
-        function getAppStatusStyle(status) {
-            switch (status) {
-                case 'Shortlisted': return 'background: #dbeafe; color: #2563eb;';
-                case 'Rejected': return 'background: #fee2e2; color: #dc2626;';
-                case 'Hired': return 'background: #d1fae5; color: #059669;';
-                default: return 'background: #f3f4f6; color: #4b5563;';
+        function getKanbanActions(currentStage, appId) {
+            // Returns the "Move Next" button
+            if (currentStage === 'New') {
+                return `<button class="action-btn" onclick="updateStatus(${appId}, 'Shortlisted')" style="color: #f59e0b;">Shortlist <i class="ph-bold ph-caret-right"></i></button>`;
+            } else if (currentStage === 'Shortlisted') {
+                return `<button class="action-btn" onclick="updateStatus(${appId}, 'Interview')" style="color: #8b5cf6;">Interview <i class="ph-bold ph-caret-right"></i></button>`;
+            } else if (currentStage === 'Interview') {
+                return `<button class="action-btn" onclick="updateStatus(${appId}, 'Offer')" style="color: #10b981;">Offer <i class="ph-bold ph-caret-right"></i></button>`;
+            } else {
+                return `<span style="color: #10b981; font-size: 0.8rem; font-weight: bold;"><i class="ph-bold ph-check"></i> Done</span>`;
             }
         }
 
-        function getActionButtons(app) {
-            if (app.status === 'Rejected' || app.status === 'Hired') return '';
+        // Remove old getActionButtons as we use getKanbanActions now
+        // function getActionButtons(app) { ... } // Deleted via replacement logic
 
-            return `
-                <button onclick="updateStatus(${app.id}, 'Shortlisted')" style="background: #eff6ff; color: #2563eb; border: 1px solid #bfdbfe; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-weight: 500;">
-                    Shortlist
-                </button>
-                <button onclick="updateStatus(${app.id}, 'Rejected')" style="background: #fef2f2; color: #b91c1c; border: 1px solid #fecaca; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-weight: 500;">
-                    Reject
-                </button>
-            `;
-        }
 
         function updateStatus(appId, status) {
             HRMS_STATE.recruitment.updateApplicationStatus(appId, status);
