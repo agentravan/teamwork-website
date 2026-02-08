@@ -421,21 +421,31 @@
             // Get Jobs for THIS recruiter
             const jobs = HRMS_STATE.recruitment.getJobs(currentRecruiterId);
 
+            // In a real app, we'd handle Sort/Filter here based on UI state
+            // For now, simple list
+
             container.innerHTML = `
                 <div class="card-container">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                        <h2 style="font-size: 1.2rem;">Recent Posted Jobs</h2>
-                        <button onclick="showView('submit-job')" class="btn-primary" style="padding: 8px 16px; font-size: 0.9rem;">
-                            + Post New Job
-                        </button>
+                        <div>
+                            <h2 style="font-size: 1.5rem; margin-bottom: 5px;">My Job Postings</h2>
+                            <p style="color: var(--text-secondary);">Manage your open positions.</p>
+                        </div>
+                        <div style="display: flex; gap: 10px;">
+                            <input type="text" placeholder="Search jobs..." class="form-control" style="width: 250px; padding: 8px 12px;">
+                            <button onclick="showView('submit-job')" class="btn-primary" style="padding: 8px 16px; font-size: 0.9rem; white-space: nowrap;">
+                                + Post New Job
+                            </button>
+                        </div>
                     </div>
 
-                    <table style="width: 100%; border-collapse: collapse;">
+                    <table class="data-table" style="width: 100%; border-collapse: collapse;">
                         <thead>
-                            <tr style="text-align: left; color: var(--text-secondary); border-bottom: 1px solid #e5e7eb;">
-                                <th style="padding: 15px;">Job Title</th>
-                                <th style="padding: 15px;">Applications</th>
+                            <tr style="text-align: left; border-bottom: 1px solid #e5e7eb;">
+                                <th style="padding: 15px; width: 40%;">Job Details</th>
+                                <th style="padding: 15px;">Candidates</th>
                                 <th style="padding: 15px;">Status</th>
+                                <th style="padding: 15px;">Posted</th>
                                 <th style="padding: 15px; text-align: right;">Action</th>
                             </tr>
                         </thead>
@@ -443,32 +453,47 @@
                             ${jobs.length > 0 ? jobs.map(j => `
                                 <tr style="border-bottom: 1px solid #f3f4f6;">
                                     <td style="padding: 15px;">
-                                        <div style="font-weight: 600;">${j.title}</div>
-                                        <div style="font-size: 0.85rem; color: var(--text-secondary);">${j.type} • ${j.loc}</div>
-                                        <div style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 4px;">Posted: ${new Date(j.postedDate || j.id).toLocaleDateString()}</div>
+                                        <div style="font-weight: 600; font-size: 1rem; color: var(--text-primary);">${j.title}</div>
+                                        <div style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 4px;">
+                                            <i class="ph-bold ph-map-pin"></i> ${j.loc} • 
+                                            <span style="color: var(--primary-green);">${j.type}</span>
+                                        </div>
+                                        <div style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 2px;">
+                                            ${j.category || j.dept || 'General'}
+                                        </div>
                                     </td>
                                     <td style="padding: 15px;">
-                                        <div style="display: flex; -webkit-box-align: center; align-items: center; gap: 8px; cursor: pointer;" onclick="showView('applications', ${j.id})">
-                                            <span style="font-weight: 600; text-decoration: underline; color: var(--primary-green);">${j.applications || 0}</span>
-                                            <span style="font-size: 0.8rem; color: var(--text-secondary);">Applied</span>
+                                        <div style="display: flex; align-items: center; gap: 8px; cursor: pointer;" onclick="showView('applications', ${j.id})">
+                                            <div style="background: #eef2ff; color: #4f46e5; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 0.9rem;">
+                                                ${j.applications || 0}
+                                            </div>
+                                            <span style="font-size: 0.85rem; color: var(--text-secondary); text-decoration: underline;">View Pipeline</span>
                                         </div>
                                     </td>
                                     <td style="padding: 15px;">
                                         <span class="status-badge ${getStatusClass(j.status)}">${j.status}</span>
                                     </td>
+                                    <td style="padding: 15px; font-size: 0.9rem; color: var(--text-primary);">
+                                        ${new Date(j.postedDate || j.id).toLocaleDateString()}
+                                    </td>
                                     <td style="padding: 15px; text-align: right;">
-                                        <button onclick="showView('applications', ${j.id})" title="View Candidates" style="background: none; border: none; color: var(--text-secondary); cursor: pointer; padding: 4px; margin-right: 8px;">
-                                            <i class="ph-bold ph-users" style="font-size: 1.1rem; color: #4f46e5;"></i>
+                                        <button onclick="showView('applications', ${j.id})" title="Pipeline" style="background: none; border: none; color: var(--text-secondary); cursor: pointer; margin-right: 10px;">
+                                            <i class="ph-bold ph-kanban" style="font-size: 1.2rem;"></i>
                                         </button>
-                                        <button onclick="deleteJob(${j.id})" title="Delete Job" style="background: none; border: none; color: var(--text-secondary); cursor: pointer; padding: 4px;">
-                                            <i class="ph-bold ph-trash" style="font-size: 1.1rem; color: #ef4444;"></i>
+                                        <button onclick="alert('Edit functionality coming in v1.2')" title="Edit Job" style="background: none; border: none; color: var(--text-secondary); cursor: pointer; margin-right: 10px;">
+                                            <i class="ph-bold ph-pencil-simple" style="font-size: 1.2rem;"></i>
+                                        </button>
+                                        <button onclick="deleteJob(${j.id})" title="Archive/Close" style="background: none; border: none; color: #ef4444; cursor: pointer;">
+                                            <i class="ph-bold ph-archive" style="font-size: 1.2rem;"></i>
                                         </button>
                                     </td>
                                 </tr>
                             `).join('') : `
                                 <tr>
-                                    <td colspan="4" style="text-align: center; padding: 40px; color: var(--text-secondary);">
-                                        No active jobs found for this account.
+                                    <td colspan="5" style="text-align: center; padding: 60px; color: var(--text-secondary);">
+                                        <i class="ph-duotone ph-briefcase" style="font-size: 3rem; margin-bottom: 15px;"></i>
+                                        <p>You haven't posted any jobs yet.</p>
+                                        <button onclick="showView('submit-job')" class="btn-primary" style="margin-top: 15px;">Post Your First Job</button>
                                     </td>
                                 </tr>
                             `}
@@ -606,11 +631,41 @@
                 <div class="card-container">
                     <h2 style="margin-bottom: 25px;">Post a New Job</h2>
                     <form onsubmit="handlePostJob(event)">
+                        <!-- Basic Info -->
+                        <h4 style="margin-bottom: 15px; color: var(--primary-green); border-bottom: 1px solid #f3f4f6; padding-bottom: 5px;">Basic Information</h4>
                         <div class="form-grid">
                             <div class="form-group">
-                                <label>Job Title</label>
+                                <label>Job Title <span style="color:red">*</span></label>
                                 <input type="text" name="title" class="form-control" placeholder="e.g. Senior Product Designer" required>
                             </div>
+                            <div class="form-group">
+                                <label>Job Category</label>
+                                <select name="category" class="form-control">
+                                    <option>Engineering</option>
+                                    <option>Design</option>
+                                    <option>Marketing</option>
+                                    <option>Sales</option>
+                                    <option>HR & Admin</option>
+                                    <option>Finance</option>
+                                    <option>Customer Support</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-grid">
+                             <div class="form-group">
+                                <label>Department (Internal)</label>
+                                <input type="text" name="dept" class="form-control" placeholder="e.g. Product Team A">
+                            </div>
+                            <div class="form-group">
+                                <label>Location <span style="color:red">*</span></label>
+                                <input type="text" name="loc" class="form-control" value="Gurugram, India (On-site)" required>
+                            </div>
+                        </div>
+
+                        <!-- Details -->
+                        <h4 style="margin-bottom: 15px; color: var(--primary-green); border-bottom: 1px solid #f3f4f6; padding-bottom: 5px; margin-top: 20px;">Job Details</h4>
+                        <div class="form-grid">
                             <div class="form-group">
                                 <label>Job Type</label>
                                 <select name="type" class="form-control">
@@ -618,53 +673,57 @@
                                     <option>Part Time</option>
                                     <option>Contract</option>
                                     <option>Freelance</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-grid">
-                            <div class="form-group">
-                                <label>Department</label>
-                                <select name="dept" class="form-control">
-                                    <option>Engineering</option>
-                                    <option>Design</option>
-                                    <option>Marketing</option>
-                                    <option>Sales</option>
-                                    <option>HR & Admin</option>
+                                    <option>Internship</option>
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label>Location</label>
-                                <input type="text" name="loc" class="form-control" value="Gurugram, India (On-site)">
-                            </div>
-                        </div>
-
-                        <div class="form-grid">
-                            <div class="form-group">
-                                <label>Experience</label>
+                                <label>Experience Level</label>
                                 <select name="exp" class="form-control">
-                                    <option>Freshers</option>
-                                    <option>1-3 Years</option>
-                                    <option>3-5 Years</option>
-                                    <option>5+ Years</option>
+                                    <option>Freshers (0-1y)</option>
+                                    <option>Junior (1-3y)</option>
+                                    <option>Mid-Level (3-5y)</option>
+                                    <option>Senior (5-8y)</option>
+                                    <option>Lead / Manager (8y+)</option>
                                 </select>
+                            </div>
+                        </div>
+
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Salary Range</label>
+                                <div style="display: flex; gap: 10px;">
+                                    <input type="text" name="salaryMin" class="form-control" placeholder="Min (e.g. 10L)">
+                                    <input type="text" name="salaryMax" class="form-control" placeholder="Max (e.g. 18L)">
+                                </div>
                             </div>
                             <div class="form-group">
-                                <label>Status</label>
-                                <select name="status" class="form-control">
-                                    <option value="Open">Active (Visible + Apply)</option>
-                                    <option value="Hold">Hold (Visible - No Apply)</option>
-                                    <option value="Closed">Closed (Hidden)</option>
-                                </select>
+                                <label>Duration (if Contract)</label>
+                                <input type="text" name="duration" class="form-control" placeholder="e.g. 6 Months, Permanent">
                             </div>
                         </div>
 
-                        <div class="form-group" style="margin-bottom: 30px;">
-                            <label>Job Description</label>
-                            <textarea name="desc" class="form-control" rows="6" placeholder="Describe requirements, responsibilities..." required></textarea>
+                        <!-- Description -->
+                        <h4 style="margin-bottom: 15px; color: var(--primary-green); border-bottom: 1px solid #f3f4f6; padding-bottom: 5px; margin-top: 20px;">Description & Benefits</h4>
+                        <div class="form-group">
+                            <label>Job Description <span style="color:red">*</span></label>
+                            <textarea name="desc" class="form-control" rows="6" placeholder="Describe the role, responsibilities, and requirements..." required></textarea>
                         </div>
 
-                        <div style="display: flex; gap: 15px;">
+                        <div class="form-group" style="margin-bottom: 20px;">
+                            <label>Benefits & Perks</label>
+                            <textarea name="benefits" class="form-control" rows="3" placeholder="e.g. Health Insurance, Remote Work, Stock Options..."></textarea>
+                        </div>
+                        
+                         <div class="form-group">
+                            <label>Status</label>
+                            <select name="status" class="form-control" style="max-width: 200px;">
+                                <option value="Open">Active (Visible + Apply)</option>
+                                <option value="Hold">Hold (Visible - No Apply)</option>
+                                <option value="Closed">Closed (Hidden)</option>
+                            </select>
+                        </div>
+
+                        <div style="display: flex; gap: 15px; margin-top: 30px;">
                             <button type="submit" class="btn-primary">Publish Job</button>
                             <button type="button" onclick="showView('dashboard')" class="btn-outline">Cancel</button>
                         </div>
@@ -689,18 +748,23 @@
             const form = e.target;
             const data = {
                 title: form.title.value,
-                type: form.type.value,
+                category: form.category.value,
                 dept: form.dept.value,
                 loc: form.loc.value,
+                type: form.type.value,
                 exp: form.exp.value,
+                salaryMin: form.salaryMin.value,
+                salaryMax: form.salaryMax.value,
+                duration: form.duration.value,
                 status: form.status.value,
-                desc: form.desc.value
+                desc: form.desc.value,
+                benefits: form.benefits.value,
             };
 
             // Pass Recruiter ID here
             HRMS_STATE.recruitment.addJob(data, currentRecruiterId);
             renderKPIs(); // Update counters
-            showView('dashboard'); // Go back to list
+            showView('my-jobs'); // Go to My Jobs list
         }
 
         function deleteJob(id) {
