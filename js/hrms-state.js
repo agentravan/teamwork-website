@@ -135,6 +135,15 @@ const HRMS_STATE = {
             HRMS_STATE.audit.log('SUPER_ADMIN', 'CREATE_TENANT', `Onboarded ${newTenant.name}`);
             return newTenant;
         },
+        deactivate: function (tenantId) {
+            const tenants = this.getAll();
+            const tenant = tenants.find(t => t.id === tenantId);
+            if (tenant) {
+                tenant.status = 'INACTIVE';
+                localStorage.setItem('tenants', JSON.stringify(tenants));
+                HRMS_STATE.audit.log('SUPER_ADMIN', 'DEACTIVATE_TENANT', `Deactivated tenant ${tenant.name}`);
+            }
+        },
         getStats: function () {
             const tenants = this.getAll();
             const totalRevenue = tenants.reduce((acc, t) => acc + (t.status === 'ACTIVE' ? t.revenue : 0), 0);
@@ -158,7 +167,19 @@ const HRMS_STATE = {
             return allJobs; // Candidates/Public see all active (filtered elsewhere)
         },
         addJob: function (jobData, recruiterId) {
+            // Quota Check
+            const tenants = HRMS_STATE.tenants.getAll();
+            const tenant = tenants.find(t => t.id === recruiterId);
             const allJobs = JSON.parse(localStorage.getItem('jobs')) || [];
+
+            if (tenant && tenant.plan === 'Free') {
+                const myActiveJobs = allJobs.filter(j => j.recruiterId === recruiterId && j.status !== 'Closed').length;
+                if (myActiveJobs >= 2) {
+                    alert('Upgrade to Enterprise to post more jobs! (Free Plan Limit: 2)');
+                    return null;
+                }
+            }
+
             const newJob = {
                 id: Date.now(),
                 status: 'Open', // Default to Open (Active)
@@ -215,6 +236,14 @@ const HRMS_STATE = {
 
             return { success: true };
         },
+        updateStatus: function (jobId, status) {
+            const allJobs = JSON.parse(localStorage.getItem('jobs')) || [];
+            const job = allJobs.find(j => j.id === jobId);
+            if (job) {
+                job.status = status;
+                localStorage.setItem('jobs', JSON.stringify(allJobs));
+            }
+        },
         updateApplicationStatus: function (appId, status) {
             const allApps = JSON.parse(localStorage.getItem('applications')) || [];
             const app = allApps.find(a => a.id === appId);
@@ -231,64 +260,83 @@ const HRMS_STATE = {
                 }
             }
         },
-        if(job) {
-            job.status = status;
-            localStorage.setItem('jobs', JSON.stringify(allJobs));
-            // HRMS_STATE.audit.log(..., 'UPDATE_JOB', ...);
-        }
-    },
-    deleteJob: function (jobId) {
-        let allJobs = JSON.parse(localStorage.getItem('jobs')) || [];
-        allJobs = allJobs.filter(j => j.id !== jobId);
-        localStorage.setItem('jobs', JSON.stringify(allJobs));
-    },
-    // Applicant Tracking
-    getApplications: function (recruiterId = null) {
-        const allApps = JSON.parse(localStorage.getItem('applications')) || [];
-        if (recruiterId) {
-            // Get this recruiter's job IDs first
-            const myJobs = this.getJobs(recruiterId).map(j => j.id);
-            return allApps.filter(a => myJobs.includes(a.jobId));
-        }
-        return allApps;
-    },
-    getSavedCandidates: function (recruiterId = null) {
-        // Can implement recruiter-specific saves if needed, sharing storage for now or filtering
-        return JSON.parse(localStorage.getItem('savedCandidates')) || [];
-    },
-    toggleSaveCandidate: function (candidateId) {
-        // ... existing logic (ideally should be scoped to recruiter too)
-        // Keeping simple for now as per previous instruction, but adhering to isolation principle broadly
-        let saved = this.getSavedCandidates();
-        if (saved.includes(candidateId)) {
-            saved = saved.filter(id => id !== candidateId);
-        } else {
-            saved.push(candidateId);
-        }
-        localStorage.setItem('savedCandidates', JSON.stringify(saved));
-        return saved.includes(candidateId);
-    },
-    updateApplicationStatus: function (appId, newStatus) {
-        const allApps = JSON.parse(localStorage.getItem('applications')) || [];
-        const app = allApps.find(a => a.id === appId);
-        if (app) {
-            app.status = newStatus;
-            localStorage.setItem('applications', JSON.stringify(allApps));
-        }
-    },
-    getStats: function (recruiterId) {
-        const jobs = this.getJobs(recruiterId);
-        const apps = this.getApplications(recruiterId);
-        const saved = this.getSavedCandidates(recruiterId);
+        deleteJob: function (jobId) {
+            let allJobs = JSON.parse(localStorage.getItem('jobs')) || [];
+            const job = allJobs.find(j => j.id === jobId);
+            if (job) {
+                job.status = 'Closed'; // Soft Delete
+                localStorage.setItem('jobs', JSON.stringify(allJobs));
+                HRMS_STATE.audit.log('SYSTEM', 'CLOSE_JOB', `Soft deleted job ${jobId}`);
+            }
+        },
+        getApplications: function (recruiterId = null) {
+            const allApps = JSON.parse(localStorage.getItem('applications')) || [];
+            if (recruiterId) {
+                const myJobs = this.getJobs(recruiterId).map(j => j.id);
+                return allApps.filter(a => myJobs.includes(a.jobId));
+            }
+            return allApps;
+        },
+        getSavedCandidates: function (recruiterId = null) {
+            const allSaved = JSON.parse(localStorage.getItem('saved_candidates')) || [];
+            if (recruiterId) {
+                return allSaved.filter(s => s.recruiterId === recruiterId);
+            }
+            return allSaved;
+        },
+        toggleSaveCandidate: function (candidateId, recruiterId) {
+            let allSaved = JSON.parse(localStorage.getItem('saved_candidates')) || [];
+            const existingIndex = allSaved.findIndex(s => s.candidateId === candidateId && s.recruiterId === recruiterId);
 
-        return {
-            postedJobs: jobs.filter(j => j.status !== 'Closed').length,
-            shortlisted: apps.filter(a => a.status === 'Shortlisted').length,
-            applications: apps.length,
-            savedCandidates: saved.length
-        };
-    }
-},
+            if (existingIndex >= 0) {
+                allSaved.splice(existingIndex, 1); // Remove
+            } else {
+                allSaved.push({
+                    recruiterId: recruiterId,
+                    candidateId: candidateId,
+                    savedDate: new Date().toISOString()
+                });
+            }
+            localStorage.setItem('saved_candidates', JSON.stringify(allSaved));
+            return existingIndex === -1; // True if added
+        },
+        getStats: function (recruiterId) {
+            const jobs = this.getJobs(recruiterId);
+            const apps = this.getApplications(recruiterId);
+            const saved = this.getSavedCandidates(recruiterId);
+
+            return {
+                postedJobs: jobs.filter(j => j.status !== 'Closed').length,
+                shortlisted: apps.filter(a => a.status === 'Shortlisted').length,
+                applications: apps.length,
+                savedCandidates: saved.length
+            };
+        }
+    },
+
+    // --- MESSAGES SERVICE ---
+    messages: {
+        getAll: function () {
+            return JSON.parse(localStorage.getItem('messages')) || [];
+        },
+        send: function (msgData) {
+            const msgs = this.getAll();
+            const newMsg = {
+                id: Date.now(),
+                timestamp: new Date().toISOString(),
+                read: false,
+                ...msgData // { from, to, subject, body, jobId }
+            };
+            msgs.unshift(newMsg);
+            localStorage.setItem('messages', JSON.stringify(msgs));
+            HRMS_STATE.audit.log(msgData.from, 'SEND_MESSAGE', `Sent message to ${msgData.to}`);
+            return newMsg;
+        },
+        getInbox: function (userId) {
+            const all = this.getAll();
+            return all.filter(m => m.from === userId || m.to === userId);
+        }
+    },
 
     // --- ACCESS REQUEST SERVICE ---
     requests: {
@@ -299,80 +347,96 @@ const HRMS_STATE = {
                 date: new Date().toISOString(),
                 ...requestData
             };
-HRMS_STATE.db.accessRequests.unshift(newRequest);
-HRMS_STATE.persist();
+            HRMS_STATE.db.accessRequests.unshift(newRequest);
+            HRMS_STATE.persist();
         },
-getPending: function () {
-    return HRMS_STATE.db.accessRequests.filter(r => r.status === 'PENDING');
-}
+        getPending: function () {
+            return HRMS_STATE.db.accessRequests.filter(r => r.status === 'PENDING');
+        }
     },
 
-// --- AI & AUTOMATION LAYER (PHASE 3) ---
-ai: {
-    parseResume: function (resumeText, jobDescription) {
-        // SIMULATED AI PARSER
-        // In a real app, this would hit OpenAI/Gemini API
+    // --- AI & AUTOMATION LAYER (PHASE 3) ---
+    ai: {
+        parseResume: function (resumeText, jobDescription) {
+            // SIMULATED AI PARSER
+            // In a real app, this would hit OpenAI/Gemini API
 
-        // 1. Extract Skills (Simple Regex Mock)
-        const commonSkills = ['JavaScript', 'React', 'Node.js', 'Python', 'Sales', 'Marketing', 'Excel', 'Management', 'Communication', 'Java', 'SQL'];
-        const foundSkills = commonSkills.filter(skill =>
-            new RegExp(skill, 'i').test(resumeText)
-        );
+            // 1. Extract Skills (Simple Regex Mock)
+            const commonSkills = ['JavaScript', 'React', 'Node.js', 'Python', 'Sales', 'Marketing', 'Excel', 'Management', 'Communication', 'Java', 'SQL'];
+            const foundSkills = commonSkills.filter(skill =>
+                new RegExp(skill, 'i').test(resumeText)
+            );
 
-        // 2. Calculate Match Score
-        // Count how many "found skills" are also in Job Description
-        let matchCount = 0;
-        const jobLower = jobDescription.toLowerCase();
-        foundSkills.forEach(skill => {
-            if (jobLower.includes(skill.toLowerCase())) matchCount++;
-        });
+            // 2. Calculate Match Score
+            // Count how many "found skills" are also in Job Description
+            let matchCount = 0;
+            const jobLower = jobDescription.toLowerCase();
+            foundSkills.forEach(skill => {
+                if (jobLower.includes(skill.toLowerCase())) matchCount++;
+            });
 
-        // Base score 60% + 10% per matched skill (max 95%)
-        let score = 60 + (matchCount * 10);
-        if (score > 95) score = 98; // AI isn't perfect
+            // Base score 60% + 10% per matched skill (max 95%)
+            let score = 60 + (matchCount * 10);
+            if (score > 95) score = 98; // AI isn't perfect
 
-        return {
-            skills: foundSkills,
-            score: score,
-            summary: `Matched ${matchCount} key skills from JD. Strong candidate.`
-        };
-    }
-},
-
-automation: {
-    trigger: function (triggerType, data) {
-        // SIMULATED AUTOMATION ENGINE
-        if (triggerType === 'APPLICATION_RECEIVED') {
-            HRMS_STATE.audit.log(data.recruiterId, 'AUTO_EMAIL', `Sent "Application Received" to ${data.candidateEmail}`);
-        } else if (triggerType === 'SHORTLISTED') {
-            HRMS_STATE.audit.log(data.recruiterId, 'AUTO_EMAIL', `Sent "Interview Invite" to ${data.candidateEmail}`);
-        } else if (triggerType === 'AI_REJECT') {
-            HRMS_STATE.audit.log(data.recruiterId, 'AUTO_ACTION', `Auto-rejected ${data.candidateEmail} (Score < 50%)`);
+            return {
+                skills: foundSkills,
+                score: score,
+                summary: `Matched ${matchCount} key skills from JD. Strong candidate.`
+            };
         }
-    }
-},
+    },
 
-// --- PERSISTENCE ---
-persist: function () {
-    // In a real app, this would be an API call.
-    // Here we just ensure memory state is consistent.
-    // For strict enterprise demo, we might NOT want to use LocalStorage for DB 
-    // to prevent 'magic' data appearing on refresh if we want a clean slate every time.
-    // But to keep constraints of "Store request", we will use memory for this session.
-    // or we can use LocalStorage if persistent across reloads is needed.
-    // Let's use LocalStorage for PERSISTENCE to act like a real DB.
-    localStorage.setItem('hrms_db', JSON.stringify(HRMS_STATE.db));
-},
-load: function () {
-    const saved = localStorage.getItem('hrms_db');
-    if (saved) {
-        HRMS_STATE.db = JSON.parse(saved);
+    automation: {
+        trigger: function (triggerType, data) {
+            // SIMULATED AUTOMATION ENGINE
+            if (triggerType === 'APPLICATION_RECEIVED') {
+                const text = `Hi, thanks for applying. We have received your application.`;
+                HRMS_STATE.messages.send({
+                    from: 'system',
+                    to: data.candidateEmail,
+                    subject: 'Application Received',
+                    body: text,
+                    jobId: null
+                });
+                HRMS_STATE.audit.log(data.recruiterId, 'AUTO_EMAIL', `Sent "Application Received" to ${data.candidateEmail}`);
+            } else if (triggerType === 'SHORTLISTED') {
+                const text = `Great news! You've been shortlisted. We will contact you soon.`;
+                HRMS_STATE.messages.send({
+                    from: data.recruiterId,
+                    to: data.candidateEmail,
+                    subject: 'Interview Invite',
+                    body: text,
+                    jobId: null
+                });
+                HRMS_STATE.audit.log(data.recruiterId, 'AUTO_EMAIL', `Sent "Interview Invite" to ${data.candidateEmail}`);
+            } else if (triggerType === 'AI_REJECT') {
+                HRMS_STATE.audit.log(data.recruiterId, 'AUTO_ACTION', `Auto-rejected ${data.candidateEmail} (Score < 50%)`);
+            }
+        }
+    },
+
+    // --- PERSISTENCE ---
+    persist: function () {
+        // In a real app, this would be an API call.
+        // Here we just ensure memory state is consistent.
+        // For strict enterprise demo, we might NOT want to use LocalStorage for DB 
+        // to prevent 'magic' data appearing on refresh if we want a clean slate every time.
+        // But to keep constraints of "Store request", we will use memory for this session.
+        // or we can use LocalStorage if persistent across reloads is needed.
+        // Let's use LocalStorage for PERSISTENCE to act like a real DB.
+        localStorage.setItem('hrms_db', JSON.stringify(HRMS_STATE.db));
+    },
+    load: function () {
+        const saved = localStorage.getItem('hrms_db');
+        if (saved) {
+            HRMS_STATE.db = JSON.parse(saved);
+        }
+    },
+    reset: function () {
+        localStorage.removeItem('hrms_db');
+        window.location.reload();
     }
-},
-reset: function () {
-    localStorage.removeItem('hrms_db');
-    window.location.reload();
-}
 };
 
 // Initialize

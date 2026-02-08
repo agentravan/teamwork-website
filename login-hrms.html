@@ -189,7 +189,7 @@
         }
 
         .error-banner {
-            background: #fer2f2;
+            background: #fef2f2;
             border: 1px solid #fecaca;
             color: #dc2626;
             padding: 12px;
@@ -301,16 +301,24 @@
             error.style.display = 'none';
 
             setTimeout(() => {
-                const user = HRMS_STATE.auth.login(email, password);
+                const user = HRMS_STATE.auth.login(email, password); // Returns user obj or null
 
                 if (user) {
-                    window.location.href = 'hrms-dashboard.html';
+                    // Redirect based on Role
+                    if (user.role === 'SUPER_ADMIN') {
+                        window.location.href = 'super-admin-dashboard.html';
+                    } else if (user.role === 'CLIENT_ADMIN' || user.role === 'RECRUITER') {
+                        window.location.href = 'admin-dashboard.html';
+                    } else {
+                        window.location.href = 'hrms-dashboard.html';
+                    }
                 } else {
                     error.style.display = 'block';
+                    error.textContent = 'Invalid credentials. Please try again.';
                     btn.innerHTML = 'Sign In';
                     btn.disabled = false;
                 }
-            }, 1200);
+            }, 800);
         });
     </script>
 </body>

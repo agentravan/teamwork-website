@@ -58,17 +58,17 @@
         </div>
     </main>
 
+    <script src="js/hrms-state.js"></script>
     <script src="js/main.js"></script>
     <script src="js/unified-header.js"></script>
     <script>
         // Check Session on Load
         window.addEventListener('DOMContentLoaded', () => {
-            const session = JSON.parse(localStorage.getItem('adminSession'));
-            if (session && session.expiry > Date.now()) {
-                document.getElementById('loginForm').style.display = 'none';
-                document.getElementById('sessionFound').style.display = 'block';
-            } else {
-                localStorage.removeItem('adminSession'); // Clear expired
+            const user = HRMS_STATE.auth.getCurrentUser();
+            if (user) {
+                // If already logged in, show session found or redirect
+                if (user.role === 'SUPER_ADMIN') window.location.href = 'super-admin-dashboard.html';
+                else window.location.href = 'admin-dashboard.html';
             }
         });
 
@@ -77,29 +77,14 @@
             const u = document.getElementById('username').value;
             const p = document.getElementById('password').value;
 
-            // Fetch users from storage (or use default admin)
-            const users = JSON.parse(localStorage.getItem('adminUsers')) ||
-                [{ username: 'admin', password: 'admin123' }];
+            const user = HRMS_STATE.auth.login(u, p);
 
-            const validUser = users.find(user => user.username === u && user.password === p);
-
-            if (validUser) {
-                // Set Session (5 Mins = 5*60*1000 ms)
-                const expiry = Date.now() + (5 * 60 * 1000);
-                localStorage.setItem('adminSession', JSON.stringify({
-                    token: 'valid-token-' + Date.now(),
-                    username: validUser.username,
-                    expiry: expiry
-                }));
-                window.location.href = 'admin-dashboard.html';
+            if (user) {
+                if (user.role === 'SUPER_ADMIN') window.location.href = 'super-admin-dashboard.html';
+                else window.location.href = 'admin-dashboard.html';
             } else {
-                alert('Invalid Credentials.');
+                alert('Invalid Credentials. Please use a valid recruiter account.');
             }
-        }
-
-        function logout() {
-            localStorage.removeItem('adminSession');
-            location.reload();
         }
     </script>
     <script src="js/main.js"></script>

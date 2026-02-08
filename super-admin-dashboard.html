@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Super Admin | GlobalHRX System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <style>
+        :root {
+            /* Distinct Theme for Super Admin - Darker Sidebar? */
+            --sidebar-bg: #111827;
+            --sidebar-text: #9ca3af;
+            --sidebar-active-bg: #374151;
+            --sidebar-active-text: #f9fafb;
+            --primary-color: #4f46e5;
+            /* Indigo */
+        }
+
+        .sidebar {
+            background: var(--sidebar-bg);
+            color: var(--sidebar-text);
+            border-right: none;
+        }
+
+        .sidebar-header {
+            color: white;
+            border-bottom: 1px solid #374151;
+        }
+
+        .user-profile {
+            border-bottom: 1px solid #374151;
+            color: white;
+        }
+
+        .user-profile p {
+            color: #9ca3af;
+        }
+
+        .nav-item {
+            color: var(--sidebar-text);
+        }
+
+        .nav-item:hover,
+        .nav-item.active {
+            background: var(--sidebar-active-bg);
+            color: var(--sidebar-active-text);
+        }
+
+        .search-bar {
+            background: white;
+            border: 1px solid #e5e7eb;
+            padding: 8px 16px;
+            border-radius: 8px;
+            width: 300px;
+        }
+
+        /* Table Enhancements */
+        .admin-table th {
+            background: #f9fafb;
+            color: #374151;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .role-badge {
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            background: #e0e7ff;
+            color: #4338ca;
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- SIDEBAR -->
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <h2 style="font-weight: 700; font-size: 1.5rem;">Global<span style="color: var(--primary-color);">HRX</span>
+            </h2>
+        </div>
+
+        <div class="user-profile">
+            <div class="user-avatar" style="background: #374151; color: white;">SA</div>
+            <h3 style="font-size: 1rem; margin-bottom: 4px;">Super Admin</h3>
+            <p style="font-size: 0.8rem;">System Owner</p>
+        </div>
+
+        <div class="nav-menu">
+            <a href="#" class="nav-item active" onclick="showView('dashboard')">
+                <i class="ph-bold ph-squares-four"></i> Overview
+            </a>
+            <a href="#" class="nav-item" onclick="showView('recruiters')">
+                <i class="ph-bold ph-users"></i> Recruiters (Tenants)
+            </a>
+            <a href="#" class="nav-item" onclick="showView('jobs')">
+                <i class="ph-bold ph-briefcase"></i> Global Jobs
+            </a>
+            <a href="#" class="nav-item" onclick="showView('candidates')">
+                <i class="ph-bold ph-user-list"></i> Global Candidates
+            </a>
+            <a href="#" class="nav-item" onclick="showView('audit')">
+                <i class="ph-bold ph-scroll"></i> Audit Logs
+            </a>
+
+            <div style="margin-top: 30px; border-top: 1px solid #374151; padding-top: 20px;">
+                <a href="#" class="nav-item" onclick="logout()">
+                    <i class="ph-bold ph-sign-out"></i> Logout
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+        <!-- HEADER -->
+        <div class="dashboard-header">
+            <div>
+                <h1 style="font-size: 1.8rem; font-weight: 700; margin-bottom: 5px;">System Overview</h1>
+                <p style="color: var(--text-secondary);">Manage the entire Global HRX ecosystem.</p>
+            </div>
+            <div style="display: flex; gap: 15px; align-items: center;">
+                <input type="text" placeholder="Search system..." class="search-bar">
+                <button class="header-btn" onclick="alert('System Settings')"><i class="ph-bold ph-gear"></i></button>
+            </div>
+        </div>
+
+        <!-- KPI GRID -->
+        <div class="kpi-grid" id="kpi-container">
+            <!-- JS Injected -->
+        </div>
+
+        <!-- VIEW CONTAINER -->
+        <div id="view-container">
+            <!-- JS Injected -->
+        </div>
+    </main>
+
+    <script src="js/hrms-state.js"></script>
+    <script>
+        // --- AUTH CHECK ---
+        const user = HRMS_STATE.auth.checkSession();
+        if (!user || user.role !== 'SUPER_ADMIN') {
+            // Strict Separation
+            alert('Access Denied: Super Admin Only');
+            window.location.href = 'login-hrms.html';
+        }
+
+        // --- RENDER ---
+        function renderKPIs() {
+            const tenants = HRMS_STATE.tenants.getAll();
+            const jobs = HRMS_STATE.recruitment.getJobs(null); // All jobs
+            const apps = HRMS_STATE.recruitment.getApplications(null); // All apps
+            const activeTenants = tenants.filter(t => t.status === 'ACTIVE').length;
+
+            const kpis = [
+                { label: 'Total Recruiters', value: tenants.length, icon: 'ph-users', color: '#e0e7ff', iconColor: '#4338ca' },
+                { label: 'Active Jobs', value: jobs.filter(j => j.status === 'Open').length, icon: 'ph-briefcase', color: '#dcfce7', iconColor: '#15803d' },
+                { label: 'Total Candidates', value: apps.length, icon: 'ph-user-list', color: '#fef3c7', iconColor: '#b45309' },
+                { label: 'System Health', value: '100%', icon: 'ph-heartbeat', color: '#fee2e2', iconColor: '#b91c1c' }
+            ];
+
+            document.getElementById('kpi-container').innerHTML = kpis.map(k => `
+                <div class="kpi-card">
+                    <div>
+                        <div class="kpi-value">${k.value}</div>
+                        <div class="kpi-label">${k.label}</div>
+                    </div>
+                    <div class="kpi-icon" style="background: ${k.color}; color: ${k.iconColor};">
+                        <i class="ph-bold ${k.icon}"></i>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function showView(view) {
+            const container = document.getElementById('view-container');
+            document.querySelectorAll('.nav-item').forEach(e => e.classList.remove('active'));
+            // Highlight nav omitted for brevity, add logic if needed
+
+            if (view === 'dashboard' || !view) {
+                renderRecruiters(container, true); // Dashboard view shows recent recruiters or summary
+            } else if (view === 'recruiters') {
+                renderRecruiters(container);
+            } else if (view === 'jobs') {
+                renderGlobalJobs(container);
+            } else if (view === 'candidates') {
+                renderGlobalCandidates(container);
+            } else if (view === 'audit') {
+                renderAuditLogs(container);
+            }
+        }
+
+        function renderRecruiters(container, isDashboard = false) {
+            const tenants = HRMS_STATE.tenants.getAll();
+            container.innerHTML = `
+                <div class="card-container">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <h2 style="font-size: 1.5rem;">${isDashboard ? 'Recent Recruiters' : 'Manage Recruiters'}</h2>
+                        ${!isDashboard ? `<button onclick="promptCreateRecruiter()" class="btn-primary">+ Add Recruiter</button>` : ''}
+                    </div>
+                    <table class="data-table admin-table" style="width: 100%;">
+                        <thead>
+                            <tr style="text-align: left; border-bottom: 1px solid #e5e7eb;">
+                                <th style="padding: 15px;">Company / Name</th>
+                                <th style="padding: 15px;">Plan</th>
+                                <th style="padding: 15px;">Joined</th>
+                                <th style="padding: 15px;">Status</th>
+                                <th style="padding: 15px; text-align: right;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${tenants.map(t => `
+                                <tr style="border-bottom: 1px solid #f3f4f6;">
+                                    <td style="padding: 15px;">
+                                        <div style="font-weight: 600;">${t.name}</div>
+                                        <div style="font-size: 0.85rem; color: var(--text-secondary);">${t.adminEmail}</div>
+                                    </td>
+                                    <td style="padding: 15px;"><span class="role-badge">${t.plan || 'Free Tier'}</span></td>
+                                    <td style="padding: 15px; font-size: 0.9rem;">${new Date(t.joinedDate).toLocaleDateString()}</td>
+                                    <td style="padding: 15px;">
+                                        <span style="color: ${t.status === 'ACTIVE' ? '#059669' : '#dc2626'}; font-weight: 600; font-size: 0.8rem;">
+                                            ${t.status}
+                                        </span>
+                                    </td>
+                                    <td style="padding: 15px; text-align: right;">
+                                        <button onclick="impersonate('${t.id}')" class="btn-outline" style="padding: 6px 12px; font-size: 0.75rem;">Login As</button>
+                                        <button onclick="deleteRecruiter('${t.id}')" class="btn-outline" style="color: #dc2626; border-color: #dc2626; padding: 6px 12px; font-size: 0.75rem;">Delete</button>
+                                    </td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                </div>
+            `;
+        }
+
+        function renderGlobalJobs(container) {
+            const jobs = HRMS_STATE.recruitment.getJobs(null);
+            container.innerHTML = `
+                <div class="card-container">
+                    <h2 style="font-size: 1.5rem; margin-bottom: 20px;">Global Job Monitor</h2>
+                    <table class="data-table admin-table" style="width: 100%;">
+                        <thead>
+                            <tr style="text-align: left; border-bottom: 1px solid #e5e7eb;">
+                                <th style="padding: 15px;">Job Title</th>
+                                <th style="padding: 15px;">Recruiter ID</th>
+                                <th style="padding: 15px;">Applicants</th>
+                                <th style="padding: 15px;">Status</th>
+                                <th style="padding: 15px; text-align: right;">Admin Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${jobs.map(j => `
+                                <tr style="border-bottom: 1px solid #f3f4f6;">
+                                    <td style="padding: 15px; font-weight: 600;">${j.title}</td>
+                                    <td style="padding: 15px; font-size: 0.9rem; color: var(--text-secondary);">${j.recruiterId}</td>
+                                    <td style="padding: 15px;">${j.applications || 0}</td>
+                                    <td style="padding: 15px;">${j.status}</td>
+                                    <td style="padding: 15px; text-align: right;">
+                                        <button onclick="HRMS_STATE.recruitment.deleteJob(${j.id}); showView('jobs');" class="btn-outline" style="color: #dc2626; font-size: 0.75rem;">Force Close</button>
+                                    </td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                </div>
+            `;
+        }
+
+        function renderAuditLogs(container) {
+            const logs = HRMS_STATE.audit.getLogs();
+            container.innerHTML = `
+                <div class="card-container">
+                    <h2 style="font-size: 1.5rem; margin-bottom: 20px;">System Audit Logs</h2>
+                    <div style="max-height: 600px; overflow-y: auto;">
+                        <table class="data-table admin-table" style="width: 100%;">
+                            <thead>
+                                <tr style="text-align: left; border-bottom: 1px solid #e5e7eb; position: sticky; top: 0; background: white;">
+                                    <th style="padding: 15px;">Time</th>
+                                    <th style="padding: 15px;">User</th>
+                                    <th style="padding: 15px;">Action</th>
+                                    <th style="padding: 15px;">Details</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${logs.map(l => `
+                                    <tr style="border-bottom: 1px solid #f3f4f6;">
+                                        <td style="padding: 15px; font-size: 0.8rem; color: var(--text-secondary); white-space: nowrap;">
+                                            ${new Date(l.timestamp).toLocaleString()}
+                                        </td>
+                                        <td style="padding: 15px; font-weight: 600; font-size: 0.9rem;">${l.userId}</td>
+                                        <td style="padding: 15px;"><span style="background: #f3f4f6; padding: 2px 6px; border-radius: 4px; font-size: 0.75rem; font-family: monospace;">${l.action}</span></td>
+                                        <td style="padding: 15px; font-size: 0.9rem;">${l.details}</td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderGlobalCandidates(container) {
+            const apps = HRMS_STATE.recruitment.getApplications(null);
+            container.innerHTML = `
+                <div class="card-container">
+                    <h2 style="font-size: 1.5rem; margin-bottom: 20px;">Global Candidate Database</h2>
+                    <table class="data-table admin-table" style="width: 100%;">
+                        <thead>
+                            <tr style="text-align: left; border-bottom: 1px solid #e5e7eb;">
+                                <th style="padding: 15px;">Name</th>
+                                <th style="padding: 15px;">Applied For</th>
+                                <th style="padding: 15px;">Recruiter</th>
+                                <th style="padding: 15px;">AI Score</th>
+                                <th style="padding: 15px;">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${apps.map(a => `
+                                <tr style="border-bottom: 1px solid #f3f4f6;">
+                                    <td style="padding: 15px;">
+                                        <div style="font-weight: 600;">${a.name}</div>
+                                        <div style="font-size: 0.8rem; color: var(--text-secondary);">${a.email}</div>
+                                    </td>
+                                    <td style="padding: 15px;">${a.jobTitle}</td>
+                                    <td style="padding: 15px; font-size: 0.85rem; color: var(--text-secondary);">${a.recruiterId}</td>
+                                    <td style="padding: 15px; font-weight: 700; color: ${a.aiScore > 70 ? '#059669' : '#d97706'}">${a.aiScore}%</td>
+                                    <td style="padding: 15px;">${a.status}</td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                </div>
+            `;
+        }
+
+        // --- ACTIONS ---
+        function promptCreateRecruiter() {
+            const name = prompt("Company Name:");
+            if (!name) return;
+            const email = prompt("Admin Email:");
+            if (!email) return;
+            const password = prompt("Default Password:", "GlobalHRX@123");
+
+            HRMS_STATE.tenants.create({
+                name: name,
+                adminEmail: email,
+                password: password,
+                plan: 'Enterprise',
+                employees: 0,
+                revenue: 0,
+                adminName: 'Admin'
+            });
+            renderKPIs();
+            showView('recruiters');
+        }
+
+        function impersonate(tenantId) {
+            // Find user logic
+            // const tenants = HRMS_STATE.tenants.getAll(); 
+            // Logic to find valid user for this tenant to masquerade
+            // For strict demo:
+            const user = {
+                id: tenantId,
+                name: 'Impersonated User',
+                role: 'RECRUITER',
+                tenantId: tenantId
+            };
+            HRMS_STATE.auth.createSession(user);
+            HRMS_STATE.audit.log('SUPER_ADMIN', 'IMPERSONATE', `Impersonated tenant ${tenantId}`);
+            window.location.href = 'admin-dashboard.html'; // Redirect to their dashboard
+        }
+
+        function logout() {
+            HRMS_STATE.auth.logout();
+            window.location.href = 'login-hrms.html';
+        }
+
+        function deleteRecruiter(id) {
+            if (confirm('Are you sure you want to deactivate this recruiter?')) {
+                HRMS_STATE.tenants.deactivate(id);
+                // Refresh View
+                const container = document.getElementById('view-container');
+                renderRecruiters(container);
+                renderKPIs();
+            }
+        }
+
+        // INIT
+        renderKPIs();
+        showView('dashboard');
+    </script>
+</body>
+
+</html>

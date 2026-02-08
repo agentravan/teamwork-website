@@ -409,12 +409,145 @@
                 renderJobForm(container);
             } else if (viewName === 'applications') {
                 renderApplications(container, param);
+            } else if (viewName === 'messages') {
+                renderMessages(container);
+            } else if (viewName === 'saved') {
+                renderSavedCandidates(container);
+            } else if (viewName === 'profile') {
+                renderProfile(container);
             } else {
                 container.innerHTML = `<div class="card-container" style="text-align: center; color: var(--text-secondary); padding: 50px;">
                     <i class="ph-duotone ph-cone" style="font-size: 3rem; margin-bottom: 20px;"></i>
                     <p>This module is under development.</p>
                 </div>`;
             }
+        }
+
+        function renderMessages(container) {
+            const msgs = HRMS_STATE.messages.getInbox(currentRecruiterId);
+            container.innerHTML = `
+                <div class="card-container">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <h2 style="font-size: 1.5rem;">Messages</h2>
+                        <button onclick="alert('Compose feature coming soon')" class="btn-primary">
+                            <i class="ph-bold ph-pencil-simple"></i> Compose
+                        </button>
+                    </div>
+                    <div style="border: 1px solid #e5e7eb; border-radius: 8px; overflow: hidden;">
+                        ${msgs.length > 0 ? msgs.map(m => `
+                            <div style="padding: 15px; border-bottom: 1px solid #f3f4f6; display: flex; justify-content: space-between; cursor: pointer; background: ${m.read ? 'white' : '#f0f9ff'};">
+                                <div>
+                                    <div style="font-weight: 600; color: var(--text-primary);">${m.subject}</div>
+                                    <div style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 2px;">${m.body.substring(0, 60)}...</div>
+                                    <div style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 4px;">To: ${m.to}</div>
+                                </div>
+                                <div style="font-size: 0.8rem; color: var(--text-secondary); white-space: nowrap;">
+                                    ${new Date(m.timestamp).toLocaleDateString()}
+                                </div>
+                            </div>
+                        `).join('') : `
+                            <div style="padding: 40px; text-align: center; color: var(--text-secondary);">
+                                <i class="ph-duotone ph-chat-teardrop-text" style="font-size: 2.5rem; margin-bottom: 10px;"></i>
+                                <p>No messages yet.</p>
+                            </div>
+                        `}
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderSavedCandidates(container) {
+            const savedItems = HRMS_STATE.recruitment.getSavedCandidates(currentRecruiterId);
+            const allApps = HRMS_STATE.recruitment.getApplications();
+
+            const candidates = savedItems.map(item => {
+                const app = allApps.find(a => a.id === item.candidateId);
+                return app ? { ...item, ...app } : null;
+            }).filter(Boolean);
+
+            container.innerHTML = `
+                <div class="card-container">
+                    <h2 style="font-size: 1.5rem; margin-bottom: 20px;">Saved Candidates</h2>
+                    <table class="data-table" style="width: 100%;">
+                         <thead>
+                            <tr style="text-align: left; border-bottom: 1px solid #e5e7eb;">
+                                <th style="padding: 15px;">Candidate</th>
+                                <th style="padding: 15px;">Role / Skills</th>
+                                <th style="padding: 15px;">Saved Date</th>
+                                <th style="padding: 15px; text-align: right;">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${candidates.length > 0 ? candidates.map(c => `
+                                <tr style="border-bottom: 1px solid #f3f4f6;">
+                                    <td style="padding: 15px;">
+                                        <div style="font-weight: 600;">${c.name}</div>
+                                        <div style="font-size: 0.85rem; color: var(--text-secondary);">${c.email}</div>
+                                    </td>
+                                    <td style="padding: 15px;">
+                                        <div style="font-size: 0.9rem;">${c.jobTitle || 'General Pool'}</div>
+                                        <div style="font-size: 0.8rem; color: var(--primary-green);">${(c.aiSkills || []).slice(0, 3).join(', ')}</div>
+                                    </td>
+                                    <td style="padding: 15px; color: var(--text-secondary); font-size: 0.9rem;">
+                                        ${new Date(c.savedDate).toLocaleDateString()}
+                                    </td>
+                                    <td style="padding: 15px; text-align: right;">
+                                        <button onclick="toggleSave(${c.candidateId})" class="btn-outline" style="padding: 6px 12px; font-size: 0.8rem; border-color: #ef4444; color: #ef4444;">
+                                            Remove
+                                        </button>
+                                    </td>
+                                </tr>
+                            `).join('') : `
+                                <tr>
+                                    <td colspan="4" style="text-align: center; padding: 40px; color: var(--text-secondary);">
+                                        No saved candidates.
+                                    </td>
+                                </tr>
+                            `}
+                        </tbody>
+                    </table>
+                </div>
+            `;
+        }
+
+        function renderProfile(container) {
+            container.innerHTML = `
+                <div class="card-container">
+                    <h2 style="font-size: 1.5rem; margin-bottom: 20px;">Company Profile</h2>
+                    <form onsubmit="handleProfileUpdate(event)">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Company Name</label>
+                                <input type="text" name="companyName" class="form-control" value="TeamWork Solutions" disabled style="background: #f3f4f6;">
+                            </div>
+                             <div class="form-group">
+                                <label>Industry</label>
+                                <input type="text" name="industry" class="form-control" value="Software & IT">
+                            </div>
+                        </div>
+                        <div class="form-group" style="margin-bottom: 20px;">
+                            <label>Company Description</label>
+                            <textarea name="desc" class="form-control" rows="4">We build software that matters.</textarea>
+                        </div>
+                         <div class="form-group">
+                            <label>Website URL</label>
+                            <input type="text" name="website" class="form-control" value="https://teamwork.com">
+                        </div>
+                        <button type="submit" class="btn-primary" style="margin-top: 20px;">Save Changes</button>
+                    </form>
+                </div>
+            `;
+        }
+
+        function toggleSave(id) {
+            HRMS_STATE.recruitment.toggleSaveCandidate(id, currentRecruiterId);
+            renderSavedCandidates(document.getElementById('view-container'));
+            renderKPIs();
+        }
+
+        function handleProfileUpdate(e) {
+            e.preventDefault();
+            alert('Profile updated successfully!');
         }
 
         function renderJobList(container) {
@@ -762,9 +895,11 @@
             };
 
             // Pass Recruiter ID here
-            HRMS_STATE.recruitment.addJob(data, currentRecruiterId);
-            renderKPIs(); // Update counters
-            showView('my-jobs'); // Go to My Jobs list
+            const result = HRMS_STATE.recruitment.addJob(data, currentRecruiterId);
+            if (result) {
+                renderKPIs(); // Update counters
+                showView('my-jobs'); // Go to My Jobs list
+            }
         }
 
         function deleteJob(id) {
