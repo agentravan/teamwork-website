@@ -7,75 +7,9 @@
     <title>Super Admin | GlobalHRX System</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard-premium.css">
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
-    <style>
-        :root {
-            /* Distinct Theme for Super Admin - Darker Sidebar? */
-            --sidebar-bg: #111827;
-            --sidebar-text: #9ca3af;
-            --sidebar-active-bg: #374151;
-            --sidebar-active-text: #f9fafb;
-            --primary-color: #4f46e5;
-            /* Indigo */
-        }
-
-        .sidebar {
-            background: var(--sidebar-bg);
-            color: var(--sidebar-text);
-            border-right: none;
-        }
-
-        .sidebar-header {
-            color: white;
-            border-bottom: 1px solid #374151;
-        }
-
-        .user-profile {
-            border-bottom: 1px solid #374151;
-            color: white;
-        }
-
-        .user-profile p {
-            color: #9ca3af;
-        }
-
-        .nav-item {
-            color: var(--sidebar-text);
-        }
-
-        .nav-item:hover,
-        .nav-item.active {
-            background: var(--sidebar-active-bg);
-            color: var(--sidebar-active-text);
-        }
-
-        .search-bar {
-            background: white;
-            border: 1px solid #e5e7eb;
-            padding: 8px 16px;
-            border-radius: 8px;
-            width: 300px;
-        }
-
-        /* Table Enhancements */
-        .admin-table th {
-            background: #f9fafb;
-            color: #374151;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .role-badge {
-            padding: 2px 8px;
-            border-radius: 12px;
-            font-size: 0.75rem;
-            background: #e0e7ff;
-            color: #4338ca;
-            font-weight: 600;
-        }
-    </style>
 </head>
 
 <body>
@@ -83,14 +17,17 @@
     <!-- SIDEBAR -->
     <nav class="sidebar">
         <div class="sidebar-header">
-            <h2 style="font-weight: 700; font-size: 1.5rem;">Global<span style="color: var(--primary-color);">HRX</span>
-            </h2>
+            <div class="brand">
+                <i class="ph-fill ph-globe-hemisphere-west"></i> Global HRX
+            </div>
         </div>
 
         <div class="user-profile">
-            <div class="user-avatar" style="background: #374151; color: white;">SA</div>
-            <h3 style="font-size: 1rem; margin-bottom: 4px;">Super Admin</h3>
-            <p style="font-size: 0.8rem;">System Owner</p>
+            <div class="user-avatar">SA</div>
+            <div class="user-info">
+                <h3>Super Admin</h3>
+                <p>System Owner</p>
+            </div>
         </div>
 
         <div class="nav-menu">
