@@ -1,443 +1,232 @@
 /**
- * GlobalHRX Enterprise SaaS - State Management System
- * Simulates Backend Database, Auth, and Business Logic
+ * GlobalHRX Enterprise SaaS - Core State Management
+ * VERSION: 2.1 (STRICT RESET)
  * 
- * STRICT ENTERPRISE MODE: NO FAKE DATA
+ * STRICT RULES:
+ * 1. NO Dummy Data.
+ * 2. NO Auto-generated content.
+ * 3. NO Hardcoded Users (not even Super Admin).
+ * 4. Single Source of Truth: 'hrms_core_db' in localStorage.
  */
 
 const HRMS_STATE = {
-    // --- DATABASE SCHEMA ---
+    // --- DATABASE (In-Memory synced to LocalStorage) ---
     db: {
-        superAdmin: {
-            id: 'SA_001',
-            name: 'Harshit Bhardwaj',
-            email: 'admin@globalhrx.com',
-            password: 'GlobalHRX@2026', // Stored for demo only
-            role: 'SUPER_ADMIN',
-            avatar: 'HB'
-        },
-        tenants: [], // NO DEMO TENANTS
-        accessRequests: [], // NO FAKE REQUESTS
-        auditLogs: []
+        users: [],        // Unified User Registry 
+        tenants: [],      // Recruiters/Companies
+        jobs: [],         // Global Job Registry
+        applications: [], // Global Candidate Registry
+        auditLogs: [],    // Security Logs
+        messages: []      // Internal System Messaging
     },
 
-    // --- AUTH SERVICE ---
+    // --- INITIALIZATION ---
+    init: function () {
+        // Load from storage or start clean
+        const savedDB = localStorage.getItem('hrms_core_db');
+        if (savedDB) {
+            this.db = { ...this.db, ...JSON.parse(savedDB) };
+        }
+        // NO DEFAULT SUPER ADMIN CREATION
+    },
+
+    save: function () {
+        localStorage.setItem('hrms_core_db', JSON.stringify(this.db));
+    },
+
+    wipe: function () {
+        localStorage.removeItem('hrms_core_db');
+        localStorage.removeItem('hrms_session');
+        window.location.href = 'index.html';
+    },
+
+    // --- AUTHENTICATION SERVICE ---
     auth: {
         login: function (email, password) {
-            // 1. Check Super Admin
-            if (email === HRMS_STATE.db.superAdmin.email && password === HRMS_STATE.db.superAdmin.password) {
-                const user = { ...HRMS_STATE.db.superAdmin };
-                delete user.password;
+            // Check Database Users (Unified)
+            // Since we have no hardcoded users, we check the 'users' array or 'tenants' array
+
+            // 1. Check Tenants (Recruiters)
+            const tenant = HRMS_STATE.db.tenants.find(t => t.email === email && t.password === password && t.status === 'ACTIVE');
+            if (tenant) {
+                const user = {
+                    id: tenant.id,
+                    name: tenant.name,
+                    email: tenant.email,
+                    role: 'RECRUITER',
+                    plan: tenant.plan
+                };
                 this.createSession(user);
                 return user;
             }
 
-            // 2. Check Client Tenants
-            const tenants = HRMS_STATE.db.tenants;
-            for (const tenant of tenants) {
-                if (tenant.adminEmail === email && tenant.password === password && tenant.status === 'ACTIVE') {
-                    const user = {
-                        id: tenant.id,
-                        name: tenant.adminName || tenant.name,
-                        email: tenant.adminEmail,
-                        role: 'CLIENT_ADMIN',
-                        tenantId: tenant.id,
-                        avatar: tenant.name.substring(0, 2).toUpperCase()
-                    };
-                    this.createSession(user);
-                    return user;
-                }
+            // 2. Check Generic Users (e.g. Employee, Future Super Admin if stored in DB)
+            const user = HRMS_STATE.db.users.find(u => u.email === email && u.password === password);
+            if (user) {
+                const sessionUser = { ...user };
+                delete sessionUser.password;
+                this.createSession(sessionUser);
+                return sessionUser;
             }
 
             return null;
         },
+
         createSession: function (user) {
-            localStorage.setItem('hrms_user', JSON.stringify(user));
-            // Log Audit
-            HRMS_STATE.audit.log(user.id, 'LOGIN', 'User logged into the system');
+            localStorage.setItem('hrms_session', JSON.stringify(user));
+            HRMS_STATE.audit.log(user.id, 'LOGIN', `User ${user.email} logged in`);
         },
+
         logout: function () {
             const user = this.getCurrentUser();
             if (user) HRMS_STATE.audit.log(user.id, 'LOGOUT', 'User logged out');
-            localStorage.removeItem('hrms_user');
-            window.location.href = 'login-hrms.html';
+            localStorage.removeItem('hrms_session');
+            window.location.reload();
         },
+
         getCurrentUser: function () {
-            return JSON.parse(localStorage.getItem('hrms_user'));
+            return JSON.parse(localStorage.getItem('hrms_session'));
         },
-        checkSession: function () {
+
+        requireAuth: function (requiredRole) {
             const user = this.getCurrentUser();
             if (!user) {
-                window.location.href = 'login-hrms.html';
+                // If no user, maybe redirect to logic page? 
+                // But pages are deleted now. Just return null.
+                return null;
+            }
+            if (requiredRole && user.role !== requiredRole) {
+                alert('Access Denied');
                 return null;
             }
             return user;
-        }
-    },
-
-    // --- AUDIT SYSTEM ---
-    audit: {
-        log: function (userId, action, details) {
-            const logs = this.getLogs();
-            const newLog = {
-                id: Date.now(),
-                timestamp: new Date().toISOString(),
-                userId: userId,
-                action: action,
-                details: details
-            };
-            logs.unshift(newLog);
-            // Keep last 1000 logs
-            if (logs.length > 1000) logs.pop();
-            localStorage.setItem('hrms_audit', JSON.stringify(logs));
         },
-        getLogs: function () {
-            return HRMS_STATE.db.auditLogs;
+
+        // Helper to register the FIRST super admin if none exist (Bootstrapping)
+        registerSuperAdmin: function (name, email, password) {
+            if (HRMS_STATE.db.users.some(u => u.role === 'SUPER_ADMIN')) {
+                return { success: false, message: 'Super Admin already exists.' };
+            }
+            const newAdmin = {
+                id: 'SA_' + Date.now(),
+                name,
+                email,
+                password, // In real app: Hash this
+                role: 'SUPER_ADMIN',
+                joinedDate: new Date().toISOString()
+            };
+            HRMS_STATE.db.users.push(newAdmin);
+            HRMS_STATE.save();
+            return { success: true, user: newAdmin };
         }
     },
 
-    // --- TENANT MANAGEMENT SERVICE ---
+    // --- TENANTS (Recruiters) ---
     tenants: {
         getAll: function () {
-            return JSON.parse(localStorage.getItem('tenants')) || [];
+            return HRMS_STATE.db.tenants;
         },
-        create: function (tenantData) {
-            const tenants = this.getAll();
-            const newTenant = {
-                id: 'org_' + Date.now(),
+        create: function (data) {
+            constnewTenant = {
+                id: 'T_' + Date.now(),
                 joinedDate: new Date().toISOString(),
                 status: 'ACTIVE',
-                ...tenantData
+                ...data
             };
-            tenants.unshift(newTenant);
-            localStorage.setItem('tenants', JSON.stringify(tenants));
-
-            // --- AUTOMAGIC: Create Auth User for this Tenant ---
-            // "When YOU create a client... System auto-generates Login"
-            const authUsers = JSON.parse(localStorage.getItem('hrms_users')) || [];
-
-            // Check if user already exists
-            if (!authUsers.find(u => u.email === tenantData.adminEmail)) {
-                const newUser = {
-                    id: newTenant.id, // Link User ID to Tenant ID for simple ownership
-                    name: 'Admin', // Default name, they can change later
-                    email: tenantData.adminEmail,
-                    password: tenantData.password, // Plain for demo, hash in real world
-                    role: 'RECRUITER', // Client Admin
-                    tenantId: newTenant.id, // Explicit link
-                    avatar: `https://ui-avatars.com/api/?name=${encodeURIComponent(tenantData.name)}&background=random`
-                };
-                authUsers.push(newUser);
-                localStorage.setItem('hrms_users', JSON.stringify(authUsers));
-                HRMS_STATE.audit.log('SUPER_ADMIN', 'CREATE_USER', `Auto-generated admin for ${newTenant.name}`);
-            }
-
-            HRMS_STATE.audit.log('SUPER_ADMIN', 'CREATE_TENANT', `Onboarded ${newTenant.name}`);
+            HRMS_STATE.db.tenants.unshift(newTenant);
+            HRMS_STATE.save();
+            HRMS_STATE.audit.log('SUPER_ADMIN', 'CREATE_TENANT', `Created tenant: ${data.name}`);
             return newTenant;
         },
-        deactivate: function (tenantId) {
-            const tenants = this.getAll();
-            const tenant = tenants.find(t => t.id === tenantId);
-            if (tenant) {
-                tenant.status = 'INACTIVE';
-                localStorage.setItem('tenants', JSON.stringify(tenants));
-                HRMS_STATE.audit.log('SUPER_ADMIN', 'DEACTIVATE_TENANT', `Deactivated tenant ${tenant.name}`);
+        updateStatus: function (id, status) {
+            const t = HRMS_STATE.db.tenants.find(x => x.id === id);
+            if (t) {
+                t.status = status;
+                HRMS_STATE.save();
             }
         },
-        getStats: function () {
-            const tenants = this.getAll();
-            const totalRevenue = tenants.reduce((acc, t) => acc + (t.status === 'ACTIVE' ? t.revenue : 0), 0);
-            return {
-                totalTenants: tenants.length,
-                activeTenants: tenants.filter(t => t.status === 'ACTIVE').length,
-                totalEmployees: tenants.reduce((acc, t) => acc + t.employees, 0),
-                mrr: totalRevenue
-            };
+        deactivate: function (id) {
+            const t = HRMS_STATE.db.tenants.find(x => x.id === id);
+            if (t) {
+                t.status = 'INACTIVE';
+                HRMS_STATE.save();
+            }
         }
     },
 
-    // --- RECRUITMENT SERVICE (CAREER ADMIN - JOBI STYLE) ---
-    recruitment: {
-        getJobs: function (recruiterId = null) {
-            // Sync with existing public localStorage key 'jobs'
-            const allJobs = JSON.parse(localStorage.getItem('jobs')) || [];
-            if (recruiterId) {
-                return allJobs.filter(j => j.recruiterId === recruiterId);
-            }
-            return allJobs; // Candidates/Public see all active (filtered elsewhere)
-        },
-        addJob: function (jobData, recruiterId) {
-            // Quota Check
-            const tenants = HRMS_STATE.tenants.getAll();
-            const tenant = tenants.find(t => t.id === recruiterId);
-            const allJobs = JSON.parse(localStorage.getItem('jobs')) || [];
-
-            if (tenant && tenant.plan === 'Free') {
-                const myActiveJobs = allJobs.filter(j => j.recruiterId === recruiterId && j.status !== 'Closed').length;
-                if (myActiveJobs >= 2) {
-                    alert('Upgrade to Enterprise to post more jobs! (Free Plan Limit: 2)');
-                    return null;
-                }
-            }
-
+    // --- JOBS ---
+    jobs: {
+        post: function (jobData, recruiterId) {
             const newJob = {
-                id: Date.now(),
-                status: 'Open', // Default to Open (Active)
-                applications: 0,
-                type: 'Full Time',
-                exp: '0-2 Years',
-                recruiterId: recruiterId || 'admin', // Bind to recruiter
+                id: 'J_' + Date.now(),
                 postedDate: new Date().toISOString(),
+                status: 'OPEN',
+                recruiterId: recruiterId,
+                applications: 0,
                 ...jobData
             };
-            allJobs.unshift(newJob);
-            localStorage.setItem('jobs', JSON.stringify(allJobs));
-
-            // Also log to audit
-            HRMS_STATE.audit.log(recruiterId || 'unknown', 'POST_JOB', `Posted job: ${newJob.title}`);
+            HRMS_STATE.db.jobs.unshift(newJob);
+            HRMS_STATE.save();
+            HRMS_STATE.audit.log(recruiterId, 'POST_JOB', `Posted job: ${jobData.title}`);
             return newJob;
         },
-        submitApplication: function (jobId, candidateData) {
-            const allApps = JSON.parse(localStorage.getItem('applications')) || [];
-            const allJobs = JSON.parse(localStorage.getItem('jobs')) || [];
-            const job = allJobs.find(j => j.id === parseInt(jobId));
-
-            if (!job) return { success: false, message: 'Job not found' };
-
-            // 1. Run AI Parsing
-            const aiResult = HRMS_STATE.ai.parseResume(candidateData.resumeText || '', job.desc || '');
-
-            // 2. Create Application Record
-            const newApp = {
-                id: Date.now(),
-                jobId: parseInt(jobId),
-                jobTitle: job.title,
-                recruiterId: job.recruiterId,
-                date: new Date().toISOString(),
-                status: aiResult.score < 50 ? 'Rejected' : 'New', // Auto-Reject if low score
-                aiScore: aiResult.score,
-                aiSkills: aiResult.skills,
-                ...candidateData
-            };
-
-            allApps.unshift(newApp);
-            localStorage.setItem('applications', JSON.stringify(allApps));
-
-            // 3. Update Job Count
-            job.applications = (job.applications || 0) + 1;
-            localStorage.setItem('jobs', JSON.stringify(allJobs));
-
-            // 4. Trigger Automation
-            if (newApp.status === 'Rejected') {
-                HRMS_STATE.automation.trigger('AI_REJECT', { recruiterId: job.recruiterId, candidateEmail: newApp.email });
-            } else {
-                HRMS_STATE.automation.trigger('APPLICATION_RECEIVED', { recruiterId: job.recruiterId, candidateEmail: newApp.email });
-            }
-
-            return { success: true };
+        getAll: function () {
+            return HRMS_STATE.db.jobs;
         },
-        updateStatus: function (jobId, status) {
-            const allJobs = JSON.parse(localStorage.getItem('jobs')) || [];
-            const job = allJobs.find(j => j.id === jobId);
-            if (job) {
-                job.status = status;
-                localStorage.setItem('jobs', JSON.stringify(allJobs));
-            }
-        },
-        updateApplicationStatus: function (appId, status) {
-            const allApps = JSON.parse(localStorage.getItem('applications')) || [];
-            const app = allApps.find(a => a.id === appId);
-            if (app) {
-                app.status = status;
-                localStorage.setItem('applications', JSON.stringify(allApps));
-
-                // Trigger Automation
-                if (status === 'Shortlisted') {
-                    HRMS_STATE.automation.trigger('SHORTLISTED', {
-                        recruiterId: app.recruiterId,
-                        candidateEmail: app.email
-                    });
-                }
-            }
+        getByRecruiter: function (recruiterId) {
+            return HRMS_STATE.db.jobs.filter(j => j.recruiterId === recruiterId);
         },
         deleteJob: function (jobId) {
-            let allJobs = JSON.parse(localStorage.getItem('jobs')) || [];
-            const job = allJobs.find(j => j.id === jobId);
-            if (job) {
-                job.status = 'Closed'; // Soft Delete
-                localStorage.setItem('jobs', JSON.stringify(allJobs));
-                HRMS_STATE.audit.log('SYSTEM', 'CLOSE_JOB', `Soft deleted job ${jobId}`);
+            const j = HRMS_STATE.db.jobs.find(x => x.id === jobId);
+            if (j) {
+                j.status = 'CLOSED';
+                HRMS_STATE.save();
             }
-        },
-        getApplications: function (recruiterId = null) {
-            const allApps = JSON.parse(localStorage.getItem('applications')) || [];
-            if (recruiterId) {
-                const myJobs = this.getJobs(recruiterId).map(j => j.id);
-                return allApps.filter(a => myJobs.includes(a.jobId));
-            }
-            return allApps;
-        },
-        getSavedCandidates: function (recruiterId = null) {
-            const allSaved = JSON.parse(localStorage.getItem('saved_candidates')) || [];
-            if (recruiterId) {
-                return allSaved.filter(s => s.recruiterId === recruiterId);
-            }
-            return allSaved;
-        },
-        toggleSaveCandidate: function (candidateId, recruiterId) {
-            let allSaved = JSON.parse(localStorage.getItem('saved_candidates')) || [];
-            const existingIndex = allSaved.findIndex(s => s.candidateId === candidateId && s.recruiterId === recruiterId);
-
-            if (existingIndex >= 0) {
-                allSaved.splice(existingIndex, 1); // Remove
-            } else {
-                allSaved.push({
-                    recruiterId: recruiterId,
-                    candidateId: candidateId,
-                    savedDate: new Date().toISOString()
-                });
-            }
-            localStorage.setItem('saved_candidates', JSON.stringify(allSaved));
-            return existingIndex === -1; // True if added
-        },
-        getStats: function (recruiterId) {
-            const jobs = this.getJobs(recruiterId);
-            const apps = this.getApplications(recruiterId);
-            const saved = this.getSavedCandidates(recruiterId);
-
-            return {
-                postedJobs: jobs.filter(j => j.status !== 'Closed').length,
-                shortlisted: apps.filter(a => a.status === 'Shortlisted').length,
-                applications: apps.length,
-                savedCandidates: saved.length
-            };
         }
     },
 
-    // --- MESSAGES SERVICE ---
-    messages: {
-        getAll: function () {
-            return JSON.parse(localStorage.getItem('messages')) || [];
+    // --- APPLICATIONS ---
+    applications: {
+        submit: function (appData) {
+            const newApp = {
+                id: 'A_' + Date.now(),
+                appliedDate: new Date().toISOString(),
+                status: 'NEW',
+                score: 0,
+                ...appData
+            };
+
+            HRMS_STATE.db.applications.unshift(newApp);
+
+            // Update Job Counter
+            const job = HRMS_STATE.db.jobs.find(j => j.id === appData.jobId);
+            if (job) job.applications++;
+
+            HRMS_STATE.save();
+            return newApp;
         },
-        send: function (msgData) {
-            const msgs = this.getAll();
-            const newMsg = {
-                id: Date.now(),
+        getByJob: function (jobId) {
+            return HRMS_STATE.db.applications.filter(a => a.jobId === jobId);
+        }
+    },
+
+    // --- AUDIT ---
+    audit: {
+        log: function (userId, action, details) {
+            const entry = {
+                id: 'L_' + Date.now(),
                 timestamp: new Date().toISOString(),
-                read: false,
-                ...msgData // { from, to, subject, body, jobId }
+                userId, action, details
             };
-            msgs.unshift(newMsg);
-            localStorage.setItem('messages', JSON.stringify(msgs));
-            HRMS_STATE.audit.log(msgData.from, 'SEND_MESSAGE', `Sent message to ${msgData.to}`);
-            return newMsg;
+            HRMS_STATE.db.auditLogs.unshift(entry);
+            if (HRMS_STATE.db.auditLogs.length > 500) HRMS_STATE.db.auditLogs.pop();
+            HRMS_STATE.save();
         },
-        getInbox: function (userId) {
-            const all = this.getAll();
-            return all.filter(m => m.from === userId || m.to === userId);
+        get: function () {
+            return HRMS_STATE.db.auditLogs;
         }
-    },
-
-    // --- ACCESS REQUEST SERVICE ---
-    requests: {
-        add: function (requestData) {
-            const newRequest = {
-                id: 'R_' + Date.now(),
-                status: 'PENDING',
-                date: new Date().toISOString(),
-                ...requestData
-            };
-            HRMS_STATE.db.accessRequests.unshift(newRequest);
-            HRMS_STATE.persist();
-        },
-        getPending: function () {
-            return HRMS_STATE.db.accessRequests.filter(r => r.status === 'PENDING');
-        }
-    },
-
-    // --- AI & AUTOMATION LAYER (PHASE 3) ---
-    ai: {
-        parseResume: function (resumeText, jobDescription) {
-            // SIMULATED AI PARSER
-            // In a real app, this would hit OpenAI/Gemini API
-
-            // 1. Extract Skills (Simple Regex Mock)
-            const commonSkills = ['JavaScript', 'React', 'Node.js', 'Python', 'Sales', 'Marketing', 'Excel', 'Management', 'Communication', 'Java', 'SQL'];
-            const foundSkills = commonSkills.filter(skill =>
-                new RegExp(skill, 'i').test(resumeText)
-            );
-
-            // 2. Calculate Match Score
-            // Count how many "found skills" are also in Job Description
-            let matchCount = 0;
-            const jobLower = jobDescription.toLowerCase();
-            foundSkills.forEach(skill => {
-                if (jobLower.includes(skill.toLowerCase())) matchCount++;
-            });
-
-            // Base score 60% + 10% per matched skill (max 95%)
-            let score = 60 + (matchCount * 10);
-            if (score > 95) score = 98; // AI isn't perfect
-
-            return {
-                skills: foundSkills,
-                score: score,
-                summary: `Matched ${matchCount} key skills from JD. Strong candidate.`
-            };
-        }
-    },
-
-    automation: {
-        trigger: function (triggerType, data) {
-            // SIMULATED AUTOMATION ENGINE
-            if (triggerType === 'APPLICATION_RECEIVED') {
-                const text = `Hi, thanks for applying. We have received your application.`;
-                HRMS_STATE.messages.send({
-                    from: 'system',
-                    to: data.candidateEmail,
-                    subject: 'Application Received',
-                    body: text,
-                    jobId: null
-                });
-                HRMS_STATE.audit.log(data.recruiterId, 'AUTO_EMAIL', `Sent "Application Received" to ${data.candidateEmail}`);
-            } else if (triggerType === 'SHORTLISTED') {
-                const text = `Great news! You've been shortlisted. We will contact you soon.`;
-                HRMS_STATE.messages.send({
-                    from: data.recruiterId,
-                    to: data.candidateEmail,
-                    subject: 'Interview Invite',
-                    body: text,
-                    jobId: null
-                });
-                HRMS_STATE.audit.log(data.recruiterId, 'AUTO_EMAIL', `Sent "Interview Invite" to ${data.candidateEmail}`);
-            } else if (triggerType === 'AI_REJECT') {
-                HRMS_STATE.audit.log(data.recruiterId, 'AUTO_ACTION', `Auto-rejected ${data.candidateEmail} (Score < 50%)`);
-            }
-        }
-    },
-
-    // --- PERSISTENCE ---
-    persist: function () {
-        // In a real app, this would be an API call.
-        // Here we just ensure memory state is consistent.
-        // For strict enterprise demo, we might NOT want to use LocalStorage for DB 
-        // to prevent 'magic' data appearing on refresh if we want a clean slate every time.
-        // But to keep constraints of "Store request", we will use memory for this session.
-        // or we can use LocalStorage if persistent across reloads is needed.
-        // Let's use LocalStorage for PERSISTENCE to act like a real DB.
-        localStorage.setItem('hrms_db', JSON.stringify(HRMS_STATE.db));
-    },
-    load: function () {
-        const saved = localStorage.getItem('hrms_db');
-        if (saved) {
-            HRMS_STATE.db = JSON.parse(saved);
-        }
-    },
-    reset: function () {
-        localStorage.removeItem('hrms_db');
-        window.location.reload();
     }
 };
 
-// Initialize
-HRMS_STATE.load();
+// Initialize on Load
+HRMS_STATE.init();
