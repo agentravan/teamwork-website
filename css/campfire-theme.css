@@ -230,35 +230,55 @@ footer {
     color: white;
 }
 
-/* Infinite Marquee */
-.marquee-container {
-    background: var(--bg-surface);
+/* =========================================
+   1. AUTO SLIDE MARQUEE (Blue Glow)
+   ========================================= */
+.marquee-wrapper {
+    overflow: hidden;
+    position: relative;
+    background: linear-gradient(90deg, #0F172A, #111C35);
     border-top: 1px solid var(--border-subtle);
     border-bottom: 1px solid var(--border-subtle);
     padding: 40px 0;
-    overflow: hidden;
-    position: relative;
 }
 
-.marquee-content {
+.marquee-wrapper::before,
+.marquee-wrapper::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 120px;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.marquee-wrapper::before {
+    left: 0;
+    background: linear-gradient(to right, #0F172A, transparent);
+}
+
+.marquee-wrapper::after {
+    right: 0;
+    background: linear-gradient(to left, #0F172A, transparent);
+}
+
+.marquee {
     display: flex;
-    gap: 60px;
-    animation: scroll 30s linear infinite;
+    gap: 80px;
+    animation: scroll 25s linear infinite;
     width: max-content;
 }
 
-.marquee-item {
-    color: var(--text-muted);
+.marquee span {
+    color: #60A5FA;
+    /* Soft Blue */
+    font-weight: 600;
+    letter-spacing: 2px;
     font-size: 1.5rem;
-    font-weight: 700;
-    opacity: 0.6;
-    transition: opacity 0.3s;
     font-family: 'Space Grotesk', sans-serif;
-}
-
-.marquee-item:hover {
-    opacity: 1;
-    color: var(--text-main);
+    text-transform: uppercase;
+    text-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
 }
 
 @keyframes scroll {
@@ -271,272 +291,130 @@ footer {
     }
 }
 
-/* Hero Glow Background */
-.hero-glow-bg {
-    position: absolute;
-    top: -50%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 1200px;
-    height: 800px;
-    background: radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, rgba(0, 0, 0, 0) 60%);
-    pointer-events: none;
-    z-index: -1;
-}
-
-/* Bento Grid Layout */
-.bento-grid {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    gap: 24px;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.bento-item {
-    grid-column: span 4;
-}
-
-.bento-item.large {
-    grid-column: span 8;
-}
-
-/* Mobile */
-@media (max-width: 900px) {
-    .bento-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .bento-span-2 {
-        grid-column: span 1;
-    }
-
-    .bento-item,
-    .bento-item.large {
-        grid-column: span 12;
-    }
-
-    h1 {
-        font-size: 2.5rem !important;
-    }
-}
-
 /* =========================================
-   DETAILED DASHBOARD MOCKUP (Quicker Style)
+   2. WHO WE ARE (Enterprise Hero Block)
    ========================================= */
-.dashboard-interface {
-    display: flex;
-    height: 480px;
-    background: #F8FAFC;
-    /* Light Slate bg */
-    border-radius: 16px;
-    overflow: hidden;
-    font-family: 'Inter', sans-serif;
-    color: #1E293B;
-    text-align: left;
-}
-
-/* Sidebar */
-.dash-sidebar {
-    width: 60px;
-    /* Collapsed visual */
-    background: #0F172A;
-    /* Slate 900 */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px 0;
-    gap: 20px;
-}
-
-.dash-icon {
-    width: 32px;
-    height: 32px;
-    border-radius: 8px;
-    color: #94A3B8;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-}
-
-.dash-icon.active {
-    background: var(--primary);
-    color: white;
-    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
-}
-
-/* Main Content */
-.dash-main {
-    flex: 1;
-    padding: 24px;
-    display: grid;
-    grid-template-columns: 1.2fr 0.8fr;
-    grid-template-rows: auto 1fr;
-    gap: 20px;
-    overflow: hidden;
-}
-
-/* Widgets */
-.dash-widget {
-    background: white;
-    border-radius: 12px;
-    padding: 16px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-    display: flex;
-    flex-direction: column;
-
-    /* Animation Initial State */
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-
-.dash-widget.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* Stagger Delays */
-.dash-widget:nth-child(1) {
-    transition-delay: 0.4s;
-}
-
-.dash-widget:nth-child(2) {
-    transition-delay: 0.5s;
-}
-
-.dash-widget:nth-child(3) {
-    transition-delay: 0.6s;
-}
-
-.dash-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
-}
-
-.dash-title {
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: #1E293B;
-}
-
-/* Chart */
-.donut-container {
+.section-who-we-are {
+    background: radial-gradient(circle at center, #1E3A8A 0%, #0F172A 60%);
     position: relative;
-    width: 120px;
-    height: 120px;
-    margin: 0 auto;
-    border-radius: 50%;
-    background: conic-gradient(#3B82F6 0% 60%,
-            /* Blue */
-            #F59E0B 60% 80%,
-            /* Amber */
-            #10B981 80% 96%,
-            /* Emerald */
-            #8B5CF6 96% 100%
-            /* Violet */
-        );
+    overflow: hidden;
 }
 
-.donut-hole {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 80px;
-    height: 80px;
-    background: white;
-    border-radius: 50%;
-}
-
-/* Lists */
-.employee-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 8px 0;
-    border-bottom: 1px solid #F1F5F9;
-}
-
-.employee-avatar {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    background: #E2E8F0;
-    /* Placeholder for image */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.7rem;
-    font-weight: 700;
-    color: #64748B;
-}
-
-/* =========================================
-   PRELOADER (Sunrise Blue Style)
-   ========================================= */
-#preloader {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
+.card-enterprise {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 20px;
+    padding: 40px;
+    transition: 0.3s ease;
     height: 100%;
-    background: #0B1120;
-    z-index: 9999;
+}
+
+.card-enterprise:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 25px 40px rgba(59, 130, 246, 0.2);
+    border-color: #60A5FA;
+}
+
+.card-highlight {
+    border: 1.5px solid #3B82F6;
+    box-shadow: 0 0 30px rgba(59, 130, 246, 0.15);
+}
+
+/* =========================================
+   3. SERVICES (Read More)
+   ========================================= */
+.service-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    height: 100%;
+}
+
+.read-more {
+    color: #3B82F6;
+    font-weight: 500;
+    transition: 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: auto;
+}
+
+.service-card:hover .read-more {
+    transform: translateX(5px);
+    color: #60A5FA;
+}
+
+/* =========================================
+   4. GLOBAL SMART LOADER
+   ========================================= */
+#page-loader {
+    position: fixed;
+    inset: 0;
+    background: #0F172A;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: opacity 0.8s ease, visibility 0.8s ease;
+    z-index: 9999;
+    transition: 0.5s ease;
 }
 
-.sunrise-container {
-    position: relative;
-    width: 150px;
-    height: 80px;
-    /* Half circle height */
-    overflow: visible;
+.loader-content {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
 }
 
-.sun {
+.pulse-circle {
     width: 60px;
     height: 60px;
-    background: var(--gradient-primary);
-    /* Blue Sun */
+    background: #3B82F6;
     border-radius: 50%;
-    position: absolute;
-    bottom: -30px;
-    /* Start below horizon */
-    left: 50%;
-    transform: translateX(-50%);
-    box-shadow: 0 0 40px var(--primary);
-    animation: sunrise 1.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    animation: pulse 1.2s infinite;
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
 }
 
-.horizon-line {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0;
-    height: 2px;
-    background: rgba(255, 255, 255, 0.2);
-    animation: expandHorizon 1.2s ease 0.5s forwards;
-}
-
-.logo-text-loader {
-    position: absolute;
-    bottom: -40px;
-    left: 50%;
-    transform: translateX(-50%);
+#page-title {
     color: white;
     font-family: 'Space Grotesk', sans-serif;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 1px;
     opacity: 0;
-    letter-spacing: 2px;
-    animation: fadeInText 1s ease 1s forwards;
+    animation: fadeInText 0.5s ease 0.3s forwards;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.6;
+    }
+
+    50% {
+        transform: scale(1.4);
+        opacity: 0.2;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 0.6;
+    }
+}
+
+@keyframes fadeInText {
+    0% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(10px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
 }
 
 @keyframes sunrise {

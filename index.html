@@ -18,11 +18,10 @@
 
 <body>
     <!-- PRELOADER -->
-    <div id="preloader">
-        <div class="sunrise-container">
-            <div class="sun"></div>
-            <div class="horizon-line"></div>
-            <div class="logo-text-loader">TeamWork</div>
+    <div id="page-loader">
+        <div class="loader-content">
+            <div class="pulse-circle"></div>
+            <h2 id="page-title">Home</h2>
         </div>
     </div>
     <div id="global-header-container"></div>
@@ -37,8 +36,8 @@
 
             <div class="fade-up" style="margin-bottom: 24px;">
                 <span
-                    style="background: rgba(255, 85, 0, 0.15); border: 1px solid rgba(255, 85, 0, 0.3); color: var(--primary); padding: 8px 16px; border-radius: 50px; font-weight: 600; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 8px;">
-                    <i class="ph-fill ph-fire"></i> HR Management Evolved
+                    style="background: rgba(59, 130, 246, 0.15); border: 1px solid rgba(59, 130, 246, 0.3); color: var(--primary); padding: 8px 16px; border-radius: 50px; font-weight: 600; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 8px;">
+                    <i class="ph-fill ph-lightning"></i> HR Management Evolved
                 </span>
             </div>
 
@@ -58,7 +57,7 @@
                 <a href="contact.html" class="btn-campfire">
                     Start Your Trial <i class="ph-bold ph-arrow-right"></i>
                 </a>
-                <a href="services.html" class="btn-glass">
+                <a href="services.html" class="btn-outline">
                     Explore Platform
                 </a>
             </div>
@@ -178,38 +177,28 @@
         </div>
     </header>
 
-    <!-- TRUST CAROUSEL -->
-    <!-- INFINITE MARQUEE -->
-    <div
-        style="background: black; padding: 40px 0; border-top: 1px solid #222; border-bottom: 1px solid #222; overflow: hidden;">
-        <div class="marquee-container"
-            style="display: flex; gap: 60px; width: max-content; animation: scrollLoop 20s linear infinite;">
-            <!-- Logos styled as Grey/Blue Text for Enterprise look -->
-            <div style="font-size: 1.5rem; font-weight: 700; color: #94A3B8;">HEXAGON</div>
-            <div style="font-size: 1.5rem; font-weight: 700; color: #94A3B8;">WAVELABS</div>
-            <div style="font-size: 1.5rem; font-weight: 700; color: #94A3B8;">NEXUS</div>
-            <div style="font-size: 1.5rem; font-weight: 700; color: #94A3B8;">VORTEX</div>
-            <div style="font-size: 1.5rem; font-weight: 700; color: #94A3B8;">CATALYST</div>
-            <div style="font-size: 1.5rem; font-weight: 700; color: #94A3B8;">HORIZON</div>
-
-            <!-- Duplicates -->
-            <div style="font-size: 1.5rem; font-weight: 700; color: #94A3B8;">HEXAGON</div>
-            <div style="font-size: 1.5rem; font-weight: 700; color: #94A3B8;">WAVELABS</div>
-            <div style="font-size: 1.5rem; font-weight: 700; color: #94A3B8;">NEXUS</div>
-            <div style="font-size: 1.5rem; font-weight: 700; color: #94A3B8;">VORTEX</div>
-            <div style="font-size: 1.5rem; font-weight: 700; color: #94A3B8;">CATALYST</div>
-            <div style="font-size: 1.5rem; font-weight: 700; color: #94A3B8;">HORIZON</div>
+    <!-- TRUST CAROUSEL (Infinite Scroll) -->
+    <div class="marquee-wrapper">
+        <div class="marquee">
+            <span>HEXAGON</span>
+            <span>WAVELABS</span>
+            <span>NEXUS</span>
+            <span>VORTEX</span>
+            <span>CATALYST</span>
+            <span>HORIZON</span>
+            <!-- Duplicate for Infinite Scroll -->
+            <span>HEXAGON</span>
+            <span>WAVELABS</span>
+            <span>NEXUS</span>
+            <span>VORTEX</span>
+            <span>CATALYST</span>
+            <span>HORIZON</span>
         </div>
     </div>
 
-    <!-- ABOUT US (BLUE GLASS CARDS) -->
-    <section class="section-padding" style="background: var(--bg-surface); position: relative; overflow: hidden;">
-        <!-- Background Glow -->
-        <div
-            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 50% 50%, rgba(37, 99, 235, 0.05), transparent 70%); pointer-events: none;">
-        </div>
-
-        <div class="container" style="position: relative; z-index: 2;">
+    <!-- WHO WE ARE (Refined) -->
+    <section class="section-padding section-who-we-are">
+        <div class="container">
             <div style="text-align: center; margin-bottom: 60px;">
                 <h5 class="text-blue"
                     style="margin-bottom: 16px; text-transform: uppercase; letter-spacing: 2px; font-weight: 700;">Who
@@ -222,30 +211,26 @@
             </div>
 
             <div class="bento-grid" style="grid-template-columns: repeat(3, 1fr); gap: 30px;">
-                <!-- Glass Card 1 -->
-                <div class="campfire-card fade-up" style="grid-column: span 1;">
+                <!-- Card 1 -->
+                <div class="card-enterprise fade-up" style="grid-column: span 1;">
                     <div class="icon-box"><i class="ph-duotone ph-users-three"></i></div>
                     <h3 style="font-size: 1.25rem; margin-bottom: 12px; color: white;">Expert Team</h3>
                     <p>Dedicated professionals managing your HR operations with precision and care.</p>
                 </div>
 
-                <!-- Glass Card 2 -->
-                <div class="campfire-card fade-up" style="grid-column: span 1; border-color: var(--primary-dark);">
+                <!-- Card 2 (Highlight) -->
+                <div class="card-enterprise card-highlight fade-up" style="grid-column: span 1;">
                     <div class="icon-box"><i class="ph-duotone ph-chart-line-up"></i></div>
                     <h3 style="font-size: 1.25rem; margin-bottom: 12px; color: white;">Proven Growth</h3>
                     <p>Consistent results that help you scale your workforce without compliance headaches.</p>
                 </div>
 
-                <!-- Glass Card 3 -->
-                <div class="campfire-card fade-up" style="grid-column: span 1;">
+                <!-- Card 3 -->
+                <div class="card-enterprise fade-up" style="grid-column: span 1;">
                     <div class="icon-box"><i class="ph-duotone ph-shield-check"></i></div>
                     <h3 style="font-size: 1.25rem; margin-bottom: 12px; color: white;">100% Compliant</h3>
                     <p>Stay ahead of regulations with our automated and expert-verified systems.</p>
                 </div>
-            </div>
-
-            <div style="text-align: center; margin-top: 50px;">
-                <a href="about.html" class="btn-outline">Learn More About Us</a>
             </div>
         </div>
     </section>
@@ -255,7 +240,7 @@
         <div class="container">
             <div style="text-align: center; margin-bottom: 60px;">
                 <div
-                    style="display: inline-block; padding: 6px 12px; background: #EFF6FF; color: var(--primary); border-radius: 20px; font-weight: 600; font-size: 0.85rem; margin-bottom: 15px;">
+                    style="display: inline-block; padding: 6px 12px; background: rgba(59, 130, 246, 0.1); color: var(--primary); border-radius: 20px; font-weight: 600; font-size: 0.85rem; margin-bottom: 15px;">
                     OUR EXPERTISE</div>
                 <h2 style="margin-bottom: 16px; font-size: 2.5rem;">Comprehensive HR Services</h2>
                 <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto;">End-to-end solutions designed to
@@ -264,49 +249,65 @@
 
             <div class="bento-grid">
                 <!-- Large Card: Payroll -->
-                <div class="campfire-card bento-span-2">
-                    <div class="icon-box"><i class="ph-duotone ph-currency-dollar"></i></div>
-                    <h3 style="font-size: 1.5rem; margin-bottom: 12px; color: white;">Payroll Processing</h3>
-                    <p style="margin-bottom: 20px;">Automated payroll calculation that handles tax deductions,
-                        reimbursements, and payslips with zero errors.</p>
-                    <a href="payroll-management.html"
-                        style="color: var(--primary); font-weight: 500; text-decoration: none;">Learn more &rarr;</a>
-                    <div style="position: absolute; right: -20px; bottom: -20px; opacity: 0.5;">
-                        <i class="ph-duotone ph-chart-line-up"
-                            style="font-size: 150px; color: rgba(255,255,255,0.03);"></i>
+                <a href="payroll-management.html" class="service-link bento-span-2">
+                    <div class="service-card campfire-card"
+                        style="height: 100%; display: flex; flex-direction: column;">
+                        <div class="icon-box"><i class="ph-duotone ph-currency-dollar"></i></div>
+                        <h3 style="font-size: 1.5rem; margin-bottom: 12px; color: white;">Payroll Processing</h3>
+                        <p style="margin-bottom: 20px;">Automated payroll calculation that handles tax deductions,
+                            reimbursements, and payslips with zero errors.</p>
+                        <span class="read-more">Read More &rarr;</span>
+                        <div style="position: absolute; right: -20px; bottom: -20px; opacity: 0.5;">
+                            <i class="ph-duotone ph-chart-line-up"
+                                style="font-size: 150px; color: rgba(255,255,255,0.03);"></i>
+                        </div>
                     </div>
-                </div>
+                </a>
 
                 <!-- Card: Compliance -->
-                <div class="campfire-card">
-                    <div class="icon-box"><i class="ph-duotone ph-shield-check"></i></div>
-                    <h3 style="font-size: 1.25rem; margin-bottom: 12px; color: white;">Compliance</h3>
-                    <p>Full statutory coverage for PF, ESIC, and Tax.</p>
-                </div>
+                <a href="compliance-outsourcing.html" class="service-link">
+                    <div class="service-card campfire-card"
+                        style="height: 100%; display: flex; flex-direction: column;">
+                        <div class="icon-box"><i class="ph-duotone ph-shield-check"></i></div>
+                        <h3 style="font-size: 1.25rem; margin-bottom: 12px; color: white;">Compliance</h3>
+                        <p style="margin-bottom: 20px;">Full statutory coverage for PF, ESIC, and Tax.</p>
+                        <span class="read-more">Read More &rarr;</span>
+                    </div>
+                </a>
 
                 <!-- Card: Audits -->
-                <div class="campfire-card">
-                    <div class="icon-box"><i class="ph-duotone ph-files"></i></div>
-                    <h3 style="font-size: 1.25rem; margin-bottom: 12px; color: white;">HR Audits</h3>
-                    <p>Risk-free policy design and internal audits.</p>
-                </div>
+                <a href="hr-policy-audit.html" class="service-link">
+                    <div class="service-card campfire-card"
+                        style="height: 100%; display: flex; flex-direction: column;">
+                        <div class="icon-box"><i class="ph-duotone ph-files"></i></div>
+                        <h3 style="font-size: 1.25rem; margin-bottom: 12px; color: white;">HR Audits</h3>
+                        <p style="margin-bottom: 20px;">Risk-free policy design and internal audits.</p>
+                        <span class="read-more">Read More &rarr;</span>
+                    </div>
+                </a>
 
                 <!-- Large Card: Business Setup -->
-                <div class="campfire-card bento-span-2">
-                    <div class="icon-box"><i class="ph-duotone ph-buildings"></i></div>
-                    <h3 style="font-size: 1.5rem; margin-bottom: 12px; color: white;">Business Setup</h3>
-                    <p style="margin-bottom: 20px;">End-to-end support for company registration, licensing, and
-                        operational foundation.</p>
-                    <a href="services.html" style="color: var(--primary); font-weight: 500; text-decoration: none;">Read
-                        guide &rarr;</a>
-                </div>
+                <a href="startup-registration.html" class="service-link bento-span-2">
+                    <div class="service-card campfire-card"
+                        style="height: 100%; display: flex; flex-direction: column;">
+                        <div class="icon-box"><i class="ph-duotone ph-buildings"></i></div>
+                        <h3 style="font-size: 1.5rem; margin-bottom: 12px; color: white;">Business Setup</h3>
+                        <p style="margin-bottom: 20px;">End-to-end support for company registration, licensing, and
+                            operational foundation.</p>
+                        <span class="read-more">Read More &rarr;</span>
+                    </div>
+                </a>
 
                 <!-- Card: Attendance -->
-                <div class="campfire-card">
-                    <div class="icon-box"><i class="ph-duotone ph-clock-user"></i></div>
-                    <h3 style="font-size: 1.25rem; margin-bottom: 12px; color: white;">Attendance</h3>
-                    <p>Biometric and geo-fenced tracking.</p>
-                </div>
+                <a href="global-hrx.html" class="service-link">
+                    <div class="service-card campfire-card"
+                        style="height: 100%; display: flex; flex-direction: column;">
+                        <div class="icon-box"><i class="ph-duotone ph-clock-user"></i></div>
+                        <h3 style="font-size: 1.25rem; margin-bottom: 12px; color: white;">Attendance</h3>
+                        <p style="margin-bottom: 20px;">Biometric and geo-fenced tracking.</p>
+                        <span class="read-more">Read More &rarr;</span>
+                    </div>
+                </a>
             </div>
         </div>
     </section>
@@ -476,6 +477,7 @@
     <script src="js/home-interactions.js"></script>
     <script src="js/main.js"></script>
     <script src="js/unified-header.js"></script>
+    <script src="js/loader.js"></script>
 </body>
 
 </html>
