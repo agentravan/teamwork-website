@@ -513,7 +513,7 @@ footer {
 }
 
 /* =========================================
-   4. BLUE SUNRISE LOADER (Restored)
+   4. BRAND LOADER (TeamWork Style)
    ========================================= */
 #page-loader {
     position: fixed;
@@ -530,91 +530,50 @@ footer {
     transition: opacity 0.8s ease, visibility 0.8s ease;
 }
 
-.sunrise-container {
-    position: relative;
-    width: 150px;
-    height: 80px;
-    overflow: visible;
+.loader-brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    animation: pulse-logo 2s infinite ease-in-out;
 }
 
-.sun {
-    width: 60px;
-    height: 60px;
-    background: var(--gradient-primary);
-    /* Blue Sun */
-    border-radius: 50%;
-    position: absolute;
-    bottom: -30px;
-    left: 50%;
-    transform: translateX(-50%);
-    box-shadow: 0 0 40px var(--primary);
-    animation: sunrise 1.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+.brand-icon-loader {
+    font-size: 3rem;
+    color: var(--primary);
+    margin-bottom: 8px;
+    filter: drop-shadow(0 0 20px rgba(59, 130, 246, 0.4));
 }
 
-.horizon-line {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0;
-    height: 2px;
-    background: rgba(255, 255, 255, 0.2);
-    animation: expandHorizon 1.2s ease 0.5s forwards;
-}
-
-/* Centered Text Logic */
-.loader-content-center {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    width: 100%;
-    margin-top: 60px;
-    /* Push below sun */
-}
-
-#page-title {
-    color: white;
+.brand-logo-text {
     font-family: 'Space Grotesk', sans-serif;
-    font-size: 1.5rem;
-    font-weight: 600;
-    letter-spacing: 2px;
-    opacity: 0;
-    animation: fadeInText 1s ease 0.8s forwards;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: white;
+    letter-spacing: -1px;
+    line-height: 1;
 }
 
-@keyframes sunrise {
-    0% {
-        bottom: -60px;
-        opacity: 0;
-    }
+.brand-tagline {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+    font-weight: 400;
+    opacity: 0.8;
+}
 
+@keyframes pulse-logo {
+
+    0%,
     100% {
-        bottom: 20px;
+        transform: scale(1);
         opacity: 1;
     }
-}
 
-@keyframes expandHorizon {
-    0% {
-        width: 0;
-    }
-
-    100% {
-        width: 140px;
-    }
-}
-
-@keyframes fadeInText {
-    0% {
-        opacity: 0;
-        transform: translateX(-50%) translateY(10px);
-    }
-
-    100% {
-        opacity: 1;
-        transform: translateX(-50%) translateY(0);
+    50% {
+        transform: scale(1.02);
+        opacity: 0.8;
     }
 }
 
