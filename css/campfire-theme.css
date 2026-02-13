@@ -1,35 +1,39 @@
 /* =========================================
-   CAMPFIRE.AI INSPIRED THEME (Dark Mode)
+   BLUE ENTERPRISE THEME (Standardized)
    ========================================= */
 
 :root {
     /* -- Palette -- */
-    --bg-body: #050505;
-    /* Deepest Black */
-    --bg-surface: #0F0F11;
-    /* Card Background */
-    --bg-glass: rgba(20, 20, 22, 0.7);
+    --bg-body: #0B1120;
+    /* Deepest Navy */
+    --bg-surface: #0F172A;
+    /* Slate 900 */
+    --bg-glass: rgba(15, 23, 42, 0.7);
 
-    /* Brand Accents (Fire/Warm) */
-    --primary: #FF5500;
-    /* Vibrant Orange */
-    --primary-dim: #CC4400;
-    --accent: #E11D48;
-    /* Rose/Red */
+    /* Brand Accents (Blue Enterprise) */
+    --primary: #3B82F6;
+    /* Blue 500 */
+    --primary-dark: #2563EB;
+    /* Blue 600 */
+    --accent: #60A5FA;
+    /* Blue 400 */
 
     /* Gradients */
-    --gradient-fire: linear-gradient(135deg, #FF5500 0%, #FF2E00 100%);
-    --gradient-glow: radial-gradient(circle at center, rgba(255, 85, 0, 0.15) 0%, rgba(0, 0, 0, 0) 70%);
-    --gradient-text: linear-gradient(to right, #FFFFFF 20%, #A1A1AA 100%);
+    --gradient-primary: linear-gradient(135deg, #2563EB 0%, #3B82F6 100%);
+    --gradient-glow: radial-gradient(circle at center, rgba(59, 130, 246, 0.15) 0%, rgba(0, 0, 0, 0) 70%);
+    --gradient-text: linear-gradient(to right, #F8FAFC 20%, #94A3B8 100%);
 
     /* Text */
-    --text-main: #FFFFFF;
-    --text-muted: #A1A1AA;
-    --text-dark: #52525B;
+    --text-main: #F8FAFC;
+    /* Slate 50 */
+    --text-muted: #94A3B8;
+    /* Slate 400 */
+    --text-dark: #1E293B;
+    /* Slate 800 */
 
     /* Borders */
-    --border-subtle: rgba(255, 255, 255, 0.08);
-    --border-highlight: rgba(255, 85, 0, 0.3);
+    --border-subtle: rgba(255, 255, 255, 0.06);
+    --border-highlight: rgba(59, 130, 246, 0.3);
 
     /* Spacing & Radius */
     --radius-sm: 8px;
@@ -38,8 +42,8 @@
     --radius-pill: 9999px;
 
     /* Shadows */
-    --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.4);
-    --shadow-glow: 0 0 40px rgba(255, 85, 0, 0.1);
+    --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.5);
+    --shadow-glow: 0 0 40px rgba(59, 130, 246, 0.1);
 }
 
 /* -- Global RESET Overrides -- */
@@ -57,8 +61,7 @@ h4,
 h5,
 h6 {
     color: var(--text-main);
-    letter-spacing: -0.03em;
-    /* Tight Campfire style */
+    letter-spacing: -0.02em;
 }
 
 p {
@@ -71,14 +74,14 @@ p {
 
 /* Typography */
 .text-gradient {
-    background: linear-gradient(to bottom right, #FFFFFF 30%, #9ca3af 100%);
+    background: linear-gradient(to bottom right, #FFFFFF 30%, #94A3B8 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
 }
 
-.text-fire {
-    background: var(--gradient-fire);
+.text-blue {
+    background: var(--gradient-primary);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -86,14 +89,15 @@ p {
 
 /* Buttons */
 .btn-campfire {
-    background: var(--gradient-fire);
+    /* Keeping class name for compatibility but updating style */
+    background: var(--gradient-primary);
     color: white;
-    padding: 12px 28px;
+    padding: 14px 28px;
     border-radius: var(--radius-pill);
     font-weight: 600;
     font-size: 0.95rem;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 4px 20px rgba(255, 69, 0, 0.3);
+    border: none;
+    box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
     transition: all 0.3s ease;
     text-decoration: none;
     display: inline-flex;
@@ -102,8 +106,8 @@ p {
 }
 
 .btn-campfire:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 30px rgba(255, 69, 0, 0.5);
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 0 25px rgba(59, 130, 246, 0.5);
     filter: brightness(1.1);
 }
 
@@ -125,21 +129,51 @@ p {
     transform: translateY(-1px);
 }
 
-/* Glass Card (Bento Style) */
-.campfire-card {
-    background: var(--bg-surface);
+/* Secondary Button */
+.btn-outline {
+    background: transparent;
+    color: var(--primary-dark);
+    padding: 14px 28px;
+    border-radius: var(--radius-pill);
+    font-weight: 600;
+    font-size: 0.95rem;
+    border: 1px solid var(--primary-dark);
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-outline:hover {
+    background: rgba(59, 130, 246, 0.1);
+    transform: translateY(-2px);
+}
+
+/* Glass Card (Blue Enterprise) */
+.glass-panel,
+.campfire-card,
+.mockup-card {
+    background: var(--card-glass);
     border: 1px solid var(--border-subtle);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border-radius: var(--radius-md);
-    padding: 32px;
-    position: relative;
-    overflow: hidden;
-    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s ease;
 }
 
 .campfire-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-card);
     border-color: var(--border-highlight);
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-glow);
+    background: rgba(30, 41, 59, 0.6);
+    /* Slightly more opaque on hover */
+}
+
+/* Text Glow */
+.text-glow {
+    text-shadow: 0 0 30px rgba(59, 130, 246, 0.4);
 }
 
 /* Header Override */
@@ -165,6 +199,27 @@ p {
     background: rgba(255, 255, 255, 0.05) !important;
 }
 
+/* Nav Link Hover */
+.nav-link:hover {
+    color: var(--primary);
+    text-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+}
+
+/* Icons */
+.icon-box {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: rgba(59, 130, 246, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: var(--primary);
+    margin-bottom: 20px;
+    border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
 /* Footer Override */
 footer {
     background: #000000;
@@ -177,7 +232,43 @@ footer {
 
 /* Infinite Marquee */
 .marquee-container {
-    mask-image: linear-gradient(to right, transparent, black 20%, black 80%, transparent);
+    background: var(--bg-surface);
+    border-top: 1px solid var(--border-subtle);
+    border-bottom: 1px solid var(--border-subtle);
+    padding: 40px 0;
+    overflow: hidden;
+    position: relative;
+}
+
+.marquee-content {
+    display: flex;
+    gap: 60px;
+    animation: scroll 30s linear infinite;
+    width: max-content;
+}
+
+.marquee-item {
+    color: var(--text-muted);
+    font-size: 1.5rem;
+    font-weight: 700;
+    opacity: 0.6;
+    transition: opacity 0.3s;
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+.marquee-item:hover {
+    opacity: 1;
+    color: var(--text-main);
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
 }
 
 /* Hero Glow Background */
@@ -188,9 +279,46 @@ footer {
     transform: translateX(-50%);
     width: 1200px;
     height: 800px;
-    background: radial-gradient(circle, rgba(255, 85, 0, 0.08) 0%, rgba(0, 0, 0, 0) 60%);
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, rgba(0, 0, 0, 0) 60%);
     pointer-events: none;
     z-index: -1;
+}
+
+/* Bento Grid Layout */
+.bento-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.bento-item {
+    grid-column: span 4;
+}
+
+.bento-item.large {
+    grid-column: span 8;
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+    .bento-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .bento-span-2 {
+        grid-column: span 1;
+    }
+
+    .bento-item,
+    .bento-item.large {
+        grid-column: span 12;
+    }
+
+    h1 {
+        font-size: 2.5rem !important;
+    }
 }
 
 /* =========================================
@@ -199,12 +327,12 @@ footer {
 .dashboard-interface {
     display: flex;
     height: 480px;
-    background: #F3F4F6;
-    /* Light gray bg like reference */
+    background: #F8FAFC;
+    /* Light Slate bg */
     border-radius: 16px;
     overflow: hidden;
     font-family: 'Inter', sans-serif;
-    color: #1F2937;
+    color: #1E293B;
     text-align: left;
 }
 
@@ -212,8 +340,8 @@ footer {
 .dash-sidebar {
     width: 60px;
     /* Collapsed visual */
-    background: #111827;
-    /* Dark sidebar */
+    background: #0F172A;
+    /* Slate 900 */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -225,7 +353,7 @@ footer {
     width: 32px;
     height: 32px;
     border-radius: 8px;
-    color: #9CA3AF;
+    color: #94A3B8;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -235,7 +363,7 @@ footer {
 .dash-icon.active {
     background: var(--primary);
     color: white;
-    box-shadow: 0 4px 12px rgba(255, 85, 0, 0.4);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
 }
 
 /* Main Content */
@@ -292,7 +420,7 @@ footer {
 .dash-title {
     font-size: 0.85rem;
     font-weight: 600;
-    color: #111827;
+    color: #1E293B;
 }
 
 /* Chart */
@@ -303,9 +431,14 @@ footer {
     margin: 0 auto;
     border-radius: 50%;
     background: conic-gradient(#3B82F6 0% 60%,
+            /* Blue */
             #F59E0B 60% 80%,
+            /* Amber */
             #10B981 80% 96%,
-            #A855F7 96% 100%);
+            /* Emerald */
+            #8B5CF6 96% 100%
+            /* Violet */
+        );
 }
 
 .donut-hole {
@@ -325,25 +458,25 @@ footer {
     align-items: center;
     gap: 10px;
     padding: 8px 0;
-    border-bottom: 1px solid #F3F4F6;
+    border-bottom: 1px solid #F1F5F9;
 }
 
 .employee-avatar {
     width: 32px;
     height: 32px;
     border-radius: 50%;
-    background: #E5E7EB;
+    background: #E2E8F0;
     /* Placeholder for image */
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 0.7rem;
     font-weight: 700;
-    color: #6B7280;
+    color: #64748B;
 }
 
 /* =========================================
-   PRELOADER (Sunrise Campfire Animation)
+   PRELOADER (Sunrise Blue Style)
    ========================================= */
 #preloader {
     position: fixed;
@@ -351,7 +484,7 @@ footer {
     left: 0;
     width: 100%;
     height: 100%;
-    background: #000;
+    background: #0B1120;
     z-index: 9999;
     display: flex;
     align-items: center;
@@ -370,7 +503,8 @@ footer {
 .sun {
     width: 60px;
     height: 60px;
-    background: var(--gradient-fire);
+    background: var(--gradient-primary);
+    /* Blue Sun */
     border-radius: 50%;
     position: absolute;
     bottom: -30px;
