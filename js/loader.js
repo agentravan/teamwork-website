@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
             loader.style.opacity = "0";
             setTimeout(() => {
                 loader.style.visibility = "hidden";
-            }, 500); // Wait for transition
-        }, 1200); // Display time
+            }, 800); // Wait for transition
+        }, 2500); // Display time (matched to animation)
     }
 });
