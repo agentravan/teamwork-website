@@ -1,0 +1,236 @@
+/* =========================================
+   CAMPFIRE.AI INSPIRED THEME (Dark Mode)
+   ========================================= */
+
+:root {
+    /* -- Palette -- */
+    --bg-body: #050505;
+    /* Deepest Black */
+    --bg-surface: #0F0F11;
+    /* Card Background */
+    --bg-glass: rgba(20, 20, 22, 0.7);
+
+    /* Brand Accents (Fire/Warm) */
+    --primary: #FF5500;
+    /* Vibrant Orange */
+    --primary-dim: #CC4400;
+    --accent: #E11D48;
+    /* Rose/Red */
+
+    /* Gradients */
+    --gradient-fire: linear-gradient(135deg, #FF5500 0%, #FF2E00 100%);
+    --gradient-glow: radial-gradient(circle at center, rgba(255, 85, 0, 0.15) 0%, rgba(0, 0, 0, 0) 70%);
+    --gradient-text: linear-gradient(to right, #FFFFFF 20%, #A1A1AA 100%);
+
+    /* Text */
+    --text-main: #FFFFFF;
+    --text-muted: #A1A1AA;
+    --text-dark: #52525B;
+
+    /* Borders */
+    --border-subtle: rgba(255, 255, 255, 0.08);
+    --border-highlight: rgba(255, 85, 0, 0.3);
+
+    /* Spacing & Radius */
+    --radius-sm: 8px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+    --radius-pill: 9999px;
+
+    /* Shadows */
+    --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.4);
+    --shadow-glow: 0 0 40px rgba(255, 85, 0, 0.1);
+}
+
+/* -- Global RESET Overrides -- */
+body {
+    background-color: var(--bg-body);
+    color: var(--text-main);
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: var(--text-main);
+    letter-spacing: -0.03em;
+    /* Tight Campfire style */
+}
+
+p {
+    color: var(--text-muted);
+    font-weight: 400;
+    line-height: 1.6;
+}
+
+/* -- Utility Classes -- */
+
+/* Typography */
+.text-gradient {
+    background: linear-gradient(to bottom right, #FFFFFF 30%, #9ca3af 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.text-fire {
+    background: var(--gradient-fire);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Buttons */
+.btn-campfire {
+    background: var(--gradient-fire);
+    color: white;
+    padding: 12px 28px;
+    border-radius: var(--radius-pill);
+    font-weight: 600;
+    font-size: 0.95rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 20px rgba(255, 69, 0, 0.3);
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-campfire:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(255, 69, 0, 0.5);
+    filter: brightness(1.1);
+}
+
+.btn-glass {
+    background: rgba(255, 255, 255, 0.05);
+    color: white;
+    padding: 12px 28px;
+    border-radius: var(--radius-pill);
+    font-weight: 500;
+    border: 1px solid var(--border-subtle);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.btn-glass:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-1px);
+}
+
+/* Glass Card (Bento Style) */
+.campfire-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: 32px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.campfire-card:hover {
+    border-color: var(--border-highlight);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-glow);
+}
+
+/* Header Override */
+.site-header {
+    background: rgba(5, 5, 5, 0.6) !important;
+    backdrop-filter: blur(20px) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+
+.site-header.scrolled {
+    background: rgba(5, 5, 5, 0.9) !important;
+}
+
+/* Nav Links */
+.main-nav a {
+    color: var(--text-muted) !important;
+    font-size: 0.9rem !important;
+}
+
+.main-nav a:hover,
+.main-nav a.active {
+    color: white !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+}
+
+/* Footer Override */
+footer {
+    background: #000000;
+    border-top: 1px solid var(--border-subtle);
+}
+
+.footer-col h4 {
+    color: white;
+}
+
+/* Infinite Marquee */
+.marquee-container {
+    mask-image: linear-gradient(to right, transparent, black 20%, black 80%, transparent);
+}
+
+/* Hero Glow Background */
+.hero-glow-bg {
+    position: absolute;
+    top: -50%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1200px;
+    height: 800px;
+    background: radial-gradient(circle, rgba(255, 85, 0, 0.08) 0%, rgba(0, 0, 0, 0) 60%);
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* Icons */
+.icon-box {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: var(--text-main);
+    margin-bottom: 20px;
+    border: 1px solid var(--border-subtle);
+}
+
+/* Bento Grid Layout */
+.bento-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: minmax(280px, auto);
+    gap: 24px;
+}
+
+.bento-span-2 {
+    grid-column: span 2;
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+    .bento-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .bento-span-2 {
+        grid-column: span 1;
+    }
+
+    h1 {
+        font-size: 2.5rem !important;
+    }
+}

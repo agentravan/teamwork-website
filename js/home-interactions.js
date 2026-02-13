@@ -1,55 +1,50 @@
-/**
- * PREMIUM SAAS INTERACTIONS
- * Handles scroll reveals, carousel logic, and hero animations.
- */
 
 document.addEventListener('DOMContentLoaded', () => {
     initScrollReveals();
-    initTrustCarousel();
     initHeroAnimation();
 });
 
 function initScrollReveals() {
     const observerOptions = {
-        threshold: 0.15, // Trigger when 15% visible
-        rootMargin: "0px 0px -50px 0px"
+        threshold: 0.1, // Trigger earlier/snappier
+        rootMargin: "0px 0px -20px 0px"
     };
 
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
-                observer.unobserve(entry.target); // Trigger once
+                observer.unobserve(entry.target);
             }
         });
     }, observerOptions);
 
-    // Target elements
-    const revealElements = document.querySelectorAll('.fade-up, .feature-card, .benefit-block, .cta-strip');
+    const revealElements = document.querySelectorAll('.fade-up, .campfire-card, .cta-strip');
     revealElements.forEach(el => observer.observe(el));
 }
 
-function initTrustCarousel() {
-    const track = document.querySelector('.trust-track');
-    if (!track) return;
-
-    // Clone items for seamless loop
-    const items = Array.from(track.children);
-    items.forEach(item => {
-        const clone = item.cloneNode(true);
-        track.appendChild(clone);
-    });
-}
-
 function initHeroAnimation() {
-    // Parallax or subtle movement on mouse move for Hero
-    const hero = document.querySelector('.hero-mockup-container');
-    if (!hero) return;
+    // 3D Tilt Effect for Hero Mockup
+    const container = document.querySelector('.hero-mockup-container');
+    const card = document.querySelector('.mockup-card');
 
-    document.addEventListener('mousemove', (e) => {
-        const x = (window.innerWidth - e.pageX * 2) / 100;
-        const y = (window.innerHeight - e.pageY * 2) / 100;
+    if (!container || !card) return;
 
-        hero.style.transform = `translateX(${x}px) translateY(${y}px)`;
+    // Reset transition on mouse enter to avoid lag
+    container.addEventListener('mouseenter', () => {
+        card.style.transition = 'none';
+    });
+
+    container.addEventListener('mousemove', (e) => {
+        const xAxis = (window.innerWidth / 2 - e.pageX) / 30;
+        const yAxis = (window.innerHeight / 2 - e.pageY) / 30;
+
+        card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+    });
+
+    // Reset on leave
+    container.addEventListener('mouseleave', () => {
+        card.style.transition = 'transform 0.5s ease';
+        card.style.transform = `rotateY(0deg) rotateX(0deg)`;
     });
 }
