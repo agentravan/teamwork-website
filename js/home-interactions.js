@@ -1,12 +1,34 @@
 
 document.addEventListener('DOMContentLoaded', () => {
+    initPreloader();
     initScrollReveals();
     initHeroAnimation();
 });
 
+function initPreloader() {
+    const preloader = document.getElementById('preloader');
+    if (preloader) {
+        // Force minimum display time for branding
+        const minTime = 1500;
+        const start = Date.now();
+
+        window.addEventListener('load', () => {
+            const elapsed = Date.now() - start;
+            const remaining = Math.max(0, minTime - elapsed);
+
+            setTimeout(() => {
+                preloader.style.opacity = '0';
+                setTimeout(() => {
+                    preloader.style.visibility = 'hidden';
+                }, 800);
+            }, remaining);
+        });
+    }
+}
+
 function initScrollReveals() {
     const observerOptions = {
-        threshold: 0.1, // Trigger earlier/snappier
+        threshold: 0.1,
         rootMargin: "0px 0px -20px 0px"
     };
 
@@ -19,7 +41,7 @@ function initScrollReveals() {
         });
     }, observerOptions);
 
-    const revealElements = document.querySelectorAll('.fade-up, .campfire-card, .cta-strip');
+    const revealElements = document.querySelectorAll('.fade-up, .campfire-card, .cta-strip, .dash-widget');
     revealElements.forEach(el => observer.observe(el));
 }
 
