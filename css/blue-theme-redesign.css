@@ -1,0 +1,448 @@
+/* =========================================
+   TEAMWORK SOLUTIONS - PREMIUM SAAS REDESIGN (Light Mode)
+   ========================================= */
+
+:root {
+    /* -- New Palette -- */
+    --bg-body: #FAFAFC;
+    --bg-surface: #FFFFFF;
+
+    /* Primary: Deep Indigo */
+    --primary: #1F3A8A;
+    --primary-light: #2563EB;
+    /* Accent */
+    --primary-glow: rgba(37, 99, 235, 0.2);
+
+    /* Text Colors */
+    --text-main: #111827;
+    /* Dark Gray */
+    --text-muted: #6B7280;
+    /* Medium Gray */
+    --text-inverse: #FFFFFF;
+
+    /* Borders */
+    --border-subtle: #E5E7EB;
+    --border-highlight: #BFDBFE;
+
+    /* Spacing & Radius */
+    --radius-card: 16px;
+    --radius-btn: 50px;
+    --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+}
+
+/* -- Global Overrides -- */
+body {
+    background-color: var(--bg-body);
+    color: var(--text-main);
+    font-family: 'Inter', sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: var(--text-main);
+    font-family: 'Space Grotesk', sans-serif;
+    letter-spacing: -0.02em;
+}
+
+h1 {
+    font-weight: 800;
+    /* Extra Bold */
+}
+
+h2 {
+    font-weight: 700;
+}
+
+p,
+li,
+span {
+    color: var(--text-muted);
+}
+
+.text-gradient {
+    /* Updated gradient for light background */
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* -- HEADER (Sticky & Transparent to White) -- */
+/* Note: The ID is #global-header-container, but content is injected. 
+   We target .site-header which is in instructions. 
+   We need to override the existing dark header styles. */
+
+.site-header {
+    background: transparent !important;
+    border-bottom: 1px solid transparent !important;
+    box-shadow: none !important;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Scrolled State (Added via JS) */
+.site-header.scrolled {
+    background: rgba(255, 255, 255, 0.9) !important;
+    backdrop-filter: blur(12px) !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05) !important;
+}
+
+.site-header .logo {
+    color: var(--primary) !important;
+}
+
+.site-header .logo span {
+    color: var(--primary-light) !important;
+    border-left-color: rgba(31, 58, 138, 0.2) !important;
+    /* Divider color */
+}
+
+.site-header .main-nav a {
+    color: var(--text-main) !important;
+}
+
+.site-header .main-nav a:hover,
+.site-header .main-nav a.active {
+    color: var(--primary-light) !important;
+    background: rgba(37, 99, 235, 0.05) !important;
+}
+
+/* Hero Section Refactor */
+.hero-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    position: relative;
+    padding-top: 140px;
+    /* Offset for header */
+    padding-bottom: 80px;
+}
+
+.hero-content {
+    text-align: left;
+}
+
+.hero-headline {
+    font-size: clamp(3rem, 5vw, 4.5rem);
+    line-height: 1.1;
+    margin-bottom: 24px;
+    color: #111827;
+}
+
+.hero-subtext {
+    font-size: 1.25rem;
+    line-height: 1.6;
+    margin-bottom: 40px;
+    color: #4B5563;
+}
+
+.hero-actions {
+    display: flex;
+    gap: 16px;
+}
+
+/* Hero Mockup (Right Column) */
+.hero-mockup-container {
+    position: relative;
+    perspective: 1000px;
+}
+
+.mockup-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    padding: 20px;
+    position: relative;
+    /* CSS Representation of Dashboard */
+    min-height: 350px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    animation: float 6s ease-in-out infinite;
+}
+
+/* Mockup Elements (Abstract representation) */
+.mock-header {
+    height: 20px;
+    width: 100%;
+    background: #F3F4F6;
+    border-radius: 4px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.mock-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #E5E7EB;
+}
+
+.mock-dot.active {
+    background: #3B82F6;
+}
+
+.mock-body {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 15px;
+    flex: 1;
+}
+
+.mock-sidebar {
+    background: #F9FAFB;
+    border-radius: 8px;
+}
+
+.mock-main {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.mock-row {
+    height: 40px;
+    background: #F3F4F6;
+    border-radius: 6px;
+    width: 100%;
+}
+
+.mock-chart {
+    height: 120px;
+    background: linear-gradient(180deg, rgba(37, 99, 235, 0.1) 0%, rgba(37, 99, 235, 0) 100%);
+    border-radius: 8px;
+    border-bottom: 2px solid #3B82F6;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+/* Buttons Update */
+.btn-primary {
+    background: var(--primary-light) !important;
+    border-color: var(--primary-light) !important;
+    color: white !important;
+    box-shadow: 0 4px 14px 0 rgba(37, 99, 235, 0.39) !important;
+}
+
+.btn-primary:hover {
+    transform: scale(1.04) translateY(-1px) !important;
+    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.23) !important;
+}
+
+.btn-outline {
+    border: 2px solid var(--primary-light) !important;
+    color: var(--primary-light) !important;
+}
+
+.btn-outline:hover {
+    background: rgba(37, 99, 235, 0.1) !important;
+}
+
+/* Features Grid (Services) */
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.feature-card {
+    background: white;
+    border-radius: 16px;
+    padding: 32px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+    transition: all 0.3s ease;
+    cursor: default;
+}
+
+.feature-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.feature-icon {
+    font-size: 40px;
+    color: var(--primary-light);
+    margin-bottom: 20px;
+    transition: transform 0.3s ease;
+    display: inline-block;
+}
+
+.feature-card:hover .feature-icon {
+    transform: scale(1.1);
+    /* Micro-bounce effect */
+}
+
+.feature-title {
+    font-size: 1.25rem;
+    margin-bottom: 12px;
+    color: var(--text-main);
+}
+
+.feature-desc {
+    color: var(--text-muted);
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+/* Product Benefits (Alternating Blocks) */
+.benefits-section {
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+}
+
+.benefit-block {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    opacity: 0;
+    /* JS Reveal */
+}
+
+/* Alternating logic via :nth-child handled in structure or CSS if possible */
+.benefit-block.reverse {
+    direction: rtl;
+    /* Simple way to swap, but text direction needs reset */
+}
+
+.benefit-block.reverse>* {
+    direction: ltr;
+}
+
+/* Trust Carousel */
+.trust-carousel-container {
+    overflow: hidden;
+    padding: 40px 0;
+    margin-top: 40px;
+    background: #F9FAFB;
+    border-top: 1px solid #E5E7EB;
+    border-bottom: 1px solid #E5E7EB;
+}
+
+.trust-track {
+    display: flex;
+    width: max-content;
+    gap: 60px;
+    animation: scrollLoop 30s linear infinite;
+}
+
+.trust-logo {
+    height: 40px;
+    filter: grayscale(100%);
+    opacity: 0.6;
+    transition: all 0.3s;
+    font-size: 1.5rem;
+    /* For text placeholders */
+    font-weight: bold;
+    color: #9CA3AF;
+    white-space: nowrap;
+}
+
+.trust-logo:hover {
+    filter: grayscale(0%);
+    opacity: 1;
+    color: var(--primary);
+}
+
+.trust-track:hover {
+    animation-play-state: paused;
+}
+
+@keyframes scrollLoop {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* CTA Footer Strip */
+.cta-strip {
+    background: linear-gradient(90deg, #EFF6FF 0%, #DBEAFE 100%);
+    padding: 80px 0;
+    text-align: center;
+    margin-top: 80px;
+}
+
+.cta-strip h2 {
+    color: var(--primary);
+    margin-bottom: 30px;
+}
+
+/* Mobile Responsive Overrides */
+@media (max-width: 992px) {
+    .site-header {
+        background: white !important;
+    }
+
+    /* Always solid on mobile for readability */
+
+    .hero-wrapper {
+        grid-template-columns: 1fr;
+        padding-top: 120px;
+        text-align: center;
+        gap: 40px;
+    }
+
+    .hero-content {
+        order: 1;
+        text-align: center;
+    }
+
+    .hero-mockup-container {
+        order: 2;
+    }
+
+    .hero-actions {
+        justify-content: center;
+    }
+
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .benefit-block,
+    .benefit-block.reverse {
+        grid-template-columns: 1fr !important;
+        direction: ltr !important;
+        text-align: center;
+        gap: 30px;
+    }
+}
+
+/* Override Glass Panel for Light Mode */
+.glass-panel {
+    background: white !important;
+    border: 1px solid rgba(0, 0, 0, 0.05) !important;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02) !important;
+    border-radius: 16px !important;
+}
+
+.glass-panel:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1) !important;
+    border-color: var(--primary-light) !important;
+}
