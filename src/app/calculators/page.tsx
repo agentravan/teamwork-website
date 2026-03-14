@@ -1,5 +1,6 @@
 import { AnimatedSection } from "@/components/ui-custom/AnimatedSection";
-import { PricingCard, pricingPlans } from "@/components/ui-custom/PricingCard";
+import { PricingCard } from "@/components/ui-custom/PricingCard";
+import { pricingPlans } from "@/lib/constants";
 
 interface CalculatorProps {
   id: string;

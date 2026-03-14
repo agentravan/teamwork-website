@@ -2,7 +2,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { AnimatedSection } from "@/components/ui-custom/AnimatedSection";
-import { PricingCard, pricingPlans } from "@/components/ui-custom/PricingCard";
+import { PricingCard } from "@/components/ui-custom/PricingCard";
+import { pricingPlans } from "@/lib/constants";
 
 // Define the content for each service page
 const serviceContents: Record<string, any> = {

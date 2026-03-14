@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { ArrowRight, BarChart3, Users, ShieldCheck, Zap, Globe2 } from "lucide-react";
 import { AnimatedSection } from "@/components/ui-custom/AnimatedSection";
-import { PricingCard, pricingPlans } from "@/components/ui-custom/PricingCard";
+import { PricingCard } from "@/components/ui-custom/PricingCard";
+import { pricingPlans } from "@/lib/constants";
 
 export default function Home() {
   return (

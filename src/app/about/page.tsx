@@ -1,6 +1,7 @@
 import { AnimatedSection } from "@/components/ui-custom/AnimatedSection";
 import { Globe2 } from "lucide-react";
-import { PricingCard, pricingPlans } from "@/components/ui-custom/PricingCard";
+import { PricingCard } from "@/components/ui-custom/PricingCard";
+import { pricingPlans } from "@/lib/constants";
 
 export default function AboutPage() {
   return (
