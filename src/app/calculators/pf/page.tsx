@@ -7,6 +7,7 @@ import { AnimatedSection } from "@/components/ui-custom/AnimatedSection";
 
 export default function PFCalculator() {
   const [basicSalary, setBasicSalary] = useState<number>(25000);
+  const [applyCap, setApplyCap] = useState<boolean>(true);
   const [results, setResults] = useState({
     employeeEPF: 0,
     employerEPF: 0,
@@ -15,18 +16,18 @@ export default function PFCalculator() {
   });
 
   useEffect(() => {
-    // Standard PF Calculation (India)
+    // PF Calculation logic with Capping
+    const calculationBasic = applyCap ? Math.min(basicSalary, 15000) : basicSalary;
+    
     // Employee: 12% of Basic
-    // Employer: 12% total (3.67% to EPF, 8.33% to EPS capped at 1250)
+    const empEPF = Math.round(calculationBasic * 0.12);
     
-    const empEPF = Math.round(basicSalary * 0.12);
-    
-    // EPS is 8.33% capped at 15000 basic (i.e., 1250 max)
-    const epsBasic = Math.min(basicSalary, 15000);
+    // EPS is 8.33% of capped basic
+    const epsBasic = Math.min(calculationBasic, 15000);
     const employerEPS = Math.round(epsBasic * 0.0833);
     
     // Employer EPF is the balance of 12%
-    const totalEmployer = Math.round(basicSalary * 0.12);
+    const totalEmployer = Math.round(calculationBasic * 0.12);
     const employerEPF = totalEmployer - employerEPS;
     
     setResults({
@@ -35,7 +36,7 @@ export default function PFCalculator() {
       employerEPS: employerEPS,
       totalMonthly: empEPF + totalEmployer
     });
-  }, [basicSalary]);
+  }, [basicSalary, applyCap]);
 
   return (
     <CalculatorLayout 
@@ -51,7 +52,19 @@ export default function PFCalculator() {
               <Info className="w-5 h-5 text-primary" /> Input Details
             </h3>
             
-            <div className="space-y-4">
+            <div className="space-y-6">
+              <div>
+                <label className="block text-sm font-medium mb-3 text-muted-foreground flex justify-between items-center">
+                   <span>Apply statutory cap (₹15,000)</span>
+                   <button 
+                    onClick={() => setApplyCap(!applyCap)}
+                    className={`w-12 h-6 rounded-full transition-colors relative ${applyCap ? 'bg-primary' : 'bg-muted'}`}
+                   >
+                     <div className={`absolute top-1 w-4 h-4 bg-white rounded-full transition-transform ${applyCap ? 'left-7' : 'left-1'}`}></div>
+                   </button>
+                </label>
+              </div>
+
               <div>
                 <label className="block text-sm font-medium mb-2 text-muted-foreground underline italic">Monthly Basic Salary (₹)</label>
                 <input 
@@ -73,6 +86,15 @@ export default function PFCalculator() {
                   />
                 </div>
               </div>
+
+              {basicSalary > 15000 && applyCap && (
+                <div className="p-4 bg-orange-500/10 border border-orange-500/20 rounded-2xl">
+                   <p className="text-[10px] font-bold text-orange-600 uppercase mb-1">Cap Active</p>
+                   <p className="text-xs text-orange-600/80 leading-relaxed italic">
+                     Basic Salary is capped at ₹15,000 for PF calculation (as per 2026 rules).
+                   </p>
+                </div>
+              )}
             </div>
             
             <div className="mt-8 p-4 bg-primary/5 rounded-2xl border border-primary/10">
