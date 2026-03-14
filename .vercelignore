@@ -1,0 +1,8 @@
+node_modules
+.next
+.vercel
+go
+build_debug.log
+build_debug_v2.log
+build_debug_v3.log
+package_check.json
