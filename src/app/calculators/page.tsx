@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { AnimatedSection } from "@/components/ui-custom/AnimatedSection";
 import { PricingCard } from "@/components/ui-custom/PricingCard";
 import { pricingPlans } from "@/lib/constants";
@@ -35,7 +36,7 @@ const calculators: CalculatorProps[] = [
     imageColor: "bg-orange-500/20"
   },
   {
-    id: "compliance",
+    id: "compliance-cost",
     name: "Compliance Cost Calculator",
     description: "Estimate your total global compliance and HR administrative overhead.",
     imageColor: "bg-red-500/20"
@@ -76,14 +77,22 @@ export default function CalculatorsPage() {
                     </div>
                   </div>
                   
-                   <a 
-                    href="https://wa.me/919518842774"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-xl px-6 py-3 font-medium inline-block transition-colors"
-                  >
-                    Get Custom Quote for Global Processing
-                  </a>
+                   <div className="flex flex-wrap gap-4">
+                     <Link 
+                      href={`/calculators/${calc.id}`}
+                      className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-xl px-6 py-3 font-medium inline-block transition-colors"
+                    >
+                      Use {calc.name}
+                    </Link>
+                    <a 
+                      href="https://wa.me/919518842774"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="border border-primary/20 bg-primary/5 text-primary hover:bg-primary/10 rounded-xl px-6 py-3 font-medium inline-block transition-colors"
+                    >
+                      Get Custom Quote
+                    </a>
+                   </div>
                 </div>
                 
                 {/* Screenshot Placeholder representing the calculator */}

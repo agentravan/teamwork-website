@@ -61,22 +61,22 @@ export default function Footer() {
             <h3 className="font-semibold mb-6">Tools</h3>
             <ul className="space-y-4">
               <li>
-                <Link href="/calculators#pf" className="text-muted-foreground hover:text-primary transition-colors cursor-pointer">
+                <Link href="/calculators/pf" className="text-muted-foreground hover:text-primary transition-colors cursor-pointer">
                   PF Calculator
                 </Link>
               </li>
               <li>
-                <Link href="/calculators#esic" className="text-muted-foreground hover:text-primary transition-colors cursor-pointer">
+                <Link href="/calculators/esic" className="text-muted-foreground hover:text-primary transition-colors cursor-pointer">
                   ESIC Calculator
                 </Link>
               </li>
               <li>
-                <Link href="/calculators#tds" className="text-muted-foreground hover:text-primary transition-colors cursor-pointer">
+                <Link href="/calculators/tds" className="text-muted-foreground hover:text-primary transition-colors cursor-pointer">
                   TDS Calculator
                 </Link>
               </li>
               <li>
-                <Link href="/calculators#gratuity" className="text-muted-foreground hover:text-primary transition-colors cursor-pointer">
+                <Link href="/calculators/gratuity" className="text-muted-foreground hover:text-primary transition-colors cursor-pointer">
                   Gratuity Calculator
                 </Link>
               </li>

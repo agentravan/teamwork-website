@@ -32,16 +32,16 @@ export default function Navbar() {
 
   const calculators = [
     { name: "Overview", href: "/calculators" },
-    { name: "PF Calculator", href: "/calculators#pf" },
-    { name: "ESIC Calculator", href: "/calculators#esic" },
-    { name: "TDS Calculator", href: "/calculators#tds" },
-    { name: "Gratuity Calculator", href: "/calculators#gratuity" },
-    { name: "Compliance Cost", href: "/calculators#compliance" },
+    { name: "PF Calculator", href: "/calculators/pf" },
+    { name: "ESIC Calculator", href: "/calculators/esic" },
+    { name: "TDS Calculator", href: "/calculators/tds" },
+    { name: "Gratuity Calculator", href: "/calculators/gratuity" },
+    { name: "Compliance Cost", href: "/calculators/compliance-cost" },
   ];
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 ${
         isScrolled
           ? "bg-background/80 backdrop-blur-md border-b border-border shadow-sm py-3"
           : "bg-transparent py-5"
@@ -88,7 +88,7 @@ export default function Navbar() {
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 10, transition: { duration: 0.1 } }}
-                    className="absolute top-full left-0 pt-4 w-56"
+                    className="absolute top-full left-0 pt-4 w-56 z-[60]"
                   >
                     <div className="bg-card border border-border rounded-xl shadow-xl overflow-hidden p-2 flex flex-col gap-1">
                       {services.map((item) => (
@@ -128,7 +128,7 @@ export default function Navbar() {
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 10, transition: { duration: 0.1 } }}
-                    className="absolute top-full left-0 pt-4 w-56"
+                    className="absolute top-full left-0 pt-4 w-56 z-[60]"
                   >
                     <div className="bg-card border border-border rounded-xl shadow-xl overflow-hidden p-2 flex flex-col gap-1">
                       {calculators.map((item) => (
