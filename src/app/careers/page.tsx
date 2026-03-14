@@ -3,6 +3,7 @@ import { ArrowRight, MapPin, Briefcase, Clock, FileText } from "lucide-react";
 import { AnimatedSection } from "@/components/ui-custom/AnimatedSection";
 import prisma from "@/lib/prisma"; // Note: Using mock data if DB connection is unavailable during build
 
+export const dynamic = "force-dynamic";
 export const revalidate = 60; // Revalidate every minute
 
 // Fallback data in case DB is unseeded or unreachable
