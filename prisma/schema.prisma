@@ -1,0 +1,88 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String
+  role      Role     @default(RECRUITER)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  jobs      Job[]    // Jobs posted by this user
+}
+
+enum Role {
+  RECRUITER
+  SUPER_ADMIN
+}
+
+model Job {
+  id          String        @id @default(cuid())
+  title       String
+  description String
+  category    String
+  location    String        // Should be generic, i.e. "Remote (Global)"
+  experience  String
+  salaryRange String
+  jobType     String
+  benefits    String[]
+  status      JobStatus     @default(ACTIVE)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  
+  postedById  String
+  postedBy    User          @relation(fields: [postedById], references: [id])
+  
+  applications Application[]
+}
+
+enum JobStatus {
+  ACTIVE
+  CLOSED
+}
+
+model Application {
+  id          String   @id @default(cuid())
+  jobId       String
+  job         Job      @relation(fields: [jobId], references: [id])
+  
+  candidateName  String
+  candidateEmail String
+  candidatePhone String
+  resumeUrl      String?  // Optional for this MVP
+  coverLetter    String?
+  source         String?
+  
+  status      AppStatus @default(NEW)
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  messages    Message[]
+}
+
+enum AppStatus {
+  NEW
+  SCREENING
+  INTERVIEW
+  OFFER
+  HIRED
+  DECLINED
+}
+
+// Minimal implementation representation for applicant messaging
+model Message {
+  id            String      @id @default(cuid())
+  applicationId String
+  application   Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  content       String
+  isFromCandidate Boolean     @default(false)
+  createdAt     DateTime    @default(now())
+}
