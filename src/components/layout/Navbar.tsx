@@ -4,15 +4,19 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown, Menu, X } from "lucide-react";
+import { ChevronDown, Menu, X, Sun, Moon } from "lucide-react";
+import { useTheme } from "next-themes";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [mounted, setMounted] = useState(false);
+  const { theme, setTheme } = useTheme();
   const pathname = usePathname();
 
   useEffect(() => {
+    setMounted(true);
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
@@ -43,8 +47,8 @@ export default function Navbar() {
     <header
       className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 ${
         isScrolled
-          ? "bg-background/95 backdrop-blur-md border-b border-border shadow-md py-2"
-          : "bg-background/40 backdrop-blur-sm py-5"
+          ? "bg-background/98 backdrop-blur-md border-b border-border shadow-md py-2"
+          : "bg-background/70 backdrop-blur-sm py-5"
       }`}
     >
       <div className="container mx-auto px-4 md:px-6">
@@ -88,14 +92,14 @@ export default function Navbar() {
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 10, transition: { duration: 0.1 } }}
-                    className="absolute top-full left-0 pt-4 w-56 z-[60]"
+                    className="absolute top-full left-0 pt-4 w-56 z-[120]"
                   >
-                    <div className="bg-card border border-border rounded-xl shadow-xl overflow-hidden p-2 flex flex-col gap-1">
+                    <div className="bg-background border border-border rounded-xl shadow-2xl overflow-hidden p-2 flex flex-col gap-1">
                       {services.map((item) => (
                         <Link
                           key={item.name}
                           href={item.href}
-                          className="px-4 py-2 text-sm rounded-md hover:bg-muted transition-colors"
+                           className="px-4 py-2 text-sm rounded-md hover:bg-muted transition-colors"
                           onClick={() => setActiveDropdown(null)}
                         >
                           {item.name}
@@ -128,9 +132,9 @@ export default function Navbar() {
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 10, transition: { duration: 0.1 } }}
-                    className="absolute top-full left-0 pt-4 w-56 z-[60]"
+                    className="absolute top-full left-0 pt-4 w-56 z-[120]"
                   >
-                    <div className="bg-card border border-border rounded-xl shadow-xl overflow-hidden p-2 flex flex-col gap-1">
+                    <div className="bg-background border border-border rounded-xl shadow-2xl overflow-hidden p-2 flex flex-col gap-1">
                       {calculators.map((item) => (
                         <Link
                           key={item.href}
@@ -153,7 +157,7 @@ export default function Navbar() {
                 pathname === "/about" ? "text-primary" : "text-muted-foreground"
               }`}
             >
-              About
+              About Us
             </Link>
             
             <Link
@@ -167,6 +171,13 @@ export default function Navbar() {
           </nav>
 
           <div className="hidden md:flex items-center gap-4">
+            <button
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              className="p-2 rounded-lg hover:bg-muted transition-colors"
+              aria-label="Toggle theme"
+            >
+              {mounted && (theme === "dark" ? <Sun className="w-5 h-5 text-yellow-500" /> : <Moon className="w-5 h-5 text-slate-700" />)}
+            </button>
             <Link
               href="/career-admin"
               className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
@@ -184,12 +195,21 @@ export default function Navbar() {
           </div>
 
           {/* Mobile Menu Toggle */}
-          <button
-            className="md:hidden p-2 text-foreground"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          >
-            {mobileMenuOpen ? <X /> : <Menu />}
-          </button>
+          <div className="flex items-center gap-2 md:hidden">
+            <button
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              className="p-2 rounded-lg hover:bg-muted transition-colors"
+              aria-label="Toggle theme"
+            >
+              {mounted && (theme === "dark" ? <Sun className="w-5 h-5 text-yellow-500" /> : <Moon className="w-5 h-5 text-slate-700" />)}
+            </button>
+            <button
+              className="p-2 text-foreground"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
+              {mobileMenuOpen ? <X /> : <Menu />}
+            </button>
+          </div>
         </div>
       </div>
 
@@ -206,20 +226,20 @@ export default function Navbar() {
               <Link href="/" onClick={() => setMobileMenuOpen(false)} className="py-2 text-lg font-medium border-b border-border/50">
                 Home
               </Link>
-              <Link href="/services" onClick={() => setMobileMenuOpen(false)} className="py-2 text-lg font-medium border-b border-border/50 flex justify-between">
+              <Link href="/services" onClick={() => setMobileMenuOpen(false)} className="py-2 text-lg font-medium border-b border-border/50">
                 Services
               </Link>
-              <Link href="/calculators" onClick={() => setMobileMenuOpen(false)} className="py-2 text-lg font-medium border-b border-border/50 flex justify-between">
+              <Link href="/calculators" onClick={() => setMobileMenuOpen(false)} className="py-2 text-lg font-medium border-b border-border/50">
                 Calculators
               </Link>
               <Link href="/about" onClick={() => setMobileMenuOpen(false)} className="py-2 text-lg font-medium border-b border-border/50">
-                About
+                About Us
               </Link>
               <Link href="/careers" onClick={() => setMobileMenuOpen(false)} className="py-2 text-lg font-medium border-b border-border/50">
                 Careers
               </Link>
               <Link href="/career-admin" onClick={() => setMobileMenuOpen(false)} className="py-2 text-lg font-medium border-b border-border/50">
-                Portal Login
+                Log in
               </Link>
               <a
                 href="https://wa.me/919518842774"

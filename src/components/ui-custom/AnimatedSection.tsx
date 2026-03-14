@@ -9,6 +9,7 @@ interface AnimatedSectionProps {
   className?: string;
   delay?: number;
   direction?: "up" | "down" | "left" | "right" | "none";
+  id?: string;
 }
 
 export function AnimatedSection({
@@ -16,6 +17,7 @@ export function AnimatedSection({
   className,
   delay = 0,
   direction = "up",
+  id,
 }: AnimatedSectionProps) {
   const directions = {
     up: { y: 40, x: 0 },
@@ -27,6 +29,7 @@ export function AnimatedSection({
 
   return (
     <motion.div
+      id={id}
       initial={{
         opacity: 0,
         ...directions[direction],
