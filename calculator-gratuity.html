@@ -1,0 +1,126 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gratuity Calculator | TeamWork Solutions</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/mega-menu.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="css/header-premium.css">
+</head>
+
+<body>
+    <!-- PRELOADER (Brand Logo) -->
+    <div id="page-loader">
+        <div class="loader-brand">
+            <div class="brand-icon-loader"><i class="ph-fill ph-users-three"></i></div>
+            <div class="brand-logo-text">TeamWork</div>
+            <div class="brand-tagline">together we can do so much</div>
+        </div>
+    </div>
+    <div id="global-header-container"></div>
+
+
+
+    <header class="section-padding" style="padding-top: 160px; text-align: center;">
+        <div class="container">
+            <h1 class="fade-up" style="margin-bottom: 24px;">Gratuity <span class="text-gradient">Estimator</span></h1>
+            <p class="fade-up" style="color: var(--text-secondary); max-width: 700px; margin: 0 auto;">
+                Calculate accrued gratuity as per Payment of Gratuity Act, 1972.
+            </p>
+        </div>
+    </header>
+
+    <main>
+        <section class="section-padding">
+            <div class="container">
+
+                <!-- Info Section -->
+                <div class="glass-panel"
+                    style="padding: 30px; margin-bottom: 40px; border-left: 4px solid var(--warning, #eab308);">
+                    <h3 style="margin-bottom: 10px; color: var(--warning, #eab308);">Eligibility Criteria</h3>
+                    <p style="color: var(--text-secondary);">
+                        <strong>5 Years of Continuous Service</strong> is mandatory to claim Gratuity (except in cases
+                        of death/disablement).
+                        <br>Formula: <code>(Last Drawn Basic) * (15/26) * Years of Service</code>.
+                    </p>
+                </div>
+
+                <div class="glass-panel" style="padding: 40px; max-width: 600px; margin: 0 auto;">
+                    <h3 style="margin-bottom: 30px;">Calculate Gratuity</h3>
+
+                    <div class="form-group" style="margin-bottom: 20px;">
+                        <label style="display: block; margin-bottom: 8px; font-size: 0.9rem;">Last Drawn Basic
+                            Salary</label>
+                        <input type="number" id="gratBasic" placeholder="e.g. 50000"
+                            style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 30px;">
+                        <label style="display: block; margin-bottom: 8px; font-size: 0.9rem;">Years of Service</label>
+                        <input type="number" id="gratYears" placeholder="e.g. 7"
+                            style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
+                    </div>
+
+                    <button onclick="calculateGratuity()" class="btn btn-primary"
+                        style="width: 100%; margin-bottom: 30px;">Estimate Payout</button>
+
+                    <!-- Alert for Ineligibility -->
+                    <div id="gratAlert"
+                        style="display: none; padding: 15px; background: rgba(234, 179, 8, 0.1); border: 1px solid #eab308; color: #eab308; border-radius: 8px; text-align: center; margin-bottom: 20px;">
+                        Service period is less than 5 years. You may not be eligible for standard gratuity.
+                    </div>
+
+                    <!-- Results -->
+                    <div id="gratResult"
+                        style="display: none; border-top: 1px solid var(--border-subtle); padding-top: 30px; text-align: center;">
+                        <span style="color: var(--text-secondary); display: block; margin-bottom: 10px;">Estimated
+                            Payout</span>
+                        <span id="resGratuity" style="color: white; font-weight: 700; font-size: 2rem;">₹ 0</span>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container"
+            style="text-align: center; padding: 40px 0; border-top: 1px solid var(--border-subtle); color: var(--text-tertiary);">
+            &copy; 2026 TeamWork Solutions.
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        function calculateGratuity() {
+            const basic = parseFloat(document.getElementById('gratBasic').value) || 0;
+            const years = parseFloat(document.getElementById('gratYears').value) || 0;
+            const alertBox = document.getElementById('gratAlert');
+            const resBox = document.getElementById('gratResult');
+
+            if (years < 5 && years > 0) {
+                alertBox.style.display = 'block';
+            } else {
+                alertBox.style.display = 'none';
+            }
+
+            if (basic > 0 && years > 0) {
+                resBox.style.display = 'block';
+                // Formula: (Basic * 15 * Years) / 26
+                const val = Math.round((basic * 15 * years) / 26);
+                document.getElementById('resGratuity').innerText = "₹ " + val.toLocaleString();
+            }
+        }
+    </script>
+    <script src="js/unified-header.js"></script>
+    <script src="js/loader.js"></script>
+</body>
+
+</html>

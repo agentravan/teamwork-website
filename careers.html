@@ -1,0 +1,312 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Careers | TeamWork Solutions</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="css/header-premium.css">
+</head>
+
+<body>
+    <!-- PRELOADER (Brand Logo) -->
+    <div id="page-loader">
+        <div class="loader-brand">
+            <div class="brand-icon-loader"><i class="ph-fill ph-users-three"></i></div>
+            <div class="brand-logo-text">TeamWork</div>
+            <div class="brand-tagline">together we can do so much</div>
+        </div>
+    </div>
+    <div id="global-header-container"></div>
+
+
+
+    <header class="section-padding" style="padding-top: 160px; text-align: center;">
+        <div class="container">
+            <h1 class="fade-up" style="margin-bottom: 24px;">Careers at <span class="text-gradient">TeamWork</span></h1>
+            <p class="fade-up"
+                style="color: var(--text-secondary); max-width: 700px; margin: 0 auto; margin-bottom: 40px; font-size: 1.25rem;">
+                We believe careers grow where <strong>learning meets responsibility</strong>.
+            </p>
+        </div>
+    </header>
+
+    <main>
+
+        <section class="section-padding">
+            <div class="container">
+                <!-- Job List Container -->
+                <div id="jobListContainer" style="display: grid; gap: 20px;">
+                    <!-- Jobs will be injected here by JS -->
+                </div>
+
+                <!-- Empty State (Hidden by default) -->
+                <div id="noJobsMessage" class="glass-panel" style="text-align: center; padding: 60px; display: none;">
+                    <i class="ph-duotone ph-briefcase"
+                        style="font-size: 48px; color: var(--text-tertiary); margin-bottom: 20px;"></i>
+                    <h3 style="color: var(--text-secondary);">No Openings Currently</h3>
+                    <p style="color: var(--text-tertiary);">Please check back later.</p>
+                </div>
+
+                <!-- Legacy Section (Why Work Here) -->
+                <div class="glass-panel" style="padding: 50px; text-align: center; margin-top: 60px;">
+                    <h2 style="margin-bottom: 30px;">Work With Real Impact</h2>
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-bottom: 50px;">
+                        <div>
+                            <i class="ph-duotone ph-files"
+                                style="font-size: 40px; color: var(--service); margin-bottom: 20px;"></i>
+                            <p>You work on real payrolls.</p>
+                        </div>
+                        <div>
+                            <i class="ph-duotone ph-gavel"
+                                style="font-size: 40px; color: var(--accent); margin-bottom: 20px;"></i>
+                            <p>You handle real compliance.</p>
+                        </div>
+                        <div>
+                            <i class="ph-duotone ph-desktop"
+                                style="font-size: 40px; color: var(--primary); margin-bottom: 20px;"></i>
+                            <p>You learn enterprise systems.</p>
+                            <!-- Job Listings (Dynamic) -->
+                            <section class="section-padding">
+                                <div class="container">
+                                    <h2 class="fade-up" style="margin-bottom: 40px;">Current Openings</h2>
+
+                                    <div id="jobContainer" class="job-grid">
+                                        <!-- Javascript will populate this -->
+                                        <div
+                                            style="text-align: center; grid-column: 1/-1; color: var(--text-tertiary);">
+                                            Loading positions...
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <!-- Application Modal -->
+                            <div id="applyModal" class="modal-overlay"
+                                style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 2000; align-items: center; justify-content: center;">
+                                <div class="glass-panel"
+                                    style="width: 100%; max-width: 500px; padding: 40px; position: relative;">
+                                    <button onclick="closeModal()"
+                                        style="position: absolute; top: 20px; right: 20px; background: none; border: none; color: white; font-size: 1.2rem; cursor: pointer;"><i
+                                            class="ph-bold ph-x"></i></button>
+                                    <h3 style="margin-bottom: 20px;">Apply for <span id="modalJobTitle"
+                                            style="color: var(--primary);">Role</span></h3>
+
+                                    <form onsubmit="submitApplication(event)">
+                                        <div class="form-group" style="margin-bottom: 15px;">
+                                            <label style="display: block; margin-bottom: 8px; font-size: 0.9rem;">Full
+                                                Name</label>
+                                            <input type="text" required
+                                                style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
+                                        </div>
+                                        <div class="form-group" style="margin-bottom: 15px;">
+                                            <label style="display: block; margin-bottom: 8px; font-size: 0.9rem;">Email
+                                                Address</label>
+                                            <input type="email" required
+                                                style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
+                                        </div>
+
+                                        <!-- Resume Sim -->
+                                        <div class="form-group" style="margin-bottom: 25px;">
+                                            <label style="display: block; margin-bottom: 8px; font-size: 0.9rem;">Resume
+                                                / CV</label>
+                                            <div style="border: 2px dashed var(--border-subtle); padding: 20px; text-align: center; border-radius: 8px; cursor: pointer;"
+                                                onclick="document.getElementById('resumeUpload').click()">
+                                                <i class="ph-duotone ph-upload-simple"
+                                                    style="font-size: 24px; color: var(--text-tertiary);"></i>
+                                                <p
+                                                    style="font-size: 0.8rem; margin-top: 10px; color: var(--text-secondary);">
+                                                    Click to Upload (PDF/DOC)</p>
+                                                <input type="file" id="resumeUpload" style="display: none;"
+                                                    onchange="showFileName(this)">
+                                                <p id="fileName"
+                                                    style="font-size: 0.8rem; color: #10b981; margin-top: 5px;"></p>
+                                            </div>
+                                        </div>
+
+                                        <button type="submit" class="btn btn-primary" style="width: 100%;">Submit
+                                            Application</button>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <!-- Success Toast -->
+                            <div id="successToast"
+                                style="display: none; position: fixed; bottom: 30px; right: 30px; background: #10b981; color: white; padding: 15px 25px; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); z-index: 3000;">
+                                <i class="ph-bold ph-check-circle" style="margin-right: 8px;"></i> Application Sent
+                                Successfully!
+                            </div>
+
+    </main>
+
+    <!-- Unified Footer -->
+    <footer>
+        <div class="container"
+            style="text-align: center; padding: 40px 0; border-top: 1px solid var(--border-subtle); color: var(--text-tertiary);">
+            &copy; 2026 TeamWork Solutions.
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/unified-header.js"></script>
+    <script>
+        // Load Jobs
+        window.addEventListener('DOMContentLoaded', () => {
+            const jobs = JSON.parse(localStorage.getItem('jobs')) || [];
+            const container = document.getElementById('jobContainer');
+            container.innerHTML = '';
+
+            // 1. Filter: Open OR Hold. (Closed are hidden)
+            const publicJobs = jobs.filter(j => j.status === 'Open' || j.status === 'Hold');
+
+            if (publicJobs.length === 0) {
+                container.innerHTML = `
+                    <div style="grid-column: 1/-1; text-align: center; padding: 60px;">
+                        <i class="ph-duotone ph-magnifying-glass" style="font-size: 48px; color: var(--text-tertiary); margin-bottom: 20px;"></i>
+                        <h3 style="color: var(--text-secondary);">No Openings Currently</h3>
+                        <p style="color: var(--text-tertiary);">Check back later or follow us on LinkedIn.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            publicJobs.forEach(job => {
+                const isHold = job.status === 'Hold';
+                const card = `
+                    <div class="job-card glass-panel" style="padding: 30px; position: relative;">
+                        ${isHold ? '<div style="position: absolute; top: 20px; right: 20px; background: rgba(234, 179, 8, 0.1); color: #eab308; padding: 4px 10px; border-radius: 4px; font-size: 0.75rem; border: 1px solid rgba(234, 179, 8, 0.2);">Positions on Hold</div>' : ''}
+                        
+                        <div style="color: var(--primary); font-size: 0.9rem; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px;">${job.dept}</div>
+                        <h3 style="margin-bottom: 15px; color: white;">${job.title}</h3>
+                        <div style="display: flex; gap: 15px; margin-bottom: 20px; font-size: 0.9rem; color: var(--text-secondary);">
+                            <span><i class="ph-bold ph-map-pin"></i> ${job.loc}</span>
+                            <span><i class="ph-bold ph-briefcase"></i> ${job.type || 'Full Time'}</span>
+                            <span><i class="ph-bold ph-clock"></i> ${job.exp || 'Exp: N/A'}</span>
+                        </div>
+                        <p style="color: var(--text-tertiary); font-size: 0.9rem; line-height: 1.6; margin-bottom: 25px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">
+                            ${job.desc}
+                        </p>
+                        
+                        ${isHold
+                        ? '<button disabled class="btn btn-outline" style="width: 100%; opacity: 0.5; cursor: not-allowed;">Applications Paused</button>'
+                        : `<button onclick="openModal('${job.title}')" class="btn btn-primary" style="width: 100%;">Apply Now</button>`
+                    }
+                    </div>
+                `;
+                container.innerHTML += card;
+            });
+        });
+
+        // Modal Logic
+        function openModal(title) {
+            document.getElementById('modalJobTitle').innerText = title;
+            document.getElementById('applyModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('applyModal').style.display = 'none';
+        }
+
+        function showFileName(input) {
+            if (input.files && input.files[0]) {
+                document.getElementById('fileName').innerText = "Selected: " + input.files[0].name;
+            }
+        }
+
+        document.getElementById('applicationForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            // For simplicity, we find the first job with this title (titles should be unique ideally)
+            const jobs = JSON.parse(localStorage.getItem('jobs')) || [];
+            const job = jobs.find(j => j.title === jobTitle);
+            const jobId = job ? job.id : Date.now(); // Fallback if not found (should not happen)
+
+            setTimeout(() => {
+                // Creates Application Object
+                const application = {
+                    id: Date.now(),
+                    jobId: jobId,
+                    jobTitle: jobTitle,
+                    name: form.querySelector('input[type="text"]').value,
+                    email: form.querySelector('input[type="email"]').value,
+                    phone: "N/A", // Add phone field if needed, for now N/A
+                    resumeLink: "https://drive.google.com/open?id=demo_resume_" + Date.now(), // Simulated Link
+                    appliedDate: Date.now()
+                };
+
+                // Save to LocalStorage
+                const apps = JSON.parse(localStorage.getItem('applications')) || [];
+                apps.push(application);
+                localStorage.setItem('applications', JSON.stringify(apps));
+
+                // Cleanup UI
+                closeModal();
+                btn.innerText = originalText;
+                btn.disabled = false;
+
+                // Show Success Toast
+                const toast = document.getElementById('successToast');
+                toast.style.display = 'block';
+                setTimeout(() => {
+                    toast.style.display = 'none';
+                }, 3000);
+
+                form.reset();
+                document.getElementById('fileName').innerText = "";
+            }, 1500);
+        }
+    </script>
+
+    <!-- Standard Footer -->
+    <footer>
+        <div class="container">
+            <div
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-bottom: 40px;">
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Compliance Tools</h4>
+                    <ul>
+                        <li><a href="calculator-pf.html">PF Calculator</a></li>
+                        <li><a href="calculator-esic.html">ESIC Calculator</a></li>
+                        <li><a href="calculator-tds.html">TDS Calculator</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Legal & Privacy</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms</a></li>
+                        <li><a href="https://unifiedportal-mem.epfindia.gov.in" target="_blank">EPFO</a></li>
+                        <li><a href="https://www.esic.in" target="_blank">ESIC</a></li>
+                    </ul>
+                    <p style="margin-top:20px; font-size: 0.8rem; color: var(--text-tertiary);">Disclaimer: Calculations
+                        are indicative. Actual statutory deductions may vary.</p>
+                </div>
+            </div>
+            <div
+                style="text-align: center; padding-top: 40px; border-top: 1px solid var(--border-subtle); color: var(--text-tertiary);">
+                &copy; 2026 TeamWork Solutions | Payroll & Compliance Experts
+            </div>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/919518842774" class="whatsapp-float" target="_blank"><i
+            class="ph-fill ph-whatsapp-logo"></i></a>
+    <script src="js/main.js"></script>
+
+    <script src="js/loader.js"></script>
+</body>
+
+</html>

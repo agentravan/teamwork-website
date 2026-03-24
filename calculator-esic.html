@@ -1,0 +1,209 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESIC Calculator | TeamWork Solutions</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/mega-menu.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="css/header-premium.css">
+</head>
+
+<body>
+    <!-- PRELOADER (Brand Logo) -->
+    <div id="page-loader">
+        <div class="loader-brand">
+            <div class="brand-icon-loader"><i class="ph-fill ph-users-three"></i></div>
+            <div class="brand-logo-text">TeamWork</div>
+            <div class="brand-tagline">together we can do so much</div>
+        </div>
+    </div>
+    <div id="global-header-container"></div>
+
+
+
+    <header class="section-padding" style="padding-top: 140px; text-align: center;">
+        <div class="container">
+            <h1 class="fade-up" style="margin-bottom: 24px;">ESIC <span class="text-gradient">Calculator</span></h1>
+            <p class="fade-up" style="color: var(--text-secondary);">Employee State Insurance Act, 1948. Latest
+                Contribution Rates.</p>
+        </div>
+    </header>
+
+    <main>
+        <section class="section-padding">
+            <div class="container">
+                <div class="glass-panel" style="padding: 40px; max-width: 900px; margin: 0 auto;">
+
+                    <!-- Legal Info -->
+                    <div
+                        style="background: rgba(59, 130, 246, 0.1); padding: 20px; border-left: 4px solid var(--primary); margin-bottom: 30px; border-radius: 8px;">
+                        <h4 style="color: var(--primary); margin-bottom: 10px;">Eligibility & Rates (2025-26)</h4>
+                        <ul style="font-size: 0.9rem; color: var(--text-secondary); list-style-position: inside;">
+                            <li>Applicable if Gross Salary ≤ ₹21,000 (Monthly).</li>
+                            <li>Employee Contribution: 0.75% of Gross.</li>
+                            <li>Employer Contribution: 3.25% of Gross.</li>
+                        </ul>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px;">
+                        <!-- Input -->
+                        <div>
+                            <h3 style="margin-bottom: 20px;">Input</h3>
+
+                            <div class="form-group" style="margin-bottom: 20px;">
+                                <label style="display: block; margin-bottom: 8px;">Gross Monthly Salary</label>
+                                <input type="number" id="esicGross" value="18000"
+                                    style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
+                            </div>
+
+                            <!-- Daily Wage Toggle for optional exemption case mentioned in Blueprint (Daily < 176) 
+                                 Blueprint said "If daily wage < 176 -> employee exempted". 
+                                 Let's keep it simple as "Standard" vs "Exempted" if user wants? 
+                                 User Blueprint said "INPUT: Gross Monthly Salary". That's all. 
+                                 I will handle the logic internally based on standard 21k rule.
+                            -->
+
+                            <button onclick="calculateESIC()" class="btn btn-primary"
+                                style="width: 100%;">Calculate</button>
+                        </div>
+
+                        <!-- Output -->
+                        <div id="esicResult"
+                            style="background: rgba(255,255,255,0.02); padding: 30px; border-radius: 12px; border: 1px solid var(--border-subtle);">
+                            <h3 style="margin-bottom: 20px; color: var(--text-primary);">Calculations</h3>
+
+                            <!-- Eligibility Flag -->
+                            <div id="esicAlert"
+                                style="display: none; background: rgba(239, 68, 68, 0.1); color: #ef4444; padding: 10px; border-radius: 8px; font-size: 0.9rem; margin-bottom: 20px;">
+                                Not Eligible (Gross > ₹21,000)
+                            </div>
+
+                            <div id="esicBreakdown">
+                                <div style="margin-bottom: 25px;">
+                                    <h4 style="color: var(--service); font-size: 0.9rem; margin-bottom: 10px;">Employee
+                                        Share (0.75%)</h4>
+                                    <div
+                                        style="display: flex; justify-content: space-between; font-weight: 600; color: white;">
+                                        <span>Deduction</span>
+                                        <span id="outEsicEmp">₹ 0</span>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <h4 style="color: var(--accent); font-size: 0.9rem; margin-bottom: 10px;">Employer
+                                        Share (3.25%)</h4>
+                                    <div
+                                        style="display: flex; justify-content: space-between; font-weight: 600; color: white;">
+                                        <span>Contribution</span>
+                                        <span id="outEsicEmplr">₹ 0</span>
+                                    </div>
+                                    <div
+                                        style="display: flex; justify-content: space-between; padding-top: 15px; margin-top: 15px; border-top: 1px dashed var(--border-subtle);">
+                                        <span style="color: var(--text-secondary);">Total Statutory Cost</span>
+                                        <span style="color: var(--accent); font-weight: 700;" id="outEsicTotal">₹
+                                            0</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Links -->
+                <div style="text-align: center; margin-top: 40px; font-size: 0.9rem;">
+                    <a href="https://www.esic.in" target="_blank"
+                        style="color: var(--text-secondary); margin: 0 15px;">ESIC Official Portal</a>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- Standard Footer -->
+    <footer>
+        <div class="container">
+            <div
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-bottom: 40px;">
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Compliance Tools</h4>
+                    <ul>
+                        <li><a href="calculator-pf.html">PF Calculator</a></li>
+                        <li><a href="calculator-esic.html">ESIC Calculator</a></li>
+                        <li><a href="calculator-tds.html">TDS Calculator</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Legal & Privacy</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms</a></li>
+                        <li><a href="https://unifiedportal-mem.epfindia.gov.in" target="_blank">EPFO</a></li>
+                        <li><a href="https://www.esic.in" target="_blank">ESIC</a></li>
+                    </ul>
+                    <p style="margin-top:20px; font-size: 0.8rem; color: var(--text-tertiary);">Disclaimer: Calculations
+                        are indicative. Actual statutory deductions may vary.</p>
+                </div>
+            </div>
+            <div
+                style="text-align: center; padding-top: 40px; border-top: 1px solid var(--border-subtle); color: var(--text-tertiary);">
+                &copy; 2026 TeamWork Solutions | Payroll & Compliance Experts
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        function calculateESIC() {
+            const gross = parseFloat(document.getElementById('esicGross').value) || 0;
+            const breakdown = document.getElementById('esicBreakdown');
+            const alertBox = document.getElementById('esicAlert');
+
+            if (gross > 21000) {
+                alertBox.style.display = 'block';
+                breakdown.style.opacity = '0.3'; // Dim it
+                // Set zero?
+                // Usually statutory calc shows 0 if ineligible.
+                document.getElementById('outEsicEmp').innerText = "₹ 0";
+                document.getElementById('outEsicEmplr').innerText = "₹ 0";
+                document.getElementById('outEsicTotal').innerText = "₹ 0";
+                return;
+            }
+
+            alertBox.style.display = 'none';
+            breakdown.style.opacity = '1';
+
+            // Calc
+            // ESIC is rounded to next rupee sometimes, but standard math.round or ceil?
+            // Regulation 31C: Contribution rounded to next higher rupee.
+            const empShare = Math.ceil(gross * 0.0075);
+            const emplrShare = Math.ceil(gross * 0.0325);
+            const total = empShare + emplrShare;
+
+            document.getElementById('outEsicEmp').innerText = "₹ " + empShare.toLocaleString();
+            document.getElementById('outEsicEmplr').innerText = "₹ " + emplrShare.toLocaleString();
+            document.getElementById('outEsicTotal').innerText = "₹ " + total.toLocaleString();
+        }
+
+        // Init
+        calculateESIC();
+    </script>
+    <script src="js/unified-header.js"></script>
+    <script src="js/loader.js"></script>
+</body>
+
+</html>
