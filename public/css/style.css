@@ -1,0 +1,574 @@
+/* =========================================
+   TEAMWORK SOLUTIONS - ENTERPRISE DESIGN SYSTEM 3.0
+   ========================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+:root {
+    /* -- Colors: Dual Brand Identity -- */
+    --bg-deep: #020617;
+    /* Deepest Slate */
+    --bg-surface: #0f172a;
+    /* Slate 900 */
+
+    --primary: #3b82f6;
+    /* HRMS Blue */
+    --primary-glow: rgba(59, 130, 246, 0.4);
+
+    --service: #10b981;
+    /* Consultancy Green */
+    --service-glow: rgba(16, 185, 129, 0.4);
+
+    --accent: #f59e0b;
+    /* Gold for Pricing/Trust */
+
+    --text-white: #ffffff;
+    --text-primary: #f1f5f9;
+    --text-secondary: #94a3b8;
+    --text-tertiary: #64748b;
+
+    --border-subtle: rgba(255, 255, 255, 0.08);
+    --border-highlight: rgba(255, 255, 255, 0.15);
+
+    /* -- System -- */
+    --glass-blur: blur(12px);
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 20px;
+    --header-height: 80px;
+    --max-width: 1200px;
+}
+
+/* -- Reset & Core -- */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-deep);
+    color: var(--text-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* -- Typography -- */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Space Grotesk', sans-serif;
+    color: var(--text-white);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+}
+
+h1 {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+}
+
+h2 {
+    font-size: clamp(2rem, 4vw, 2.8rem);
+}
+
+h3 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+}
+
+.text-gradient {
+    background: linear-gradient(135deg, #fff 0%, var(--primary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* -- Layout -- */
+.container {
+    width: 90%;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.section-padding {
+    padding: 80px 0;
+}
+
+/* -- Components -- */
+.glass-panel {
+    background: rgba(30, 41, 59, 0.4);
+    backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.glass-panel:hover {
+    border-color: var(--border-highlight);
+    transform: translateY(-5px);
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 28px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-decoration: none;
+    gap: 8px;
+    border: 1px solid transparent;
+}
+
+.btn-primary {
+    background: #2563eb;
+    /* Matching the bright blue from image */
+    color: white;
+    border: 1px solid #2563eb;
+    padding: 10px 24px;
+    /* Pill shape */
+    font-weight: 600;
+}
+
+.btn-primary:hover {
+    background: #1d4ed8;
+    border-color: #1d4ed8;
+    transform: translateY(-2px);
+}
+
+.btn-service {
+    background: var(--service);
+    color: white;
+}
+
+.btn-service:hover {
+    background: #059669;
+    transform: translateY(-2px);
+}
+
+.btn-outline {
+    background: transparent;
+    border-color: var(--border-subtle);
+    color: var(--text-white);
+}
+
+.btn-outline:hover {
+    border-color: var(--text-white);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.btn-ghost {
+    background: #0f172a;
+    /* Dark background as seen in image */
+    color: var(--text-white);
+    padding: 10px 24px;
+    /* Matching size */
+    font-weight: 600;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.btn-ghost:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+    color: white;
+}
+
+
+/* -- LOCKED HEADER STYLES (FINAL) -- */
+.site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    background: rgba(2, 6, 23, 0.95);
+    /* Consistent dark background */
+    border-bottom: 1px solid var(--border-subtle);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+}
+
+.nav-container {
+    width: 90%;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    /* Horizontal alignment */
+    align-items: center;
+    gap: 8px;
+    /* Gap between text parts */
+    line-height: 1;
+}
+
+/* Optional: If we want to add an icon without HTML changes, we could use ::before, 
+   but currently the HTML structure is text based. 
+   Let's just refine the "TeamWork" part vs "Solutions" part */
+
+.logo span {
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+    color: #cbd5e1;
+    /* Lighter Slate for better visibility */
+    text-transform: capitalize;
+    font-weight: 400;
+    padding-left: 8px;
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
+    /* Vertical divider */
+    line-height: 1.2;
+}
+
+.main-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.main-nav>ul {
+    display: flex;
+    gap: 24px;
+}
+
+.main-nav a {
+    text-decoration: none;
+    color: var(--text-secondary);
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: color 0.2s;
+}
+
+.main-nav a:hover {
+    color: white;
+}
+
+/* -- LOCKED DROPDOWN CSS -- */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #0b1220;
+    min-width: 220px;
+    display: none;
+    z-index: 2000;
+    border-radius: 8px;
+    padding: 10px 0;
+    border: 1px solid var(--border-subtle);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.dropdown-menu li a {
+    display: block;
+    padding: 10px 20px;
+    color: #cfd3ff;
+    font-size: 14px;
+}
+
+.dropdown-menu li a:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+/* -- MOBILE HEADER FIX -- */
+.hamburger {
+    display: none;
+    font-size: 26px;
+    color: #fff;
+    cursor: pointer;
+}
+
+@media (max-width: 992px) {
+
+    /* Trigger mobile menu slightly earlier for better tablet support */
+    .main-nav {
+        display: none;
+        /* Hidden by default on mobile */
+    }
+
+    .hamburger {
+        display: block;
+    }
+
+    .main-nav {
+        position: absolute;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        background: rgba(2, 6, 23, 0.98);
+        border-bottom: 1px solid var(--border-subtle);
+        padding-bottom: 20px;
+        backdrop-filter: blur(20px);
+        height: auto;
+        /* Allow content to dictate height */
+        max-height: calc(100vh - 80px);
+        overflow-y: auto;
+    }
+
+    .main-nav>ul {
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .dropdown-menu {
+        position: static;
+        /* Stack naturally on mobile */
+        background: rgba(255, 255, 255, 0.02);
+        box-shadow: none;
+        border: none;
+        min-width: 100%;
+        text-align: center;
+        display: none;
+        /* Still hidden by default */
+    }
+
+    .dropdown:hover .dropdown-menu {
+        display: block;
+        /* Simple hover for now, or use JS click for mobile dropdowns specifically if needed */
+    }
+
+    .main-nav.show {
+        display: block;
+    }
+
+    /* Ensure mobile actions are visible in the menu */
+    .mobile-action-item {
+        display: block !important;
+        margin-top: 20px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .mobile-actions-clone {
+        display: flex !important;
+        flex-direction: column;
+        gap: 12px;
+        align-items: center;
+        width: 100%;
+    }
+
+    .mobile-actions-clone .btn {
+        width: 100%;
+        max-width: 250px;
+        /* Prevent full width buttons affecting extensive layout */
+        justify-content: center;
+    }
+}
+
+/* STRICT MOBILE ACTIONS */
+.nav-actions {
+    display: none;
+    /* Hide original container on mobile, moved inside menu via JS or just stacked */
+}
+
+/* ALWAYS VISIBLE ON DESKTOP */
+@media (min-width: 993px) {
+    .nav-actions {
+        display: flex !important;
+        align-items: center;
+        gap: 16px;
+        /* Space between buttons */
+    }
+}
+
+/* -- Animations -- */
+.fade-up {
+    animation: fadeUp 0.8s ease-out forwards;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+@keyframes fadeUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* -- WhatsApp Floating -- */
+.whatsapp-float {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 60px;
+    height: 60px;
+    background: #25D366;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 32px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    z-index: 999;
+    transition: transform 0.3s;
+}
+
+.whatsapp-float:hover {
+    transform: scale(1.1);
+}
+
+/* -- Footer -- */
+footer {
+    background: #020617;
+    border-top: 1px solid var(--border-subtle);
+    padding: 60px 0 30px;
+    font-size: 0.9rem;
+    color: var(--text-tertiary);
+}
+
+.footer-col h4 {
+    margin-bottom: 20px;
+    color: white;
+}
+
+.footer-col ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.footer-col a {
+    color: var(--text-tertiary);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.footer-col a:hover {
+    color: var(--text-primary);
+}
+
+/* -- FIX: Hide Mobile Cloned Actions on Desktop -- */
+@media (min-width: 993px) {
+
+    .mobile-actions-clone,
+    .mobile-action-item {
+        display: none !important;
+    }
+}
+
+/* -- PROFESSIONAL HEADER ENHANCEMENTS -- */
+.site-header {
+    background: rgba(2, 6, 23, 0.85);
+    /* Slightly more transparent */
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    /* Stronger blur */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    /* Slightly brighter border */
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+    /* Stronger shadow for depth */
+}
+
+.nav-container {
+    height: 80px;
+    /* Enforce height */
+}
+
+/* Refined Nav Links */
+.main-nav a {
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 0.2px;
+    color: #94a3b8;
+    padding: 8px 12px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+.main-nav a:hover,
+.main-nav a.active {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.05);
+    /* Proper pill on hover */
+}
+
+/* Login Button -> Professional Outline Pill */
+.btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 24px;
+    /* Match primary button */
+    border-radius: 50px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    /* Subtle Border */
+    transition: all 0.2s ease;
+    text-decoration: none;
+    backdrop-filter: blur(4px);
+    box-shadow: none;
+    gap: 0;
+}
+
+.btn-ghost:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: #fff;
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Primary CTA -> Gradient & Glow */
+.btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    border: none;
+    box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
+    padding: 10px 24px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: white;
+    border-radius: 50px;
+    /* Ensure Pill Shape */
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.5);
+    border-color: transparent;
+}

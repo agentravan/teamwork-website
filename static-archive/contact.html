@@ -1,0 +1,224 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | TeamWork Solutions</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/mega-menu.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="css/header-premium.css">
+</head>
+
+<body>
+    <!-- PRELOADER (Brand Logo) -->
+    <div id="page-loader">
+        <div class="loader-brand">
+            <div class="brand-icon-loader"><i class="ph-fill ph-users-three"></i></div>
+            <div class="brand-logo-text">TeamWork</div>
+            <div class="brand-tagline">together we can do so much</div>
+        </div>
+    </div>
+    <div id="global-header-container"></div>
+
+
+
+    <!-- HEADER -->
+    <header class="section-padding" style="padding-top: 180px; text-align: center;">
+        <div class="container">
+            <h1 class="fade-up" style="margin-bottom: 24px;">Let's Simplify Your <span class="text-gradient">HR
+                    Journey</span></h1>
+            <p class="fade-up" style="color: var(--text-secondary); max-width: 600px; margin: 0 auto;">
+                Whether you are a startup, a growing business, or an enterprise—we are ready to engage.
+            </p>
+        </div>
+    </header>
+
+    <main>
+        <section class="section-padding">
+            <div class="container">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px;">
+
+                    <!-- Contact Info -->
+                    <div class="glass-panel fade-up" style="padding: 60px; text-align: left;">
+                        <h3 style="margin-bottom: 30px;">Contact Details</h3>
+
+                        <div style="margin-bottom: 40px; display: flex; gap: 20px; align-items: start;">
+                            <i class="ph-fill ph-phone" style="font-size: 32px; color: var(--primary);"></i>
+                            <div>
+                                <h4 style="color: var(--text-primary); margin-bottom: 5px;">Phone</h4>
+                                <p style="font-size: 1.1rem; color: white;">+91 95188 42774</p>
+                                <p style="font-size: 0.9rem; color: var(--text-secondary);">(WhatsApp Available)</p>
+                            </div>
+                        </div>
+
+                        <div style="margin-bottom: 40px; display: flex; gap: 20px; align-items: start;">
+                            <i class="ph-fill ph-envelope" style="font-size: 32px; color: var(--primary);"></i>
+                            <div>
+                                <h4 style="color: var(--text-primary); margin-bottom: 5px;">Email</h4>
+                                <p style="font-size: 1.1rem; color: white;">teamwork.hrsolution@zohomail.in</p>
+                            </div>
+                        </div>
+
+                        <div style="margin-bottom: 40px; display: flex; gap: 20px; align-items: start;">
+                            <i class="ph-fill ph-map-pin" style="font-size: 32px; color: var(--primary);"></i>
+                            <div>
+                                <h4 style="color: var(--text-primary); margin-bottom: 5px;">Location</h4>
+                                <p style="font-size: 1.1rem; color: white;">Jind, Haryana</p>
+                                <p style="font-size: 0.9rem; color: var(--text-secondary);">(Serving Clients Across
+                                    India)</p>
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 40px;">
+                            <h4 style="margin-bottom: 16px;">Engagement Options</h4>
+                            <ul style="display: grid; gap: 10px; color: var(--text-secondary);">
+                                <li>• Free compliance discussion</li>
+                                <li>• Payroll assessment</li>
+                                <li>• HRMS demo</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Contact Form (Zoho) -->
+                    <div class="glass-panel fade-up" style="padding: 40px;">
+                        <h3 style="margin-bottom: 24px;">Start a Conversation</h3>
+
+                        <form id="zohoContactForm"
+                            action="https://forms.zoho.in/teamworkhrsolutionzoho1/form/TeamWorkContactUs" method="POST"
+                            target="hiddenContactFrame" onsubmit="handleContactSubmit(event)">
+                            <div class="form-group" style="margin-bottom: 16px;">
+                                <label style="display: block; margin-bottom: 8px; font-size: 0.9rem;">Full Name
+                                    *</label>
+                                <input type="text" name="Name_First" required
+                                    style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
+                            </div>
+                            <div class="form-group" style="margin-bottom: 16px;">
+                                <label style="display: block; margin-bottom: 8px; font-size: 0.9rem;">Company *</label>
+                                <input type="text" name="SingleLine" required
+                                    style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
+                            </div>
+                            <div class="form-group" style="margin-bottom: 16px;">
+                                <label style="display: block; margin-bottom: 8px; font-size: 0.9rem;">Email *</label>
+                                <input type="email" name="Email" required
+                                    style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
+                            </div>
+                            <div class="form-group" style="margin-bottom: 16px;">
+                                <label style="display: block; margin-bottom: 8px; font-size: 0.9rem;">Phone *</label>
+                                <input type="text" name="PhoneNumber" required
+                                    style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
+                            </div>
+                            <div class="form-group" style="margin-bottom: 24px;">
+                                <label style="display: block; margin-bottom: 8px; font-size: 0.9rem;">Message</label>
+                                <textarea name="MultiLine" rows="4"
+                                    style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: white; border-radius: 8px;"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+                        </form>
+
+                        <iframe name="hiddenContactFrame" style="display:none;"
+                            onload="handleContactFrameLoad()"></iframe>
+
+                        <div id="contactSuccessMessage"
+                            style="display: none; text-align: center; margin-top: 20px; color: var(--service);">
+                            <i class="ph-fill ph-check-circle" style="font-size: 40px; margin-bottom: 10px;"></i>
+                            <h3>Message Sent!</h3>
+                            <p>We will get back to you shortly.</p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 50px; margin-bottom: 60px;">
+                <div class="footer-col">
+                    <h4 style="margin-bottom: 24px;">Let's Simplify Your HR Journey</h4>
+                    <ul style="gap: 16px;">
+                        <li style="display: flex; gap: 12px; align-items: flex-start; color: var(--text-secondary);">
+                            <i class="ph-fill ph-phone"
+                                style="color: var(--primary); font-size: 1.2rem; margin-top: 2px;"></i>
+                            <div>
+                                <span style="display: block; color: white;">+91 95188 42774</span>
+                                <span style="font-size: 0.85rem;">(WhatsApp Available)</span>
+                            </div>
+                        </li>
+                        <li style="display: flex; gap: 12px; align-items: flex-start; color: var(--text-secondary);">
+                            <i class="ph-fill ph-envelope"
+                                style="color: var(--primary); font-size: 1.2rem; margin-top: 2px;"></i>
+                            <div>
+                                <span style="display: block; color: white;">teamwork.hrsolution@zohomail.in</span>
+                            </div>
+                        </li>
+                        <li style="display: flex; gap: 12px; align-items: flex-start; color: var(--text-secondary);">
+                            <i class="ph-fill ph-map-pin"
+                                style="color: var(--primary); font-size: 1.2rem; margin-top: 2px;"></i>
+                            <div>
+                                <span style="display: block; color: white;">Jind, Haryana</span>
+                                <span style="font-size: 0.85rem;">(Serving Clients Across India)</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4 style="margin-bottom: 24px;">Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="global-hrx.html">Global HRX</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col"
+                    style="display: flex; align-items: center; justify-content: center; text-align: center;">
+                    <div>
+                        <div
+                            style="font-family: 'Space Grotesk'; font-size: 1.5rem; font-weight: 700; color: white; margin-bottom: 10px;">
+                            TeamWork Solutions</div>
+                        <p style="font-style: italic; color: var(--text-tertiary);">Together, We Can Do So Much.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div
+                style="text-align: center; padding-top: 40px; border-top: 1px solid var(--border-subtle); color: var(--text-tertiary); font-size: 0.9rem;">
+                &copy; 2026 TeamWork Solutions. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/unified-header.js"></script>
+    <script>
+        let contactSubmitted = false;
+        function handleContactSubmit(event) {
+            const btn = event.target.querySelector('button');
+            btn.innerHTML = '<i class="ph-bold ph-spinner ph-spin"></i> Sending...';
+            btn.disabled = true;
+            contactSubmitted = true;
+        }
+
+        function handleContactFrameLoad() {
+            if (contactSubmitted) {
+                document.getElementById('zohoContactForm').style.display = 'none';
+                document.getElementById('contactSuccessMessage').style.display = 'block';
+            }
+        }
+    </script>
+    <script src="js/loader.js"></script>
+</body>
+
+</html>

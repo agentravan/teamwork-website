@@ -1,0 +1,132 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Details | TeamWork Solutions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/header-premium.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+
+<body>
+    <!-- PRELOADER (Brand Logo) -->
+    <div id="page-loader">
+        <div class="loader-brand">
+            <div class="brand-icon-loader"><i class="ph-fill ph-users-three"></i></div>
+            <div class="brand-logo-text">TeamWork</div>
+            <div class="brand-tagline">together we can do so much</div>
+        </div>
+    </div>
+    <div id="global-header-container"></div>
+
+    <main id="details-container" style="min-height: 80vh; padding-top: 150px;">
+        <!-- CONTENT LOADED VIA JS -->
+        <div style="text-align: center; color: white;">Loading Service Details...</div>
+    </main>
+
+    <script src="js/service-store.js"></script>
+    <script src="js/unified-header.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const id = params.get('id');
+            const pageId = params.get('page'); // View sub-page
+
+            const service = ServiceStore.getServiceById(id);
+
+            if (!service) {
+                // ... Error handling ...
+            }
+
+            // Default to first page if not specified
+            const activePageId = pageId || service.subPages[0].id;
+            const activePage = service.subPages.find(p => p.id === activePageId) || service.subPages[0];
+
+            document.title = `${activePage.title} - ${service.name} | TeamWork Solutions`;
+
+            document.getElementById('details-container').innerHTML = `
+                <div class="container">
+                    <div style="margin-bottom: 30px; display: flex; align-items: center; justify-content: space-between;">
+                        <div>
+                             <a href="services.html" style="color: var(--text-secondary); text-decoration: none; display: inline-flex; align-items: center; gap: 5px; margin-bottom: 10px;">
+                                <i class="ph-bold ph-arrow-left"></i> Back to Services
+                            </a>
+                            <div style="display: flex; align-items: center; gap: 15px;">
+                                <i class="ph-duotone ${service.icon}" style="font-size: 48px; color: var(--primary);"></i>
+                                <div>
+                                    <h1 style="font-size: 2.5rem; line-height: 1;">${service.name}</h1>
+                                    <span style="color: var(--text-secondary);">${service.category}</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <a href="pricing-plans.html?service=${service.id}" class="btn btn-primary">
+                            See Pricing Plans <i class="ph-bold ph-arrow-right"></i>
+                        </a>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 280px 1fr; gap: 40px; align-items: start;">
+                        <!-- SIDEBAR NAV -->
+                        <div style="background: rgba(30, 41, 59, 0.4); border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); overflow: hidden; position: sticky; top: 120px;">
+                            ${service.subPages.map(page => `
+                                <a href="?id=${service.id}&page=${page.id}" 
+                                   class="sub-page-link ${page.id === activePageId ? 'active' : ''}"
+                                   style="display: block; padding: 15px 20px; color: ${page.id === activePageId ? 'white' : '#94a3b8'}; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.05); background: ${page.id === activePageId ? 'var(--primary)' : 'transparent'};">
+                                    ${page.title}
+                                </a>
+                            `).join('')}
+                        </div>
+
+                        <!-- CONTENT AREA -->
+                        <div style="background: rgba(30, 41, 59, 0.2); padding: 40px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.05); min-height: 500px;">
+                            <h2 style="margin-bottom: 20px; font-size: 2rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px;">${activePage.title}</h2>
+                            <div class="typography" style="color: var(--text-secondary); line-height: 1.8; font-size: 1.1rem;">
+                                ${activePage.content}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+    </script>
+    <style>
+        .typography h3 {
+            color: white;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        .typography h4 {
+            color: #e2e8f0;
+            margin-top: 25px;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .typography ul,
+        .typography ol {
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .typography li {
+            margin-bottom: 10px;
+        }
+
+        .sub-page-link:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+        }
+    </style>
+    <div id="global-footer-container"></div>
+    <script src="js/service-store.js"></script>
+    <script src="js/unified-header.js"></script>
+    <script src="js/unified-footer.js"></script>
+    <script src="js/loader.js"></script>
+</body>
+
+</html>

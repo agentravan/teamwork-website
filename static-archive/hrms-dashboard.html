@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global HRX | Enterprise Dashboard</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+
+<body>
+    <!-- PRELOADER (Brand Logo) -->
+    <div id="page-loader">
+        <div class="loader-brand">
+            <div class="brand-icon-loader"><i class="ph-fill ph-users-three"></i></div>
+            <div class="brand-logo-text">TeamWork</div>
+            <div class="brand-tagline">together we can do so much</div>
+        </div>
+    </div>
+
+    <!-- HRMS HEADER -->
+    <nav class="navbar"
+        style="background: rgba(15, 23, 42, 0.95); border-bottom: 1px solid var(--border-subtle); position: fixed; width: 100%; top: 0; z-index: 1000;">
+        <div class="container nav-content" style="max-width: 100%; padding: 0 30px;">
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <i class="ph-bold ph-list sidebar-toggle"
+                    style="font-size: 24px; color: white; cursor: pointer; display: none;"></i>
+                <a href="https://teamwork-website.vercel.app/" class="back-link"
+                    style="color: var(--text-tertiary); text-decoration: none; font-size: 0.9rem; display: flex; align-items: center; gap: 5px; margin-right: 15px;">
+                    <i class="ph-bold ph-arrow-left"></i> Website
+                </a>
+                <a href="#" class="logo">
+                    <i class="ph-fill ph-hexagon" style="color: var(--primary);"></i>
+                    Global HRX <span
+                        style="font-size: 0.8rem; color: #10b981; margin-left: 5px; background: rgba(16, 185, 129, 0.2); padding: 2px 6px; border-radius: 4px;">ENTERPRISE</span>
+                </a>
+            </div>
+            <div style="display: flex; gap: 20px; align-items: center;">
+                <div style="position: relative; cursor: pointer;">
+                    <i class="ph-fill ph-bell" style="color: white; font-size: 20px;"></i>
+                    <span
+                        style="position: absolute; top: -5px; right: -5px; width: 8px; height: 8px; background: #ef4444; border-radius: 50%;"></span>
+                </div>
+                <div
+                    style="display: flex; align-items: center; gap: 10px; padding-left: 20px; border-left: 1px solid rgba(255,255,255,0.1);">
+                    <div
+                        style="width: 32px; height: 32px; background: linear-gradient(135deg, var(--primary), var(--accent)); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white;">
+                        <span style="font-weight: 700; font-size: 0.9rem;">HB</span>
+                    </div>
+                    <div style="display: flex; flex-direction: column;">
+                        <span style="color: white; font-size: 0.9rem; font-weight: 500;">Harshit Bhardwaj</span>
+                        <span style="color: var(--text-tertiary); font-size: 0.75rem;">Super Admin</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- DYNAMIC SIDEBAR -->
+    <div id="dynamic-sidebar" class="sidebar">
+        <!-- Sidebar content injected by dashboard.js -->
+        <div style="padding: 20px; text-align: center; color: var(--text-tertiary);">
+            Loading Modules...
+        </div>
+    </div>
+
+    <!-- DYNAMIC DASHBOARD CONTENT -->
+    <div id="dynamic-content" class="dashboard-content">
+        <!-- Content injected by dashboard.js -->
+        <div style="display: flex; align-items: center; justify-content: center; height: 50vh;">
+            <p style="color: var(--text-tertiary);">Loading Dashboard Environment...</p>
+        </div>
+    </div>
+
+    <script src="js/hrms-state.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/loader.js"></script>
+</body>
+
+</html>

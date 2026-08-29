@@ -1,0 +1,127 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Request Access | TeamWork Solutions</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/mega-menu.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="css/header-premium.css">
+    <style>
+        /* Logic: Hide Request Access Button in Header */
+        .btn-primary[href="request-access.html"] {
+            display: none !important;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- PRELOADER (Brand Logo) -->
+    <div id="page-loader">
+        <div class="loader-brand">
+            <div class="brand-icon-loader"><i class="ph-fill ph-users-three"></i></div>
+            <div class="brand-logo-text">TeamWork</div>
+            <div class="brand-tagline">together we can do so much</div>
+        </div>
+    </div>
+    <div id="global-header-container"></div>
+
+
+
+    <main style="min-height: 100vh; display: flex; align-items: center; justify-content: center; padding-top: 80px;">
+        <div class="glass-panel" style="width: 100%; max-width: 500px; padding: 40px;">
+            <div style="text-align: center; margin-bottom: 30px;">
+                <i class="ph-duotone ph-key" style="font-size: 48px; color: var(--service); margin-bottom: 15px;"></i>
+                <h2 style="color: white; font-size: 1.5rem;">Request Access</h2>
+                <p style="color: var(--text-secondary); font-size: 0.9rem;">Join the TeamWork Enterprise Ecosystem.</p>
+            </div>
+
+            <form id="access-form" onsubmit="handleRequestSubmit(event)">
+                <div class="form-group" style="margin-bottom: 20px;">
+                    <label style="display: block; margin-bottom: 8px; font-size: 0.9rem;">Work Email</label>
+                    <input type="email" id="req-email" placeholder="you@company.com" required
+                        style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
+                </div>
+                <div class="form-group" style="margin-bottom: 25px;">
+                    <label style="display: block; margin-bottom: 8px; font-size: 0.9rem;">Organization Name</label>
+                    <input type="text" id="req-org" placeholder="Company Ltd." required
+                        style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
+                </div>
+                <button type="submit" class="btn btn-service" style="width: 100%;">Submit Request</button>
+            </form>
+
+            <script>
+                function handleRequestSubmit(e) {
+                    e.preventDefault();
+                    const email = document.getElementById('req-email').value;
+                    const org = document.getElementById('req-org').value;
+
+                    const newRequest = {
+                        email: email,
+                        org: org,
+                        date: new Date().toLocaleString()
+                    };
+
+                    const existing = JSON.parse(localStorage.getItem('accessRequests') || '[]');
+                    existing.unshift(newRequest); // Add to top
+                    localStorage.setItem('accessRequests', JSON.stringify(existing));
+
+                    alert('Request submitted successfully! Our team will contact you shortly.');
+                    e.target.reset();
+                }
+            </script>
+        </div>
+    </main>
+
+    <!-- Standard Footer -->
+    <footer>
+        <div class="container">
+            <div
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-bottom: 40px;">
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Compliance Tools</h4>
+                    <ul>
+                        <li><a href="calculator-pf.html">PF Calculator</a></li>
+                        <li><a href="calculator-esic.html">ESIC Calculator</a></li>
+                        <li><a href="calculator-tds.html">TDS Calculator</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Legal & Privacy</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms</a></li>
+                        <li><a href="https://unifiedportal-mem.epfindia.gov.in" target="_blank">EPFO</a></li>
+                        <li><a href="https://www.esic.in" target="_blank">ESIC</a></li>
+                    </ul>
+                    <p style="margin-top:20px; font-size: 0.8rem; color: var(--text-tertiary);">Disclaimer: Calculations
+                        are indicative. Actual statutory deductions may vary.</p>
+                </div>
+            </div>
+            <div
+                style="text-align: center; padding-top: 40px; border-top: 1px solid var(--border-subtle); color: var(--text-tertiary);">
+                &copy; 2026 TeamWork Solutions | Payroll & Compliance Experts
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/unified-header.js"></script>
+    <script src="js/loader.js"></script>
+</body>
+
+</html>

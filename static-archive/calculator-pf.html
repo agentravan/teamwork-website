@@ -1,0 +1,424 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PF Calculator | TeamWork Solutions</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/mega-menu.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="css/header-premium.css">
+</head>
+
+<body>
+    <!-- PRELOADER (Brand Logo) -->
+    <div id="page-loader">
+        <div class="loader-brand">
+            <div class="brand-icon-loader"><i class="ph-fill ph-users-three"></i></div>
+            <div class="brand-logo-text">TeamWork</div>
+            <div class="brand-tagline">together we can do so much</div>
+        </div>
+    </div>
+    <div id="global-header-container"></div>
+
+
+
+    <header class="section-padding" style="padding-top: 140px; text-align: center;">
+        <div class="container">
+            <h1 class="fade-up" style="margin-bottom: 24px;">PF <span class="text-gradient">Calculator</span></h1>
+            <p class="fade-up" style="color: var(--text-secondary);">Compliant with EPF & MP Act, 1952. FY 2025-26
+                Ready.</p>
+        </div>
+    </header>
+
+    <main>
+        <section class="section-padding">
+            <div class="container">
+                <div class="glass-panel" style="padding: 40px; max-width: 900px; margin: 0 auto;">
+
+                    <!-- Legal Info -->
+                    <div
+                        style="background: rgba(59, 130, 246, 0.1); padding: 20px; border-left: 4px solid var(--primary); margin-bottom: 30px; border-radius: 8px;">
+                        <h4 style="color: var(--primary); margin-bottom: 10px;">Applicability & Rules</h4>
+                        <ul style="font-size: 0.9rem; color: var(--text-secondary); list-style-position: inside;">
+                            <li>Mandatory if Establishment ≥ 20 employees.</li>
+                            <li>Mandatory if Basic + DA ≤ ₹15,000.</li>
+                            <li>Interest Rate: ~8.25% (FY 23-24).</li>
+                        </ul>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px;">
+                        <!-- Input -->
+                        <div>
+                            <h3 style="margin-bottom: 20px;">Configuration</h3>
+
+                            <div class="form-group" style="margin-bottom: 20px;">
+                                <label style="display: block; margin-bottom: 8px;">Basic + DA (Monthly)</label>
+                                <input type="number" id="pfBasic" value="15000"
+                                    style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
+                            </div>
+
+                            <div class="form-group" style="margin-bottom: 20px;">
+                                <label style="display: block; margin-bottom: 8px;">PF Ceiling Applicable?</label>
+                                <select id="pfCeiling"
+                                    style="width: 100%; padding: 12px; background: #0f172a; border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
+                                    <option value="yes">Yes (Cap at ₹15,000)</option>
+                                    <option value="no">No (Full Basic)</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group" style="margin-bottom: 30px;">
+                                <label style="display: block; margin-bottom: 8px;">Employer Contribution Mode</label>
+                                <select id="pfMode"
+                                    style="width: 100%; padding: 12px; background: #0f172a; border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
+                                    <option value="12">12% (Standard)</option>
+                                    <option value="13">13% (Includes Admin Charges)</option>
+                                </select>
+                            </div>
+
+                            <button onclick="calculatePF()" class="btn btn-primary"
+                                style="width: 100%;">Calculate</button>
+                        </div>
+
+                        <!-- Output -->
+                        <div id="pfResult"
+                            style="background: rgba(255,255,255,0.02); padding: 30px; border-radius: 12px; border: 1px solid var(--border-subtle);">
+                            <h3 style="margin-bottom: 20px; color: var(--text-primary);">Breakdown</h3>
+
+                            <div style="margin-bottom: 25px;">
+                                <h4 style="color: var(--service); font-size: 0.9rem; margin-bottom: 10px;">Employee
+                                    Share</h4>
+                                <div
+                                    style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.9rem;">
+                                    <span style="color: var(--text-secondary);">EPF (12%)</span>
+                                    <span style="color: white; font-weight: 600;" id="outEmpPf">₹ 0</span>
+                                </div>
+                                <div
+                                    style="display: flex; justify-content: space-between; padding-top: 10px; border-top: 1px dashed var(--border-subtle);">
+                                    <span>Total Deduction</span>
+                                    <span style="color: var(--service); font-weight: 700;" id="outEmpTotal">₹ 0</span>
+                                </div>
+                            </div>
+
+                            <div>
+                                <h4 style="color: var(--accent); font-size: 0.9rem; margin-bottom: 10px;">Employer Share
+                                </h4>
+                                <div
+                                    style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.9rem;">
+                                    <span style="color: var(--text-secondary);">EPF (3.67%)</span>
+                                    <span style="color: white;" id="outEmplrEpf">₹ 0</span>
+                                </div>
+                                <div
+                                    style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.9rem;">
+                                    <span style="color: var(--text-secondary);">EPS (8.33%)</span>
+                                    <span style="color: white;" id="outEmplrEps">₹ 0</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.9rem; display: none;"
+                                    id="rowEdli">
+                                    <span style="color: var(--text-secondary);">Admin/EDLI (~1%)</span>
+                                    <span style="color: white;" id="outEmplrEdli">₹ 0</span>
+                                </div>
+                                <div
+                                    style="display: flex; justify-content: space-between; padding-top: 10px; border-top: 1px dashed var(--border-subtle);">
+                                    <span>Total Cost</span>
+                                    <span style="color: var(--accent); font-weight: 700;" id="outEmplrTotal">₹ 0</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Links -->
+                <div style="text-align: center; margin-top: 40px; font-size: 0.9rem;">
+                    <a href="https://unifiedportal-mem.epfindia.gov.in" target="_blank"
+                        style="color: var(--text-secondary); margin: 0 15px;">UAN Member Portal</a>
+                    <a href="https://unifiedportal-emp.epfindia.gov.in/epfo/" target="_blank" rel="noopener noreferrer"
+                        style="color: var(--text-secondary); margin: 0 15px;">EPFO Employer Unified Portal</a>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- MASTER CONTENT GUIDE (Added 2026) -->
+    <section class="section-padding" style="border-top: 1px solid var(--border-subtle);">
+        <div class="container" style="max-width: 800px;">
+            <h2 style="margin-bottom: 30px; text-align: center;">The Comprehensive Guide to EPF (2026 Edition)</h2>
+
+            <p style="color: var(--text-secondary); margin-bottom: 40px; text-align: center;">
+                The Employees’ Provident Fund (EPF) is India’s largest statutory social security system, administered by
+                the Employees’ Provident Fund Organisation (EPFO).
+                Originally designed as a retirement savings mechanism, EPF has evolved into a multi-pillar financial
+                safety net.
+            </p>
+
+            <!-- Part 1 -->
+            <div style="margin-bottom: 50px;">
+                <h3 style="color: var(--primary); margin-bottom: 20px;">🔹 PART 1: FOR EMPLOYEES – Securing Your Future
+                </h3>
+                <p style="color: var(--text-secondary); margin-bottom: 20px;">For employees, EPF is not merely a salary
+                    deduction—it is a high-yield, tax-efficient, government-backed investment.</p>
+
+                <h4 style="color: white; margin-bottom: 10px;">1️⃣ The Power of UAN (Universal Account Number)</h4>
+                <p style="color: var(--text-secondary); margin-bottom: 10px;">The UAN is a 12-digit permanent identifier
+                    allotted to every EPF member.</p>
+                <ul style="color: var(--text-secondary); margin-bottom: 20px; padding-left: 20px;">
+                    <li><strong>Portability:</strong> Seamlessly transfer PF when changing jobs</li>
+                    <li><strong>Self-Service:</strong> Update KYC (Aadhaar, PAN, Bank)</li>
+                    <li><strong>Digital Control:</strong> Download passbook & submit claims online via the <a
+                            href="https://unifiedportal-mem.epfindia.gov.in" target="_blank"
+                            style="color: var(--primary);">Member Portal</a>.</li>
+                </ul>
+
+                <h4 style="color: white; margin-bottom: 10px;">2️⃣ Contribution & Wealth Creation</h4>
+                <ul style="color: var(--text-secondary); margin-bottom: 20px; padding-left: 20px;">
+                    <li><strong>The 12% Rule:</strong> 12% of Basic + DA is deducted from salary every month.</li>
+                    <li><strong>Compounding Advantage:</strong> Interest Rate (FY 2024-25) is <strong>8.25%</strong>,
+                        higher than most FDs.</li>
+                    <li><strong>Tax Benefits:</strong> Section 80C deduction up to ₹1.5 lakh. Withdrawals tax-free after
+                        5 years.</li>
+                </ul>
+
+                <h4 style="color: white; margin-bottom: 10px;">3️⃣ The Three Pillars of Protection</h4>
+                <table class="modern-table"
+                    style="width:100%; margin-bottom:20px; text-align: left; border-collapse: separate; border-spacing: 0 5px;">
+                    <tr>
+                        <td
+                            style="padding:10px; background: rgba(255,255,255,0.05); color:white; border-radius: 4px 0 0 4px;">
+                            EPF</td>
+                        <td
+                            style="padding:10px; background: rgba(255,255,255,0.05); color:var(--text-secondary); border-radius: 0 4px 4px 0;">
+                            Lump sum retirement savings</td>
+                    </tr>
+                    <tr>
+                        <td
+                            style="padding:10px; background: rgba(255,255,255,0.05); color:white; border-radius: 4px 0 0 4px;">
+                            EPS</td>
+                        <td
+                            style="padding:10px; background: rgba(255,255,255,0.05); color:var(--text-secondary); border-radius: 0 4px 4px 0;">
+                            Lifelong monthly pension (after 10 years service)</td>
+                    </tr>
+                    <tr>
+                        <td
+                            style="padding:10px; background: rgba(255,255,255,0.05); color:white; border-radius: 4px 0 0 4px;">
+                            EDLI</td>
+                        <td
+                            style="padding:10px; background: rgba(255,255,255,0.05); color:var(--text-secondary); border-radius: 0 4px 4px 0;">
+                            Free life insurance up to ₹7 lakh (Employer Funded)</td>
+                    </tr>
+                </table>
+
+                <h4 style="color: white; margin-bottom: 10px;">4️⃣ New EPF Withdrawal Norms (2025–2026)</h4>
+                <ul style="color: var(--text-secondary); margin-bottom: 10px; padding-left: 20px;">
+                    <li><strong>Auto-Claims:</strong> Illness / Education claims up to ₹1 lakh processed in 3–4 days
+                        (AI-based).</li>
+                    <li><strong>Unemployment:</strong> 75% withdrawal after 1 month, remaining 25% after 2 months.</li>
+                    <li><strong>Retention Advisory:</strong> Members are encouraged to keep at least 25% balance for
+                        retirement security.</li>
+                </ul>
+            </div>
+
+            <!-- Part 2 -->
+            <div style="margin-bottom: 50px;">
+                <h3 style="color: var(--accent); margin-bottom: 20px;">🔹 PART 2: FOR EMPLOYERS – Compliance &
+                    Responsibility</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 20px;">EPF compliance is digital-first and
+                    non-negotiable. Any lapse can trigger penalties and criminal liability.</p>
+
+                <h4 style="color: white; margin-bottom: 10px;">1️⃣ Mandatory Coverage</h4>
+                <ul style="color: var(--text-secondary); margin-bottom: 20px; padding-left: 20px;">
+                    <li>Applicable to establishments with <strong>20+ employees</strong>.</li>
+                    <li>Once covered, it remains permanent even if headcount drops.</li>
+                </ul>
+
+                <h4 style="color: white; margin-bottom: 10px;">2️⃣ Employer Contribution Breakdown (Approx 13%)</h4>
+                <table class="modern-table"
+                    style="width:100%; margin-bottom:20px; text-align: left; border-collapse: separate; border-spacing: 0 5px;">
+                    <tr>
+                        <th style="padding:10px; color:var(--text-tertiary);">Component</th>
+                        <th style="padding:10px; color:var(--text-tertiary);">Rate</th>
+                    </tr>
+                    <tr>
+                        <td
+                            style="padding:10px; background: rgba(255,255,255,0.05); color:white; border-radius: 4px 0 0 4px;">
+                            EPF</td>
+                        <td
+                            style="padding:10px; background: rgba(255,255,255,0.05); color:var(--text-secondary); border-radius: 0 4px 4px 0;">
+                            3.67%</td>
+                    </tr>
+                    <tr>
+                        <td
+                            style="padding:10px; background: rgba(255,255,255,0.05); color:white; border-radius: 4px 0 0 4px;">
+                            EPS</td>
+                        <td
+                            style="padding:10px; background: rgba(255,255,255,0.05); color:var(--text-secondary); border-radius: 0 4px 4px 0;">
+                            8.33% (Wage capped at ₹15,000)</td>
+                    </tr>
+                    <tr>
+                        <td
+                            style="padding:10px; background: rgba(255,255,255,0.05); color:white; border-radius: 4px 0 0 4px;">
+                            EDLI</td>
+                        <td
+                            style="padding:10px; background: rgba(255,255,255,0.05); color:var(--text-secondary); border-radius: 0 4px 4px 0;">
+                            0.50%</td>
+                    </tr>
+                    <tr>
+                        <td
+                            style="padding:10px; background: rgba(255,255,255,0.05); color:white; border-radius: 4px 0 0 4px;">
+                            Admin</td>
+                        <td
+                            style="padding:10px; background: rgba(255,255,255,0.05); color:var(--text-secondary); border-radius: 0 4px 4px 0;">
+                            0.50% (Min ₹75)</td>
+                    </tr>
+                </table>
+
+                <h4 style="color: white; margin-bottom: 10px;">3️⃣ Critical Deadlines & ECR</h4>
+                <ul style="color: var(--text-secondary); margin-bottom: 20px; padding-left: 20px;">
+                    <li><strong>Due Date:</strong> 15th of every month.</li>
+                    <li><strong>Action:</strong> File ECR (Electronic Challan-cum-Return) on <a
+                            href="https://unifiedportal-emp.epfindia.gov.in/epfo/" target="_blank"
+                            style="color: var(--accent);">Employer Portal</a>.</li>
+                    <li><strong>Compliance:</strong> Aadhaar seeding is mandatory to avoid rejection.</li>
+                </ul>
+
+                <h4 style="color: white; margin-bottom: 10px;">4️⃣ Penalties (Section 14B) & Interest (7Q)</h4>
+                <p style="color: var(--text-secondary); margin-bottom: 5px;">Interest for delay: <strong>12%
+                        p.a.</strong> (Mandatory)</p>
+                <div
+                    style="background: rgba(239, 68, 68, 0.1); border-left: 3px solid #ef4444; padding: 10px; margin-top: 10px;">
+                    <p style="color: #ef4444; font-size: 0.9rem;"><strong>Damages for Delay:</strong><br>
+                        • Up to 2 months: 5%<br>
+                        • 2–4 months: 10%<br>
+                        • 4–6 months: 15%<br>
+                        • > 6 months: 25%</p>
+                </div>
+            </div>
+
+            <!-- Part 3 -->
+            <div style="margin-bottom: 30px;">
+                <h3 style="color: var(--service); margin-bottom: 20px;">🔹 PART 3: EPF Procedures – Step-by-Step</h3>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <div style="background: rgba(255,255,255,0.02); padding: 20px; border-radius: 8px;">
+                        <h5 style="color: white; margin-bottom: 10px;">Verify & Transfer</h5>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem;">Login to Member Portal → Online
+                            Services → One Member One EPF Account.</p>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.02); padding: 20px; border-radius: 8px;">
+                        <h5 style="color: white; margin-bottom: 10px;">Forms 11, 15G & 15H</h5>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem;"><strong>Form 11:</strong> New joiner
+                            declaration.<br><strong>15G/15H:</strong> Tax exemption on withdrawal.</p>
+                    </div>
+                </div>
+
+                <div style="margin-top: 30px; text-align: center;">
+                    <p style="color: var(--text-tertiary); font-size: 0.9rem;">Need detailed ECR filing steps or ceiling
+                        validation?</p>
+                    <a href="contact.html" class="btn btn-outline" style="margin-top: 10px;">Contact Compliance
+                        Expert</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    </main>
+
+    <!-- Standard Footer -->
+    <footer>
+        <div class="container">
+            <div
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-bottom: 40px;">
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Compliance Tools</h4>
+                    <ul>
+                        <li><a href="calculator-pf.html">PF Calculator</a></li>
+                        <li><a href="calculator-esic.html">ESIC Calculator</a></li>
+                        <li><a href="calculator-tds.html">TDS Calculator</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Legal & Privacy</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms</a></li>
+                        <li><a href="https://unifiedportal-mem.epfindia.gov.in" target="_blank">EPFO</a></li>
+                        <li><a href="https://www.esic.in" target="_blank">ESIC</a></li>
+                    </ul>
+                    <p style="margin-top:20px; font-size: 0.8rem; color: var(--text-tertiary);">Disclaimer: Calculations
+                        are indicative. Actual statutory deductions may vary.</p>
+                </div>
+            </div>
+            <div
+                style="text-align: center; padding-top: 40px; border-top: 1px solid var(--border-subtle); color: var(--text-tertiary);">
+                &copy; 2026 TeamWork Solutions | Payroll & Compliance Experts
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        function calculatePF() {
+            const basic = parseFloat(document.getElementById('pfBasic').value) || 0;
+            const ceiling = document.getElementById('pfCeiling').value === 'yes';
+            const mode = document.getElementById('pfMode').value; // 12 or 13
+
+            // Wage Logic
+            // If ceiling is Yes: Wage is limited to 15000
+            // If ceiling is No: Wage is actual basic
+            let wage = basic;
+            if (ceiling && basic > 15000) wage = 15000;
+
+            // Employee Share: 12% of Wage
+            const empPf = Math.round(wage * 0.12);
+
+            // Employer Share
+            // EPS strictly on Capped Wage (15000)
+            let epsWage = (basic > 15000) ? 15000 : basic;
+
+            const eps = Math.round(epsWage * 0.0833);
+            const emplrEpf = Math.round(wage * 0.12) - eps;
+
+            // Admin Charges (if 13%)
+            let admin = 0;
+            if (mode === '13') {
+                // Admin charges usually on capped wage
+                admin = Math.round(epsWage * 0.01);
+                document.getElementById('rowEdli').style.display = 'flex';
+                document.getElementById('outEmplrEdli').innerText = "₹ " + admin;
+            } else {
+                document.getElementById('rowEdli').style.display = 'none';
+            }
+
+            const emplrTotal = emplrEpf + eps + admin;
+
+            // UI
+            document.getElementById('outEmpPf').innerText = "₹ " + empPf.toLocaleString();
+            document.getElementById('outEmpTotal').innerText = "₹ " + empPf.toLocaleString();
+
+            document.getElementById('outEmplrEpf').innerText = "₹ " + emplrEpf.toLocaleString();
+            document.getElementById('outEmplrEps').innerText = "₹ " + eps.toLocaleString();
+            document.getElementById('outEmplrTotal').innerText = "₹ " + emplrTotal.toLocaleString();
+        }
+
+        // Init with default calc
+        calculatePF();
+    </script>
+    <script src="js/unified-header.js"></script>
+    <script src="js/loader.js"></script>
+</body>
+
+</html>

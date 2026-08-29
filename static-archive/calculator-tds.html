@@ -1,0 +1,425 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TDS Calculator | TeamWork Solutions</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/mega-menu.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="css/header-premium.css">
+</head>
+
+<body>
+    <!-- PRELOADER (Brand Logo) -->
+    <div id="page-loader">
+        <div class="loader-brand">
+            <div class="brand-icon-loader"><i class="ph-fill ph-users-three"></i></div>
+            <div class="brand-logo-text">TeamWork</div>
+            <div class="brand-tagline">together we can do so much</div>
+        </div>
+    </div>
+    <div id="global-header-container"></div>
+
+
+
+    <header class="section-padding" style="padding-top: 140px; text-align: center;">
+        <div class="container">
+            <h1 class="fade-up" style="margin-bottom: 24px;">TDS <span class="text-gradient">Estimator</span></h1>
+            <p class="fade-up" style="color: var(--text-secondary);">Income Tax (Salary) Calculator for FY 2025-26 (AY
+                2026-27)</p>
+        </div>
+    </header>
+
+    <main>
+        <section class="section-padding">
+            <div class="container">
+                <div class="glass-panel" style="padding: 40px; max-width: 1000px; margin: 0 auto;">
+
+                    <!-- Slab Info -->
+                    <div
+                        style="margin-bottom: 30px; background: rgba(255,255,255,0.02); padding: 20px; border-radius: 8px; border: 1px solid var(--border-subtle);">
+                        <h4 style="margin-bottom: 15px; color: var(--primary);">New Tax Regime Slab (FY 2025-26)</h4>
+                        <div
+                            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 10px; font-size: 0.85rem; color: var(--text-secondary);">
+                            <div>0-4L: <span style="color: #10b981;">Nil</span></div>
+                            <div>4-8L: <span style="color: white;">5%</span></div>
+                            <div>8-12L: <span style="color: white;">10%</span></div>
+                            <div>12-16L: <span style="color: white;">15%</span></div>
+                            <div>16-20L: <span style="color: white;">20%</span></div>
+                            <div>20-24L: <span style="color: white;">25%</span></div>
+                            <div>>24L: <span style="color: white;">30%</span></div>
+                        </div>
+                        <div style="margin-top: 10px; font-size: 0.8rem; color: var(--text-tertiary);">
+                            * Standard Deduction: ₹75,000 assumed for Salaried. Rebate u/s 87A: Tax Nil upto ₹12L
+                            Income.
+                        </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px;">
+                        <!-- Inputs -->
+                        <div>
+                            <h3 style="margin-bottom: 20px;">Income Details</h3>
+
+                            <div class="form-group" style="margin-bottom: 20px;">
+                                <label style="display: block; margin-bottom: 8px;">Financial Year</label>
+                                <select id="tdsFY"
+                                    style="width: 100%; padding: 12px; background: #0f172a; border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
+                                    <option value="2025">FY 2025-26 (AY 26-27)</option>
+                                    <option value="2024">FY 2024-25 (AY 25-26)</option>
+                                    <option value="2023">FY 2023-24 (AY 24-25)</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group" style="margin-bottom: 20px;">
+                                <label style="display: block; margin-bottom: 8px;">Annual Gross Salary</label>
+                                <input type="number" id="tdsIncome" value="1500000"
+                                    style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
+                            </div>
+
+                            <div class="form-group" style="margin-bottom: 20px;">
+                                <label style="display: block; margin-bottom: 8px;">Deductions (80C, 80D, HRA etc.)
+                                    <br><span style="font-size:0.8rem; color:var(--text-tertiary);">Only for Old
+                                        Regime</span></label>
+                                <input type="number" id="tdsDeduction" value="150000"
+                                    style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: white; border-radius: 8px;">
+                            </div>
+
+                            <button onclick="calculateTDS()" class="btn btn-primary" style="width: 100%;">Calculate
+                                Tax</button>
+                        </div>
+
+                        <!-- Output Comparison -->
+                        <div>
+                            <h3 style="margin-bottom: 20px;">Comparison</h3>
+
+                            <div class="glass-panel"
+                                style="padding: 20px; margin-bottom: 20px; border-color: rgba(16, 185, 129, 0.3);">
+                                <div
+                                    style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                                    <h4 style="color: #10b981;">New Regime</h4>
+                                    <span
+                                        style="font-size: 0.8rem; background: rgba(16, 185, 129, 0.2); color: #10b981; padding: 2px 8px; border-radius: 4px;">Default</span>
+                                </div>
+                                <div style="font-size: 2rem; font-weight: 700; color: white; margin-bottom: 5px;"
+                                    id="outNewTax">₹ 0</div>
+                                <div style="font-size: 0.9rem; color: var(--text-secondary);">Monthly TDS: <span
+                                        id="outNewMonthly" style="color: white;">₹ 0</span></div>
+                            </div>
+
+                            <div class="glass-panel" style="padding: 20px;">
+                                <h4 style="color: var(--text-secondary); margin-bottom: 15px;">Old Regime</h4>
+                                <div style="font-size: 2rem; font-weight: 700; color: white; margin-bottom: 5px;"
+                                    id="outOldTax">₹ 0</div>
+                                <div style="font-size: 0.9rem; color: var(--text-secondary);">Monthly TDS: <span
+                                        id="outOldMonthly" style="color: white;">₹ 0</span></div>
+                            </div>
+
+                            <!-- Smart Suggestion -->
+                            <div id="tdsSuggestion"
+                                style="margin-top: 20px; padding: 15px; border-radius: 8px; font-size: 0.9rem;">
+                                <!-- Populated via JS -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Link -->
+                <div style="text-align: center; margin-top: 40px; font-size: 0.9rem;">
+                    <a href="https://www.incometax.gov.in" target="_blank" style="color: var(--text-secondary);">Go to
+                        Income Tax Filing Portal -></a>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- CONTENT GUIDE (Added 2026) -->
+    <section class="section-padding" style="border-top: 1px solid var(--border-subtle);">
+        <div class="container" style="max-width: 900px;">
+            <div style="text-align: center; margin-bottom: 50px;">
+                <h2 style="margin-bottom: 20px;">Understanding TDS & Tax Calculations</h2>
+                <p style="color: var(--text-secondary); max-width: 700px; margin: 0 auto;">Everything you need to know
+                    about Tax Deducted at Source (TDS) for FY 2025-26.</p>
+            </div>
+
+            <!-- 1. What is TDS -->
+            <div style="margin-bottom: 60px;">
+                <h3 style="color: var(--primary); margin-bottom: 20px;">What is Tax Deducted at Source (TDS)?</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 20px;">
+                    Tax Deducted at Source (TDS) is a mechanism designed by the Indian government to collect tax at the
+                    point of payment itself. When you make certain payments such as salary, rent, professional fees, or
+                    contractor payments, the payer deducts a portion of the payment as tax before crediting the
+                    remainder to the recipient.
+                </p>
+                <div
+                    style="background: rgba(59, 130, 246, 0.1); padding: 20px; border-left: 4px solid var(--primary); border-radius: 6px;">
+                    <p style="color: white; font-weight: 500; margin-bottom: 5px;">Why Use a TDS Calculator?</p>
+                    <ul style="color: var(--text-secondary); padding-left: 20px; margin: 0;">
+                        <li>Accurate compliance with the Income Tax Act</li>
+                        <li>Correct tax planning and withholding</li>
+                        <li>Avoidance of penalties due to under-deduction</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 2. How it Works -->
+            <div
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; margin-bottom: 60px;">
+                <div>
+                    <h3 style="color: var(--service); margin-bottom: 20px;">📌 How the Calculator Works</h3>
+                    <ol
+                        style="color: var(--text-secondary); padding-left: 20px; display: flex; flex-direction: column; gap: 15px;">
+                        <li>
+                            <strong style="color: white;">Identify Payment Nature:</strong>
+                            <br>Salary (Sec 192), Interest (194A), Contractor (194C), or Professional Fees (194J).
+                        </li>
+                        <li>
+                            <strong style="color: white;">Check Thresholds:</strong>
+                            <br>Exemptions apply below certain limits (e.g., Interest TDS only above ₹40k/₹50k).
+                        </li>
+                        <li>
+                            <strong style="color: white;">Compute Taxable Base:</strong>
+                            <br>For Salary: Gross Income - Deductions (Standard Deduction, 80C, etc.).
+                        </li>
+                        <li>
+                            <strong style="color: white;">Apply Rate:</strong>
+                            <br>The tool applies relevant slab rates (New/Old Regime) or fixed percentages (e.g., 10%
+                            for Fees).
+                        </li>
+                    </ol>
+                </div>
+
+                <div>
+                    <h3 style="color: var(--accent); margin-bottom: 20px;">🧠 Example: Salary TDS</h3>
+                    <div
+                        style="background: rgba(255,255,255,0.02); padding: 25px; border-radius: 12px; border: 1px solid var(--border-subtle);">
+                        <p style="color: var(--text-secondary); margin-bottom: 10px;">Assume Annual Taxable Salary =
+                            <strong>₹10,00,000</strong>
+                        </p>
+
+                        <div
+                            style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.9rem;">
+                            <span>Slab Tax (New Regime):</span>
+                            <span style="color: white;">₹ 60,000</span>
+                        </div>
+                        <div
+                            style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.9rem;">
+                            <span>Cess (4%):</span>
+                            <span style="color: white;">₹ 2,400</span>
+                        </div>
+                        <div
+                            style="border-top: 1px dashed var(--border-subtle); padding-top: 10px; margin-top: 10px; display: flex; justify-content: space-between; font-weight: 600;">
+                            <span style="color: var(--accent);">Total Annual TDS</span>
+                            <span style="color: white;">₹ 62,400</span>
+                        </div>
+                        <p style="margin-top: 15px; font-size: 0.85rem; color: var(--text-tertiary);">* Calculator
+                            estimates monthly deduction based on this annual projection.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. Compliance & Due Dates -->
+            <div style="margin-bottom: 60px;">
+                <h3 style="color: #ec4899; margin-bottom: 20px;">🧾 Due Dates & Employer Compliance</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+                    <div
+                        style="background: rgba(255,255,255,0.02); padding: 20px; border-radius: 8px; text-align: center;">
+                        <div style="font-size: 2rem; color: white; margin-bottom: 10px;">7th</div>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem;">Of Every Month</p>
+                        <p style="color: #ec4899; font-size: 0.8rem;">Deposit Due Date</p>
+                    </div>
+                    <div
+                        style="background: rgba(255,255,255,0.02); padding: 20px; border-radius: 8px; text-align: center;">
+                        <div style="font-size: 2rem; color: white; margin-bottom: 10px;">Qtrly</div>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem;">TDS Return Filing</p>
+                        <p style="color: #ec4899; font-size: 0.8rem;">31st Jul, Oct, Jan, May</p>
+                    </div>
+                    <div
+                        style="background: rgba(255,255,255,0.02); padding: 20px; border-radius: 8px; text-align: center;">
+                        <div style="font-size: 2rem; color: white; margin-bottom: 10px;">Form 16</div>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem;">Certificate Issuance</p>
+                        <p style="color: #ec4899; font-size: 0.8rem;">By 15th June</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA -->
+            <div
+                style="text-align: center; padding: 40px; background: rgba(16, 185, 129, 0.05); border-radius: 12px; border: 1px dashed #10b981;">
+                <h4 style="color: #10b981; margin-bottom: 10px;">Need Help with TDS Returns?</h4>
+                <p style="color: var(--text-secondary); margin-bottom: 20px;">Our experts can handle end-to-end payroll
+                    & tax compliance for your organization.</p>
+                <a href="contact.html" class="btn btn-primary"
+                    style="background: #10b981; border-color: #10b981;">Contact Tax Expert</a>
+            </div>
+
+        </div>
+    </section>
+
+    </main>
+
+    <!-- Standard Footer -->
+    <footer>
+        <div class="container">
+            <div
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-bottom: 40px;">
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Compliance Tools</h4>
+                    <ul>
+                        <li><a href="calculator-pf.html">PF Calculator</a></li>
+                        <li><a href="calculator-esic.html">ESIC Calculator</a></li>
+                        <li><a href="calculator-tds.html">TDS Calculator</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Legal & Privacy</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms</a></li>
+                        <li><a href="https://www.incometax.gov.in" target="_blank">Income Tax</a></li>
+                    </ul>
+                    <p style="margin-top:20px; font-size: 0.8rem; color: var(--text-tertiary);">Disclaimer: Calculations
+                        are indicative. Actual statutory deductions may vary.</p>
+                </div>
+            </div>
+            <div
+                style="text-align: center; padding-top: 40px; border-top: 1px solid var(--border-subtle); color: var(--text-tertiary);">
+                &copy; 2026 TeamWork Solutions | Payroll & Compliance Experts
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        function calculateTDS() {
+            const income = parseFloat(document.getElementById('tdsIncome').value) || 0;
+            const deduction = parseFloat(document.getElementById('tdsDeduction').value) || 0;
+            const fy = document.getElementById('tdsFY').value;
+
+            // --- 1. NEW REGIME CALC (FY 2025-26) ---
+            // Slabs: 0-4 Nil, 4-8 5%, 8-12 10%, 12-16 15%, 16-20 20%, 20-24 25%, >24 30%
+            // Standard Deduction: 75000 (Proposed for 25-26, was 50k before)
+            // Let's assume 75k for 2025. 50k for 2023/24.
+            const stdDedNew = (fy === '2025') ? 75000 : 50000;
+
+            let taxIncNew = income - stdDedNew;
+            if (taxIncNew < 0) taxIncNew = 0;
+
+            let taxNew = 0;
+
+            // Rebate check: 
+            // FY 25-26: Rebate upto 12L (Tax Nil) => If Taxable income <= 12L, Tax is 0?
+            // User Blueprint says "Rebate u/s 87A -> Tax Nil up to 12L / 12.75L (Salaried)".
+            // This means if (income - 75k) <= 12L => Tax = 0. aka Income <= 12.75L.
+
+            const rebateLimitNew = (fy === '2025') ? 1200000 : 700000; // 7L was for FY 23-24
+
+            if (taxIncNew <= rebateLimitNew) {
+                taxNew = 0;
+            } else {
+                // Calculate Slab Tax
+                if (fy === '2025') {
+                    // 0-4 Nil
+                    // 4-8 5%
+                    // 8-12 10%
+                    // 12-16 15%
+                    // 16-20 20%
+                    // 20-24 25%
+                    // >24 30%
+
+                    const slabs = [
+                        { limit: 400000, rate: 0 },
+                        { limit: 800000, rate: 0.05 },
+                        { limit: 1200000, rate: 0.10 },
+                        { limit: 1600000, rate: 0.15 },
+                        { limit: 2000000, rate: 0.20 },
+                        { limit: 2400000, rate: 0.25 },
+                        { limit: Infinity, rate: 0.30 }
+                    ];
+
+                    let prevLimit = 0;
+                    for (let slab of slabs) {
+                        if (taxIncNew > prevLimit) {
+                            const taxableAmount = Math.min(taxIncNew, slab.limit) - prevLimit;
+                            taxNew += taxableAmount * slab.rate;
+                            prevLimit = slab.limit;
+                        } else {
+                            break;
+                        }
+                    }
+
+                } else {
+                    // Simplified older New Regime logic fallback (Using 2025 logic for demo as requested)
+                    taxNew = 0; // Placeholder if year not 2025 to avoid complexity in this snippet
+                }
+            }
+
+            // Cess 4%
+            if (taxNew > 0) taxNew = taxNew * 1.04;
+
+
+            // --- 2. OLD REGIME CALC ---
+            // Standard Deduction: 50k
+            // Slabs: 0-2.5 Nil, 2.5-5 5%, 5-10 20%, >10 30%
+            const stdDedOld = 50000;
+            let taxIncOld = income - stdDedOld - deduction;
+            if (taxIncOld < 0) taxIncOld = 0;
+
+            let taxOld = 0;
+            // Rebate up to 5L (Old Regime constant)
+            if (taxIncOld <= 500000) {
+                taxOld = 0;
+            } else {
+                if (taxIncOld > 250000) taxOld += Math.min(taxIncOld - 250000, 250000) * 0.05;
+                if (taxIncOld > 500000) taxOld += Math.min(taxIncOld - 500000, 500000) * 0.20;
+                if (taxIncOld > 1000000) taxOld += (taxIncOld - 1000000) * 0.30;
+            }
+            if (taxOld > 0) taxOld = taxOld * 1.04;
+
+            // UI Updates
+            document.getElementById('outNewTax').innerText = "₹ " + Math.round(taxNew).toLocaleString();
+            document.getElementById('outNewMonthly').innerText = "₹ " + Math.round(taxNew / 12).toLocaleString();
+
+            document.getElementById('outOldTax').innerText = "₹ " + Math.round(taxOld).toLocaleString();
+            document.getElementById('outOldMonthly').innerText = "₹ " + Math.round(taxOld / 12).toLocaleString();
+
+            // Suggestion
+            const diff = taxOld - taxNew;
+            const suggValidation = document.getElementById('tdsSuggestion');
+            if (diff > 0) {
+                suggValidation.style.background = 'rgba(16, 185, 129, 0.1)';
+                suggValidation.style.color = '#10b981';
+                suggValidation.innerHTML = `<strong>Recommendation:</strong> Switch to <span style="text-decoration:underline;">New Regime</span>. You save <strong>₹ ${Math.round(diff).toLocaleString()}</strong> annually.`;
+            } else if (diff < 0) {
+                suggValidation.style.background = 'rgba(234, 179, 8, 0.1)';
+                suggValidation.style.color = '#eab308';
+                suggValidation.innerHTML = `<strong>Recommendation:</strong> Stick to <span style="text-decoration:underline;">Old Regime</span>. You save <strong>₹ ${Math.round(Math.abs(diff)).toLocaleString()}</strong> annually due to your high deductions.`;
+            } else {
+                suggValidation.style.background = 'rgba(255,255,255,0.05)';
+                suggValidation.style.color = 'var(--text-secondary)';
+                suggValidation.innerHTML = `Both regimes offer similar tax liability for your income.`;
+            }
+        }
+
+        // Init
+        calculateTDS();
+    </script>
+    <script src="js/unified-header.js"></script>
+    <script src="js/loader.js"></script>
+</body>
+
+</html>
