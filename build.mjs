@@ -6,6 +6,8 @@ const WA = "919518842774"; // public WhatsApp number
 const LOGIN = "https://leadnex-crm.vercel.app/login";
 const DEMO_SALON = "https://leadnex-crm.vercel.app/demo/f9e605ee-7105-4a4b-928c-aa38bed0808c";
 const DEMO_FOOD = "https://leadnex-crm.vercel.app/demo/e61a433d-e322-4515-a49f-d7b4baed1144";
+const DEMO_API = "https://leadnex-crm.vercel.app/api/public/demo";
+const TRADES = ["Salon", "Spa", "Barber shop", "Clinic", "Dentist", "Physiotherapist", "Restaurant", "Cafe", "Bakery", "Hotel", "Guest house", "Gym", "Yoga studio", "Coaching institute", "School", "Real estate agent", "Car wash", "Garage", "Boutique", "Grocery store", "Pharmacy", "Interior designer", "Photographer", "Travel agency", "Event planner", "Pet shop", "Laundry", "Jewellery shop"];
 const wa = (text) => `https://wa.me/${WA}?text=${encodeURIComponent(text)}`;
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
@@ -26,6 +28,7 @@ const NAV = [
   ["pricing", "Pricing"],
   ["demos", "Demos"],
   ["about", "About"],
+  ["contact", "Contact"],
 ];
 
 // ---------- building blocks ----------
@@ -69,9 +72,10 @@ const pages = [
       hero(
         "The everyday work that keeps a business running, handled by one team",
         "Team Work looks after payroll, builds your website and WhatsApp assistant, sets up the system your staff use, and supplies the laptops and stationery on their desks. Based in Gurugram, working with businesses in India and abroad.",
-        btn(wa("Hi Team Work, I would like to know more about your services."), "Talk to us on WhatsApp") + btn("/services", "See all services", "ghost"),
+        btn("/make-demo", "Make a demo for your business") + btn(wa("Hi Team Work, I would like to know more about your services."), "Talk to us on WhatsApp", "ghost"),
         `<div class="heroList">${serviceList()}</div>`
       ) +
+      `<div class="marquee" aria-hidden="true"><div>${[...TRADES, ...TRADES].map((t) => `<span>${t}</span>`).join("")}</div></div>` +
       section(
         "Why businesses hand this to us",
         rows([
@@ -85,7 +89,7 @@ const pages = [
         "Try it before you talk to us",
         two(
           `<p class="big">Open a demo, tap the AI Bot tab and type as if you were a customer. You will see the reply, the booking, and what lands on the owner's phone.</p>`,
-          `<ul class="links"><li><a href="${DEMO_SALON}" target="_blank" rel="noopener">Salon demo<span>Website, booking assistant and salon system</span></a></li><li><a href="${DEMO_FOOD}" target="_blank" rel="noopener">Restaurant demo<span>Menu, table booking and kitchen screens</span></a></li><li><a href="/demos">All demos</a></li></ul>`
+          `<ul class="links"><li><a href="${DEMO_SALON}" target="_blank" rel="noopener">Salon demo<span>Website, booking assistant and salon system</span></a></li><li><a href="${DEMO_FOOD}" target="_blank" rel="noopener">Restaurant demo<span>Menu, table booking and kitchen screens</span></a></li><li><a href="/make-demo">Make one for your business<span>Pick your trade, type your name, ready in about a minute</span></a></li></ul>`
         ),
         "alt"
       ) +
@@ -346,7 +350,7 @@ const pages = [
     title: "Live demos | Team Work",
     desc: "Try a website, a WhatsApp AI assistant and a management system as if you were a customer.",
     body:
-      hero("Try our work as a customer would", "These are sample businesses, not real clients. Each demo has four tabs: Website, Posts, App and AI Bot.") +
+      hero("Try our work as a customer would", "These are sample businesses, not real clients. Each demo has four tabs: Website, Posts, App and AI Bot.", btn("/make-demo", "Make a demo for your own business")) +
       section(
         "",
         `<ul class="links wide"><li><a href="${DEMO_SALON}" target="_blank" rel="noopener">Salon in Dubai<span>Book an appointment through the AI Bot tab and see it reach the owner</span></a></li><li><a href="${DEMO_FOOD}" target="_blank" rel="noopener">Restaurant in the UK<span>Book a table, then open the App tab to place an order and watch the kitchen screen</span></a></li></ul>`
@@ -446,6 +450,51 @@ const pages = [
       ),
   },
   {
+    slug: "make-demo",
+    title: "Make a demo for your business | Team Work",
+    desc: "Pick your type of business, type its name and get a working demo: website, WhatsApp assistant and management system.",
+    games: true,
+    body:
+      `<section class="hero"><div class="wrap"><h1>See your own business as a demo</h1><p class="lead">Choose your trade and type your business name. In about a minute you get a website, a WhatsApp assistant and a management system with your name on them. Free, no sign-up.</p></div></section>` +
+      `<section class="sec" id="md"><div class="wrap">
+<form id="md-form" class="form wide" novalidate>
+<fieldset class="chips"><legend>1. What kind of business is it?</legend>${TRADES.map((t, i) => `<label><input type="radio" name="niche" value="${t}"${i === 0 ? " checked" : ""}><span>${t}</span></label>`).join("")}<label><input type="radio" name="niche" value="other"><span>Something else</span></label></fieldset>
+<div id="md-otherWrap" hidden><label for="md-other">Type your kind of business</label><input id="md-other" maxlength="40" autocomplete="off"></div>
+<label for="md-name">2. Business name</label><input id="md-name" maxlength="60" autocomplete="organization" required>
+<label for="md-city">3. City or area (optional)</label><input id="md-city" maxlength="60" autocomplete="address-level2">
+<label for="md-phone">4. WhatsApp number with country code (optional)</label><input id="md-phone" maxlength="20" inputmode="tel" autocomplete="tel" placeholder="+971 50 123 4567">
+<p class="note">Add your number only if you want us to message you about the demo. We do not send bulk messages.</p>
+<p class="err" id="md-err" role="alert" hidden></p>
+<button class="btn solid" type="submit">Build my demo</button>
+</form>
+<div id="md-wait" hidden>
+<div class="status" id="md-status" role="status" aria-live="polite"><div class="spin" aria-hidden="true"></div><div><h2 id="md-h">Please wait, your demo is being built</h2><p id="md-p">This takes up to a minute. Play a game while you wait.</p></div><a id="md-open" class="btn solid" href="#" target="_blank" rel="noopener" hidden>Open my demo</a></div>
+<div class="games">
+<div class="tabs" role="tablist" aria-label="Games"><button type="button" role="tab" id="tab-ttt" aria-selected="true">Tic-tac-toe</button><button type="button" role="tab" id="tab-snake" aria-selected="false">Snake</button><button type="button" role="tab" id="tab-race" aria-selected="false">Racing</button></div>
+<div id="g-ttt" class="game"><p class="gmsg" id="ttt-msg" aria-live="polite"></p><div id="ttt-grid" class="ttt"></div><button type="button" class="btn ghost sm" id="ttt-new">New game</button></div>
+<div id="g-snake" class="game" hidden><p class="gmsg" id="snake-msg" aria-live="polite"></p><canvas id="snake-c" width="300" height="300" aria-label="Snake game"></canvas><div class="pad"><button type="button" id="s-up" aria-label="Up">&uarr;</button><div><button type="button" id="s-left" aria-label="Left">&larr;</button><button type="button" id="s-down" aria-label="Down">&darr;</button><button type="button" id="s-right" aria-label="Right">&rarr;</button></div></div><button type="button" class="btn ghost sm" id="snake-start">Start</button></div>
+<div id="g-race" class="game" hidden><p class="gmsg" id="race-msg" aria-live="polite"></p><canvas id="race-c" width="300" height="400" aria-label="Racing game"></canvas><div class="pad row"><button type="button" id="r-left" aria-label="Move left">&larr;</button><button type="button" id="r-right" aria-label="Move right">&rarr;</button></div><button type="button" class="btn ghost sm" id="race-start">Start</button></div>
+</div>
+</div>
+</div></section>`,
+    script: `(function(){var f=document.getElementById("md-form"),err=document.getElementById("md-err"),ow=document.getElementById("md-otherWrap");
+f.addEventListener("change",function(e){if(e.target.name==="niche"){ow.hidden=e.target.value!=="other";if(!ow.hidden)document.getElementById("md-other").focus()}});
+function show(m){err.textContent=m;err.hidden=false}
+f.addEventListener("submit",function(e){e.preventDefault();err.hidden=true;
+var n=f.querySelector("input[name=niche]:checked").value;if(n==="other")n=document.getElementById("md-other").value.trim();
+var name=document.getElementById("md-name").value.trim();
+if(n.length<2){show("Please tell us your kind of business.");return}
+if(name.length<2){show("Please enter your business name.");document.getElementById("md-name").focus();return}
+f.hidden=true;var w=document.getElementById("md-wait");w.hidden=false;window.twShowGame("ttt");w.scrollIntoView({behavior:"smooth",block:"start"});
+var st=document.getElementById("md-status"),h=document.getElementById("md-h"),p=document.getElementById("md-p"),o=document.getElementById("md-open");
+fetch("${DEMO_API}",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({niche:n,name:name,city:document.getElementById("md-city").value,phone:document.getElementById("md-phone").value})})
+.then(function(r){return r.json().then(function(j){return{ok:r.ok,j:j}})})
+.then(function(x){if(!x.ok||!x.j.url)throw new Error(x.j.error||"Something went wrong. Please try again.");
+st.classList.add("ready");h.textContent="Your demo is ready";p.textContent="Click the button to open it. You can keep playing, the demo will wait.";o.href=x.j.url;o.hidden=false;o.focus();st.scrollIntoView({behavior:"smooth",block:"center"})})
+.catch(function(er){st.classList.add("failed");h.textContent="We could not build the demo";p.textContent=er.message;o.textContent="Ask us on WhatsApp";o.href="https://wa.me/${WA}?text="+encodeURIComponent("Hi Team Work, please make a demo for my business: "+name+" ("+n+")");o.hidden=false})
+})})();`,
+  },
+  {
     slug: "404",
     title: "Page not found | Team Work",
     desc: "This page does not exist.",
@@ -480,17 +529,19 @@ function layout(p) {
 <header class="top"><div class="wrap">
 <a class="brand" href="/" aria-label="Team Work home"><img src="/logo-mark.png" width="40" height="40" alt=""><span>TeamWork</span></a>
 <nav class="nav" aria-label="Main">${nav}</nav>
-<a class="btn solid sm" href="/contact">Contact</a>
-<details class="menu"><summary aria-label="Menu"><span></span></summary><nav aria-label="Mobile">${nav}<a href="/contact">Contact</a></nav></details>
+<a class="btn solid sm" href="/make-demo">Make your demo</a>
+<details class="menu"><summary aria-label="Menu"><span></span></summary><nav aria-label="Mobile">${nav}<a href="/make-demo">Make your demo</a></nav></details>
 </div></header>
 <main id="main">${p.body}</main>
 <footer class="foot"><div class="wrap">
 <div class="fcol"><a class="brand" href="/"><img src="/logo-mark.png" width="44" height="44" alt=""><span>TeamWork</span></a><p>together we can do so much</p><p>Gurugram, Haryana, India</p></div>
 <div class="fcol"><h2>Services</h2>${SERVICES.map((s) => `<a href="/${s.slug}">${s.name}</a>`).join("")}</div>
-<div class="fcol"><h2>Company</h2><a href="/about">About</a><a href="/industries">Industries</a><a href="/how-we-work">How we work</a><a href="/pricing">Pricing</a><a href="/demos">Demos</a><a href="/faq">Questions</a><a href="/contact">Contact</a></div>
+<div class="fcol"><h2>Company</h2><a href="/about">About</a><a href="/industries">Industries</a><a href="/how-we-work">How we work</a><a href="/pricing">Pricing</a><a href="/demos">Demos</a><a href="/make-demo">Make your demo</a><a href="/faq">Questions</a><a href="/contact">Contact</a></div>
 <div class="fcol"><h2>Talk to us</h2><a href="${wa("Hi Team Work")}" target="_blank" rel="noopener">WhatsApp +91 95188 42774</a><a href="/privacy">Privacy policy</a><a href="/terms">Terms of service</a><a class="staff" href="${LOGIN}" rel="nofollow noopener">Team login</a></div>
 </div><div class="wrap legal"><span>&copy; 2026 Team Work. All rights reserved.</span></div></footer>
+${p.games ? '<script src="/games.js" defer></script>' : ""}
 ${p.script ? `<script>${p.script}</script>` : ""}
+<script>(function(){var m=window.matchMedia("(prefers-reduced-motion: reduce)").matches;if(m||!("IntersectionObserver" in window))return;var q=".sec h2,.rows li,.steps li,.sec .svc li,.links li,.two>div,.ticks li,.faq details,.tableWrap,.band .wrap>*,.heroList";var els=[].slice.call(document.querySelectorAll(q));var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}})},{rootMargin:"0px 0px -8% 0px"});els.forEach(function(el){var sib=el.parentNode?[].indexOf.call(el.parentNode.children,el):0;el.style.setProperty("--d",Math.min(sib,6)*70+"ms");el.classList.add("rv");io.observe(el)})})();</script>
 </body>
 </html>`;
 }
@@ -499,6 +550,7 @@ fs.rmSync("dist", { recursive: true, force: true });
 fs.mkdirSync("dist");
 for (const p of pages) fs.writeFileSync(`dist/${p.slug}.html`, layout(p));
 fs.copyFileSync("styles.css", "dist/styles.css");
+fs.copyFileSync("games.js", "dist/games.js");
 fs.copyFileSync("assets/logo-mark.png", "dist/logo-mark.png");
 fs.writeFileSync("dist/robots.txt", "User-agent: *\nAllow: /\n");
 console.log(`built ${pages.length} pages`);
