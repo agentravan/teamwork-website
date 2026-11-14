@@ -8,6 +8,7 @@ const DEMO_SALON = "https://leadnex-crm.vercel.app/demo/f9e605ee-7105-4a4b-928c-
 const DEMO_FOOD = "https://leadnex-crm.vercel.app/demo/e61a433d-e322-4515-a49f-d7b4baed1144";
 const DEMO_API = "https://leadnex-crm.vercel.app/api/public/demo";
 const TRADES = ["Salon", "Spa", "Barber shop", "Clinic", "Dentist", "Physiotherapist", "Restaurant", "Cafe", "Bakery", "Hotel", "Guest house", "Gym", "Yoga studio", "Coaching institute", "School", "Real estate agent", "Car wash", "Garage", "Boutique", "Grocery store", "Pharmacy", "Interior designer", "Photographer", "Travel agency", "Event planner", "Pet shop", "Laundry", "Jewellery shop"];
+const LOGO_SVG = `<svg class="lg" viewBox="0 0 120 120" aria-hidden="true"><path d="M60.0 26.0Q65.2 57.0 89.4 77.0" pathLength="100" stroke="#8a94a3" style="--k:0"/><path d="M89.4 43.0Q65.2 63.0 60.0 94.0" pathLength="100" stroke="#ff5a61" style="--k:1"/><path d="M89.4 77.0Q60.0 66.0 30.6 77.0" pathLength="100" stroke="#ffc02e" style="--k:2"/><path d="M60.0 94.0Q54.8 63.0 30.6 43.0" pathLength="100" stroke="#8fd14f" style="--k:3"/><path d="M30.6 77.0Q54.8 57.0 60.0 26.0" pathLength="100" stroke="#39c0f0" style="--k:4"/><path d="M30.6 43.0Q60.0 54.0 89.4 43.0" pathLength="100" stroke="#2f7de1" style="--k:5"/><circle cx="60.0" cy="14.0" r="7.5" fill="#8a94a3" style="--k:0"/><circle cx="99.8" cy="37.0" r="7.5" fill="#ff5a61" style="--k:1"/><circle cx="99.8" cy="83.0" r="7.5" fill="#ffc02e" style="--k:2"/><circle cx="60.0" cy="106.0" r="7.5" fill="#8fd14f" style="--k:3"/><circle cx="20.2" cy="83.0" r="7.5" fill="#39c0f0" style="--k:4"/><circle cx="20.2" cy="37.0" r="7.5" fill="#2f7de1" style="--k:5"/></svg>`;
 const wa = (text) => `https://wa.me/${WA}?text=${encodeURIComponent(text)}`;
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
@@ -508,7 +509,7 @@ const pages = [
 <button class="btn solid" type="submit">Build my demo</button>
 </form>
 <div id="md-wait" hidden>
-<div class="status" id="md-status" role="status" aria-live="polite"><div class="spin" aria-hidden="true"></div><div><h2 id="md-h">Please wait, your demo is being built</h2><p id="md-p">This takes up to a minute. Play a game while you wait.</p></div><a id="md-open" class="btn solid" href="#" target="_blank" rel="noopener" hidden>Open my demo</a></div>
+<div class="status" id="md-status" role="status" aria-live="polite"><span class="lgBox sm" aria-hidden="true">${LOGO_SVG.replace('class="lg"', 'class="lg loop"')}</span><div><h2 id="md-h">Please wait, your demo is being built</h2><p id="md-p">This takes up to a minute. Play a game while you wait.</p></div><a id="md-open" class="btn solid" href="#" target="_blank" rel="noopener" hidden>Open my demo</a></div>
 <div class="games">
 <div class="tabs" role="tablist" aria-label="Games"><button type="button" role="tab" id="tab-ttt" aria-selected="true">Tic-tac-toe</button><button type="button" role="tab" id="tab-snake" aria-selected="false">Snake</button><button type="button" role="tab" id="tab-race" aria-selected="false">Racing</button></div>
 <div id="g-ttt" class="game"><div class="gbar"><span>You <b id="ttt-you">0</b></span><span>Draws <b id="ttt-draw">0</b></span><span>Computer <b id="ttt-cpu">0</b></span></div><div id="ttt-grid" class="ttt"></div><p class="gmsg" id="ttt-msg" aria-live="polite"></p><button type="button" class="btn ghost sm" id="ttt-new">New game</button></div>
@@ -558,7 +559,7 @@ function layout(p) {
 <meta property="og:description" content="${esc(p.desc)}">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#06080c">
-<script>try{if(!sessionStorage.getItem("tw")&&!matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.className="loading"}catch(e){}</script>
+<script>(function(){var d=document.documentElement;try{if(localStorage.getItem("tw-theme")==="light")d.setAttribute("data-theme","light")}catch(e){}try{if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className="loading"}catch(e){}})();</script>
 <link rel="icon" href="/logo-mark.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -566,11 +567,12 @@ function layout(p) {
 <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-<div class="loader" aria-hidden="true"><div><span class="lgBox"><svg class="lg" viewBox="0 0 120 120" aria-hidden="true"><path d="M60.0 26.0Q65.2 57.0 89.4 77.0" pathLength="100" stroke="#8a94a3" style="--k:0"/><path d="M89.4 43.0Q65.2 63.0 60.0 94.0" pathLength="100" stroke="#ff5a61" style="--k:1"/><path d="M89.4 77.0Q60.0 66.0 30.6 77.0" pathLength="100" stroke="#ffc02e" style="--k:2"/><path d="M60.0 94.0Q54.8 63.0 30.6 43.0" pathLength="100" stroke="#8fd14f" style="--k:3"/><path d="M30.6 77.0Q54.8 57.0 60.0 26.0" pathLength="100" stroke="#39c0f0" style="--k:4"/><path d="M30.6 43.0Q60.0 54.0 89.4 43.0" pathLength="100" stroke="#2f7de1" style="--k:5"/><circle cx="60.0" cy="14.0" r="7.5" fill="#8a94a3" style="--k:0"/><circle cx="99.8" cy="37.0" r="7.5" fill="#ff5a61" style="--k:1"/><circle cx="99.8" cy="83.0" r="7.5" fill="#ffc02e" style="--k:2"/><circle cx="60.0" cy="106.0" r="7.5" fill="#8fd14f" style="--k:3"/><circle cx="20.2" cy="83.0" r="7.5" fill="#39c0f0" style="--k:4"/><circle cx="20.2" cy="37.0" r="7.5" fill="#2f7de1" style="--k:5"/></svg><img src="/logo-mark.png" width="120" height="120" alt=""></span><p class="lgName"><span style="--k:0">T</span><span style="--k:1">e</span><span style="--k:2">a</span><span style="--k:3">m</span><span style="--k:4">W</span><span style="--k:5">o</span><span style="--k:6">r</span><span style="--k:7">k</span></p><p class="lgTag">together we can do so much</p><b id="ld-n">0%</b><i><u id="ld-b"></u></i></div></div>
+<div class="loader" aria-hidden="true"><div><span class="lgBox">${LOGO_SVG}<img src="/logo-mark.png" width="120" height="120" alt=""></span><p class="lgName"><span style="--k:0">T</span><span style="--k:1">e</span><span style="--k:2">a</span><span style="--k:3">m</span><span style="--k:4">W</span><span style="--k:5">o</span><span style="--k:6">r</span><span style="--k:7">k</span></p><p class="lgTag">together we can do so much</p><b id="ld-n">0%</b><i><u id="ld-b"></u></i></div></div>
 <a class="skip" href="#main">Skip to content</a>
 <header class="top"><div class="wrap">
 <a class="brand" href="/" aria-label="Team Work home"><img src="/logo-mark.png" width="40" height="40" alt=""><span>TeamWork</span></a>
 <nav class="nav" aria-label="Main">${nav}</nav>
+<button class="theme" id="theme" type="button" aria-label="Switch between dark and light"><svg class="sun" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="moon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg></button>
 <a class="btn solid sm" href="/make-demo">Make your demo</a>
 <details class="menu"><summary aria-label="Menu"><span></span></summary><nav aria-label="Mobile">${nav}<a href="/make-demo">Make your demo</a></nav></details>
 </div></header>
@@ -583,10 +585,11 @@ function layout(p) {
 </div><div class="wrap legal"><span>&copy; 2026 Team Work. All rights reserved.</span></div></footer>
 ${p.games ? '<script src="/games.js" defer></script>' : ""}
 ${p.script ? `<script>${p.script}</script>` : ""}
+<script>(function(){var tb=document.getElementById("theme");if(tb)tb.addEventListener("click",function(){var d=document.documentElement,l=d.getAttribute("data-theme")==="light";if(l)d.removeAttribute("data-theme");else d.setAttribute("data-theme","light");try{localStorage.setItem("tw-theme",l?"dark":"light")}catch(e){}})})();</script>
 <script>(function(){var de=document.documentElement,rm=matchMedia("(prefers-reduced-motion: reduce)").matches;
 if(de.className.indexOf("loading")>-1){var n=document.getElementById("ld-n"),b=document.getElementById("ld-b"),t0=performance.now(),ready=document.readyState==="complete",done=false;addEventListener("load",function(){ready=true});
-var fin=function(){if(done)return;done=true;try{sessionStorage.setItem("tw","1")}catch(e){}de.classList.add("loaded");de.classList.remove("loading");setTimeout(function(){de.classList.remove("loaded")},700)};
-var step=function(t){var k=Math.min(1,(t-t0)/2600),v=Math.round((1-Math.pow(1-k,3))*(ready||t-t0>4200?100:92));n.textContent=v+"%";b.style.width=v+"%";if(v>=100)return setTimeout(fin,700);requestAnimationFrame(step)};requestAnimationFrame(step);setTimeout(fin,6500)}
+var fin=function(){if(done)return;done=true;de.classList.add("loaded");de.classList.remove("loading");setTimeout(function(){de.classList.remove("loaded")},700)};
+var step=function(t){var k=Math.min(1,(t-t0)/5000),v=Math.round(k*(ready||t-t0>7000?100:92));n.textContent=v+"%";b.style.width=v+"%";if(v>=100)return setTimeout(fin,350);requestAnimationFrame(step)};requestAnimationFrame(step);setTimeout(fin,9000)}
 if(rm||!("IntersectionObserver" in window))return;
 var q=".sec h2,.sub,.rows li,.steps li,.svc li,.links li,.two>div,.ticks li,.faq details,.tableWrap,.band .wrap>*,.tri li,.stats li,.cities,.demoBand .wrap>*,.show h2,.form,.prose";
 var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);var c=e.target.querySelector("[data-count]");if(c)count(c)}})},{rootMargin:"0px 0px -8% 0px"});
