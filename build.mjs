@@ -12,12 +12,12 @@ const wa = (text) => `https://wa.me/${WA}?text=${encodeURIComponent(text)}`;
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
 const SERVICES = [
-  { slug: "hr-payroll", name: "HR and payroll", c: "#0f6fb0", line: "Payroll run on time, with PF, ESI, TDS and WPS filed correctly." },
-  { slug: "websites", name: "Websites", c: "#c8323c", line: "A site that brings calls, bookings and WhatsApp enquiries." },
-  { slug: "whatsapp-ai-assistant", name: "WhatsApp AI assistant", c: "#0e8a7d", line: "Every customer message answered in seconds, day and night." },
-  { slug: "management-systems", name: "Management systems", c: "#c96a10", line: "Bookings, orders, staff and billing on one screen." },
-  { slug: "it-rental", name: "IT equipment rental", c: "#4f8a1f", line: "Laptops and desktops on rent, set up and supported." },
-  { slug: "office-stationery", name: "Office stationery supply", c: "#55606e", line: "One vendor for the stationery your office uses every month." },
+  { slug: "hr-payroll", name: "HR and payroll", c: "#4da3ff", line: "Payroll run on time, with PF, ESI, TDS and WPS filed correctly." },
+  { slug: "websites", name: "Websites", c: "#ff6b74", line: "A site that brings calls, bookings and WhatsApp enquiries." },
+  { slug: "whatsapp-ai-assistant", name: "WhatsApp AI assistant", c: "#2fd6c3", line: "Every customer message answered in seconds, day and night." },
+  { slug: "management-systems", name: "Management systems", c: "#ffa24d", line: "Bookings, orders, staff and billing on one screen." },
+  { slug: "it-rental", name: "IT equipment rental", c: "#9bd957", line: "Laptops and desktops on rent, set up and supported." },
+  { slug: "office-stationery", name: "Office stationery supply", c: "#b7c2cf", line: "One vendor for the stationery your office uses every month." },
 ];
 const svc = (slug) => SERVICES.find((s) => s.slug === slug);
 
@@ -78,43 +78,34 @@ const EXTRA = {
   websites: `<div class="mini webMini" aria-hidden="true"><div class="bar"><i></i><i></i><i></i></div><div class="wm"><b></b><span></span><span class="s"></span><em></em></div></div>`,
 };
 function home() {
-  const order = ["whatsapp-ai-assistant", "websites", "management-systems", "hr-payroll", "it-rental", "office-stationery"];
-  const tiles = order
-    .map((slug, i) => {
-      const s = svc(slug);
-      return `<li class="tile${i < 2 ? " wide" : ""}" style="--c:${s.c}"><a href="/${s.slug}"><span class="ic">${icon(slug)}</span><h3>${s.name}</h3><p>${s.line}</p>${EXTRA[slug] || ""}<span class="more">See how it works <span aria-hidden="true">&rarr;</span></span></a></li>`;
-    })
-    .join("");
+  const order = ["whatsapp-ai-assistant", "websites", "management-systems", "hr-payroll", "it-rental", "office-stationery"].map(svc);
+  const tick = [...order, ...order, ...order, ...order].map((s) => `<span style="--c:${s.c}">${s.name}</span>`).join("");
+  const say = "We build the website customers find you on, the assistant that answers them on WhatsApp, and the system your staff run the day on.";
+  const phone = (i, cls, inner) => `<div class="ph" style="--i:${i}"><div class="${cls}">${inner}</div></div>`;
   return (
-    `<section class="hero home"><div class="wrap split"><div>
-<h1>Websites, WhatsApp assistants and the back office your business runs on</h1>
-<p class="lead">Team Work builds the website customers find you on, the assistant that answers them on WhatsApp, and the system your staff use every day. We also run your payroll and supply your office. One team, based in Gurugram, working with businesses in India and abroad.</p>
+    `<div class="ticker" aria-hidden="true"><div>${tick}</div></div>` +
+    `<section class="h0"><div class="orb" aria-hidden="true"></div><div class="grid" aria-hidden="true"></div><div class="wrap"><div class="in">
+<h1><span><b>Every customer</b></span><span><b>answered.</b></span><span><b>Every booking kept.</b></span></h1>
+<p class="lead">Team Work builds websites, WhatsApp assistants and management systems for small businesses, and runs their payroll and office supply too. Based in Gurugram, working with businesses in India and abroad.</p>
 <div class="ctas">${btn("/make-demo", "Make a free demo for your business")}${btn(wa("Hi Team Work, I would like to know more about your services."), "Talk to us on WhatsApp", "ghost")}</div>
-<ul class="trust"><li><strong>120+</strong> clients served since 2023</li><li>Free sample before you pay</li><li>Fixed price in writing</li><li>Reply the same day</li></ul>
-</div>
-<div class="mock" aria-hidden="true">
-<div class="browser"><div class="bar"><i></i><i></i><i></i><span>yourbusiness.com</span></div><div class="bbody"><div class="bimg"></div><b></b><span></span><span class="s"></span><em>Book on WhatsApp</em></div></div>
-<div class="phone"><div class="ptop"><strong>Your business</strong><small>online</small></div><div class="chat"><p class="me c1">Hi, do you have a slot tomorrow?</p><p class="bot c2">Yes. 11:00 am, 1:00 pm or 4:30 pm are free. Which one suits you?</p><p class="me c3">1 pm please</p><p class="bot c4">Done. You are booked for tomorrow at 1:00 pm.</p></div></div>
-<div class="toastCard"><strong>New booking</strong><span>Ayesha, haircut, tomorrow 1:00 pm</span></div>
-</div></div></section>` +
-    `<div class="marquee" aria-hidden="true"><div>${[...TRADES, ...TRADES].map((t) => `<span>${t}</span>`).join("")}</div></div>` +
-    `<section class="sec"><div class="wrap"><h2>Six services, one team</h2><p class="sub">Take one or take several. Most clients start with a website or the WhatsApp assistant and add the rest later.</p><ul class="tiles">${tiles}</ul></div></section>` +
-    `<section class="demoBand"><div class="wrap"><div><h2>See your own business as a demo, in about a minute</h2><ol class="pills"><li>Pick your trade</li><li>Type your business name</li><li>Play a game while it builds</li></ol>${btn("/make-demo", "Make my demo", "light")}<a class="alt" href="/demos">or try a sample demo</a></div>
+<ul class="trust"><li><strong>120+</strong> clients served since 2023</li><li>Free sample before you pay</li><li>Fixed price in writing</li></ul>
+</div></div><p class="hint" aria-hidden="true">Scroll</p></section>` +
+    `<section class="sayWrap"><div class="wrap"><p class="say" aria-label="${say}">${say.split(" ").map((w) => `<span aria-hidden="true">${w} </span>`).join("")}</p></div></section>` +
+    `<div class="bigline" data-p aria-hidden="true"><p>Websites <b>WhatsApp AI</b> Systems <b>Payroll</b> IT rental <b>Stationery</b></p></div>` +
+    `<section class="sec"><div class="wrap"><h2>Three steps, and the first one is free</h2><ol class="tri">
+<li style="--c:#4da3ff"><span class="no">01</span><h3>You tell us your business</h3><p>Two lines on WhatsApp are enough, or build a demo yourself in a minute.</p></li>
+<li style="--c:#2fd6c3"><span class="no">02</span><h3>We build a working sample</h3><p>A website, an assistant or a system with your name on it, before you pay anything.</p></li>
+<li style="--c:#ffa24d"><span class="no">03</span><h3>It goes live</h3><p>A fixed price in writing, then live in 3 to 7 days for most websites and assistants.</p></li>
+</ol></div></section>` +
+    `<section class="sec alt"><div class="wrap"><h2>Six services, one team</h2>${serviceList(order)}</div></section>` +
+    `<section class="sec"><div class="wrap"><ul class="stats">
+<li><b data-count="120" data-suffix="+">120+</b><span>clients served since 2023</span></li>
+<li><b data-count="6">6</b><span>services from one team</span></li>
+<li><b data-count="7">7</b><span>days or less to put most websites live</span></li>
+<li><b data-count="1">1</b><span>minute to build a demo of your own business</span></li>
+</ul></div></section>` +
+    `<section class="demoBand"><div class="wrap"><div><h2>See your own business as a demo</h2><ol class="pills"><li>Pick your trade</li><li>Type your business name</li><li>Play a game while it builds</li></ol>${btn("/make-demo", "Make my demo", "light")}<a class="alt" href="/demos">or try a sample demo</a></div>
 <div class="tttArt" aria-hidden="true"><i class="x a1"></i><i></i><i class="o a2"></i><i></i><i class="x a3"></i><i></i><i class="o a4"></i><i></i><i class="x a5"></i></div></div></section>` +
-    section(
-      "How working with us goes",
-      `<ol class="flow"><li><h3>You message us</h3><p>Two lines about your business are enough. A person replies, usually the same day.</p></li><li><h3>We build a sample</h3><p>A working demo with your business name, before you pay anything.</p></li><li><h3>You get a fixed price</h3><p>In writing, with what is included and the date it will be ready.</p></li><li><h3>It goes live</h3><p>Most websites and assistants are live in 3 to 7 days. We stay on WhatsApp after that.</p></li></ol>`
-    ) +
-    section(
-      "Why businesses hand this to us",
-      rows([
-        ["One contact for six jobs", "The person who sets up your payroll knows who built your website and who delivers your laptops. You explain your business once."],
-        ["You see it before you pay", "For websites, WhatsApp assistants and management systems we build a working demo with your business name first. If you do not like it, you owe nothing."],
-        ["Fixed price, fixed date", "You get the price and the delivery date in writing before work starts."],
-        ["Built for small teams", "We started in HR and payroll, so we know how a small business runs day to day. Nothing we set up needs an IT department."],
-      ]),
-      "alt"
-    ) +
     `<section class="sec"><div class="wrap"><h2>Where we work</h2><p class="cities"><span>Dubai</span><span>London</span><span>Sydney</span><span>Toronto</span><span>Delhi</span></p>${two(`<p>Websites, automation and HR services are delivered remotely, so your business can be in any of these cities or anywhere else.</p>`, `<p>IT equipment rental and stationery supply involve delivery, so those run in Delhi NCR, with other Indian cities on request. <a href="/contact">Ask us about your city.</a></p>`)}</div></section>` +
     section(
       "Questions people ask first",
@@ -126,7 +117,14 @@ function home() {
       ]) + `<p class="note"><a href="/faq">All questions and answers</a></p>`,
       "alt"
     ) +
-    cta("Start with a conversation", "Tell us what is taking too much of your time. We will say honestly whether we can help.", "Hi Team Work, I would like to discuss what my business needs.")
+    `<section class="show" data-p><div class="wrap"><h2>Your business, in your customer's hand</h2><div class="ctas">${btn("/make-demo", "Make my demo")}${btn("/demos", "Try a sample", "ghost")}</div><p class="ill">Screens are illustrative.</p>
+<div class="phones" aria-hidden="true">
+${phone(-2, "s-menu", `<h4>Menu</h4><p><b>Paneer tikka</b><span>12</span></p><p><b>Dal makhani</b><span>9</span></p><p><b>Butter naan</b><span>2</span></p><p><b>Masala chai</b><span>3</span></p>`)}
+${phone(-1, "s-web", `<div class="im"></div><div class="tx"><b></b><u></u><u class="s"></u><em>Book on WhatsApp</em></div>`)}
+${phone(0, "s-chat", `<h4>Your business</h4><p class="me">Do you have a slot tomorrow?</p><p class="bot">Yes. 11:00 am, 1:00 pm or 4:30 pm are free.</p><p class="me">1 pm please</p><p class="bot">Done. You are booked for tomorrow at 1:00 pm.</p>`)}
+${phone(1, "s-list", `<h4>New bookings</h4><p><b>Ayesha</b><span>Haircut, tomorrow 1:00 pm</span></p><p><b>Daniel</b><span>Table for 4, today 8:30 pm</span></p><p><b>Priya</b><span>Check-up, Friday 5:00 pm</span></p>`)}
+${phone(2, "s-dash", `<h4>Today</h4><div class="k"><div><b>14</b><span>bookings</span></div><div><b>9</b><span>orders</span></div></div><div class="bars"><i style="height:40%"></i><i style="height:65%"></i><i style="height:50%"></i><i style="height:85%"></i><i style="height:70%"></i><i style="height:95%"></i></div>`)}
+</div></div></section>`
   );
 }
 
@@ -559,14 +557,16 @@ function layout(p) {
 <meta property="og:title" content="${esc(p.title)}">
 <meta property="og:description" content="${esc(p.desc)}">
 <meta property="og:type" content="website">
-<meta name="theme-color" content="#14202e">
+<meta name="theme-color" content="#06080c">
+<script>try{if(!sessionStorage.getItem("tw")&&!matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.className="loading"}catch(e){}</script>
 <link rel="icon" href="/logo-mark.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Instrument+Serif&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Inter+Tight:wght@500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
+<div class="loader" aria-hidden="true"><div><img src="/logo-mark.png" width="64" height="64" alt=""><b id="ld-n">0%</b><i><u id="ld-b"></u></i></div></div>
 <a class="skip" href="#main">Skip to content</a>
 <header class="top"><div class="wrap">
 <a class="brand" href="/" aria-label="Team Work home"><img src="/logo-mark.png" width="40" height="40" alt=""><span>TeamWork</span></a>
@@ -583,7 +583,20 @@ function layout(p) {
 </div><div class="wrap legal"><span>&copy; 2026 Team Work. All rights reserved.</span></div></footer>
 ${p.games ? '<script src="/games.js" defer></script>' : ""}
 ${p.script ? `<script>${p.script}</script>` : ""}
-<script>(function(){var m=window.matchMedia("(prefers-reduced-motion: reduce)").matches;if(m||!("IntersectionObserver" in window))return;var q=".sec h2,.sub,.tile,.flow li,.cities,.demoBand .wrap>*,.rows li,.steps li,.sec .svc li,.links li,.two>div,.ticks li,.faq details,.tableWrap,.band .wrap>*,.heroList";var els=[].slice.call(document.querySelectorAll(q));var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}})},{rootMargin:"0px 0px -8% 0px"});els.forEach(function(el){var sib=el.parentNode?[].indexOf.call(el.parentNode.children,el):0;el.style.setProperty("--d",Math.min(sib,6)*70+"ms");el.classList.add("rv");io.observe(el)})})();</script>
+<script>(function(){var de=document.documentElement,rm=matchMedia("(prefers-reduced-motion: reduce)").matches;
+if(de.className.indexOf("loading")>-1){var n=document.getElementById("ld-n"),b=document.getElementById("ld-b"),t0=performance.now(),ready=document.readyState==="complete",done=false;addEventListener("load",function(){ready=true});
+var fin=function(){if(done)return;done=true;try{sessionStorage.setItem("tw","1")}catch(e){}de.classList.add("loaded");de.classList.remove("loading");setTimeout(function(){de.classList.remove("loaded")},700)};
+var step=function(t){var k=Math.min(1,(t-t0)/1500),v=Math.round((1-Math.pow(1-k,3))*(ready||t-t0>3000?100:92));n.textContent=v+"%";b.style.width=v+"%";if(v>=100)return setTimeout(fin,220);requestAnimationFrame(step)};requestAnimationFrame(step);setTimeout(fin,5000)}
+if(rm||!("IntersectionObserver" in window))return;
+var q=".sec h2,.sub,.rows li,.steps li,.svc li,.links li,.two>div,.ticks li,.faq details,.tableWrap,.band .wrap>*,.tri li,.stats li,.cities,.demoBand .wrap>*,.show h2,.form,.prose";
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);var c=e.target.querySelector("[data-count]");if(c)count(c)}})},{rootMargin:"0px 0px -8% 0px"});
+[].slice.call(document.querySelectorAll(q)).forEach(function(el){var sib=el.parentNode?[].indexOf.call(el.parentNode.children,el):0;el.style.setProperty("--d",Math.min(sib,6)*80+"ms");el.classList.add("rv");io.observe(el)});
+function count(el){var to=+el.getAttribute("data-count"),suf=el.getAttribute("data-suffix")||"",t0=performance.now();(function f(t){var k=Math.min(1,(t-t0)/1400);el.textContent=Math.round((1-Math.pow(1-k,3))*to)+suf;if(k<1)requestAnimationFrame(f)})(t0)}
+var ps=[].slice.call(document.querySelectorAll("[data-p]")),say=document.querySelector(".say"),sp=say?say.querySelectorAll("span"):[],tick=false;
+function f(){var vh=innerHeight;de.style.setProperty("--s",Math.min(1,scrollY/vh).toFixed(3));
+ps.forEach(function(el){var r=el.getBoundingClientRect();el.style.setProperty("--p",Math.max(0,Math.min(1,(vh-r.top)/(vh+r.height))).toFixed(3))});
+if(say){var r=say.getBoundingClientRect(),p=Math.max(0,Math.min(1,(vh*.82-r.top)/(r.height+vh*.3))),k=Math.round(p*sp.length);for(var i=0;i<sp.length;i++)sp[i].classList.toggle("on",i<k)}tick=false}
+addEventListener("scroll",function(){if(!tick){tick=true;requestAnimationFrame(f)}},{passive:true});addEventListener("resize",f);f()})();</script>
 </body>
 </html>`;
 }
