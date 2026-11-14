@@ -62,39 +62,81 @@ function servicePage(slug, o) {
   };
 }
 
+
+// ---------- home page ----------
+const ICONS = {
+  "hr-payroll": '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>',
+  websites: '<rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 9h20M6 6.5h.01M9 6.5h.01"/>',
+  "whatsapp-ai-assistant": '<path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.2A8.4 8.4 0 1 1 21 11.5Z"/><path d="M8.5 11.5h.01M12 11.5h.01M15.5 11.5h.01"/>',
+  "management-systems": '<rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/>',
+  "it-rental": '<rect x="4" y="5" width="16" height="11" rx="2"/><path d="M2 20h20"/>',
+  "office-stationery": '<path d="M17 3l4 4L8 20l-5 1 1-5L17 3Z"/><path d="M14 6l4 4"/>',
+};
+const icon = (slug) => `<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[slug]}</svg>`;
+const EXTRA = {
+  "whatsapp-ai-assistant": `<div class="mini chatMini" aria-hidden="true"><p class="me">Are you open on Sunday?</p><p class="bot">Yes, 10 am to 9 pm. Shall I book a slot for you?</p></div>`,
+  websites: `<div class="mini webMini" aria-hidden="true"><div class="bar"><i></i><i></i><i></i></div><div class="wm"><b></b><span></span><span class="s"></span><em></em></div></div>`,
+};
+function home() {
+  const order = ["whatsapp-ai-assistant", "websites", "management-systems", "hr-payroll", "it-rental", "office-stationery"];
+  const tiles = order
+    .map((slug, i) => {
+      const s = svc(slug);
+      return `<li class="tile${i < 2 ? " wide" : ""}" style="--c:${s.c}"><a href="/${s.slug}"><span class="ic">${icon(slug)}</span><h3>${s.name}</h3><p>${s.line}</p>${EXTRA[slug] || ""}<span class="more">See how it works <span aria-hidden="true">&rarr;</span></span></a></li>`;
+    })
+    .join("");
+  return (
+    `<section class="hero home"><div class="wrap split"><div>
+<h1>Websites, WhatsApp assistants and the back office your business runs on</h1>
+<p class="lead">Team Work builds the website customers find you on, the assistant that answers them on WhatsApp, and the system your staff use every day. We also run your payroll and supply your office. One team, based in Gurugram, working with businesses in India and abroad.</p>
+<div class="ctas">${btn("/make-demo", "Make a free demo for your business")}${btn(wa("Hi Team Work, I would like to know more about your services."), "Talk to us on WhatsApp", "ghost")}</div>
+<p class="under">Free sample first. You pay only if you like it.</p>
+</div>
+<div class="mock" aria-hidden="true">
+<div class="browser"><div class="bar"><i></i><i></i><i></i><span>yourbusiness.com</span></div><div class="bbody"><div class="bimg"></div><b></b><span></span><span class="s"></span><em>Book on WhatsApp</em></div></div>
+<div class="phone"><div class="ptop"><strong>Your business</strong><small>online</small></div><div class="chat"><p class="me c1">Hi, do you have a slot tomorrow?</p><p class="bot c2">Yes. 11:00 am, 1:00 pm or 4:30 pm are free. Which one suits you?</p><p class="me c3">1 pm please</p><p class="bot c4">Done. You are booked for tomorrow at 1:00 pm.</p></div></div>
+<div class="toastCard"><strong>New booking</strong><span>Ayesha, haircut, tomorrow 1:00 pm</span></div>
+</div></div></section>` +
+    `<div class="marquee" aria-hidden="true"><div>${[...TRADES, ...TRADES].map((t) => `<span>${t}</span>`).join("")}</div></div>` +
+    `<section class="sec"><div class="wrap"><h2>Six services, one team</h2><p class="sub">Take one or take several. Most clients start with a website or the WhatsApp assistant and add the rest later.</p><ul class="tiles">${tiles}</ul></div></section>` +
+    `<section class="demoBand"><div class="wrap"><div><h2>See your own business as a demo, in about a minute</h2><ol class="pills"><li>Pick your trade</li><li>Type your business name</li><li>Play a game while it builds</li></ol>${btn("/make-demo", "Make my demo", "light")}<a class="alt" href="/demos">or try a sample demo</a></div>
+<div class="tttArt" aria-hidden="true"><i class="x a1"></i><i></i><i class="o a2"></i><i></i><i class="x a3"></i><i></i><i class="o a4"></i><i></i><i class="x a5"></i></div></div></section>` +
+    section(
+      "How working with us goes",
+      `<ol class="flow"><li><h3>You message us</h3><p>Two lines about your business are enough. A person replies, usually the same day.</p></li><li><h3>We build a sample</h3><p>A working demo with your business name, before you pay anything.</p></li><li><h3>You get a fixed price</h3><p>In writing, with what is included and the date it will be ready.</p></li><li><h3>It goes live</h3><p>Most websites and assistants are live in 3 to 7 days. We stay on WhatsApp after that.</p></li></ol>`
+    ) +
+    section(
+      "Why businesses hand this to us",
+      rows([
+        ["One contact for six jobs", "The person who sets up your payroll knows who built your website and who delivers your laptops. You explain your business once."],
+        ["You see it before you pay", "For websites, WhatsApp assistants and management systems we build a working demo with your business name first. If you do not like it, you owe nothing."],
+        ["Fixed price, fixed date", "You get the price and the delivery date in writing before work starts."],
+        ["Built for small teams", "We started in HR and payroll, so we know how a small business runs day to day. Nothing we set up needs an IT department."],
+      ]),
+      "alt"
+    ) +
+    `<section class="sec"><div class="wrap"><h2>Where we work</h2><p class="cities"><span>Dubai</span><span>London</span><span>Sydney</span><span>Toronto</span><span>Delhi</span></p>${two(`<p>Websites, automation and HR services are delivered remotely, so your business can be in any of these cities or anywhere else.</p>`, `<p>IT equipment rental and stationery supply involve delivery, so those run in Delhi NCR, with other Indian cities on request. <a href="/contact">Ask us about your city.</a></p>`)}</div></section>` +
+    section(
+      "Questions people ask first",
+      faq([
+        ["Is the sample really free?", "Yes. We build a working demo first. If you do not go ahead, you pay nothing."],
+        ["How fast can you deliver?", "A website in 5 to 7 days, a WhatsApp assistant in about 3 days, a management system in 1 to 3 weeks."],
+        ["How do I pay from outside India?", "By Wise, PayPal or international bank transfer. You get an invoice for every payment."],
+        ["Can I take only one service?", "Yes. Most clients start with one and add others later."],
+      ]) + `<p class="note"><a href="/faq">All questions and answers</a></p>`,
+      "alt"
+    ) +
+    cta("Start with a conversation", "Tell us what is taking too much of your time. We will say honestly whether we can help.", "Hi Team Work, I would like to discuss what my business needs.")
+  );
+}
+
 // ---------- pages ----------
 const pages = [
   {
     slug: "index",
     title: "Team Work | HR, websites, WhatsApp automation, IT rental and office supplies",
     desc: "Team Work is a business services company in Gurugram, India. HR and payroll, websites, WhatsApp AI assistants, management systems, IT equipment rental and office stationery.",
-    body:
-      hero(
-        "The everyday work that keeps a business running, handled by one team",
-        "Team Work looks after payroll, builds your website and WhatsApp assistant, sets up the system your staff use, and supplies the laptops and stationery on their desks. Based in Gurugram, working with businesses in India and abroad.",
-        btn("/make-demo", "Make a demo for your business") + btn(wa("Hi Team Work, I would like to know more about your services."), "Talk to us on WhatsApp", "ghost"),
-        `<div class="heroList">${serviceList()}</div>`
-      ) +
-      `<div class="marquee" aria-hidden="true"><div>${[...TRADES, ...TRADES].map((t) => `<span>${t}</span>`).join("")}</div></div>` +
-      section(
-        "Why businesses hand this to us",
-        rows([
-          ["One contact for six jobs", "The person who sets up your payroll knows who built your website and who delivers your laptops. You explain your business once."],
-          ["You see it before you pay", "For websites, WhatsApp assistants and management systems we build a working demo with your business name first. If you do not like it, you owe nothing."],
-          ["Fixed price, fixed date", "You get the price and the delivery date in writing before work starts. Most websites and assistants go live in 3 to 7 days."],
-          ["Built for small teams", "We started in HR and payroll, so we know how a 5 to 50 person business runs day to day. Nothing we set up needs an IT department."],
-        ])
-      ) +
-      section(
-        "Try it before you talk to us",
-        two(
-          `<p class="big">Open a demo, tap the AI Bot tab and type as if you were a customer. You will see the reply, the booking, and what lands on the owner's phone.</p>`,
-          `<ul class="links"><li><a href="${DEMO_SALON}" target="_blank" rel="noopener">Salon demo<span>Website, booking assistant and salon system</span></a></li><li><a href="${DEMO_FOOD}" target="_blank" rel="noopener">Restaurant demo<span>Menu, table booking and kitchen screens</span></a></li><li><a href="/make-demo">Make one for your business<span>Pick your trade, type your name, ready in about a minute</span></a></li></ul>`
-        ),
-        "alt"
-      ) +
-      section("Where we work", two(`<p class="big">Websites, automation and HR services are delivered remotely, so your business can be in Dubai, London, Sydney, Toronto or Delhi.</p>`, `<p>IT equipment rental and stationery supply involve delivery, so those run in Delhi NCR, with other Indian cities on request. <a href="/contact">Ask us about your city.</a></p>`)) +
-      cta("Start with a conversation", "Tell us what is taking too much of your time. We will say honestly whether we can help.", "Hi Team Work, I would like to discuss what my business needs."),
+    body: home(),
   },
   {
     slug: "services",
@@ -541,7 +583,7 @@ function layout(p) {
 </div><div class="wrap legal"><span>&copy; 2026 Team Work. All rights reserved.</span></div></footer>
 ${p.games ? '<script src="/games.js" defer></script>' : ""}
 ${p.script ? `<script>${p.script}</script>` : ""}
-<script>(function(){var m=window.matchMedia("(prefers-reduced-motion: reduce)").matches;if(m||!("IntersectionObserver" in window))return;var q=".sec h2,.rows li,.steps li,.sec .svc li,.links li,.two>div,.ticks li,.faq details,.tableWrap,.band .wrap>*,.heroList";var els=[].slice.call(document.querySelectorAll(q));var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}})},{rootMargin:"0px 0px -8% 0px"});els.forEach(function(el){var sib=el.parentNode?[].indexOf.call(el.parentNode.children,el):0;el.style.setProperty("--d",Math.min(sib,6)*70+"ms");el.classList.add("rv");io.observe(el)})})();</script>
+<script>(function(){var m=window.matchMedia("(prefers-reduced-motion: reduce)").matches;if(m||!("IntersectionObserver" in window))return;var q=".sec h2,.sub,.tile,.flow li,.cities,.demoBand .wrap>*,.rows li,.steps li,.sec .svc li,.links li,.two>div,.ticks li,.faq details,.tableWrap,.band .wrap>*,.heroList";var els=[].slice.call(document.querySelectorAll(q));var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}})},{rootMargin:"0px 0px -8% 0px"});els.forEach(function(el){var sib=el.parentNode?[].indexOf.call(el.parentNode.children,el):0;el.style.setProperty("--d",Math.min(sib,6)*70+"ms");el.classList.add("rv");io.observe(el)})})();</script>
 </body>
 </html>`;
 }
