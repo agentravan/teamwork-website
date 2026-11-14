@@ -1,5 +1,12 @@
 {
-  "framework": "nextjs",
-  "buildCommand": "npm run build",
-  "outputDirectory": ".next"
+  "framework": null,
+  "installCommand": "echo no dependencies",
+  "buildCommand": "node build.mjs",
+  "outputDirectory": "dist",
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/login", "destination": "https://leadnex-crm.vercel.app/login", "permanent": false },
+    { "source": "/admin", "destination": "https://leadnex-crm.vercel.app/login", "permanent": false }
+  ]
 }
