@@ -240,6 +240,10 @@ td:nth-child(2),td:nth-child(3){font-variant-numeric:tabular-nums;white-space:no
 /* ---------- home ---------- */
 .hero.home h1{max-width:15ch;font-size:clamp(36px,5.4vw,60px)}
 .under{margin-top:16px;font-size:15px;color:var(--muted)}
+.trust{display:flex;flex-wrap:wrap;gap:8px 10px;margin-top:26px}
+.trust li{display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:0 14px;border-radius:999px;background:#fff;border:1px solid var(--line);font-size:14.5px;color:var(--muted);animation:rise .6s .3s ease both}
+.trust li:first-child{border-color:var(--ink);color:var(--ink)}
+.trust strong{font-family:var(--serif);font-weight:400;font-size:20px;color:var(--ink)}
 .sub{color:var(--muted);max-width:60ch;margin:-12px 0 32px;font-size:18px}
 .mock{position:relative;height:440px;max-width:520px;margin:8px auto 0;width:100%}
 .browser{position:absolute;left:0;top:10px;width:78%;background:#fff;border-radius:14px;box-shadow:0 40px 80px -40px rgba(20,32,46,.45),0 0 0 1px var(--line);overflow:hidden;animation:rise .7s .1s ease both}

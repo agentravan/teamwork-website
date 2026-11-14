@@ -90,7 +90,7 @@ function home() {
 <h1>Websites, WhatsApp assistants and the back office your business runs on</h1>
 <p class="lead">Team Work builds the website customers find you on, the assistant that answers them on WhatsApp, and the system your staff use every day. We also run your payroll and supply your office. One team, based in Gurugram, working with businesses in India and abroad.</p>
 <div class="ctas">${btn("/make-demo", "Make a free demo for your business")}${btn(wa("Hi Team Work, I would like to know more about your services."), "Talk to us on WhatsApp", "ghost")}</div>
-<p class="under">Free sample first. You pay only if you like it.</p>
+<ul class="trust"><li><strong>120+</strong> clients served since 2023</li><li>Free sample before you pay</li><li>Fixed price in writing</li><li>Reply the same day</li></ul>
 </div>
 <div class="mock" aria-hidden="true">
 <div class="browser"><div class="bar"><i></i><i></i><i></i><span>yourbusiness.com</span></div><div class="bbody"><div class="bimg"></div><b></b><span></span><span class="s"></span><em>Book on WhatsApp</em></div></div>
@@ -409,7 +409,7 @@ const pages = [
       section(
         "Where we come from",
         two(
-          `<p class="big">Team Work began in 2023 in Gurugram as an HR and payroll consultancy.</p>`,
+          `<p class="big">Team Work began in 2023 in Gurugram as an HR and payroll consultancy, and has served more than 120 clients since.</p>`,
           `<p>Running payroll for small companies showed us the rest of their day: enquiries going unanswered on WhatsApp, bookings kept in notebooks, new joiners waiting for a laptop, someone senior approving stationery bills. So we added the services our clients kept asking for.</p><p>Today the same team handles HR and payroll, builds websites, WhatsApp assistants and management systems, and supplies IT equipment and office stationery.</p>`
         )
       ) +
