@@ -559,7 +559,7 @@ function layout(p) {
 <meta property="og:description" content="${esc(p.desc)}">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#06080c">
-<script>(function(){var d=document.documentElement;try{if(localStorage.getItem("tw-theme")==="light")d.setAttribute("data-theme","light")}catch(e){}try{if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.className="loading"}catch(e){}})();</script>
+<script>(function(){var d=document.documentElement;try{if(localStorage.getItem("tw-theme")==="light")d.setAttribute("data-theme","light")}catch(e){}try{if(!matchMedia("(prefers-reduced-motion: reduce)").matches){var q=false;try{q=sessionStorage.getItem("tw")==="1"}catch(e){}d.className=q?"loading quick":"loading"}}catch(e){}})();</script>
 <link rel="icon" href="/logo-mark.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -588,8 +588,8 @@ ${p.script ? `<script>${p.script}</script>` : ""}
 <script>(function(){var tb=document.getElementById("theme");if(tb)tb.addEventListener("click",function(){var d=document.documentElement,l=d.getAttribute("data-theme")==="light";if(l)d.removeAttribute("data-theme");else d.setAttribute("data-theme","light");try{localStorage.setItem("tw-theme",l?"dark":"light")}catch(e){}})})();</script>
 <script>(function(){var de=document.documentElement,rm=matchMedia("(prefers-reduced-motion: reduce)").matches;
 if(de.className.indexOf("loading")>-1){var n=document.getElementById("ld-n"),b=document.getElementById("ld-b"),t0=performance.now(),ready=document.readyState==="complete",done=false;addEventListener("load",function(){ready=true});
-var fin=function(){if(done)return;done=true;de.classList.add("loaded");de.classList.remove("loading");setTimeout(function(){de.classList.remove("loaded")},700)};
-var step=function(t){var k=Math.min(1,(t-t0)/5000),v=Math.round(k*(ready||t-t0>7000?100:92));n.textContent=v+"%";b.style.width=v+"%";if(v>=100)return setTimeout(fin,350);requestAnimationFrame(step)};requestAnimationFrame(step);setTimeout(fin,9000)}
+var dur=de.className.indexOf("quick")>-1?1000:5000;var fin=function(){if(done)return;done=true;try{sessionStorage.setItem("tw","1")}catch(e){}de.classList.remove("quick");de.classList.add("loaded");de.classList.remove("loading");setTimeout(function(){de.classList.remove("loaded")},700)};
+var step=function(t){var k=Math.min(1,(t-t0)/dur),v=Math.round(k*(ready||t-t0>dur+2000?100:92));n.textContent=v+"%";b.style.width=v+"%";if(v>=100)return setTimeout(fin,350);requestAnimationFrame(step)};requestAnimationFrame(step);setTimeout(fin,9000)}
 if(rm||!("IntersectionObserver" in window))return;
 var q=".sec h2,.sub,.rows li,.steps li,.svc li,.links li,.two>div,.ticks li,.faq details,.tableWrap,.band .wrap>*,.tri li,.stats li,.cities,.demoBand .wrap>*,.show h2,.form,.prose";
 var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);var c=e.target.querySelector("[data-count]");if(c)count(c)}})},{rootMargin:"0px 0px -8% 0px"});

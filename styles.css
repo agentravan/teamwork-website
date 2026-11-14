@@ -42,6 +42,9 @@ html.loading .lgBox{animation:pulse 1.6s 3.4s ease-in-out infinite}
 @keyframes loopDraw{0%{stroke-dashoffset:100}32%,80%{stroke-dashoffset:0}100%{stroke-dashoffset:-100}}
 @keyframes loopSpin{to{rotate:360deg}}
 .status.ready .lgBox,.status.failed .lgBox{display:none}
+html.quick .lg{display:none}
+html.quick .lgBox img{opacity:1;transform:none;animation:none}
+html.quick .lgName span,html.quick .lgTag{opacity:1;transform:none;animation:none}
 .lgName{font-family:var(--disp);font-weight:600;font-size:34px;letter-spacing:-.03em;margin-top:6px}
 .lgName span{display:inline-block;opacity:0;transform:translateY(14px)}
 html.loading .lgName span{animation:rise .5s ease forwards;animation-delay:calc(3s + var(--k)*.07s)}
