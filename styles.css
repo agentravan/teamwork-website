@@ -380,3 +380,6 @@ html[data-theme=light] .menu nav{box-shadow:0 24px 60px rgba(10,14,20,.18)}
 html[data-theme=light] .ph{box-shadow:0 40px 80px -24px rgba(10,14,20,.45)}
 html,body,.top,.sec,.tableWrap,.form input{transition:background-color .35s,color .35s,border-color .35s}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}.rv{opacity:1;transform:none}.say span{color:var(--hi)}.h0 .in{opacity:1;transform:none}.ttt .mx,.ttt .mo{stroke-dashoffset:0}}
+
+/* Trap field for bots: off-screen, never shown to people. */
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}

@@ -476,7 +476,7 @@ const pages = [
       hero("Privacy policy", "A plain account of what we collect and what we do with it. Last updated November 2026.") +
       section(
         "",
-        `<div class="prose"><h3>What we collect</h3><p>When you contact us we receive what you send: your name, business name, phone number and your message. This website does not use advertising trackers and does not ask you to create an account.</p><h3>How we use it</h3><p>To reply to you, prepare a sample or a quote, and deliver the service you ask for. We do not sell your information or pass it to advertisers.</p><h3>Client data</h3><p>If we run your payroll or build a system for you, we handle employee or customer data on your behalf and only on your instructions. It is shared only with the people you name.</p><h3>Other services</h3><p>We use WhatsApp to talk to you and hosting providers to run websites and systems. Their own privacy terms apply to those services.</p><h3>Your choices</h3><p>You can ask us to show, correct or delete the information we hold about you by messaging us on WhatsApp.</p><h3>Contact</h3><p>Team Work, Gurugram, Haryana, India. <a href="/contact">Contact us.</a></p></div>`
+        `<div class="prose"><h3>What we collect</h3><p>When you contact us we receive what you send: your name, business name, phone number and your message. This website does not use advertising trackers and does not ask you to create an account.</p><h3>The demo maker</h3><p>When you build a demo on this site we save the business type, business name, city and, if you add it, your WhatsApp number. We use them to build the demo and to reply to you. The business name and type are sent to an AI service to write the demo text. The demo page is public to anyone who has its link. To limit misuse we keep a scrambled, one-way tag of your internet address for one day, not the address itself.</p><h3>How long we keep it</h3><p>We keep enquiries and demos while we are in touch with you, and delete them when you ask.</p><h3>How we use it</h3><p>To reply to you, prepare a sample or a quote, and deliver the service you ask for. We do not sell your information or pass it to advertisers.</p><h3>Client data</h3><p>If we run your payroll or build a system for you, we handle employee or customer data on your behalf and only on your instructions. It is shared only with the people you name.</p><h3>Other services</h3><p>We use WhatsApp to talk to you and hosting providers to run websites and systems. Their own privacy terms apply to those services.</p><h3>Your choices</h3><p>You can ask us to show, correct or delete the information we hold about you by messaging us on WhatsApp.</p><h3>Contact</h3><p>Team Work, Gurugram, Haryana, India. <a href="/contact">Contact us.</a></p></div>`
       ),
   },
   {
@@ -505,6 +505,8 @@ const pages = [
 <label for="md-city">3. City or area (optional)</label><input id="md-city" maxlength="60" autocomplete="address-level2">
 <label for="md-phone">4. WhatsApp number with country code (optional)</label><input id="md-phone" maxlength="20" inputmode="tel" autocomplete="tel" placeholder="+971 50 123 4567">
 <p class="note">Add your number only if you want us to message you about the demo. We do not send bulk messages.</p>
+<div class="hp" aria-hidden="true"><label for="md-web">Leave this empty</label><input id="md-web" name="website" tabindex="-1" autocomplete="off"></div>
+<p class="note">We keep what you type here to build the demo and to reply to you. <a href="/privacy">Privacy policy</a>.</p>
 <p class="err" id="md-err" role="alert" hidden></p>
 <button class="btn solid" type="submit">Build my demo</button>
 </form>
@@ -528,7 +530,7 @@ if(n.length<2){show("Please tell us your kind of business.");return}
 if(name.length<2){show("Please enter your business name.");document.getElementById("md-name").focus();return}
 f.hidden=true;var w=document.getElementById("md-wait");w.hidden=false;window.twShowGame("ttt");w.scrollIntoView({behavior:"smooth",block:"start"});
 var st=document.getElementById("md-status"),h=document.getElementById("md-h"),p=document.getElementById("md-p"),o=document.getElementById("md-open");
-fetch("${DEMO_API}",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({niche:n,name:name,city:document.getElementById("md-city").value,phone:document.getElementById("md-phone").value})})
+fetch("${DEMO_API}",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({niche:n,name:name,city:document.getElementById("md-city").value,phone:document.getElementById("md-phone").value,website:document.getElementById("md-web").value})})
 .then(function(r){return r.json().then(function(j){return{ok:r.ok,j:j}})})
 .then(function(x){if(!x.ok||!x.j.url)throw new Error(x.j.error||"Something went wrong. Please try again.");
 st.classList.add("ready");h.textContent="Your demo is ready";p.textContent="Click the button to open it. You can keep playing, the demo will wait.";o.href=x.j.url;o.hidden=false;o.focus();st.scrollIntoView({behavior:"smooth",block:"center"})})
